@@ -164,27 +164,25 @@
               Profesional con <span class="font-semibold text-white">más de 15 años de trayectoria híbrida</span>. Especializado en transformar flujos de trabajo caóticos en <span class="font-semibold text-blue-400">sistemas rentables, medibles y escalables</span>. Articulo la solvencia técnica del terreno industrial con la visión estratégica de negocios, el análisis de datos y la innovación ágil asistida por Inteligencia Artificial.
             </p>
 
-            <!-- Acciones Principales con Logos -->
+            <!-- Acciones Principales (Navegación & Exploración Directa) -->
             <div class="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-3">
               
-              <!-- Botón LinkedIn con Logo -->
-              <a href="https://www.linkedin.com/in/león-munitz" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl font-semibold text-sm bg-[#0a66c2] hover:bg-[#004182] text-white shadow-lg shadow-blue-900/30 transition-all hover:scale-105 flex items-center gap-2">
-                <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/>
-                </svg>
-                <span>LinkedIn</span>
+              <!-- Explorar Experiencia -->
+              <a href="#experiencia" class="px-5 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-900/30 transition-all hover:scale-105 flex items-center gap-2">
+                <i data-lucide="briefcase" class="w-4 h-4"></i>
+                <span>Explorar Experiencia & Casos</span>
               </a>
 
-              <!-- Botón WhatsApp -->
-              <a href="https://wa.me/5491164204035?text=Hola%20León,%20vi%20tu%20CV%20interactivo%20y%20me%20gustaría%20conversar." target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl font-semibold text-sm bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-900/30 transition-all hover:scale-105 flex items-center gap-2">
-                <i data-lucide="message-circle" class="w-4 h-4"></i>
-                Chatear por WhatsApp
-              </a>
+              <!-- Abrir Historial Técnico Directo -->
+              <button type="button" onclick="document.getElementById('btn-open-tech-history').click()" class="px-4 py-2.5 rounded-xl font-semibold text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all border border-slate-700/80 flex items-center gap-2 cursor-pointer">
+                <i data-lucide="history" class="w-4 h-4 text-orange-400"></i>
+                <span>Historial Técnico (13 Puestos)</span>
+              </button>
 
-              <!-- Botón Correo -->
-              <a href="mailto:munitz.2027@gmail.com" class="px-4 py-2.5 rounded-xl font-semibold text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all border border-slate-700/80 flex items-center gap-2">
-                <i data-lucide="mail" class="w-4 h-4 text-blue-400"></i>
-                Enviar Correo
+              <!-- Salto a Contratación / Contacto -->
+              <a href="#contratacion" class="px-4 py-2.5 rounded-xl font-semibold text-sm bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-all border border-slate-700/80 flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
+                <span>¿Hablamos?</span>
               </a>
 
             </div>
@@ -290,7 +288,7 @@
           <!-- 1. ArreglaTodo -->
           <div class="experience-card glass-panel rounded-2xl transition-all border border-slate-800 hover:border-blue-500/60 overflow-hidden">
             
-            <!-- Cabecera de la tarjeta (siempre visible) -->
+            <!-- Cabecera de la tarjeta (Primer vistazo) -->
             <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer toggle-experience-card" role="button" aria-expanded="false">
               <div class="flex-1">
                 <div class="flex flex-wrap items-center gap-2.5 mb-1.5">
@@ -305,9 +303,22 @@
                 <div class="text-xs sm:text-sm font-semibold text-blue-400 mt-0.5">
                   ArreglaTodo / Empresa de Servicios (Uruguay / Remoto)
                 </div>
-                <p class="text-xs text-slate-400 mt-2 line-clamp-1">
-                  Optimización de embudo CRM (+15% conversión sostenida, pico récord de 67.6%) y centralización de flujo de atención.
-                </p>
+                
+                <!-- Subtítulos de primer vistazo (Ejes temáticos sin redundancia) -->
+                <div class="flex flex-wrap gap-2 mt-2.5">
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Optimización de Embudo & Conversión (Pico 67.6%)
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Rediseño de Pantalla Única en CRM
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Continuidad & Contingencias
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Comunidad de Prestadores
+                  </span>
+                </div>
               </div>
 
               <!-- Indicador de expansión -->
@@ -318,35 +329,20 @@
               </div>
             </div>
 
-            <!-- Contenido desplegable -->
+            <!-- Contenido desplegable (Detalle completo real) -->
             <div class="collapsible-content">
-              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-2 border-t border-slate-800/80">
+              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-3 border-t border-slate-800/80">
                 
-                <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
-                  <li><strong class="text-white">Optimización de Embudo & Conversión:</strong> Aumento sostenido de la tasa de conversión histórica (~38%-41%) a una franja del 51%-54%, con récord de 67.6% (313 cierres sobre 463 solicitudes en Junio 2026).</li>
-                  <li><strong class="text-white">Rediseño Integral de CRM:</strong> Creación de una pantalla unificada de atención que centraliza el historial de chat y estado de servicio, eliminando leads traspapelados.</li>
-                  <li><strong class="text-white">Comunidad de Proveedores & Continuidad:</strong> Coordinación de prestadores de servicio y auditoría activa ante cambios de sistemas.</li>
+                <ul class="space-y-2.5 text-sm text-slate-300 list-disc list-inside">
+                  <li><strong class="text-white">Optimización de Embudo & Conversión:</strong> Aumento sostenido de la tasa de conversión comercial histórica (~38%-41%) a una franja del 51%-54%, alcanzando un récord de 67.6% (313 cierres sobre 463 solicitudes en Junio 2026) tras centralizar la gestión de consultas.</li>
+                  <li><strong class="text-white">Rediseño Integral de CRM:</strong> Creación e implementación de una pantalla unificada de atención que centraliza el historial de chat del cliente y el estado de su solicitud en un solo lugar, eliminando leads traspapelados y reduciendo tiempos de espera.</li>
+                  <li><strong class="text-white">Continuidad Operativa & Contingencias:</strong> Estandarización de protocolos de respuesta y absorción integral de la operación durante procesos críticos de migración de sistemas y fluctuaciones en la tasa de entrada de consultas.</li>
+                  <li><strong class="text-white">Comunidad de Proveedores:</strong> Creación y coordinación de una comunidad de prestadores de servicio para unificar criterios técnicos de trabajo y fortalecer el vínculo operativo.</li>
                 </ul>
-
-                <!-- Bloque de Detalle Técnico / Retos -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 p-4 rounded-xl bg-slate-900/90 text-xs text-slate-300 border border-slate-800 mt-4">
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">🛠️ Desafío</span>
-                    Dispersión de chats entre operadores, falta de visibilidad en tiempo real del estado de cotización y demoras críticas en tiempos de respuesta.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">💡 Solución</span>
-                    Diseño de flujo de trabajo unificado en CRM; estandarización de macros de respuesta rápida y reglas de clasificación de prospectos de alto valor.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">📊 Métricas</span>
-                    +15 puntos porcentuales de incremento directo en conversión; absorción del 100% de la operación en contingencias sin pérdida de ingresos.
-                  </div>
-                </div>
 
                 <!-- Botón de consulta directa contextual -->
                 <div class="mt-4 flex justify-end">
-                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-900/40 text-blue-300 hover:bg-blue-900/70 border border-blue-700/50 transition-colors" data-topic="ArreglaTodo - Optimización CRM y Conversión" data-detail="Incremento de conversión comercial a 67.6% y rediseño de flujo de atención unificada.">
+                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-900/40 text-blue-300 hover:bg-blue-900/70 border border-blue-700/50 transition-colors cursor-pointer" data-topic="ArreglaTodo - Optimización CRM y Conversión" data-detail="Incremento de conversión comercial a 67.6% y rediseño de flujo de atención unificada.">
                     <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
                     Consultar sobre este hito
                   </button>
@@ -360,7 +356,7 @@
           <!-- 2. Leondon.Net -->
           <div class="experience-card glass-panel rounded-2xl transition-all border border-slate-800 hover:border-blue-500/60 overflow-hidden">
             
-            <!-- Cabecera de la tarjeta -->
+            <!-- Cabecera de la tarjeta (Primer vistazo) -->
             <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer toggle-experience-card" role="button" aria-expanded="false">
               <div class="flex-1">
                 <div class="flex flex-wrap items-center gap-2.5 mb-1.5">
@@ -375,9 +371,22 @@
                 <div class="text-xs sm:text-sm font-semibold text-blue-400 mt-0.5">
                   Leondon.Net (HealthTech & Gamificación)
                 </div>
-                <p class="text-xs text-slate-400 mt-2 line-clamp-1">
-                  Gamificación de salud (Diabetes Tipo 1 y TDAH) con prototipado acelerado con IA, flujos de datos y arquitectura funcional.
-                </p>
+
+                <!-- Subtítulos de primer vistazo -->
+                <div class="flex flex-wrap gap-2 mt-2.5">
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Gamificación en Salud (Diabetes T1 & TDAH)
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Prototipado Acelerado con IA
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Arquitectura Funcional & UX
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Modelo de Negocio B2C
+                  </span>
+                </div>
               </div>
 
               <!-- Indicador de expansión -->
@@ -388,33 +397,18 @@
               </div>
             </div>
 
-            <!-- Contenido desplegable -->
+            <!-- Contenido desplegable (Detalle completo real) -->
             <div class="collapsible-content">
-              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-2 border-t border-slate-800/80">
+              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-3 border-t border-slate-800/80">
                 
-                <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
-                  <li><strong class="text-white">Innovación en Salud (Diabetes T1 & TDAH):</strong> Proyecto personal enfocado en la gamificación de la gestión diaria de patologías complejas mediante mecánicas de recompensa y hábitos sostenibles.</li>
-                  <li><strong class="text-white">Prototipado Acelerado con IA:</strong> Construcción de MVPs funcionales integrando herramientas avanzadas de IA para acelerar el desarrollo, modelado de reglas de negocio y automatizaciones.</li>
-                  <li><strong class="text-white">Arquitectura de Producto & Negocio:</strong> Definición de flujos de datos, diseño UX/UI de interfaces accesibles y estructuración de modelos B2C.</li>
+                <ul class="space-y-2.5 text-sm text-slate-300 list-disc list-inside">
+                  <li><strong class="text-white">Innovación en Salud (Diabetes T1 & TDAH):</strong> Proyecto personal enfocado en la gamificación de la gestión diaria de patologías complejas mediante mecánicas de recompensa, micro-logros y hábitos sostenibles para reducir el desgaste psicológico de la adherencia terapéutica.</li>
+                  <li><strong class="text-white">Prototipado Acelerado con IA:</strong> Construcción de MVPs funcionales integrando herramientas avanzadas de Inteligencia Artificial para acelerar el desarrollo lógico, modelado de reglas de negocio y automatizaciones en días en lugar de meses.</li>
+                  <li><strong class="text-white">Arquitectura de Producto & Negocio:</strong> Definición de flujos de datos, diseño de interfaz centrada en la accesibilidad para usuarios neurodivergentes y estructuración del modelo comercial B2C.</li>
                 </ul>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 p-4 rounded-xl bg-slate-900/90 text-xs text-slate-300 border border-slate-800 mt-4">
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">🎮 Mecánicas</span>
-                    Loops de retroalimentación inmediata, micro-logros y visualización adaptados a la atención fluctuante del usuario neurodivergente.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">⚡ Stack IA</span>
-                    Modelos de lenguaje para generación de lógica funcional, prototipos dinámicos y validación rápida con usuarios reales.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">🚀 Visión</span>
-                    Transformar tratamientos médicos rutinarios y desgastantes en experiencias intuitivas, reduciendo la fricción psicológica.
-                  </div>
-                </div>
-
                 <div class="mt-4 flex justify-end">
-                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-purple-900/40 text-purple-300 hover:bg-purple-900/70 border border-purple-700/50 transition-colors" data-topic="Leondon.Net - Gamificación e IA" data-detail="Arquitectura de producto para Diabetes Tipo 1 y TDAH con prototipado acelerado con IA.">
+                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-purple-900/40 text-purple-300 hover:bg-purple-900/70 border border-purple-700/50 transition-colors cursor-pointer" data-topic="Leondon.Net - Gamificación e IA" data-detail="Arquitectura de producto para Diabetes Tipo 1 y TDAH con prototipado acelerado con IA.">
                     <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
                     Consultar sobre este proyecto
                   </button>
@@ -428,7 +422,7 @@
           <!-- 3. Almango -->
           <div class="experience-card glass-panel rounded-2xl transition-all border border-slate-800 hover:border-blue-500/60 overflow-hidden">
             
-            <!-- Cabecera de la tarjeta -->
+            <!-- Cabecera de la tarjeta (Primer vistazo) -->
             <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer toggle-experience-card" role="button" aria-expanded="false">
               <div class="flex-1">
                 <div class="flex flex-wrap items-center gap-2.5 mb-1.5">
@@ -443,9 +437,22 @@
                 <div class="text-xs sm:text-sm font-semibold text-blue-400 mt-0.5">
                   Almango (Cuenta Principal: Sodimac Uruguay)
                 </div>
-                <p class="text-xs text-slate-400 mt-2 line-clamp-1">
-                  Triplicación de la capacidad operativa diaria (de 3 a 6-9 servicios) y coordinación de prestadores en logística de retail.
-                </p>
+
+                <!-- Subtítulos de primer vistazo -->
+                <div class="flex flex-wrap gap-2 mt-2.5">
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Gestión Integral Cuenta Sodimac
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Capacidad Operativa Diaria x3
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Red de Prestadores en Exterior
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Automatización CRM/ERP
+                  </span>
+                </div>
               </div>
 
               <!-- Indicador de expansión -->
@@ -456,33 +463,19 @@
               </div>
             </div>
 
-            <!-- Contenido desplegable -->
+            <!-- Contenido desplegable (Detalle completo real) -->
             <div class="collapsible-content">
-              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-2 border-t border-slate-800/80">
+              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-3 border-t border-slate-800/80">
                 
-                <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
-                  <li><strong class="text-white">Gestión Integral de Cuenta Retail:</strong> Liderazgo operativo y comercial para servicios de instalación y asistencia técnica entre Sodimac y clientes finales en el exterior, cubriendo desde la orden hasta facturación.</li>
-                  <li><strong class="text-white">Escalabilidad x3:</strong> Automatización de tareas repetitivas en CRM/ERP, pasando de 3 a 6-9 servicios corporativos resueltos y auditados diariamente.</li>
-                  <li><strong class="text-white">Instrucción de Prestadores:</strong> Estandarización de protocolos de campo y aseguramiento estricto de SLA para las 3 cuentas principales.</li>
+                <ul class="space-y-2.5 text-sm text-slate-300 list-disc list-inside">
+                  <li><strong class="text-white">Gestión Integral de Cuenta Retail:</strong> Liderazgo operativo y comercial para servicios de instalación y asistencia técnica contratados entre Sodimac y clientes finales en el exterior, cubriendo desde la recepción de la orden hasta facturación y archivo.</li>
+                  <li><strong class="text-white">Escalabilidad Operativa x3:</strong> Reestructuración de flujos y automatización de tareas en sistemas CRM/ERP, pasando de 3 a un promedio sostenido de 6 a 9 servicios corporativos resueltos y auditados por jornada.</li>
+                  <li><strong class="text-white">Coordinación de Red de Prestadores:</strong> Estandarización de protocolos de campo e instrucción del personal técnico para garantizar el cumplimiento de SLA en las 3 cuentas principales de la compañía.</li>
+                  <li><strong class="text-white">Control de Gestión & Retención:</strong> Monitoreo diario de tiempos de respuesta, tasa de resolución e incidencias, asegurando la retención del 100% de los clientes corporativos.</li>
                 </ul>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 p-4 rounded-xl bg-slate-900/90 text-xs text-slate-300 border border-slate-800 mt-4">
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">📦 Logística Retail</span>
-                    Coordinación transfronteriza y seguimiento en tiempo real entre la orden de compra corporativa y el proveedor técnico de instalación.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">⏱️ Optimización</span>
-                    Automatización de validación documental y facturación, reduciendo un 65% el tiempo administrativo por orden de trabajo.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">📈 Retención</span>
-                    Cumplimiento riguroso de indicadores de resolución y retención del 100% de las cuentas corporativas supervisadas.
-                  </div>
-                </div>
-
                 <div class="mt-4 flex justify-end">
-                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-900/40 text-blue-300 hover:bg-blue-900/70 border border-blue-700/50 transition-colors" data-topic="Almango - Cuenta Sodimac B2B" data-detail="Triplicación de la capacidad operativa diaria y coordinación de red de prestadores.">
+                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-900/40 text-blue-300 hover:bg-blue-900/70 border border-blue-700/50 transition-colors cursor-pointer" data-topic="Almango - Cuenta Sodimac B2B" data-detail="Triplicación de la capacidad operativa diaria y coordinación de red de prestadores.">
                     <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
                     Consultar sobre este hito
                   </button>
@@ -496,7 +489,7 @@
           <!-- 4. American Vial Group -->
           <div class="experience-card glass-panel rounded-2xl transition-all border border-slate-800 hover:border-blue-500/60 overflow-hidden">
             
-            <!-- Cabecera de la tarjeta -->
+            <!-- Cabecera de la tarjeta (Primer vistazo) -->
             <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer toggle-experience-card" role="button" aria-expanded="false">
               <div class="flex-1">
                 <div class="flex flex-wrap items-center gap-2.5 mb-1.5">
@@ -511,9 +504,22 @@
                 <div class="text-xs sm:text-sm font-semibold text-blue-400 mt-0.5">
                   American Vial Group (Maquinaria Pesada & Vial)
                 </div>
-                <p class="text-xs text-slate-400 mt-2 line-clamp-1">
-                  Recuperación de +710.000 u$d en cartera de deuda, atención de 3.500 clientes B2B y logística por postas.
-                </p>
+
+                <!-- Subtítulos de primer vistazo -->
+                <div class="flex flex-wrap gap-2 mt-2.5">
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Recuperación de Cartera (+710.000 u$d)
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Gestión Nacional (+3.500 Clientes B2B)
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Sistema Logístico de Postas Federal
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Ciclo de Servicio & Garantías
+                  </span>
+                </div>
               </div>
 
               <!-- Indicador de expansión -->
@@ -524,33 +530,19 @@
               </div>
             </div>
 
-            <!-- Contenido desplegable -->
+            <!-- Contenido desplegable (Detalle completo real) -->
             <div class="collapsible-content">
-              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-2 border-t border-slate-800/80">
+              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-3 border-t border-slate-800/80">
                 
-                <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
-                  <li><strong class="text-white">Recuperación Financiera de Seis Cifras:</strong> Conciliación de cuentas corrientes y cobranza corporativa, recuperando más de +710.000 u$d en cartera vencida preservando la relación comercial.</li>
-                  <li><strong class="text-white">Cartera Nacional de +3.500 Clientes B2B:</strong> Coordinación técnica y operativa nacional articulando Ventas, Repuestos, Almacén y Garantías.</li>
-                  <li><strong class="text-white">Sistema Logístico de Postas:</strong> Diseño de un esquema de relevos y ruteo federal para técnicos de campo con flota reducida, optimizando viáticos y tiempos de traslado.</li>
+                <ul class="space-y-2.5 text-sm text-slate-300 list-disc list-inside">
+                  <li><strong class="text-white">Recuperación Financiera de Cartera B2B:</strong> Conciliación de cuentas corrientes y cobranza corporativa, regularizando más de +710.000 u$d en cartera de deuda vencida preservando la relación comercial.</li>
+                  <li><strong class="text-white">Cartera Nacional de +3.500 Clientes B2B:</strong> Coordinación técnica y operativa nacional articulando de punta a punta Ventas, Repuestos, Almacén y Garantías para maquinaria pesada en todo el país.</li>
+                  <li><strong class="text-white">Sistema Logístico de Postas:</strong> Diseño e implementación de un esquema de ruteo y relevos nacional para técnicos de campo con flota reducida, centralizando viáticos y provisiones de repuestos críticos.</li>
+                  <li><strong class="text-white">Administración del Ciclo de Servicio:</strong> Cotizaciones por horas de servicio técnico, reparaciones fuera de garantía, facturación final y optimización de costos operativos.</li>
                 </ul>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 p-4 rounded-xl bg-slate-900/90 text-xs text-slate-300 border border-slate-800 mt-4">
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">🚚 Logística por Postas</span>
-                    Ruteo inteligente de técnicos que evitaba traslados vacíos de larga distancia, estableciendo nodos con repuestos críticos listos.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">💰 Cobranza B2B</span>
-                    Planes de pago personalizados, canjes de mantenimiento preventivo y regularización documental de cuentas en conflicto.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">🚜 Maquinaria Vial</span>
-                    Articulación de diagnósticos con manuales de fábrica para excavadoras y palas cargadoras con clientes viales e ingenierías.
-                  </div>
-                </div>
-
                 <div class="mt-4 flex justify-end">
-                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-900/40 text-amber-300 hover:bg-amber-900/70 border border-amber-700/50 transition-colors" data-topic="American Vial - Recuperación de Cartera y Postas" data-detail="Cobranza corporativa de +710.000 u$d y diseño de sistema logístico por postas.">
+                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-900/40 text-amber-300 hover:bg-amber-900/70 border border-amber-700/50 transition-colors cursor-pointer" data-topic="American Vial - Recuperación de Cartera y Postas" data-detail="Cobranza corporativa de +710.000 u$d y diseño de sistema logístico por postas.">
                     <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
                     Consultar sobre este hito
                   </button>
@@ -564,7 +556,7 @@
           <!-- 5. YoReparo -->
           <div class="experience-card glass-panel rounded-2xl transition-all border border-slate-800 hover:border-blue-500/60 overflow-hidden">
             
-            <!-- Cabecera de la tarjeta -->
+            <!-- Cabecera de la tarjeta (Primer vistazo) -->
             <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer toggle-experience-card" role="button" aria-expanded="false">
               <div class="flex-1">
                 <div class="flex flex-wrap items-center gap-2.5 mb-1.5">
@@ -579,9 +571,22 @@
                 <div class="text-xs sm:text-sm font-semibold text-blue-400 mt-0.5">
                   YoReparo (Educación Técnica & Economía Circular)
                 </div>
-                <p class="text-xs text-slate-400 mt-2 line-clamp-1">
-                  Moderación técnica en vivo para picos de más de 700 usuarios simultáneos y promoción de cultura refurbished.
-                </p>
+
+                <!-- Subtítulos de primer vistazo -->
+                <div class="flex flex-wrap gap-2 mt-2.5">
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Streaming Masivo (+700 Usuarios en Vivo)
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Soporte & Contingencias en Tiempo Real
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Cultura Refurbished & Economía Circular
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/60">
+                    Manejo de OBS, Zoom y YouTube Live
+                  </span>
+                </div>
               </div>
 
               <!-- Indicador de expansión -->
@@ -592,33 +597,19 @@
               </div>
             </div>
 
-            <!-- Contenido desplegable -->
+            <!-- Contenido desplegable (Detalle completo real) -->
             <div class="collapsible-content">
-              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-2 border-t border-slate-800/80">
+              <div class="collapsible-inner px-5 sm:px-6 pb-6 pt-3 border-t border-slate-800/80">
                 
-                <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
+                <ul class="space-y-2.5 text-sm text-slate-300 list-disc list-inside">
                   <li><strong class="text-white">Transmisiones Masivas & Contingencias en Vivo:</strong> Moderación y logística técnica en capacitaciones simultáneas con picos de más de 700 usuarios en vivo (Zoom, OBS, YouTube Live).</li>
-                  <li><strong class="text-white">Cultura Refurbished & Economía Circular:</strong> Fomento de la reparación, extensión de vida útil del hardware y valorización de equipamiento informático e industrial frente al descarte tecnológico.</li>
+                  <li><strong class="text-white">Cultura Refurbished & Economía Circular:</strong> Fomento activo de la reparación, extensión de vida útil del hardware y valorización de equipamiento informático e industrial frente al descarte tecnológico.</li>
                   <li><strong class="text-white">Soporte Técnico Individualizado:</strong> Asistencia en tiempo real a participantes ante fallas de conectividad y dinamización de contenidos docentes.</li>
+                  <li><strong class="text-white">Operación Técnica de Streaming:</strong> Manejo de herramientas de transmisión (OBS Studio, Zoom, YouTube Live), compresión en directo y locución de anuncios comerciales.</li>
                 </ul>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 p-4 rounded-xl bg-slate-900/90 text-xs text-slate-300 border border-slate-800 mt-4">
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">🎙️ Streaming</span>
-                    Manejo de OBS Studio, matrices de audio multicanal, compresión en directo y moderación dinámica de chat con alta concurrencia.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">💻 Hardware IT</span>
-                    Capacitación en reacondicionamiento de placas base, fuentes conmutadas y valorización de PC/servidores para leasing y empresas.
-                  </div>
-                  <div>
-                    <span class="font-bold text-white uppercase tracking-wider block mb-1">⚡ Contingencias</span>
-                    Resolución en tiempo real de caídas de transmisión o fallas técnicas sin interrumpir la continuidad del evento.
-                  </div>
-                </div>
-
                 <div class="mt-4 flex justify-end">
-                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-teal-900/40 text-teal-300 hover:bg-teal-900/70 border border-teal-700/50 transition-colors" data-topic="YoReparo - Streaming y Economía Circular" data-detail="Moderación técnica masiva (+700 usuarios) y fomento de la cultura refurbished.">
+                  <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-teal-900/40 text-teal-300 hover:bg-teal-900/70 border border-teal-700/50 transition-colors cursor-pointer" data-topic="YoReparo - Streaming y Economía Circular" data-detail="Moderación técnica masiva (+700 usuarios) y fomento de la cultura refurbished.">
                     <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
                     Consultar sobre este hito
                   </button>
@@ -791,8 +782,7 @@
               <i data-lucide="award" class="w-6 h-6"></i>
             </div>
             <div>
-              <span class="text-xs font-bold text-blue-400">2020 – 2024</span>
-              <h4 class="font-bold text-base text-white mt-0.5">Moderación Técnica & Economía Circular</h4>
+              <h4 class="font-bold text-base text-white">Moderación Técnica & Economía Circular</h4>
               <p class="text-xs font-semibold text-slate-400">YoReparo</p>
               <p class="text-xs text-slate-300 mt-2">
                 Especialización en extensión de vida útil de equipamiento tecnológico, soporte técnico virtual y gestión de comunidades técnicas.
