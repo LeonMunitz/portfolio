@@ -7,6 +7,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCollapsibleCards();
+  initEducationCards();
   initTechnicalHistoryModal();
   initInquiryModal();
   initEasterEgg();
@@ -48,6 +49,35 @@ function initCollapsibleCards() {
         btn.setAttribute('aria-expanded', 'true');
         if (chevron) chevron.style.transform = 'rotate(180deg)';
         if (label) label.textContent = 'Ocultar detalles ▲';
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   1.1 ACORDEÓN DE FORMACIÓN Y CAPACITACIONES (VISTA LIMPIA Y MÓVIL)
+   ========================================================================== */
+function initEducationCards() {
+  const toggleCards = document.querySelectorAll('.toggle-education-card');
+
+  toggleCards.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.education-card');
+      if (!card) return;
+
+      const content = card.querySelector('.collapsible-content');
+      const chevron = card.querySelector('.edu-chevron');
+      const isExpanded = content.classList.contains('expanded');
+
+      if (isExpanded) {
+        content.classList.remove('expanded');
+        btn.setAttribute('aria-expanded', 'false');
+        if (chevron) chevron.style.transform = 'rotate(0deg)';
+      } else {
+        content.classList.add('expanded');
+        btn.setAttribute('aria-expanded', 'true');
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
       }
     });
   });
@@ -317,7 +347,7 @@ function initEasterEgg() {
       btnNo.innerHTML = '<span>¡Una charla de 10 min no se le niega a nadie! ☕</span>';
       
       if (feedbackMsg) {
-        feedbackMsg.textContent = '⚡ Ya se movió dos veces como me pediste... ¿seguro no querés un café virtual?';
+        feedbackMsg.textContent = '⚡ Ya se movió dos veces... ¿seguro no querés un café virtual?';
         feedbackMsg.classList.remove('hidden');
       }
 

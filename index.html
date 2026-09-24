@@ -407,7 +407,12 @@
                   <li><strong class="text-white">Arquitectura de Producto & Negocio:</strong> Definición de flujos de datos, diseño de interfaz centrada en la accesibilidad para usuarios neurodivergentes y estructuración del modelo comercial B2C.</li>
                 </ul>
 
-                <div class="mt-4 flex justify-end">
+                <div class="mt-4 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800/80">
+                  <a href="https://leondon.net" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-purple-950/60 text-purple-300 hover:bg-purple-900/80 border border-purple-700/50 transition-all group" title="Ver MVP interactivo en producción">
+                    <i data-lucide="external-link" class="w-3.5 h-3.5 text-purple-400 group-hover:scale-110 transition-transform"></i>
+                    <span>Ver Prototipo / MVP en vivo (leondon.net)</span>
+                  </a>
+
                   <button class="btn-inquire inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-purple-900/40 text-purple-300 hover:bg-purple-900/70 border border-purple-700/50 transition-colors cursor-pointer" data-topic="Leondon.Net - Gamificación e IA" data-detail="Arquitectura de producto para Diabetes Tipo 1 y TDAH con prototipado acelerado con IA.">
                     <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
                     Consultar sobre este proyecto
@@ -563,7 +568,7 @@
                   <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider bg-teal-950/70 text-teal-300 border border-teal-800/50">
                     Comunidad & Streaming Masivo
                   </span>
-                  <span class="text-xs text-slate-400">Marzo 2022 – Presente (+5 años activo)</span>
+                  <span class="text-xs text-slate-400">Marzo 2022 – Presente (4 años activo)</span>
                 </div>
                 <h4 class="text-lg sm:text-xl font-bold text-white">
                   Coordinador de Eventos Digitales & Moderador Técnico
@@ -769,69 +774,113 @@
     <section id="educacion" class="py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="text-center mb-12">
+        <div class="text-center mb-10">
           <h2 class="text-xs uppercase font-extrabold tracking-widest text-blue-400">Educación Continua & Títulos</h2>
           <h3 class="text-2xl sm:text-4xl font-bold text-white mt-1">Estudios y Capacitaciones</h3>
+          <p class="text-sm text-slate-400 mt-1.5">
+            Vista sintetizada. Toca cada tarjeta para desplegar el contenido y alcance formativo.
+          </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           <!-- 1. YoReparo -->
-          <div class="p-6 rounded-2xl glass-panel flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
-              <i data-lucide="award" class="w-6 h-6"></i>
+          <div class="education-card glass-panel rounded-2xl transition-all border border-slate-800 hover:border-blue-500/60 overflow-hidden">
+            <div class="p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer toggle-education-card select-none" role="button" aria-expanded="false">
+              <div class="flex items-center gap-3.5 min-w-0">
+                <div class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="award" class="w-5 h-5"></i>
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-bold text-sm sm:text-base text-white leading-snug">
+                    Moderación Técnica & Economía Circular
+                  </h4>
+                  <p class="text-xs font-semibold text-blue-400 mt-0.5">YoReparo</p>
+                </div>
+              </div>
+              <div class="w-8 h-8 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 shrink-0">
+                <i data-lucide="chevron-down" class="edu-chevron w-4 h-4 transition-transform duration-300"></i>
+              </div>
             </div>
-            <div>
-              <h4 class="font-bold text-base text-white">Moderación Técnica & Economía Circular</h4>
-              <p class="text-xs font-semibold text-slate-400">YoReparo</p>
-              <p class="text-xs text-slate-300 mt-2">
+            <div class="collapsible-content">
+              <div class="collapsible-inner px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80">
                 Especialización en extensión de vida útil de equipamiento tecnológico, soporte técnico virtual y gestión de comunidades técnicas.
-              </p>
+              </div>
             </div>
           </div>
 
           <!-- 2. Técnico Electromecánico -->
-          <div class="p-6 rounded-2xl glass-panel flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
-              <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+          <div class="education-card glass-panel rounded-2xl transition-all border border-slate-800 hover:border-amber-500/60 overflow-hidden">
+            <div class="p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer toggle-education-card select-none" role="button" aria-expanded="false">
+              <div class="flex items-center gap-3.5 min-w-0">
+                <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-bold text-sm sm:text-base text-white leading-snug">
+                    Técnico Electromecánico & Bachiller
+                  </h4>
+                  <p class="text-xs font-semibold text-amber-400 mt-0.5">E.E.T. N° 4 - Graduado Oficial</p>
+                </div>
+              </div>
+              <div class="w-8 h-8 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 shrink-0">
+                <i data-lucide="chevron-down" class="edu-chevron w-4 h-4 transition-transform duration-300"></i>
+              </div>
             </div>
-            <div>
-              <span class="text-xs font-bold text-amber-400">Secundario Técnico</span>
-              <h4 class="font-bold text-base text-white mt-0.5">Técnico Electromecánico & Bachiller en Producción de Bienes y Servicios</h4>
-              <p class="text-xs font-semibold text-slate-400">E.E.T. N° 4 - Graduado Oficial</p>
-              <p class="text-xs text-slate-300 mt-2">
-                Bases analíticas de física, electricidad industrial, mecánica aplicada, lectura de planos técnicos y control de calidad.
-              </p>
+            <div class="collapsible-content">
+              <div class="collapsible-inner px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80">
+                Bases analíticas de física, electricidad industrial, mecánica aplicada, lectura de planos técnicos y control de calidad en producción de bienes y servicios.
+              </div>
             </div>
           </div>
 
           <!-- 3. Formación Continua Aplicada -->
-          <div class="p-6 rounded-2xl glass-panel flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
-              <i data-lucide="book-open" class="w-6 h-6"></i>
+          <div class="education-card glass-panel rounded-2xl transition-all border border-slate-800 hover:border-emerald-500/60 overflow-hidden">
+            <div class="p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer toggle-education-card select-none" role="button" aria-expanded="false">
+              <div class="flex items-center gap-3.5 min-w-0">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="book-open" class="w-5 h-5"></i>
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-bold text-sm sm:text-base text-white leading-snug">
+                    Análisis de Datos: Excel Avanzado & Power BI
+                  </h4>
+                  <p class="text-xs font-semibold text-emerald-400 mt-0.5">Modelado Operativo & Dashboards</p>
+                </div>
+              </div>
+              <div class="w-8 h-8 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 shrink-0">
+                <i data-lucide="chevron-down" class="edu-chevron w-4 h-4 transition-transform duration-300"></i>
+              </div>
             </div>
-            <div>
-              <span class="text-xs font-bold text-emerald-400">Formación Especializada</span>
-              <h4 class="font-bold text-base text-white mt-0.5">Análisis de Datos: Excel Avanzado & Power BI</h4>
-              <p class="text-xs font-semibold text-slate-400">Modelado Operativo & Dashboards</p>
-              <p class="text-xs text-slate-300 mt-2">
-                Automatización de planillas de control comercial mediante macros, tablas dinámicas avanzadas y consolidación de métricas.
-              </p>
+            <div class="collapsible-content">
+              <div class="collapsible-inner px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80">
+                Automatización de planillas de control comercial mediante macros, tablas dinámicas avanzadas y consolidación de métricas para toma de decisiones ejecutivas.
+              </div>
             </div>
           </div>
 
           <!-- 4. Gestión Comercial B2B -->
-          <div class="p-6 rounded-2xl glass-panel flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0">
-              <i data-lucide="users" class="w-6 h-6"></i>
+          <div class="education-card glass-panel rounded-2xl transition-all border border-slate-800 hover:border-indigo-500/60 overflow-hidden">
+            <div class="p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer toggle-education-card select-none" role="button" aria-expanded="false">
+              <div class="flex items-center gap-3.5 min-w-0">
+                <div class="w-11 h-11 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="users" class="w-5 h-5"></i>
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-bold text-sm sm:text-base text-white leading-snug">
+                    Gestión Comercial, Negociación B2B & CRM
+                  </h4>
+                  <p class="text-xs font-semibold text-indigo-400 mt-0.5">Atención a Cuentas Corporativas</p>
+                </div>
+              </div>
+              <div class="w-8 h-8 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 shrink-0">
+                <i data-lucide="chevron-down" class="edu-chevron w-4 h-4 transition-transform duration-300"></i>
+              </div>
             </div>
-            <div>
-              <span class="text-xs font-bold text-indigo-400">Formación Profesional</span>
-              <h4 class="font-bold text-base text-white mt-0.5">Gestión Comercial, Negociación B2B & Canales CRM</h4>
-              <p class="text-xs font-semibold text-slate-400">Atención a Cuentas Corporativas</p>
-              <p class="text-xs text-slate-300 mt-2">
-                Técnicas de prospección y cierre comercial, manejo de objeciones de compras corporativas y diseño de protocolos de atención ágil.
-              </p>
+            <div class="collapsible-content">
+              <div class="collapsible-inner px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80">
+                Técnicas de prospección y cierre comercial, manejo de objeciones de compras corporativas y diseño de protocolos de atención ágil multicanal.
+              </div>
             </div>
           </div>
 
@@ -954,6 +1003,25 @@
       <!-- Lista con Scroll de las 13 experiencias técnicas rediseñadas y mejoradas -->
       <div class="flex-grow overflow-y-auto pr-2 space-y-4 text-xs sm:text-sm" id="tech-history-list">
         
+        <!-- Testimonio Auténtico de Campo (Foto Auténtica en Tablero) -->
+        <div class="p-4 sm:p-5 rounded-2xl glass-panel-subtle border border-orange-500/30 bg-gradient-to-r from-orange-950/20 via-slate-900/60 to-slate-900/40 flex flex-col sm:flex-row items-center sm:items-start gap-4">
+          <div class="w-24 h-32 sm:w-28 sm:h-36 rounded-xl overflow-hidden shrink-0 border border-slate-700 shadow-xl">
+            <img src="assets/leon_tecnico_tablero.jpg" alt="León Munitz en servicio técnico de planta y tableros" class="w-full h-full object-cover">
+          </div>
+          <div class="text-xs sm:text-sm text-slate-300 flex-1 text-center sm:text-left">
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-950/80 text-orange-300 border border-orange-800/60 mb-2">
+              <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+              Registro Auténtico de Campo (Guardias & Tableros)
+            </div>
+            <p class="leading-relaxed text-slate-300">
+              Más de una década con instrumental en mano, comunicación en tiempo real y ejecución técnica directa en paradas continuas de planta, subestaciones y mantenimiento de bombas industriales.
+            </p>
+            <span class="text-[11px] text-slate-400 mt-2 block">
+              Inspección de gabinetes de distribución, interruptores termomagnéticos y cableado en terreno.
+            </span>
+          </div>
+        </div>
+
         <!-- 1. Imant SA (Fate) -->
         <div class="tech-history-item p-4 rounded-2xl glass-panel-subtle border border-slate-800">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
