@@ -46,19 +46,29 @@ code, .font-mono {
   box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.25);
 }
 
-/* Acordeón colapsable con animación suave */
+/* Acordeón colapsable con animación suave y contención 100% estricta (cero fugas de texto) */
 .collapsible-content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden !important;
+  visibility: hidden;
+  opacity: 0;
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, visibility 0.35s;
 }
 
 .collapsible-content.expanded {
   grid-template-rows: 1fr;
+  overflow: visible;
+  visibility: visible;
+  opacity: 1;
 }
 
 .collapsible-inner {
-  overflow: hidden;
+  overflow: hidden !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
 }
 
 /* Botón travieso con animación elástica */
