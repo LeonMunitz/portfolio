@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Generador del Material Completo de Clases - 5 Versiones (HTML y PDF)
+Generador del Material Completo de Clases con Fotografías Reales de Stock
+5 Versiones Especializadas (HTML y PDF)
 Taller: Inteligencia Artificial y Herramientas Digitales para el Técnico de Taller
 Autor: León Munitz para YoReparo Academy
 Estructura: 4 Clases x 4 Slides por Clase = 16 Slides por Versión
@@ -18,7 +19,6 @@ SLIDES_DATA = [
         "slide_num": 1,
         "slide_titulo": "El Asistente Manos Libres en el Taller",
         "subtitulo": "Por qué no usamos teclado ni PC en el banco de trabajo",
-        "icono": "smartphone",
         "badge": "Clase 1 • Slide 1/4",
         "puntos": [
             ("El Problema Real", "Tener las manos ocupadas con el soldador, el multímetro o la pinza impide tipear en un teclado o buscar textos largos en Google."),
@@ -27,7 +27,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Configuración en 3 Minutos",
         "destacado_texto": "Instalación de app gratuita • Activación de asistente por voz predeterminado • Prueba de micrófono en ambiente con ruido de taller.",
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Banco de trabajo: Herramientas activas y celular listo"
     },
     {
         "clase_num": 1,
@@ -35,7 +36,6 @@ SLIDES_DATA = [
         "slide_num": 2,
         "slide_titulo": "La Fórmula de la Consulta Técnica Hablada",
         "subtitulo": "Los 3 elementos indispensables para obtener respuestas certeras",
-        "icono": "mic",
         "badge": "Clase 1 • Slide 2/4",
         "puntos": [
             ("1. Contexto Exacto", "Decir siempre artefacto, marca y modelo comercial completo (ej. 'Lavarropas Drean Next 8.14')."),
@@ -44,7 +44,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Ejemplo de Prompt por Voz Efectivo",
         "destacado_texto": '"Tengo un lavarropas carga superior que tira error E2 al momento de desagotar. La bomba mide 165 ohms y le llegan 220V directos. ¿Qué triac o componente de la placa de control debo verificar?"',
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Medición previa con multímetro antes de formular el prompt"
     },
     {
         "clase_num": 1,
@@ -52,7 +53,6 @@ SLIDES_DATA = [
         "slide_num": 3,
         "slide_titulo": "Caso Real 1: Heladeras No Frost (Descarte en 3 Minutos)",
         "subtitulo": "Evaporador congelado en bloque y heladera que no enfría abajo",
-        "icono": "thermometer-snowflake",
         "badge": "Clase 1 • Slide 3/4",
         "puntos": [
             ("El Error Típico", "Cambiar la placa electrónica sin medir los componentes periféricos de deshielo."),
@@ -61,7 +61,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Resolución Asistida",
         "destacado_texto": "La IA compara el valor dictado con la tabla del fabricante e identifica si el sensor de deshielo está descalibrado antes de tocar un tornillo.",
-        "caso_tecnico": "Sensor NTC 10k a 25°C midiendo 3.2k a 0°C = Sensor descalibrado. Reemplazo de $3 USD salva una placa de $80 USD."
+        "caso_tecnico": "Sensor NTC 10k a 25°C midiendo 3.2k a 0°C = Sensor descalibrado. Reemplazo de $3 USD salva una placa de $80 USD.",
+        "foto_pie": "Placa de control y relés de descongelamiento"
     },
     {
         "clase_num": 1,
@@ -69,7 +70,6 @@ SLIDES_DATA = [
         "slide_num": 4,
         "slide_titulo": "Práctica de Taller y Consigna de la Clase 1",
         "subtitulo": "Poniendo a prueba el asistente con una falla real de tu banco",
-        "icono": "check-square",
         "badge": "Clase 1 • Slide 4/4",
         "puntos": [
             ("Paso 1: Activación Manos Libres", "Verificar que el teléfono despierte con la voz teniendo guantes o herramientas en la mano."),
@@ -78,7 +78,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Entregable para los Alumnos",
         "destacado_texto": "Ficha digital con el método de 3 pasos de consulta hablada y checklist de sensores comunes de línea blanca.",
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Práctica activa de diagnóstico y soldadura en banco"
     },
 
     # CLASE 2
@@ -88,7 +89,6 @@ SLIDES_DATA = [
         "slide_num": 1,
         "slide_titulo": "La Cámara del Celular como Lupa de Diagnóstico",
         "subtitulo": "Cómo los modelos de visión artificial leen lo que el ojo no ve",
-        "icono": "camera",
         "badge": "Clase 2 • Slide 1/4",
         "puntos": [
             ("Superando la Lupa Tradicional", "Los modelos multimodales pueden ampliar serigrafías microscópicas, códigos SMD borrados y fisuras térmicas."),
@@ -97,7 +97,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Poder Visual Aplicado",
         "destacado_texto": "Una foto bien enfocada al sector del microcontrolador permite identificar el pinout y las líneas de alimentación en segundos.",
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Macro de componentes SMD, pistas y serigrafía de placa"
     },
     {
         "clase_num": 2,
@@ -105,7 +106,6 @@ SLIDES_DATA = [
         "slide_num": 2,
         "slide_titulo": "Técnica Fotográfica de Precisión para Circuitos",
         "subtitulo": "Las 3 reglas para que la IA no alucine con una placa",
-        "icono": "eye",
         "badge": "Clase 2 • Slide 2/4",
         "puntos": [
             ("1. Iluminación Blanca Difusa Lateral", "Nunca usar el flash directo del celular: el reflejo en el barniz de la placa ciega a la cámara. Usar luz rasante."),
@@ -114,7 +114,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Regla Fundamental de Captura",
         "destacado_texto": "La nitidez de la foto determina el 90% del éxito del diagnóstico. Si un texto no es legible para vos con zoom, tampoco lo será para la IA.",
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Enfoque macro de chip integrado con grabado láser legible"
     },
     {
         "clase_num": 2,
@@ -122,7 +123,6 @@ SLIDES_DATA = [
         "slide_num": 3,
         "slide_titulo": "Caso Real 2: Placas Inverter (Aire Acondicionado)",
         "subtitulo": "Error de comunicación o protección por sobrecorriente de IPM",
-        "icono": "zap",
         "badge": "Clase 2 • Slide 3/4",
         "puntos": [
             ("El Desafío del Inverter", "Placas costosas donde un corto en el compresor o en el puente trifásico bloquea toda la máquina."),
@@ -131,7 +131,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Protocolo de Diagnóstico Seguro",
         "destacado_texto": "Prueba en escala de diodos entre masa, positivo y bornes U-V-W. Detección de fugas en transistores IGBT internos.",
-        "caso_tecnico": "Optoacoplador de comunicación serial con fotoresistencia abierta. Costo repuesto: $1 USD. Placa salvada: $120 USD."
+        "caso_tecnico": "Optoacoplador de comunicación serial con fotoresistencia abierta. Costo repuesto: $1 USD. Placa salvada: $120 USD.",
+        "foto_pie": "Módulo de potencia Inverter con disipador térmico"
     },
     {
         "clase_num": 2,
@@ -139,7 +140,6 @@ SLIDES_DATA = [
         "slide_num": 4,
         "slide_titulo": "Mapeo de Puntos de Prueba (Test Points)",
         "subtitulo": "Dónde apoyar las puntas del multímetro antes de conectar a 220V",
-        "icono": "target",
         "badge": "Clase 2 • Slide 4/4",
         "puntos": [
             ("Marcación Digital", "Pedirle a la IA que trace sobre la foto los puntos de masa segura (GND) y los rieles de voltaje clave (3.3V, 5V, 12V, 15V)."),
@@ -148,7 +148,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Entregable de la Clase 2",
         "destacado_texto": "Guía fotográfica de captura de placas y plantilla de mapeo de etapas para módulos Inverter de refrigeración.",
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Puntas de prueba sobre puntos de testeo (Test Points)"
     },
 
     # CLASE 3
@@ -158,7 +159,6 @@ SLIDES_DATA = [
         "slide_num": 1,
         "slide_titulo": "El Fin de la Búsqueda de Esquemáticos Propietarios",
         "subtitulo": "El secreto de los circuitos de aplicación típica en las hojas de datos",
-        "icono": "file-search",
         "badge": "Clase 3 • Slide 1/4",
         "puntos": [
             ("La Trampa de los Foros", "Perder horas buscando el manual de servicio oficial de una marca que no lo publica o cobra en dólares."),
@@ -167,7 +167,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Fórmula de Búsqueda Instantánea",
         "destacado_texto": '"Mostrame el circuito de aplicación típica del oscilador PWM OB2269 con el pinout y los valores estándar de las resistencias de sensado."',
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Diagrama esquemático de aplicación típica de fabricante"
     },
     {
         "clase_num": 3,
@@ -175,7 +176,6 @@ SLIDES_DATA = [
         "slide_num": 2,
         "slide_titulo": "Reemplazo Seguro de Componentes Discontinuados",
         "subtitulo": "Cómo hallar sustitutos directos sin quemar circuitos",
-        "icono": "shuffle",
         "badge": "Clase 3 • Slide 2/4",
         "puntos": [
             ("1. Pinout y Encapsulado", "Verificar coincidencia estricta de patillaje (Gate-Drain-Source o Base-Colector-Emisor)."),
@@ -184,7 +184,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Prompt para Búsqueda de Reemplazos Comerciales",
         "destacado_texto": '"Dame 3 reemplazos comerciales comunes para el MOSFET 2SK3569 en formato TO-220, con voltaje igual o mayor a 600V y corriente de 10A."',
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Transistores de potencia encapsulado TO-220 en disipador"
     },
     {
         "clase_num": 3,
@@ -192,7 +193,6 @@ SLIDES_DATA = [
         "slide_num": 3,
         "slide_titulo": "Caso Real 3: Fuentes Conmutadas y TV LED",
         "subtitulo": "Fuente que no oscila o protección activada por componente discontinuado",
-        "icono": "tv",
         "badge": "Clase 3 • Slide 3/4",
         "puntos": [
             ("Síntoma Típico", "TV que no enciende, LED de standby parpadea o fuente conmutada que 'hipo' (intenta arrancar y cae a cero)."),
@@ -201,7 +201,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Resultado de Taller",
         "destacado_texto": "Recuperación de fuentes de TV y monitores que en services oficiales se descartan por falta de placa completa nueva.",
-        "caso_tecnico": "Reemplazo de PWM SMD discontinuado por equivalente directo pin a pin hallado por IA. Costo: $2 USD."
+        "caso_tecnico": "Reemplazo de PWM SMD discontinuado por equivalente directo pin a pin hallado por IA. Costo: $2 USD.",
+        "foto_pie": "Fuente conmutada real: Transformador chopper y optoacoplador"
     },
     {
         "clase_num": 3,
@@ -209,7 +210,6 @@ SLIDES_DATA = [
         "slide_num": 4,
         "slide_titulo": "Traducción de Datasheets en Inglés y Chino",
         "subtitulo": "Extrayendo únicamente la información que le sirve al técnico de banco",
-        "icono": "languages",
         "badge": "Clase 3 • Slide 4/4",
         "puntos": [
             ("Extracción Quirúrgica", "Subir la foto del manual en PDF y pedirle a la IA: 'Extrae solo la tabla de voltajes de operación y descripción de pines'."),
@@ -218,7 +218,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Entregable de la Clase 3",
         "destacado_texto": "Recetario de fórmulas para búsqueda de semiconductores equivalentes y tabla rápida de pinouts universales.",
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Pinouts y diagramas de conexionado técnico de CI"
     },
 
     # CLASE 4
@@ -228,7 +229,6 @@ SLIDES_DATA = [
         "slide_num": 1,
         "slide_titulo": "Del Taller al Bolsillo: Presupuestos por Audio",
         "subtitulo": "Cómo redactar cotizaciones impecables en 30 segundos usando la voz",
-        "icono": "message-circle",
         "badge": "Clase 4 • Slide 1/4",
         "puntos": [
             ("El Problema del Mensaje Informal", "Escribir 'te sale como 40 lucas mas o menos' transmite desconfianza y habilita al cliente a regatear."),
@@ -237,7 +237,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Transformación en Tiempo Real",
         "destacado_texto": "De un audio desordenado de 20 segundos a un presupuesto formal listo para copiar y pegar en WhatsApp Business.",
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Celular y WhatsApp en el escritorio de presupuestos"
     },
     {
         "clase_num": 4,
@@ -245,7 +246,6 @@ SLIDES_DATA = [
         "slide_num": 2,
         "slide_titulo": "Cómo Cobrar y Defender la Visita Técnica",
         "subtitulo": "El valor del conocimiento y el diagnóstico profesional a domicilio",
-        "icono": "badge-dollar-sign",
         "badge": "Clase 4 • Slide 2/4",
         "puntos": [
             ("La Trampa del 'Presupuesto Sin Cargo'", "Ir a la casa del cliente, desarmar un artefacto, diagnosticar y que el cliente diga 'después te aviso' = Pérdida total."),
@@ -254,7 +254,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Mensaje Prediseñado para WhatsApp",
         "destacado_texto": '"La revisión técnica en domicilio tiene un arancel de $X que cubre traslado e informe de diagnóstico. En caso de realizar la reparación, dicho monto se bonifica al 100% del presupuesto final."',
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Maletín de instrumental para visitas a domicilio"
     },
     {
         "clase_num": 4,
@@ -262,7 +263,6 @@ SLIDES_DATA = [
         "slide_num": 3,
         "slide_titulo": "Caso Real 4: Respuestas a Objeciones Duras",
         "subtitulo": "Manejo diplomático pero firme ante clientes difíciles",
-        "icono": "shield-alert",
         "badge": "Clase 4 • Slide 3/4",
         "puntos": [
             ("Objeción 1: 'En YouTube vi que era una pavada'", "Respuesta asistida: Explicar que el componente visible se quemó por protección de una etapa previa que requiere calibración con instrumental."),
@@ -271,7 +271,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Estrategia de Cierre Comercial",
         "destacado_texto": "No discutir con el cliente; educarlo técnicamente con argumentos profesionales generados por la IA en segundos.",
-        "caso_tecnico": "Cliente reticente que aceptó presupuesto de $75 USD al recibir desglose formal con garantía y foto de prueba en banco."
+        "caso_tecnico": "Cliente reticente que aceptó presupuesto de $75 USD al recibir desglose formal con garantía y foto de prueba en banco.",
+        "foto_pie": "Técnico profesional reparando artefacto de cliente"
     },
     {
         "clase_num": 4,
@@ -279,7 +280,6 @@ SLIDES_DATA = [
         "slide_num": 4,
         "slide_titulo": "Fidelización Post-Servicio y Entrega de Materiales",
         "subtitulo": "Multiplicando clientes por recomendación en el barrio",
-        "icono": "heart-handshake",
         "badge": "Clase 4 • Slide 4/4",
         "puntos": [
             ("Mensaje de Entrega Formal", "Certificado de reparación con fecha de inicio y fin de garantía enviado automáticamente por WhatsApp."),
@@ -288,7 +288,8 @@ SLIDES_DATA = [
         ],
         "destacado_titulo": "Entregables Finales del Taller",
         "destacado_texto": "PDF 'Recetario de Prompts de Taller' completo + Pack de Plantillas de WhatsApp Business para copiar y pegar.",
-        "caso_tecnico": None
+        "caso_tecnico": None,
+        "foto_pie": "Atención impecable y conformidad de servicio con cliente"
     }
 ]
 
@@ -303,6 +304,7 @@ VERSIONS = [
         "accent_badge": "bg-blue-500/20 text-blue-400 border border-blue-500/30",
         "accent_box": "bg-blue-950/40 border border-blue-800/50 text-blue-200",
         "tech_box": "bg-emerald-950/30 border border-emerald-800/40 text-emerald-300",
+        "photo_box": "bg-slate-950 border border-slate-800",
         "header_bg": "border-b border-slate-800/80 bg-slate-950/80",
         "is_dark": True
     },
@@ -315,6 +317,7 @@ VERSIONS = [
         "accent_badge": "bg-blue-100 text-blue-800 border border-blue-300",
         "accent_box": "bg-blue-50 border border-blue-200 text-blue-900",
         "tech_box": "bg-emerald-50 border border-emerald-300 text-emerald-900",
+        "photo_box": "bg-white border-2 border-slate-300",
         "header_bg": "border-b border-slate-300 bg-white",
         "is_dark": False
     },
@@ -327,6 +330,7 @@ VERSIONS = [
         "accent_badge": "bg-amber-500/20 text-amber-300 border border-amber-500/30",
         "accent_box": "bg-zinc-800/80 border border-zinc-700 text-zinc-200",
         "tech_box": "bg-amber-950/30 border border-amber-800/40 text-amber-300",
+        "photo_box": "bg-zinc-950 border border-zinc-800",
         "header_bg": "border-b border-zinc-800 bg-zinc-950/90",
         "is_dark": True
     },
@@ -339,6 +343,7 @@ VERSIONS = [
         "accent_badge": "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40",
         "accent_box": "bg-slate-900 border border-slate-700 text-slate-200",
         "tech_box": "bg-emerald-950/40 border border-emerald-500/50 text-emerald-300 font-mono",
+        "photo_box": "bg-slate-950 border border-emerald-500/40",
         "header_bg": "border-b border-emerald-500/30 bg-slate-950/90",
         "is_dark": True
     },
@@ -351,6 +356,7 @@ VERSIONS = [
         "accent_badge": "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30",
         "accent_box": "bg-indigo-950/50 border border-indigo-800/50 text-indigo-200",
         "tech_box": "bg-blue-950/40 border border-blue-800/40 text-blue-300",
+        "photo_box": "bg-slate-950 border border-indigo-500/40",
         "header_bg": "border-b border-indigo-500/30 bg-slate-950/90",
         "is_dark": True
     }
@@ -358,7 +364,7 @@ VERSIONS = [
 
 
 def render_html_version(ver, slides, output_path):
-    """Genera el archivo HTML autocontenido con soporte de navegación interactiva e impresión A4 apaisada a PDF."""
+    """Genera el archivo HTML autocontenido con fotografías reales integradas y soporte de impresión A4 apaisada a PDF."""
     
     html = f"""<!DOCTYPE html>
 <html lang="es" class="{'dark' if ver['is_dark'] else ''} scroll-smooth">
@@ -407,7 +413,7 @@ def render_html_version(ver, slides, output_path):
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        padding: 16mm 20mm !important;
+        padding: 12mm 16mm !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
       }}
@@ -416,8 +422,8 @@ def render_html_version(ver, slides, output_path):
     @media screen {{
       .slide-page {{
         min-height: 85vh;
-        margin-bottom: 2rem;
-        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        padding: 2rem 2.5rem;
         border-radius: 1.5rem;
       }}
     }}
@@ -428,16 +434,16 @@ def render_html_version(ver, slides, output_path):
   <!-- BARRA DE CONTROL DE PANTALLA (NO IMPRIMIBLE) -->
   <header class="no-print sticky top-0 z-50 w-full {ver['header_bg']} backdrop-blur-md px-6 py-3 border-b flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <a href="propuesta-yoreparo.html" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
+      <a href="material-clases-hub.html" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
         <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
-        <span>Volver a la Propuesta</span>
+        <span>Volver al Hub de Versiones</span>
       </a>
       <span class="text-xs font-bold text-slate-400 hidden sm:inline">•</span>
       <h1 class="text-xs sm:text-sm font-bold text-slate-200 truncate">{ver['titulo']}</h1>
     </div>
 
     <div class="flex items-center gap-2">
-      <span class="text-xs text-slate-400 font-mono hidden md:inline">16 Slides • 4 Clases</span>
+      <span class="text-xs text-slate-400 font-mono hidden md:inline">16 Slides con Fotos Reales</span>
       <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-md transition-all flex items-center gap-1.5">
         <i data-lucide="printer" class="w-3.5 h-3.5"></i>
         <span>Guardar como PDF</span>
@@ -450,15 +456,17 @@ def render_html_version(ver, slides, output_path):
 """
 
     for s in slides:
+        img_src = f"assets/slides_img/slide_{s['clase_num']}_{s['slide_num']}.jpg"
+
         html += f"""
     <!-- SLIDE {s['slide_num']} DE CLASE {s['clase_num']} -->
     <section class="slide-page {ver['card_class']} relative flex flex-col justify-between">
       
       <!-- ENCABEZADO DE SLIDE -->
       <div>
-        <div class="flex items-center justify-between border-b pb-3 mb-4 {'border-slate-800' if ver['is_dark'] else 'border-slate-200'}">
+        <div class="flex items-center justify-between border-b pb-2.5 mb-3.5 {'border-slate-800' if ver['is_dark'] else 'border-slate-200'}">
           <div class="flex items-center gap-2.5">
-            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase {ver['accent_badge']}">
+            <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold tracking-wider uppercase {ver['accent_badge']}">
               {s['badge']}
             </span>
             <span class="text-xs font-semibold text-slate-400">{s['clase_nombre']}</span>
@@ -466,51 +474,74 @@ def render_html_version(ver, slides, output_path):
           <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
         </div>
 
-        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 {'text-white' if ver['is_dark'] else 'text-slate-900'}">
-          {s['slide_titulo']}
-        </h2>
-        <p class="text-xs sm:text-sm font-medium {'text-slate-400' if ver['is_dark'] else 'text-slate-600'} mb-5">
-          {s['subtitulo']}
-        </p>
+        <div class="mb-3">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight {'text-white' if ver['is_dark'] else 'text-slate-900'}">
+            {s['slide_titulo']}
+          </h2>
+          <p class="text-xs sm:text-sm font-medium {'text-slate-400' if ver['is_dark'] else 'text-slate-600'}">
+            {s['subtitulo']}
+          </p>
+        </div>
 
-        <!-- CUERPO DE PUNTOS CLAVE -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+        <!-- CUERPO PRINCIPAL: CONTENIDO + FOTOGRAFÍA REAL -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-3 items-stretch">
+          
+          <!-- Puntos Clave (8 columnas) -->
+          <div class="lg:col-span-8 flex flex-col justify-between gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
 """
         for titulo, desc in s['puntos']:
             html += f"""
-          <div class="p-3.5 rounded-xl {'bg-slate-950/60 border border-slate-800/80' if ver['is_dark'] else 'bg-white border border-slate-200'}">
-            <h3 class="text-xs font-bold mb-1.5 {'text-blue-400' if ver['is_dark'] else 'text-blue-700'}">{titulo}</h3>
-            <p class="text-[12px] leading-relaxed {'text-slate-300' if ver['is_dark'] else 'text-slate-700'}">{desc}</p>
-          </div>
+              <div class="p-3 rounded-xl {'bg-slate-950/70 border border-slate-800' if ver['is_dark'] else 'bg-white border border-slate-200'} flex flex-col justify-between">
+                <h3 class="text-xs font-bold mb-1 {'text-blue-400' if ver['is_dark'] else 'text-blue-700'}">{titulo}</h3>
+                <p class="text-[11px] leading-relaxed {'text-slate-300' if ver['is_dark'] else 'text-slate-700'}">{desc}</p>
+              </div>
 """
 
         html += f"""
-        </div>
-      </div>
+            </div>
 
-      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
-      <div class="space-y-2.5">
-        <div class="p-3 rounded-xl {ver['accent_box']}">
-          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">{s['destacado_titulo']}</div>
-          <div class="text-xs leading-relaxed">{s['destacado_texto']}</div>
-        </div>
+            <!-- Recuadros técnicos y prompts -->
+            <div class="space-y-2">
+              <div class="p-2.5 rounded-xl {ver['accent_box']}">
+                <div class="text-[10px] font-bold uppercase tracking-wider mb-0.5">{s['destacado_titulo']}</div>
+                <div class="text-xs leading-relaxed">{s['destacado_texto']}</div>
+              </div>
 """
         if s.get('caso_tecnico'):
             html += f"""
-        <div class="p-2.5 rounded-xl {ver['tech_box']}">
-          <div class="text-[10px] font-bold uppercase tracking-wider mb-0.5 flex items-center gap-1">
-            <i data-lucide="wrench" class="w-3 h-3"></i>
-            <span>Dato de Banco de Trabajo</span>
-          </div>
-          <div class="text-xs font-medium">{s['caso_tecnico']}</div>
-        </div>
+              <div class="p-2 rounded-xl {ver['tech_box']}">
+                <div class="text-[10px] font-bold uppercase tracking-wider mb-0.5 flex items-center gap-1">
+                  <i data-lucide="wrench" class="w-3 h-3"></i>
+                  <span>Dato Clave de Banco</span>
+                </div>
+                <div class="text-[11px] font-medium">{s['caso_tecnico']}</div>
+              </div>
 """
 
         html += f"""
-        <div class="flex items-center justify-between text-[10px] {'text-slate-400' if ver['is_dark'] else 'text-slate-600'} pt-2 border-t {'border-slate-800/60' if ver['is_dark'] else 'border-slate-200'}">
-          <span>Instructor: León Munitz</span>
-          <span>Material Didáctico Exclusivo para Alumnos</span>
+            </div>
+          </div>
+
+          <!-- FOTOGRAFÍA REAL DE STOCK (4 columnas) -->
+          <div class="lg:col-span-4 rounded-xl overflow-hidden {ver['photo_box']} flex flex-col justify-between shadow-lg">
+            <div class="w-full h-44 sm:h-52 overflow-hidden relative">
+              <img src="{img_src}" alt="{s['slide_titulo']}" class="w-full h-full object-cover">
+            </div>
+            <div class="p-2 text-[10px] {'text-slate-400 bg-slate-950/90' if ver['is_dark'] else 'text-slate-700 bg-slate-100'} border-t {'border-slate-800' if ver['is_dark'] else 'border-slate-300'} flex items-center justify-between">
+              <span class="truncate">{s['foto_pie']}</span>
+              <span class="{'text-blue-400 font-bold' if ver['is_dark'] else 'text-blue-700 font-bold'} shrink-0 ml-1">Foto Real #{s['clase_num']}.{s['slide_num']}</span>
+            </div>
+          </div>
+
         </div>
+
+      </div>
+
+      <!-- PIE DE SLIDE -->
+      <div class="flex items-center justify-between text-[10px] {'text-slate-400' if ver['is_dark'] else 'text-slate-600'} pt-2 border-t {'border-slate-800/60' if ver['is_dark'] else 'border-slate-200'}">
+        <span>Instructor: León Munitz</span>
+        <span>YoReparo Academy • Material Didáctico Ilustrado</span>
       </div>
 
     </section>
@@ -545,7 +576,7 @@ def convert_html_to_pdf(html_path, pdf_path):
     try:
         res = subprocess.run(cmd, capture_output=True, text=True, check=True)
         size_kb = os.path.getsize(pdf_path) / 1024
-        print(f"PDF generado con éxito: {pdf_path} ({size_kb:.1f} KB)")
+        print(f"PDF generado: {pdf_path} ({size_kb:.1f} KB)")
         return True
     except Exception as e:
         print(f"Error generando PDF para {html_path}: {e}")
@@ -557,9 +588,7 @@ def main():
     pdf_dir = os.path.join(base_dir, "pdf_versiones")
     os.makedirs(pdf_dir, exist_ok=True)
 
-    print("Iniciando generación de las 5 versiones del material de clases...")
-
-    generated_files = []
+    print("Regenerando las 5 versiones del material de clases con fotografías reales...")
 
     for ver in VERSIONS:
         html_file = f"slides_{ver['id']}.html"
@@ -567,23 +596,13 @@ def main():
         pdf_file = f"taller_ia_{ver['id']}.pdf"
         pdf_path = os.path.join(pdf_dir, pdf_file)
 
-        # 1. Renderizar HTML
+        # 1. Renderizar HTML con imágenes integradas
         render_html_version(ver, SLIDES_DATA, html_path)
 
         # 2. Convertir a PDF
         convert_html_to_pdf(html_path, pdf_path)
 
-        generated_files.append({
-            "id": ver['id'],
-            "titulo": ver['titulo'],
-            "descripcion": ver['descripcion'],
-            "html": html_file,
-            "pdf": f"pdf_versiones/{pdf_file}",
-            "size_kb": os.path.getsize(pdf_path) / 1024 if os.path.exists(pdf_path) else 0
-        })
-
-    print("\nGeneración completada para las 5 versiones.")
-    return generated_files
+    print("\nGeneración completada para las 5 versiones con fotos reales.")
 
 
 if __name__ == "__main__":
