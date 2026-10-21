@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Versión 5: Dossier Ejecutivo & Académico (YoReparo Official) • Material de Clases YoReparo</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Reglas de impresión estricta a PDF A4 apaisado */
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+    
+    @media print {
+      html, body {
+        width: 297mm;
+        height: 210mm;
+        margin: 0;
+        padding: 0;
+        background: #020617 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .slide-page {
+        width: 297mm !important;
+        height: 210mm !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding: 16mm 20mm !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+    }
+
+    @media screen {
+      .slide-page {
+        min-height: 85vh;
+        margin-bottom: 2rem;
+        padding: 2.5rem;
+        border-radius: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <!-- BARRA DE CONTROL DE PANTALLA (NO IMPRIMIBLE) -->
+  <header class="no-print sticky top-0 z-50 w-full border-b border-indigo-500/30 bg-slate-950/90 backdrop-blur-md px-6 py-3 border-b flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="propuesta-yoreparo.html" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+        <span>Volver a la Propuesta</span>
+      </a>
+      <span class="text-xs font-bold text-slate-400 hidden sm:inline">•</span>
+      <h1 class="text-xs sm:text-sm font-bold text-slate-200 truncate">Versión 5: Dossier Ejecutivo & Académico (YoReparo Official)</h1>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span class="text-xs text-slate-400 font-mono hidden md:inline">16 Slides • 4 Clases</span>
+      <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-md transition-all flex items-center gap-1.5">
+        <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+        <span>Guardar como PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL DE LAS 16 SLIDES -->
+  <main class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- SLIDE 1 DE CLASE 1 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 1 • Slide 1/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Nivelación Cero y el Asistente por Voz en el Taller</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          El Asistente Manos Libres en el Taller
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Por qué no usamos teclado ni PC en el banco de trabajo
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">El Problema Real</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Tener las manos ocupadas con el soldador, el multímetro o la pinza impide tipear en un teclado o buscar textos largos en Google.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">La Solución Inmediata</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Gemini nativo en Android (activación con 'Hey Google' o botón lateral) y ChatGPT por voz. Consultas habladas en lenguaje coloquial.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Regla de Oro de Banco</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">No busques palabras clave como en 2005. Dialogá con la IA exactamente igual que si le preguntaras a un colega con 20 años de experiencia sentado a tu lado.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Configuración en 3 Minutos</div>
+          <div class="text-xs leading-relaxed">Instalación de app gratuita • Activación de asistente por voz predeterminado • Prueba de micrófono en ambiente con ruido de taller.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 2 DE CLASE 1 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 1 • Slide 2/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Nivelación Cero y el Asistente por Voz en el Taller</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          La Fórmula de la Consulta Técnica Hablada
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Los 3 elementos indispensables para obtener respuestas certeras
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">1. Contexto Exacto</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Decir siempre artefacto, marca y modelo comercial completo (ej. 'Lavarropas Drean Next 8.14').</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">2. Síntoma de Comportamiento</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Qué hace exactamente y qué no hace (destello de LEDs, código de error en display o momento exacto del ciclo donde se detiene).</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">3. Mediciones Físicas Reales</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Valores en Ohms de bobinados o sensores, y voltajes medidos con multímetro en bornes antes de consultar.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Ejemplo de Prompt por Voz Efectivo</div>
+          <div class="text-xs leading-relaxed">"Tengo un lavarropas carga superior que tira error E2 al momento de desagotar. La bomba mide 165 ohms y le llegan 220V directos. ¿Qué triac o componente de la placa de control debo verificar?"</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 3 DE CLASE 1 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 1 • Slide 3/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Nivelación Cero y el Asistente por Voz en el Taller</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Caso Real 1: Heladeras No Frost (Descarte en 3 Minutos)
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Evaporador congelado en bloque y heladera que no enfría abajo
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">El Error Típico</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Cambiar la placa electrónica sin medir los componentes periféricos de deshielo.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Interrogatorio por Voz</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Dictarle a la IA los valores de los sensores NTC a temperatura ambiente y sumergidos en agua con hielo (tabla de curva kΩ).</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Secuencia de Descarte Lógico</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Bimetal (continuidad en frío) -> Fusible térmico (0 ohms) -> Resistencia de descongelamiento (200-400 ohms) -> Relé de placa.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Resolución Asistida</div>
+          <div class="text-xs leading-relaxed">La IA compara el valor dictado con la tabla del fabricante e identifica si el sensor de deshielo está descalibrado antes de tocar un tornillo.</div>
+        </div>
+
+        <div class="p-2.5 rounded-xl bg-blue-950/40 border border-blue-800/40 text-blue-300">
+          <div class="text-[10px] font-bold uppercase tracking-wider mb-0.5 flex items-center gap-1">
+            <i data-lucide="wrench" class="w-3 h-3"></i>
+            <span>Dato de Banco de Trabajo</span>
+          </div>
+          <div class="text-xs font-medium">Sensor NTC 10k a 25°C midiendo 3.2k a 0°C = Sensor descalibrado. Reemplazo de $3 USD salva una placa de $80 USD.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 4 DE CLASE 1 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 1 • Slide 4/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Nivelación Cero y el Asistente por Voz en el Taller</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Práctica de Taller y Consigna de la Clase 1
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Poniendo a prueba el asistente con una falla real de tu banco
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Paso 1: Activación Manos Libres</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Verificar que el teléfono despierte con la voz teniendo guantes o herramientas en la mano.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Paso 2: Dictado de Caso Pendiente</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Elegir un artefacto que tengas parado en el taller y dictar los 3 elementos clave.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Paso 3: Validación Crítica</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Evaluar si la respuesta de la IA tiene sentido físico o si necesita que le aportes una medición más.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Entregable para los Alumnos</div>
+          <div class="text-xs leading-relaxed">Ficha digital con el método de 3 pasos de consulta hablada y checklist de sensores comunes de línea blanca.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 1 DE CLASE 2 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 2 • Slide 1/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Diagnóstico Visual y Lectura de Placas</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          La Cámara del Celular como Lupa de Diagnóstico
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Cómo los modelos de visión artificial leen lo que el ojo no ve
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Superando la Lupa Tradicional</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Los modelos multimodales pueden ampliar serigrafías microscópicas, códigos SMD borrados y fisuras térmicas.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Identificación de Etapas</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">La IA reconoce de un vistazo: Fuente primaria, etapa de filtrado, oscilador PWM, acoplamiento óptico y etapa de potencia.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Detección de Daños Térmicos</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Reconocimiento de pistas recalentadas, soldaduras frías o electrolíticos hinchados a partir de una foto nítida.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Poder Visual Aplicado</div>
+          <div class="text-xs leading-relaxed">Una foto bien enfocada al sector del microcontrolador permite identificar el pinout y las líneas de alimentación en segundos.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 2 DE CLASE 2 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 2 • Slide 2/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Diagnóstico Visual y Lectura de Placas</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Técnica Fotográfica de Precisión para Circuitos
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Las 3 reglas para que la IA no alucine con una placa
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">1. Iluminación Blanca Difusa Lateral</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Nunca usar el flash directo del celular: el reflejo en el barniz de la placa ciega a la cámara. Usar luz rasante.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">2. Doble Enfoque (General + Macro)</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Tomar una foto completa para que la IA entienda el contexto y una foto macro a 10 cm del componente dudoso.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">3. Limpieza con Alcohol Isopropílico</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Una pasada con hisopo sobre el integrado revela la serigrafía grabada con láser antes de tomar la foto.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Regla Fundamental de Captura</div>
+          <div class="text-xs leading-relaxed">La nitidez de la foto determina el 90% del éxito del diagnóstico. Si un texto no es legible para vos con zoom, tampoco lo será para la IA.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 3 DE CLASE 2 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 2 • Slide 3/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Diagnóstico Visual y Lectura de Placas</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Caso Real 2: Placas Inverter (Aire Acondicionado)
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Error de comunicación o protección por sobrecorriente de IPM
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">El Desafío del Inverter</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Placas costosas donde un corto en el compresor o en el puente trifásico bloquea toda la máquina.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Análisis Visual del Módulo IPM</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">La foto permite ubicar la línea de alta tensión (310V DC), las salidas U-V-W y las resistencias Shunt de bajo valor.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Verificación de Control de 15V y 5V</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Guiado visual para medir tensiones del driver antes de culpar al microcontrolador o reemplazar el IPM.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Protocolo de Diagnóstico Seguro</div>
+          <div class="text-xs leading-relaxed">Prueba en escala de diodos entre masa, positivo y bornes U-V-W. Detección de fugas en transistores IGBT internos.</div>
+        </div>
+
+        <div class="p-2.5 rounded-xl bg-blue-950/40 border border-blue-800/40 text-blue-300">
+          <div class="text-[10px] font-bold uppercase tracking-wider mb-0.5 flex items-center gap-1">
+            <i data-lucide="wrench" class="w-3 h-3"></i>
+            <span>Dato de Banco de Trabajo</span>
+          </div>
+          <div class="text-xs font-medium">Optoacoplador de comunicación serial con fotoresistencia abierta. Costo repuesto: $1 USD. Placa salvada: $120 USD.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 4 DE CLASE 2 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 2 • Slide 4/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Diagnóstico Visual y Lectura de Placas</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Mapeo de Puntos de Prueba (Test Points)
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Dónde apoyar las puntas del multímetro antes de conectar a 220V
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Marcación Digital</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Pedirle a la IA que trace sobre la foto los puntos de masa segura (GND) y los rieles de voltaje clave (3.3V, 5V, 12V, 15V).</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Prueba en Frío (Continuidad)</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Verificar ausencia de cortocircuitos entre rieles de alimentación y masa antes de enchufar.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Conexión con Lámpara Serie</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Regla de seguridad ineludible en el banco para evitar explosiones de componentes durante la prueba inicial.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Entregable de la Clase 2</div>
+          <div class="text-xs leading-relaxed">Guía fotográfica de captura de placas y plantilla de mapeo de etapas para módulos Inverter de refrigeración.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 1 DE CLASE 3 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 3 • Slide 1/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Reemplazo de Componentes, Datasheets y Diagramas</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          El Fin de la Búsqueda de Esquemáticos Propietarios
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          El secreto de los circuitos de aplicación típica en las hojas de datos
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">La Trampa de los Foros</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Perder horas buscando el manual de servicio oficial de una marca que no lo publica o cobra en dólares.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">El Secreto Industrial</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Los diseñadores de placas copian el 'Typical Application Circuit' provisto por el fabricante del circuito integrado.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">La Solución con IA</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Foto al código del chip -> Pedir el esquema de aplicación típica del datasheet -> La placa real es 90% idéntica.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Fórmula de Búsqueda Instantánea</div>
+          <div class="text-xs leading-relaxed">"Mostrame el circuito de aplicación típica del oscilador PWM OB2269 con el pinout y los valores estándar de las resistencias de sensado."</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 2 DE CLASE 3 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 3 • Slide 2/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Reemplazo de Componentes, Datasheets y Diagramas</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Reemplazo Seguro de Componentes Discontinuados
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Cómo hallar sustitutos directos sin quemar circuitos
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">1. Pinout y Encapsulado</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Verificar coincidencia estricta de patillaje (Gate-Drain-Source o Base-Colector-Emisor).</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">2. Parámetros Eléctricos Críticos</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Tensión máxima (Vds / Vce) y corriente (Id / Ic) iguales o mayores al original.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">3. Rds(on) y Velocidad</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">En transistores MOSFET de conmutación, la resistencia interna debe ser igual o menor para evitar sobrecalentamiento.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Prompt para Búsqueda de Reemplazos Comerciales</div>
+          <div class="text-xs leading-relaxed">"Dame 3 reemplazos comerciales comunes para el MOSFET 2SK3569 en formato TO-220, con voltaje igual o mayor a 600V y corriente de 10A."</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 3 DE CLASE 3 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 3 • Slide 3/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Reemplazo de Componentes, Datasheets y Diagramas</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Caso Real 3: Fuentes Conmutadas y TV LED
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Fuente que no oscila o protección activada por componente discontinuado
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Síntoma Típico</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">TV que no enciende, LED de standby parpadea o fuente conmutada que 'hipo' (intenta arrancar y cae a cero).</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Identificación del PWM</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Lectura del código SMD del oscilador de 6 u 8 pines; traducción de funciones de cada pin (VCC, FB, CS, GATE).</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Adaptación de Módulo Universal</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Uso de la IA para conectar un módulo oscilador universal de 3 o 5 cables respetando el optoacoplador original.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Resultado de Taller</div>
+          <div class="text-xs leading-relaxed">Recuperación de fuentes de TV y monitores que en services oficiales se descartan por falta de placa completa nueva.</div>
+        </div>
+
+        <div class="p-2.5 rounded-xl bg-blue-950/40 border border-blue-800/40 text-blue-300">
+          <div class="text-[10px] font-bold uppercase tracking-wider mb-0.5 flex items-center gap-1">
+            <i data-lucide="wrench" class="w-3 h-3"></i>
+            <span>Dato de Banco de Trabajo</span>
+          </div>
+          <div class="text-xs font-medium">Reemplazo de PWM SMD discontinuado por equivalente directo pin a pin hallado por IA. Costo: $2 USD.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 4 DE CLASE 3 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 3 • Slide 4/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Reemplazo de Componentes, Datasheets y Diagramas</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Traducción de Datasheets en Inglés y Chino
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Extrayendo únicamente la información que le sirve al técnico de banco
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Extracción Quirúrgica</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Subir la foto del manual en PDF y pedirle a la IA: 'Extrae solo la tabla de voltajes de operación y descripción de pines'.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Decodificación de Códigos de Falla</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Tablas de fallas en chino o inglés traducidas a diagnósticos claros de taller en segundos.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Verificación de Tolerancias</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">La IA advierte si un reemplazo propuesto va a trabajar muy exigido en temperatura o potencia.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Entregable de la Clase 3</div>
+          <div class="text-xs leading-relaxed">Recetario de fórmulas para búsqueda de semiconductores equivalentes y tabla rápida de pinouts universales.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 1 DE CLASE 4 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 4 • Slide 1/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Presupuestos Profesionales, Cobro y Fidelización</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Del Taller al Bolsillo: Presupuestos por Audio
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Cómo redactar cotizaciones impecables en 30 segundos usando la voz
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">El Problema del Mensaje Informal</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Escribir 'te sale como 40 lucas mas o menos' transmite desconfianza y habilita al cliente a regatear.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">El Método del Dictado de Voz</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Grabarle un audio informal a la IA explicando la reparación y pedirle una cotización formal estructurada.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Estructura Profesional</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Diagnóstico técnico claro + Detalle de mano de obra y repuestos + Garantía escrita (90 días) + Validez del presupuesto.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Transformación en Tiempo Real</div>
+          <div class="text-xs leading-relaxed">De un audio desordenado de 20 segundos a un presupuesto formal listo para copiar y pegar en WhatsApp Business.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 2 DE CLASE 4 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 4 • Slide 2/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Presupuestos Profesionales, Cobro y Fidelización</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Cómo Cobrar y Defender la Visita Técnica
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          El valor del conocimiento y el diagnóstico profesional a domicilio
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">La Trampa del 'Presupuesto Sin Cargo'</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Ir a la casa del cliente, desarmar un artefacto, diagnosticar y que el cliente diga 'después te aviso' = Pérdida total.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">La Fórmula de la Visita Deducible</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">La visita técnica de diagnóstico tiene un costo fijo ($X). Si el trabajo es aprobado, ese monto se descuenta al 100% del total.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Filtrado de Clientes Tóxicos</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Quien no valora el costo de traslado e inspección profesional rara vez pagará una reparación mayor.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Mensaje Prediseñado para WhatsApp</div>
+          <div class="text-xs leading-relaxed">"La revisión técnica en domicilio tiene un arancel de $X que cubre traslado e informe de diagnóstico. En caso de realizar la reparación, dicho monto se bonifica al 100% del presupuesto final."</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 3 DE CLASE 4 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 4 • Slide 3/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Presupuestos Profesionales, Cobro y Fidelización</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Caso Real 4: Respuestas a Objeciones Duras
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Manejo diplomático pero firme ante clientes difíciles
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Objeción 1: 'En YouTube vi que era una pavada'</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Respuesta asistida: Explicar que el componente visible se quemó por protección de una etapa previa que requiere calibración con instrumental.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Objeción 2: 'En otro lado me cobran más barato'</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Respuesta asistida: Diferenciarse por repuestos originales garantizados, prueba de banco y garantía escrita con respaldo.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Ventas Adicionales Inteligentes</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Cómo ofrecer mantenimiento preventivo (ej. cambio de carbones o limpieza de conductos) con descuento por combo.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Estrategia de Cierre Comercial</div>
+          <div class="text-xs leading-relaxed">No discutir con el cliente; educarlo técnicamente con argumentos profesionales generados por la IA en segundos.</div>
+        </div>
+
+        <div class="p-2.5 rounded-xl bg-blue-950/40 border border-blue-800/40 text-blue-300">
+          <div class="text-[10px] font-bold uppercase tracking-wider mb-0.5 flex items-center gap-1">
+            <i data-lucide="wrench" class="w-3 h-3"></i>
+            <span>Dato de Banco de Trabajo</span>
+          </div>
+          <div class="text-xs font-medium">Cliente reticente que aceptó presupuesto de $75 USD al recibir desglose formal con garantía y foto de prueba en banco.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 4 DE CLASE 4 -->
+    <section class="slide-page bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-indigo-500/30 text-slate-100 relative flex flex-col justify-between">
+      
+      <!-- ENCABEZADO DE SLIDE -->
+      <div>
+        <div class="flex items-center justify-between border-b pb-3 mb-4 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wider uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Clase 4 • Slide 4/4
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Presupuestos Profesionales, Cobro y Fidelización</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400">YoReparo Academy • Taller IA</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white">
+          Fidelización Post-Servicio y Entrega de Materiales
+        </h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-400 mb-5">
+          Multiplicando clientes por recomendación en el barrio
+        </p>
+
+        <!-- CUERPO DE PUNTOS CLAVE -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-5">
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Mensaje de Entrega Formal</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Certificado de reparación con fecha de inicio y fin de garantía enviado automáticamente por WhatsApp.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Seguimiento a los 15 Días</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Consulta corta de satisfacción: '¿Cómo viene funcionando el equipo?'. Si todo está bien, solicitud sutil de recomendación.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <h3 class="text-xs font-bold mb-1.5 text-blue-400">Base de Datos Propia</h3>
+            <p class="text-[12px] leading-relaxed text-slate-300">Registro simple de clientes y artefactos para enviar recordatorios de service preventivo antes del invierno/verano.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PIE DE SLIDE: RECUADROS TÉCNICOS Y DESTACADOS -->
+      <div class="space-y-2.5">
+        <div class="p-3 rounded-xl bg-indigo-950/50 border border-indigo-800/50 text-indigo-200">
+          <div class="text-[11px] font-bold uppercase tracking-wider mb-0.5">Entregables Finales del Taller</div>
+          <div class="text-xs leading-relaxed">PDF 'Recetario de Prompts de Taller' completo + Pack de Plantillas de WhatsApp Business para copiar y pegar.</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-800/60">
+          <span>Instructor: León Munitz</span>
+          <span>Material Didáctico Exclusivo para Alumnos</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
