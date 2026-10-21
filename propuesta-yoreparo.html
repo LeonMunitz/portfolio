@@ -602,5 +602,48 @@
   <script>
     lucide.createIcons();
   </script>
+
+  <!-- Telemetría discreta de visitas -->
+  <script>
+    (function() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('no_track') === '1' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          localStorage.setItem('telemetry_disabled', '1');
+          return;
+        }
+        if (localStorage.getItem('telemetry_disabled') === '1') return;
+
+        var lastPing = sessionStorage.getItem('yoreparo_ping_sent');
+        var now = Date.now();
+        if (lastPing && (now - parseInt(lastPing, 10)) < 300000) {
+          return;
+        }
+        sessionStorage.setItem('yoreparo_ping_sent', now.toString());
+
+        var isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+        var dev = isMobile ? '📱 Celular' : '💻 Computadora';
+        var screenRes = (window.screen ? (window.screen.width + 'x' + window.screen.height) : 'N/A');
+        var ref = document.referrer ? document.referrer : 'Acceso directo (WhatsApp / enlace pegado)';
+        var nowStr = new Date().toLocaleString('es-AR', { hour12: false });
+
+        var msg = '¡Visita detectada en la propuesta de YoReparo!\n' +
+                  '• Dispositivo: ' + dev + ' (' + screenRes + ')\n' +
+                  '• Origen: ' + ref + '\n' +
+                  '• Hora local: ' + nowStr;
+
+        fetch('https://ntfy.sh/leon_yoreparo_propuesta_visitas', {
+          method: 'POST',
+          headers: {
+            'Title': '🎯 Visita a Propuesta YoReparo (' + dev + ')',
+            'Priority': 'high',
+            'Tags': 'eyes,memo,dart'
+          },
+          body: msg,
+          keepalive: true
+        }).catch(function() {});
+      } catch(e) {}
+    })();
+  </script>
 </body>
 </html>
