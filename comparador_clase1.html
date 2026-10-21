@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es" class="dark bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <title>Comparador de Estilos • Clase 1 • YoReparo Academy • León Munitz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased p-6">
+
+  <div class="max-w-6xl mx-auto space-y-8">
+    
+    <!-- Header -->
+    <div class="border-b border-slate-800 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-2">
+          Laboratorio de Diseño de Clase 1 • YoReparo Academy
+        </div>
+        <h1 class="text-3xl font-extrabold text-white tracking-tight">
+          Comparador Maestro: Portada Multiverso + 5 Estilos de Clase 1
+        </h1>
+        <p class="text-sm text-slate-400 mt-1">
+          Mismo temario técnico obligatorio, narrado y maquetado con 5 personalidades y distribuciones espaciales únicas.
+        </p>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="portada_multiverso.html" target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white transition-all flex items-center gap-2 shadow-lg shadow-blue-900/40">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span>Ver Portada Multiverso</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN PORTADA MULTIVERSO -->
+    <div class="p-6 rounded-2xl bg-slate-900/90 border-2 border-blue-500/40 relative overflow-hidden">
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <div class="w-full md:w-5/12 rounded-xl overflow-hidden border border-slate-700 shadow-xl bg-slate-950">
+          <img src="assets/portada_multiverso_preview.jpg" alt="Portada Multiverso" class="w-full h-auto object-cover">
+        </div>
+        <div class="w-full md:w-7/12 space-y-3">
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/30">
+            Apertura con Humor IA • Rasgos 100% Auténticos de León
+          </span>
+          <h2 class="text-xl font-bold text-white">
+            Portada Oficial: Los 12 "León" en el Banco de Trabajo
+          </h2>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            11 viñetas satélites con fotos reales de León operando en distintos oficios (robótica, banco, cañerías, tableros, calibración fina, gabinetes, automatización, fuerza bruta) y una foto central prominente de frente con la premisa: <strong>"En el taller que mires, la IA ya está en el celular"</strong>.
+          </p>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="portada_multiverso.html" target="_blank" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-2">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Ver HTML
+            </a>
+            <a href="pdf_versiones/portada_multiverso.pdf" target="_blank" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-950 hover:bg-emerald-900 text-emerald-300 border border-emerald-800 flex items-center gap-2">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Descargar PDF (8.0 MB)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN DE LAS 5 VERSIONES -->
+    <div class="space-y-4">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2">
+        <i data-lucide="layers" class="w-5 h-5 text-blue-400"></i>
+        <span>Las 5 Versiones de Clase 1 (Elegí tu Favorita)</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- VERSIÓN 1 -->
+        <div class="p-5 rounded-2xl bg-slate-900/80 border border-amber-500/40 flex flex-col justify-between space-y-4 hover:border-amber-500/80 transition-all">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                Versión 1 • Minion 1
+              </span>
+              <span class="text-[11px] mono text-slate-400">898 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white">El Colega de Banco</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Tono visceral y de taller real. Lenguaje de igual a igual con mate, pinza, estaño y humor de banco ("el típico clavo de las 6 PM"). Tarjetas asimétricas estilo libreta de mostrador.
+            </p>
+          </div>
+          <div class="space-y-2 pt-2 border-t border-slate-800">
+            <a href="v_clase1_minion1_v1.html" target="_blank" class="w-full py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center gap-2">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ver Slides en Navegador
+            </a>
+            <a href="pdf_versiones/v_clase1_v1_colega.pdf" target="_blank" class="w-full py-2 rounded-xl text-xs font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Descargar PDF A4
+            </a>
+          </div>
+        </div>
+
+        <!-- VERSIÓN 2 -->
+        <div class="p-5 rounded-2xl bg-slate-900/80 border border-cyan-500/40 flex flex-col justify-between space-y-4 hover:border-cyan-500/80 transition-all">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                Versión 2 • Minion 1
+              </span>
+              <span class="text-[11px] mono text-slate-400">698 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Protocolo Clínico & Forense</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Rigor de ingeniería inversa y quirófano de precisión. Badges metrológicos (V, A, Ω, °C, ms), fuentes mono para datos, y enfoque del circuito como un paciente en terapia intensiva.
+            </p>
+          </div>
+          <div class="space-y-2 pt-2 border-t border-slate-800">
+            <a href="v_clase1_minion1_v2.html" target="_blank" class="w-full py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center gap-2">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ver Slides en Navegador
+            </a>
+            <a href="pdf_versiones/v_clase1_v2_clinico.pdf" target="_blank" class="w-full py-2 rounded-xl text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Descargar PDF A4
+            </a>
+          </div>
+        </div>
+
+        <!-- VERSIÓN 3 -->
+        <div class="p-5 rounded-2xl bg-slate-900/80 border border-emerald-500/40 flex flex-col justify-between space-y-4 hover:border-emerald-500/80 transition-all">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                Versión 3 • Minion 2
+              </span>
+              <span class="text-[11px] mono text-slate-400">285 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Hacker de Taller / Cheatsheet</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Unix hardware hacker. Ventanas de terminal Linux con controles de ventana RGB, JetBrains Mono, Input/Process/Output, y prompts presentados como scripts ejecutables (.sh y .py).
+            </p>
+          </div>
+          <div class="space-y-2 pt-2 border-t border-slate-800">
+            <a href="v_clase1_minion2_v3.html" target="_blank" class="w-full py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center gap-2">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ver Slides en Navegador
+            </a>
+            <a href="pdf_versiones/v_clase1_v3_hacker.pdf" target="_blank" class="w-full py-2 rounded-xl text-xs font-bold bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Descargar PDF A4
+            </a>
+          </div>
+        </div>
+
+        <!-- VERSIÓN 4 -->
+        <div class="p-5 rounded-2xl bg-slate-900/80 border border-purple-500/40 flex flex-col justify-between space-y-4 hover:border-purple-500/80 transition-all">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                Versión 4 • Minion 2
+              </span>
+              <span class="text-[11px] mono text-slate-400">576 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Masterclass Interactiva (Live)</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Diseño para proyección en pantalla gigante (Zoom / YouTube Live). Preguntas de impacto en tipografía colosal, enfrentamiento "La Trampa" vs "La Jugada Maestra", y disparadores activos para el chat.
+            </p>
+          </div>
+          <div class="space-y-2 pt-2 border-t border-slate-800">
+            <a href="v_clase1_minion2_v4.html" target="_blank" class="w-full py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center gap-2">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ver Slides en Navegador
+            </a>
+            <a href="pdf_versiones/v_clase1_v4_masterclass.pdf" target="_blank" class="w-full py-2 rounded-xl text-xs font-bold bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Descargar PDF A4
+            </a>
+          </div>
+        </div>
+
+        <!-- VERSIÓN 5 -->
+        <div class="p-5 rounded-2xl bg-slate-900/80 border border-emerald-500/40 flex flex-col justify-between space-y-4 hover:border-emerald-500/80 transition-all">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                Versión 5 • Agente Principal
+              </span>
+              <span class="text-[11px] mono text-slate-400">348 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Dossier Ejecutivo & Rentabilidad</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Enfoque en tiempo, costos y dinero. Métricas de ROI (+45 min ahorrados por placa = +2 reparaciones/día), costo real de repuesto ($4 USD) vs cobro de mano de obra ($65 USD) y blindaje de garantías.
+            </p>
+          </div>
+          <div class="space-y-2 pt-2 border-t border-slate-800">
+            <a href="v_clase1_parent_v5.html" target="_blank" class="w-full py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center gap-2">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ver Slides en Navegador
+            </a>
+            <a href="pdf_versiones/v_clase1_v5_ejecutivo.pdf" target="_blank" class="w-full py-2 rounded-xl text-xs font-bold bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Descargar PDF A4
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="border-t border-slate-800/80 pt-4 flex items-center justify-between text-xs text-slate-400">
+      <span>YoReparo Academy • León Munitz</span>
+      <span class="mono text-blue-400">Clase 1 • Nivelación Cero & Asistente Manos Libres</span>
+    </div>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

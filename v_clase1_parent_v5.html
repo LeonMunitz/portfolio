@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es" class="dark bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <title>Clase 1 • Versión 5: Dossier Ejecutivo & Rentabilidad de Banco</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #020617;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .slide-page {
+      width: 297mm;
+      height: 210mm;
+      box-sizing: border-box;
+      padding: 16mm 18mm 14mm 18mm;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      background: radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+                  #020617;
+      overflow: hidden;
+      border-bottom: 1px solid #1e293b;
+    }
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+      body {
+        margin: 0;
+        background: #020617;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .slide-page {
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- SLIDE 1 -->
+  <section class="slide-page">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          Clase 1 • Diapositiva 1/4 • Enfoque Ejecutivo
+        </span>
+        <span class="text-xs text-slate-400 font-medium">
+          Taller de IA para Técnicos • YoReparo Academy • León Munitz
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] mono text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">
+          KPI: AHORRO DE TIEMPO +45 MIN/PLACA
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-12 gap-6 my-auto items-stretch">
+      <!-- Columna Izquierda: Análisis de Negocio y Lógica -->
+      <div class="col-span-7 flex flex-col justify-between space-y-4">
+        <div>
+          <h1 class="text-2xl font-extrabold text-white tracking-tight mb-2">
+            El Asistente Manos Libres como Motor de Rentabilidad
+          </h1>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            El cuello de botella de un taller no es la habilidad manual, sino el tiempo muerto frente a una pantalla tipeando búsquedas o descargando planos obsoletos con las manos ocupadas.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
+            <div class="text-[11px] font-bold text-red-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+              <span>✕</span> Modelo Tradicional (Pérdida)
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Técnico suelta las puntas de prueba, se saca los guantes, va a la PC del mostrador, tipea "falla placa heladera", lee foros de hace 8 años y pierde 40 minutos sin diagnosticar.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40">
+            <div class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+              <span>✓</span> Modelo Manos Libres (Ganancia)
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Celular en soporte de banco. Activación por voz sin tocar pantalla. Consulta técnica en lenguaje coloquial mientras se mide. Diagnóstico resuelto en 90 segundos.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-xs font-bold text-emerald-300 uppercase tracking-wider mb-2">
+            La Ecuación Financiera del Taller Inteligente
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="p-2 rounded-lg bg-slate-950 border border-slate-800/80">
+              <div class="text-[10px] text-slate-400 uppercase">Tiempo Ahorrado</div>
+              <div class="text-base font-bold text-white mono">45 min</div>
+              <div class="text-[9px] text-slate-400">Por diagnóstico complejo</div>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-950 border border-slate-800/80">
+              <div class="text-[10px] text-slate-400 uppercase">Capacidad Extra</div>
+              <div class="text-base font-bold text-emerald-400 mono">+2 Equipos</div>
+              <div class="text-[9px] text-slate-400">Reparaciones diarias netas</div>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-950 border border-slate-800/80">
+              <div class="text-[10px] text-slate-400 uppercase">Inversión en Software</div>
+              <div class="text-base font-bold text-blue-400 mono">$0 USD</div>
+              <div class="text-[9px] text-slate-400">Apps nativas gratuitas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Placeholder Técnico Descriptivo -->
+      <div class="col-span-5 flex flex-col justify-between">
+        <div class="h-full rounded-2xl border-2 border-dashed border-emerald-500/30 bg-slate-900/40 p-4 flex flex-col justify-between relative">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                Placeholder Técnico Fotográfico #01
+              </span>
+              <span class="text-[10px] mono text-slate-400">Toma de Banco</span>
+            </div>
+            <h4 class="text-xs font-bold text-white mb-2">
+              Fotografía Requerida: Puesto de Banco con Celular Manos Libres
+            </h4>
+            <div class="space-y-1.5 text-[11px] text-slate-300 leading-relaxed">
+              <p>• <strong class="text-emerald-300">Encuadre:</strong> Plano medio cenital en ángulo de 45 grados sobre el banco de trabajo.</p>
+              <p>• <strong class="text-emerald-300">Sujeto:</strong> Técnico sosteniendo con ambas manos las puntas de prueba de un multímetro sobre una placa electrónica energizada en serie.</p>
+              <p>• <strong class="text-emerald-300">Elemento clave:</strong> Teléfono móvil montado en brazo articulado rígido o soporte magnético a 30 cm de distancia, con la pantalla encendida mostrando la app de Gemini o ChatGPT con la animación de escucha activa por voz (ondas de audio).</p>
+              <p>• <strong class="text-emerald-300">Mensaje visual:</strong> Trabajo ininterrumpido sin teclado ni mouse al alcance de las manos.</p>
+            </div>
+          </div>
+          <div class="mt-3 p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-[10px] text-slate-400">
+            <strong class="text-white">Tip de Captura:</strong> Usar luz puntual de banco sobre la placa y evitar reflejos en la pantalla del celular para que se lea la interfaz de voz nítidamente.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between border-t border-slate-800 pt-2 text-[11px] text-slate-400">
+      <span>Módulo 1: Nivelación Cero • El Celular como Copiloto de Banco</span>
+      <span class="mono text-emerald-400 font-semibold">Regla de Oro: En el banco se mide; el asistente procesa por voz</span>
+      <span>YoReparo Academy • 2026</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 -->
+  <section class="slide-page">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          Clase 1 • Diapositiva 2/4 • Enfoque Ejecutivo
+        </span>
+        <span class="text-xs text-slate-400 font-medium">
+          Taller de IA para Técnicos • YoReparo Academy • León Munitz
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] mono text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">
+          MÉTODO: TRIAGE EN 3 PARÁMETROS
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-12 gap-6 my-auto items-stretch">
+      <!-- Columna Izquierda: Estructura del Triage -->
+      <div class="col-span-7 flex flex-col justify-between space-y-3">
+        <div>
+          <h1 class="text-2xl font-extrabold text-white tracking-tight mb-2">
+            El Triage de Entrada: Eliminando la Basura en la Consulta
+          </h1>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Una IA alimentada con datos vagos devuelve respuestas genéricas e inútiles. Para obtener diagnósticos quirúrgicos en segundos, el técnico debe inyectar 3 datos fácticos e incontrovertibles.
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-300 mono text-xs font-bold shrink-0">01</div>
+            <div>
+              <div class="text-xs font-bold text-white mb-0.5">Identidad Inalterable de la Máquina</div>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                Marca comercial, modelo de fábrica exacto tomado de etiqueta metálica o serigrafía de placa (ej. "Heladera Whirlpool WRX48D"). Nunca decir "una heladera moderna".
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-300 mono text-xs font-bold shrink-0">02</div>
+            <div>
+              <div class="text-xs font-bold text-white mb-0.5">Comportamiento Físico y Códigos de Display</div>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                Qué hace y qué no hace: "Compresor intenta arrancar cada 3 minutos, display destella código E4, ventilador del freezer funciona continuo". Cero interpretaciones subjetivas.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-300 mono text-xs font-bold shrink-0">03</div>
+            <div>
+              <div class="text-xs font-bold text-white mb-0.5">Mediciones Físicas Reales con Instrumental</div>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                Valores óhmicos y voltajes medidos con multímetro antes de preguntar: "Resistencia de descongelamiento mide 240 Ohms, fusible térmico en continuidad (0.2 Ohms), sensor NTC mide 2.8k Ohms a 0°C".
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-800/40 text-[11px] text-emerald-300 flex items-center justify-between">
+          <span><strong>Resultado Inmediato:</strong> La IA descarta el 95% de las posibilidades y apunta a la falla exacta.</span>
+          <span class="mono text-[10px] bg-emerald-500/20 px-2 py-0.5 rounded">TIEMPO: &lt; 60 SEG</span>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Placeholder Técnico Descriptivo -->
+      <div class="col-span-5 flex flex-col justify-between">
+        <div class="h-full rounded-2xl border-2 border-dashed border-emerald-500/30 bg-slate-900/40 p-4 flex flex-col justify-between relative">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                Placeholder Técnico Fotográfico #02
+              </span>
+              <span class="text-[10px] mono text-slate-400">Captura de Datos</span>
+            </div>
+            <h4 class="text-xs font-bold text-white mb-2">
+              Fotografía Requerida: Cuaderno de Triage + Etiqueta de Chasis
+            </h4>
+            <div class="space-y-1.5 text-[11px] text-slate-300 leading-relaxed">
+              <p>• <strong class="text-emerald-300">Encuadre:</strong> Plano detalle cenital sobre una mesa de recepción o banco de desarme.</p>
+              <p>• <strong class="text-emerald-300">Elementos en escena:</strong></p>
+              <p class="pl-2">- Chasis metálico de electrodoméstico con etiqueta técnica legible (marca, código de serie, gas refrigerante, watts).</p>
+              <p class="pl-2">- Cuaderno de banco o ficha de servicio con las 3 líneas manuscritas: Modelo exacto, Falla visual, Mediciones de multímetro.</p>
+              <p class="pl-2">- Multímetro apoyado al lado con la medición congelada en pantalla (función HOLD).</p>
+              <p>• <strong class="text-emerald-300">Objetivo pedagógico:</strong> Transmitir que el técnico profesional anota números, no impresiones vagas.</p>
+            </div>
+          </div>
+          <div class="mt-3 p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-[10px] text-slate-400">
+            <strong class="text-white">Tip de Captura:</strong> Letra manuscrita legible y clara para que el alumno relacione la libreta de taller con la formulación del prompt de voz.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between border-t border-slate-800 pt-2 text-[11px] text-slate-400">
+      <span>Módulo 1: Nivelación Cero • Metodología de Triage de Entrada</span>
+      <span class="mono text-emerald-400 font-semibold">Principio: Calidad de entrada = Precisión de salida</span>
+      <span>YoReparo Academy • 2026</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 -->
+  <section class="slide-page">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          Clase 1 • Diapositiva 3/4 • Enfoque Ejecutivo
+        </span>
+        <span class="text-xs text-slate-400 font-medium">
+          Taller de IA para Técnicos • YoReparo Academy • León Munitz
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] mono text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">
+          ESTUDIO FORENSE: NO FROST BLOQUEADA
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-12 gap-6 my-auto items-stretch">
+      <!-- Columna Izquierda: Análisis del Caso Real -->
+      <div class="col-span-7 flex flex-col justify-between space-y-3">
+        <div>
+          <h1 class="text-2xl font-extrabold text-white tracking-tight mb-2">
+            Caso Forense: Heladera No Frost con Bloque de Hielo
+          </h1>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            El cliente denuncia que la heladera congela arriba pero no enfría en el gabinete inferior. El técnico novato cambia la placa de $90 USD sin medir y la falla regresa a los 4 días.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
+          <div class="text-xs font-bold text-white flex items-center justify-between border-b border-slate-800 pb-1.5">
+            <span class="text-emerald-400">Autopsia de Banco en 3 Pasos</span>
+            <span class="mono text-[10px] text-slate-400">DESCARTE RÁPIDO</span>
+          </div>
+          <div class="space-y-1.5 text-[11px] text-slate-300">
+            <p>1. <strong class="text-white">Resistencia de descongelamiento:</strong> Mide 240 Ohms. <em>Estado: Perfecta (circuito cerrado normal).</em></p>
+            <p>2. <strong class="text-white">Fusible térmico de protección:</strong> Continuidad franca (0.1 Ohm). <em>Estado: Operativo.</em></p>
+            <p>3. <strong class="text-white">Sensor de temperatura NTC:</strong> Sumergido en agua con hielo (0°C), marca <strong>2.8k Ohms</strong> en el multímetro.</p>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-800/40">
+          <div class="text-xs font-bold text-emerald-300 mb-1">El Veredicto de la Inteligencia Artificial</div>
+          <p class="text-[11px] text-slate-300 leading-relaxed">
+            La IA compara inmediatamente con la curva nominal del fabricante: a 0°C, ese sensor debe medir entre <strong>27k y 32k Ohms</strong>. Al medir 2.8k, el microcontrolador cree que el evaporador está a temperatura ambiente y jamás activa el relé de descongelamiento.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 text-center">
+          <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-[10px] text-slate-400 uppercase">Costo Repuesto Real</div>
+            <div class="text-lg font-bold text-emerald-400 mono">$4 USD</div>
+            <div class="text-[10px] text-slate-400">Sensor NTC original</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-[10px] text-slate-400 uppercase">Mano de Obra Neta Cobrada</div>
+            <div class="text-lg font-bold text-white mono">$65 USD</div>
+            <div class="text-[10px] text-slate-400">Reparación garantizada</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Placeholder Técnico Descriptivo -->
+      <div class="col-span-5 flex flex-col justify-between">
+        <div class="h-full rounded-2xl border-2 border-dashed border-emerald-500/30 bg-slate-900/40 p-4 flex flex-col justify-between relative">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                Placeholder Técnico Fotográfico #03
+              </span>
+              <span class="text-[10px] mono text-slate-400">Prueba de Banco</span>
+            </div>
+            <h4 class="text-xs font-bold text-white mb-2">
+              Fotografía Requerida: Medición del Sensor NTC en Vaso con Hielo
+            </h4>
+            <div class="space-y-1.5 text-[11px] text-slate-300 leading-relaxed">
+              <p>• <strong class="text-emerald-300">Encuadre:</strong> Primer plano nítido sobre banco de pruebas.</p>
+              <p>• <strong class="text-emerald-300">Elementos en escena:</strong></p>
+              <p class="pl-2">- Vaso de vidrio transparente con agua y cubos de hielo picado flotando (referencia física de 0°C).</p>
+              <p class="pl-2">- Puntas del multímetro conectadas con pinzas cocodrilo a los terminales del sensor NTC sumergido.</p>
+              <p class="pl-2">- Display digital del multímetro encendido mostrando claramente la cifra de resistencia anómala (ej. 2.82 kΩ en escala de 20k).</p>
+              <p>• <strong class="text-emerald-300">Objetivo pedagógico:</strong> Evidencia empírica de laboratorio casero irrefutable ante el alumno y ante el cliente.</p>
+            </div>
+          </div>
+          <div class="mt-3 p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-[10px] text-slate-400">
+            <strong class="text-white">Tip de Captura:</strong> Asegurar buena iluminación en el display LCD del tester para evitar brillos o dígitos cortados en la foto.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between border-t border-slate-800 pt-2 text-[11px] text-slate-400">
+      <span>Módulo 1: Nivelación Cero • Estudio Forense de Caso Real</span>
+      <span class="mono text-emerald-400 font-semibold">Lección de Negocio: La placa no se cambia; se diagnostica el periférico</span>
+      <span>YoReparo Academy • 2026</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 -->
+  <section class="slide-page">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div class="flex items-center gap-3">
+        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          Clase 1 • Diapositiva 4/4 • Enfoque Ejecutivo
+        </span>
+        <span class="text-xs text-slate-400 font-medium">
+          Taller de IA para Técnicos • YoReparo Academy • León Munitz
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] mono text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">
+          CONTROL CRÍTICO: PROTOCOLO ANTI-ALUCINACIÓN
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-12 gap-6 my-auto items-stretch">
+      <!-- Columna Izquierda: Reglas de Oro y Verificación -->
+      <div class="col-span-7 flex flex-col justify-between space-y-3">
+        <div>
+          <h1 class="text-2xl font-extrabold text-white tracking-tight mb-2">
+            La Regla de Oro: La IA Sugiere, el Multímetro Dictamina
+          </h1>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Los modelos de lenguaje pueden alucinar componentes que no existen en tu revisión de placa. El técnico profesional jamás desuelda nada sin comprobar físicamente la coherencia eléctrica.
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-amber-400 mb-1 flex items-center gap-1.5">
+              <span>⚠</span> Filtro 1: Existencia Física en Placa
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Si la IA te sugiere revisar un optoacoplador o un triac que tu placa físicamente no tiene montado, no pierdas tiempo buscándolo. Repreguntá: <em>"Esta placa no tiene optoacoplador en la etapa de descongelamiento; funciona con relé electromecánico de 12V. Reevalúa."</em>
+            </p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-blue-400 mb-1 flex items-center gap-1.5">
+              <span>⚙</span> Filtro 2: Coherencia con la Ley de Ohm
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Toda sugerencia de la IA debe tener sentido físico medible. Si la IA te dice que una resistencia de 240 Ohms está abierta pero tu multímetro marca 240 Ohms estables, el tester siempre tiene la razón.
+            </p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-emerald-950/40 border border-emerald-800/40">
+            <div class="text-xs font-bold text-emerald-300 mb-1 flex items-center gap-1.5">
+              <span>★</span> Ejercicio Práctico Obligatorio de Clase 1
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Cada alumno tomará un sensor o resistencia de su propio taller, le medirá el valor en frío, le dictará el Triage de 3 pasos por voz a Gemini en su celular y compartirá la captura en el foro para validar el criterio.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-slate-300 flex items-center justify-between">
+          <span><strong>Entregable de Clase 1:</strong> Plantilla de Dictado Rápido para Gemini / ChatGPT</span>
+          <span class="mono text-[10px] text-emerald-400">PDF DESCARGABLE</span>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Placeholder Técnico Descriptivo -->
+      <div class="col-span-5 flex flex-col justify-between">
+        <div class="h-full rounded-2xl border-2 border-dashed border-emerald-500/30 bg-slate-900/40 p-4 flex flex-col justify-between relative">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                Placeholder Técnico Fotográfico #04
+              </span>
+              <span class="text-[10px] mono text-slate-400">Contraste Crítico</span>
+            </div>
+            <h4 class="text-xs font-bold text-white mb-2">
+              Fotografía Requerida: Pantalla del Celular frente al Multímetro
+            </h4>
+            <div class="space-y-1.5 text-[11px] text-slate-300 leading-relaxed">
+              <p>• <strong class="text-emerald-300">Encuadre:</strong> Plano conjunto cerrado sobre el banco.</p>
+              <p>• <strong class="text-emerald-300">Composición:</strong></p>
+              <p class="pl-2">- A la izquierda: Smartphone con el chat de IA mostrando la respuesta técnica estructurada.</p>
+              <p class="pl-2">- A la derecha: Multímetro digital con sus puntas de prueba apoyadas sobre el componente exacto mencionado por la IA.</p>
+              <p class="pl-2">- Al fondo: Luz tenue de taller que realce el instrumental.</p>
+              <p>• <strong class="text-emerald-300">Concepto a transmitir:</strong> La síntesis perfecta entre tecnología digital moderna y oficio manual de banco.</p>
+            </div>
+          </div>
+          <div class="mt-3 p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-[10px] text-slate-400">
+            <strong class="text-white">Tip de Captura:</strong> Asegurarse de que el texto de la pantalla del celular y los dígitos del tester tengan niveles de brillo parejos para evitar sobreexposición.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between border-t border-slate-800 pt-2 text-[11px] text-slate-400">
+      <span>Módulo 1: Nivelación Cero • Verificación Cruzada y Reglas de Oro</span>
+      <span class="mono text-emerald-400 font-semibold">Mandamiento: Cero alucinaciones sin contrastar en el tester</span>
+      <span>YoReparo Academy • 2026</span>
+    </div>
+  </section>
+
+</body>
+</html>

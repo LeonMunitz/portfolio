@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clase 1: Protocolo Clínico y Forense • YoReparo Academy</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+    
+    @media print {
+      html, body {
+        width: 297mm;
+        height: 210mm;
+        margin: 0;
+        padding: 0;
+        background: #020617 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .slide-page {
+        width: 297mm !important;
+        height: 210mm !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding: 12mm 16mm !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+    }
+
+    @media screen {
+      .slide-page {
+        min-height: 85vh;
+        margin-bottom: 2.5rem;
+        padding: 2rem 2.5rem;
+        border-radius: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <header class="no-print sticky top-0 z-50 w-full border-b border-cyan-900/60 bg-slate-950/95 backdrop-blur-md px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="px-2.5 py-1 rounded-md text-xs font-mono font-bold uppercase bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
+        Versión 2: Protocolo Clínico y Forense
+      </span>
+      <h1 class="text-xs sm:text-sm font-bold text-slate-200">YoReparo Academy • Rigor Metrológico</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-cyan-600 hover:bg-cyan-500 text-slate-950 shadow-md transition-all flex items-center gap-1.5">
+        <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+        <span>Guardar como PDF A4</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- SLIDE 1 -->
+    <section class="slide-page bg-slate-950 border border-cyan-500/40 text-slate-100 shadow-2xl relative flex flex-col justify-between mb-8">
+      <div>
+        <div class="flex items-center justify-between border-b pb-2.5 mb-3 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+              PROTOCOLO 01 • INGENIERÍA COGNITIVA
+            </span>
+            <span class="text-xs font-mono text-slate-400">SYS-REF: ACQ-VOICE-01</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] font-mono text-cyan-400">
+            <span>Fs: 16 kHz</span>
+            <span>•</span>
+            <span>Latencia: &lt;850ms</span>
+            <span>•</span>
+            <span>CAT III 1000V</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            Protocolo de Entrada: Interfaz de Voz Manos Libres en Entorno ESD
+          </h2>
+          <p class="text-xs sm:text-sm font-medium text-cyan-300">
+            Optimización ergonómica y eliminación de latencia cognitiva en banco de diagnóstico
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-3 items-stretch">
+          <div class="lg:col-span-8 flex flex-col justify-between gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                  <span>Aislamiento ESD</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  El operador mantiene contacto galvánico con doble punta de prueba y pulsera conductiva. Tipear en teclado introduce riesgo de arco estático y desconcentración visual.
+                </p>
+              </div>
+
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                  <span>Inferencia Full-Duplex</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Implementación de Gemini 1.5 Pro y GPT-4o por audio continuo. Emisión de consultas técnicas sin desviar el eje visual del microscopio o la traza del osciloscopio.
+                </p>
+              </div>
+
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="binary" class="w-3.5 h-3.5"></i>
+                  <span>Estructura Pericial</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Superación de la búsqueda booleana aislada. Formulación basada en premisas de estado inicial, magnitudes cinéticas y jerarquización por probabilidad de falla.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-2.5 rounded-lg bg-cyan-950/40 border border-cyan-800/60 font-mono text-[11px] text-cyan-200">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-cyan-300 mb-0.5">
+                ESPECIFICACIÓN DE INICIALIZACIÓN METROLÓGICA (180 SEG)
+              </div>
+              <div class="text-[11px] leading-relaxed">
+                Asignación de asistente de voz nativo en smartphone • Enlace Bluetooth 5.2 con cancelación activa de transitorios de fuentes switching • Verificación de captura vocal con 75 dBA de ruido ambiente.
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 rounded-lg bg-slate-900 border border-slate-800 p-3 flex flex-col justify-between shadow-lg">
+            <div class="border border-slate-700/80 rounded bg-slate-950/80 p-3 flex-1 flex flex-col justify-center text-center">
+              <i data-lucide="scan" class="w-8 h-8 text-cyan-400 mx-auto mb-2"></i>
+              <span class="text-xs font-mono font-bold text-cyan-300 uppercase">ESPECIFICACIÓN FOTOGRÁFICA</span>
+              <p class="text-[10px] text-slate-400 mt-2 text-left leading-relaxed">
+                Brazo articulado sosteniendo smartphone a 45° con espectrograma activo. Manta ESD azul milimetrada con pulsera a tierra. Estación JBC marcando 350°C y pinzas de titanio sobre placa SMD. Luz neutra 5000K rasante.
+              </p>
+            </div>
+            <div class="pt-2 text-[10px] font-mono text-cyan-400/80 text-center">
+              REG-IMG-01 • Setup Metrológico ESD
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-2 border-t border-slate-800">
+        <span>INSTRUCTOR: LEÓN MUNITZ</span>
+        <span>YOREPARO ACADEMY • INGENIERÍA METROLÓGICA</span>
+      </div>
+    </section>
+
+
+    <!-- SLIDE 2 -->
+    <section class="slide-page bg-slate-950 border border-cyan-500/40 text-slate-100 shadow-2xl relative flex flex-col justify-between mb-8">
+      <div>
+        <div class="flex items-center justify-between border-b pb-2.5 mb-3 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+              PROTOCOLO 02 • VECTORIZACIÓN METROLÓGICA
+            </span>
+            <span class="text-xs font-mono text-slate-400">SYS-REF: TRIAGE-3V-02</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] font-mono text-cyan-400">
+            <span>OEM: Coincidencia 100%</span>
+            <span>•</span>
+            <span>True RMS 4 Digits</span>
+            <span>•</span>
+            <span>Rel: Active</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            Metodología Triage-3V: Parametrización Obligatoria de Entrada
+          </h2>
+          <p class="text-xs sm:text-sm font-medium text-cyan-300">
+            Estructuración estricta de variables físicas para erradicar el sesgo y la alucinación estocástica
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-3 items-stretch">
+          <div class="lg:col-span-8 flex flex-col justify-between gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="file-check" class="w-3.5 h-3.5"></i>
+                  <span>Vector 1: Código OEM</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Registro alfanumérico estricto del chasis y PCB (ej. Drean Next 8.14 / DIEHL AKO 728322-04). Variaciones de sufijo alteran el mapa de pines y semiconductores.
+                </p>
+              </div>
+
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="timer" class="w-3.5 h-3.5"></i>
+                  <span>Vector 2: Cronometría</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Caracterización cronológica exacta de la detención. Código OBD en display (E02), patrón de destellos PWM o segundo exacto de colapso en máquina de estados.
+                </p>
+              </div>
+
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                  <span>Vector 3: Cuantificación</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Adquisición cuantitativa previa: resistencia DCR a 20°C en ohmios, aislación galvánica a masa en MΩ, tensión VAC/VDC bajo carga y caída en juntura PN.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-2.5 rounded-lg bg-blue-950/40 border border-blue-800/60 font-mono text-[11px] text-blue-200">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-blue-300 mb-0.5">
+                VECTOR DE PROMPT PARAMETRIZADO (PROTOCOLO CLÍNICO)
+              </div>
+              <div class="text-[10px] leading-relaxed">
+                OEM: Drean Next 8.14 (PCB DIEHL AKO 728322) • ANOMALÍA: Falla de drenaje Error E02 en fase de centrifugado • MEDIDA ACTUADOR: DCR bobina = 168.4 Ω a 22°C (aislación &gt;50 MΩ) • MEDIDA CONTROL: 0.0 VAC en J4 PIN 2-3 bajo ciclo activo • REQUERIMIENTO: Nomenclatura de triac SMD de compuerta, resistor fusible asociado y pinout de MCU.
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 rounded-lg bg-slate-900 border border-slate-800 p-3 flex flex-col justify-between shadow-lg">
+            <div class="border border-slate-700/80 rounded bg-slate-950/80 p-3 flex-1 flex flex-col justify-center text-center">
+              <i data-lucide="scan" class="w-8 h-8 text-cyan-400 mx-auto mb-2"></i>
+              <span class="text-xs font-mono font-bold text-cyan-300 uppercase">ESPECIFICACIÓN FOTOGRÁFICA</span>
+              <p class="text-[10px] text-slate-400 mt-2 text-left leading-relaxed">
+                Macro extremo sobre display de Fluke 87V marcando '168.4 Ω' con indicador REL. Puntas Kelvin bañadas en oro insertadas en terminales de bomba sobre papel milimetrado. Esquemático de fondo desenfocado.
+              </p>
+            </div>
+            <div class="pt-2 text-[10px] font-mono text-cyan-400/80 text-center">
+              REG-IMG-02 • Medición DCR True RMS
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-2 border-t border-slate-800">
+        <span>INSTRUCTOR: LEÓN MUNITZ</span>
+        <span>YOREPARO ACADEMY • INGENIERÍA METROLÓGICA</span>
+      </div>
+    </section>
+
+
+    <!-- SLIDE 3 -->
+    <section class="slide-page bg-slate-950 border border-blue-500/40 text-slate-100 shadow-2xl relative flex flex-col justify-between mb-8">
+      <div>
+        <div class="flex items-center justify-between border-b pb-2.5 mb-3 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider uppercase bg-blue-500/20 text-blue-300 border border-blue-500/40">
+              CASO FORENSE • DINÁMICA TÉRMICA
+            </span>
+            <span class="text-xs font-mono text-slate-400">SYS-REF: NTC-DRIFT-03</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] font-mono text-blue-400">
+            <span>R25: 10.0 kΩ</span>
+            <span>•</span>
+            <span>R0 Real: 2.80 kΩ</span>
+            <span>•</span>
+            <span>Error: -72.0%</span>
+            <span>•</span>
+            <span>P_htr: 200W</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            Análisis Forense: Falla Crítica en Algoritmo de Deshielo No Frost
+          </h2>
+          <p class="text-xs sm:text-sm font-medium text-blue-300">
+            Detección analítica de termistor NTC fuera de curva sin reemplazo prematuro de unidad MCU
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-3 items-stretch">
+          <div class="lg:col-span-8 flex flex-col justify-between gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-blue-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="snowflake" class="w-3.5 h-3.5"></i>
+                  <span>Bloqueo Criogénico</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Saturación de hielo estructurado en evaporador con anulación de flujo hacia el gabinete inferior. Diagnóstico empírico defectuoso: sustitución de PCB ($85 USD) sin aislar causa raíz.
+                </p>
+              </div>
+
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-blue-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="thermometer-snowflake" class="w-3.5 h-3.5"></i>
+                  <span>Ensayo Eutéctico 0°C</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Extracción del NTC e inmersión en baño bifásico de hielo y agua destilada a 0.0°C constantes. Medición real: 2.80 kΩ frente al valor nominal de catálogo de 10.0 kΩ.
+                </p>
+              </div>
+
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-blue-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                  <span>Lectura de Firmware</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  El ADC del microcontrolador interpreta una tensión equivalente a +18°C. El firmware asume evaporador seco y aborta el disparo del relé de la resistencia calefactora.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-2.5 rounded-lg bg-blue-950/40 border border-blue-800/60 font-mono text-[11px] text-blue-200">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-blue-300 mb-0.5">
+                DICTAMEN TÉCNICO PERICIAL FORENSE
+              </div>
+              <div class="text-[11px] leading-relaxed">
+                Degradación de la constante Beta del semiconductor por ingreso de micro-humedad en cápsula polimérica. Reemplazo de componente pasivo de $2.50 USD normaliza la curva analógica y previene el descarte erróneo de la placa de $85 USD.
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 rounded-lg bg-slate-900 border border-slate-800 p-3 flex flex-col justify-between shadow-lg">
+            <div class="border border-slate-700/80 rounded bg-slate-950/80 p-3 flex-1 flex flex-col justify-center text-center">
+              <i data-lucide="scan" class="w-8 h-8 text-blue-400 mx-auto mb-2"></i>
+              <span class="text-xs font-mono font-bold text-blue-300 uppercase">ESPECIFICACIÓN FOTOGRÁFICA</span>
+              <p class="text-[10px] text-slate-400 mt-2 text-left leading-relaxed">
+                Vaso de precipitado borosilicato con baño de hielo y termómetro PT100 marcando exactamente 0.0°C. Sonda Kelvin conectada a sensor cilíndrico NTC sumergido registrando 2.80 kΩ en multímetro. Curva OEM en tablet.
+              </p>
+            </div>
+            <div class="pt-2 text-[10px] font-mono text-blue-400/80 text-center">
+              REG-IMG-03 • Drift Térmico en Baño Eutéctico
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-2 border-t border-slate-800">
+        <span>INSTRUCTOR: LEÓN MUNITZ</span>
+        <span>YOREPARO ACADEMY • INGENIERÍA METROLÓGICA</span>
+      </div>
+    </section>
+
+
+    <!-- SLIDE 4 -->
+    <section class="slide-page bg-slate-950 border border-cyan-500/40 text-slate-100 shadow-2xl relative flex flex-col justify-between mb-8">
+      <div>
+        <div class="flex items-center justify-between border-b pb-2.5 mb-3 border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+              PROTOCOLO 04 • BLINDAJE METODOLÓGICO
+            </span>
+            <span class="text-xs font-mono text-slate-400">SYS-REF: GROUNDING-04</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] font-mono text-cyan-400">
+            <span>Alucinación Base: 18%</span>
+            <span>•</span>
+            <span>Residual: &lt;0.5%</span>
+            <span>•</span>
+            <span>Jerarquía: Galvánica</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            Protocolo de Verificación Cruzada y Ensayo Empírico de Banco
+          </h2>
+          <p class="text-xs sm:text-sm font-medium text-cyan-300">
+            Reglas de ingeniería para blindaje anti-alucinación y transferencia inmediata a entorno productivo
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-3 items-stretch">
+          <div class="lg:col-span-8 flex flex-col justify-between gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="scale" class="w-3.5 h-3.5"></i>
+                  <span>Primacía Instrumental</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Los LLMs operan bajo distribución estocástica de texto, no mediante metrología. Toda hipótesis de desoldado o bypass está subordinada a la medición determinista en circuito activo.
+                </p>
+              </div>
+
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+                  <span>Filtro de Alucinación</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Ante la sugerencia de un componente SMD crítico, requerir: 'Cita datasheet oficial y ecuación de malla'. Si el modelo rectifica o titubea, se neutraliza una sustitución destructiva.
+                </p>
+              </div>
+
+              <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+                <div class="text-[11px] font-mono font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+                  <i data-lucide="microscope" class="w-3.5 h-3.5"></i>
+                  <span>Ensayo de Laboratorio</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-300">
+                  Seleccionar un módulo clasificado como 'falla no reproducible'. Aplicar Triage-3V por voz y tabular desvíos entre predicción algorítmica y magnitudes físicas certificadas.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-2.5 rounded-lg bg-cyan-950/40 border border-cyan-800/60 font-mono text-[11px] text-cyan-200">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-cyan-300 mb-0.5">
+                AXIOMA EPISTEMOLÓGICO DE LABORATORIO
+              </div>
+              <div class="text-[11px] leading-relaxed">
+                El algoritmo genera hipótesis probabilísticas de alta densidad predictiva; el multímetro calibrado constata la física del conductor. Ninguna intervención de desoldado se ejecuta sin confirmación galvánica previa.
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 rounded-lg bg-slate-900 border border-slate-800 p-3 flex flex-col justify-between shadow-lg">
+            <div class="border border-slate-700/80 rounded bg-slate-950/80 p-3 flex-1 flex flex-col justify-center text-center">
+              <i data-lucide="scan" class="w-8 h-8 text-cyan-400 mx-auto mb-2"></i>
+              <span class="text-xs font-mono font-bold text-cyan-300 uppercase">ESPECIFICACIÓN FOTOGRÁFICA</span>
+              <p class="text-[10px] text-slate-400 mt-2 text-left leading-relaxed">
+                Microscopio trinocular de precisión. Sonda de osciloscopio 100:1 aplicada sobre gate de MOSFET SMD en PCB industrial. Monitor adyacente exhibe ventana de IA y datasheet oficial en contraste. Iluminación por fibra óptica 30°.
+              </p>
+            </div>
+            <div class="pt-2 text-[10px] font-mono text-cyan-400/80 text-center">
+              REG-IMG-04 • Inspección Óptica y Validación Oscilográfica
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-2 border-t border-slate-800">
+        <span>INSTRUCTOR: LEÓN MUNITZ</span>
+        <span>YOREPARO ACADEMY • INGENIERÍA METROLÓGICA</span>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

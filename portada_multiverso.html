@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es" class="dark bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <title>Portada Multiverso • León Munitz • YoReparo Academy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #020617;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .slide-page {
+      width: 297mm;
+      height: 210mm;
+      box-sizing: border-box;
+      padding: 10mm 12mm;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12) 0%, rgba(2, 6, 23, 0.98) 75%),
+                  #020617;
+      overflow: hidden;
+    }
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+      body {
+        margin: 0;
+        background: #020617;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+    .vignette-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(51, 65, 85, 0.6);
+      background-color: #0f172a;
+      transition: all 0.2s ease;
+    }
+    .vignette-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.05) brightness(0.95);
+    }
+    .vignette-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.4) 45%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0.5rem;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <section class="slide-page">
+    <!-- Header sutil -->
+    <div class="flex items-center justify-between border-b border-slate-800/80 pb-2 mb-2">
+      <div class="flex items-center gap-2">
+        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-blue-500/20 text-blue-300 border border-blue-500/30">
+          YoReparo Academy • Apertura Oficial
+        </span>
+        <span class="text-[11px] text-slate-400 font-semibold">
+          Taller Intensivo: Inteligencia Artificial y Herramientas Digitales para el Técnico
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] mono text-emerald-400 bg-emerald-950/60 px-2.5 py-0.5 rounded border border-emerald-800/50">
+          EDICIÓN HUMOR IA: EL MULTIVERSO DEL BANCO
+        </span>
+      </div>
+    </div>
+
+    <!-- Layout Multiverso: 3 columnas (Izquierda 3, Centro [Top 2 + Hero + Bottom 3], Derecha 3) = 11 satélites + 1 Hero -->
+    <div class="grid grid-cols-12 gap-3 h-[178mm] items-stretch">
+
+      <!-- COLUMNA IZQUIERDA (3 Viñetas verticales) -->
+      <div class="col-span-3 flex flex-col justify-between gap-2.5 h-full">
+        <!-- Viñeta 1 -->
+        <div class="vignette-card flex-1">
+          <img src="assets/tech_photos_proposals/opcion_1a_tablero_robotica.jpg" alt="Robótica">
+          <div class="vignette-overlay">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-blue-300">Robótica & PLC</span>
+            <span class="text-[10px] font-semibold text-white leading-tight">"Prompt: Lógica ladder en falla"</span>
+          </div>
+        </div>
+        <!-- Viñeta 2 -->
+        <div class="vignette-card flex-1">
+          <img src="assets/tech_photos_proposals/opcion_1b_taller_banco.jpg" alt="Banco Electrónica">
+          <div class="vignette-overlay">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-300">Banco & Mediciones</span>
+            <span class="text-[10px] font-semibold text-white leading-tight">"Prompt: Pinout IC oscilador"</span>
+          </div>
+        </div>
+        <!-- Viñeta 3 -->
+        <div class="vignette-card flex-1">
+          <img src="assets/tech_photos_proposals/opcion_1c_bombas_canerias.jpg" alt="Bombas y Fluidos">
+          <div class="vignette-overlay">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Bombas & Calderas</span>
+            <span class="text-[10px] font-semibold text-white leading-tight">"Prompt: Pérdida de caudal m³/h"</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA CENTRAL (Top 2 satélites + HERO CENTRAL + Bottom 3 satélites) -->
+      <div class="col-span-6 flex flex-col justify-between gap-2.5 h-full">
+
+        <!-- Top Satélites (2 Viñetas horizontales) -->
+        <div class="grid grid-cols-2 gap-2.5 h-[34mm]">
+          <div class="vignette-card">
+            <img src="assets/tech_photos_proposals/opcion_2a_sala_tableros_pasillo.jpg" alt="Sala de Tableros">
+            <div class="vignette-overlay">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-amber-300">Fuerza Motriz</span>
+              <span class="text-[10px] font-semibold text-white leading-tight">"Prompt: Salto térmico diferencial"</span>
+            </div>
+          </div>
+          <div class="vignette-card">
+            <img src="assets/tech_photos_proposals/opcion_2b_fondo_neutro_herramientas.jpg" alt="Instrumental Fino">
+            <div class="vignette-overlay">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-purple-300">Calibración Fina</span>
+              <span class="text-[10px] font-semibold text-white leading-tight">"Prompt: Tolerancia Shunt 1%"</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO CENTRAL: EL LEÓN CENTRAL DE FRENTE Y PROMINENTE -->
+        <div class="relative rounded-2xl border-2 border-blue-500/50 bg-gradient-to-br from-slate-900 via-blue-950/40 to-slate-900 p-4 flex items-center gap-5 shadow-2xl shadow-blue-950/80 h-[92mm] overflow-hidden">
+          
+          <!-- Foto de León de Frente, nítida y destacada -->
+          <div class="w-48 h-full rounded-xl overflow-hidden border-2 border-blue-400/60 shadow-lg shrink-0 relative bg-slate-950">
+            <img src="assets/leon-munitz.jpeg" alt="León Munitz" class="w-full h-full object-cover object-top">
+            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent p-2 text-center">
+              <span class="text-[11px] font-extrabold text-blue-300 mono uppercase tracking-wider">León Munitz</span>
+              <div class="text-[9px] text-slate-400">Instructor YoReparo</div>
+            </div>
+          </div>
+
+          <!-- Mensaje Principal y Humor de Apertura -->
+          <div class="flex-1 flex flex-col justify-between h-full py-1">
+            <div>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30 uppercase tracking-widest mb-1.5">
+                ★ El Multiverso del Técnico
+              </div>
+              <h1 class="text-2xl font-black text-white tracking-tight leading-tight mb-2">
+                En el taller que mires,<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-cyan-300">
+                  la IA ya está en el celular.
+                </span>
+              </h1>
+              <p class="text-xs text-slate-300 leading-relaxed mb-3">
+                No importa si estás en una fosa de camiones, en una cámara frigorífica o renegando con una placa inverter a las 7 de la tarde: el secreto no es saber todo de memoria, sino <strong>saber dictarle la falla al teléfono en 30 segundos</strong>.
+              </p>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
+              <div>
+                <div class="text-[10px] uppercase font-bold text-slate-400">Objetivo del Taller</div>
+                <div class="text-xs font-bold text-white">Dominar Gemini, GPT, Claude y Perplexity en banco</div>
+              </div>
+              <span class="text-[10px] mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded border border-emerald-500/20">
+                100% PRÁCTICO
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Satélites (3 Viñetas horizontales) -->
+        <div class="grid grid-cols-3 gap-2.5 h-[34mm]">
+          <div class="vignette-card">
+            <img src="assets/tech_photos_proposals/opcion_2c_mantenimiento_gabinete.jpg" alt="Mantenimiento Gabinete">
+            <div class="vignette-overlay">
+              <span class="text-[8px] font-bold uppercase tracking-wider text-rose-300">Potencia & Gabinetes</span>
+              <span class="text-[9px] font-semibold text-white leading-tight">"Prompt: Descarte puente Graetz"</span>
+            </div>
+          </div>
+          <div class="vignette-card">
+            <img src="assets/tech_photos_proposals/tablero_autentico_v1.jpg" alt="Tablero Auténtico">
+            <div class="vignette-overlay">
+              <span class="text-[8px] font-bold uppercase tracking-wider text-indigo-300">Automatización</span>
+              <span class="text-[9px] font-semibold text-white leading-tight">"Prompt: Tensión en borne 4"</span>
+            </div>
+          </div>
+          <div class="vignette-card">
+            <img src="assets/tech_photos_proposals/tablero_autentico_v2.jpg" alt="Inspección Cableado">
+            <div class="vignette-overlay">
+              <span class="text-[8px] font-bold uppercase tracking-wider text-teal-300">Inspección Forense</span>
+              <span class="text-[9px] font-semibold text-white leading-tight">"Prompt: Bobina contactor 24V"</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUMNA DERECHA (3 Viñetas verticales) -->
+      <div class="col-span-3 flex flex-col justify-between gap-2.5 h-full">
+        <!-- Viñeta 4 -->
+        <div class="vignette-card flex-1">
+          <img src="assets/tech_photos_proposals/tablero_autentico_v3.jpg" alt="Maniobra">
+          <div class="vignette-overlay">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-amber-300">Tablero de Maniobra</span>
+            <span class="text-[10px] font-semibold text-white leading-tight">"Prompt: Secuencia de arranque"</span>
+          </div>
+        </div>
+        <!-- Viñeta 5 -->
+        <div class="vignette-card flex-1">
+          <img src="assets/leon_taller_fuerzabruta.jpg" alt="Fuerza Bruta de Taller">
+          <div class="vignette-overlay">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-orange-300">Fuerza Bruta & Oficio</span>
+            <span class="text-[10px] font-semibold text-white leading-tight">"Prompt: Extracción de tornillo barrido"</span>
+          </div>
+        </div>
+        <!-- Viñeta 6 -->
+        <div class="vignette-card flex-1">
+          <img src="assets/leon_tecnico_tablero.jpg" alt="Electrónica de Control">
+          <div class="vignette-overlay">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-300">Electrónica de Control</span>
+            <span class="text-[10px] font-semibold text-white leading-tight">"Prompt: Frecuencia oscilador PWM"</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer de la Portada -->
+    <div class="flex items-center justify-between border-t border-slate-800/80 pt-2 text-[10px] text-slate-400">
+      <span>Capacitación Oficial YoReparo Academy • León Munitz</span>
+      <span class="mono text-blue-400 font-semibold">12 Rubros • 1 Mismo Asistente Digital • El Celular en el Banco</span>
+      <span>Buenos Aires, Argentina • 2026</span>
+    </div>
+  </section>
+
+</body>
+</html>

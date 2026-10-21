@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Versión 3: El Hacker de Taller / Terminal Cheatsheet • YoReparo Academy</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+    
+    :root {
+      --term-bg: #05080f;
+      --term-card: #090e17;
+      --neon-emerald: #10b981;
+      --neon-cyan: #06b6d4;
+      --neon-amber: #f59e0b;
+      --neon-rose: #f43f5e;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: var(--term-bg);
+      color: #e2e8f0;
+      background-image: 
+        linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .font-sans-tech {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Terminal Window Header styling */
+    .term-header {
+      background: #0d1522;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .term-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      display: inline-block;
+    }
+
+    /* Scanline effect */
+    .scanlines {
+      position: relative;
+    }
+    .scanlines::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 4px;
+      z-index: 20;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    /* Reglas de impresión estricta a PDF A4 apaisado */
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+    
+    @media print {
+      html, body {
+        width: 297mm;
+        height: 210mm;
+        margin: 0;
+        padding: 0;
+        background: #05080f !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .slide-page {
+        width: 297mm !important;
+        height: 210mm !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding: 8mm 12mm !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+    }
+
+    @media screen {
+      .slide-page {
+        aspect-ratio: 16 / 9;
+        max-width: 1380px;
+        margin: 0 auto 2.5rem auto;
+        padding: 1.5rem 2rem;
+        border-radius: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 0 35px rgba(0, 255, 170, 0.05);
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-200">
+
+  <!-- TOP BAR DE NAVEGACIÓN Y ACCIONES (NO IMPRIMIBLE) -->
+  <header class="no-print sticky top-0 z-50 w-full border-b border-emerald-500/20 bg-slate-950/90 backdrop-blur-md px-6 py-2.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="material-clases-hub.html" class="text-xs font-semibold px-3 py-1.5 rounded border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 hover:bg-emerald-900/50 transition-all flex items-center gap-2">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+        <span>Hub de Clases</span>
+      </a>
+      <span class="text-xs text-slate-500 font-mono">/</span>
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          EDICIÓN 03
+        </span>
+        <h1 class="text-xs sm:text-sm font-bold text-slate-200 font-mono tracking-tight">
+          Hacker de Taller / Terminal Cheatsheet (Clase 1)
+        </h1>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="hidden md:flex items-center gap-1.5 text-[11px] text-slate-400 font-mono">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>BAUD: 115200</span>
+        <span class="text-slate-600">•</span>
+        <span>IO: VOICE_RAW</span>
+        <span class="text-slate-600">•</span>
+        <span>STACK: GEMINI + GPT</span>
+      </div>
+      <button onclick="window.print()" class="px-3.5 py-1.5 rounded text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-mono shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-1.5">
+        <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+        <span>IMPRIMIR CHEATSHEET PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL DE LAS 4 DIAPOSITIVAS CHEATSHEET -->
+  <main class="max-w-[1440px] mx-auto px-3 sm:px-6 py-6">
+
+    <!-- ========================================== -->
+    <!-- SLIDE 1: ASISTENTE MANOS LIBRES (VOICE SHELL) -->
+    <!-- ========================================== -->
+    <section class="slide-page bg-slate-950 border border-emerald-500/30 rounded-lg relative overflow-hidden" id="slide-1">
+      
+      <!-- HEADER CHEATSHEET -->
+      <div class="border-b border-emerald-500/20 pb-2 mb-2.5">
+        <div class="flex items-center justify-between text-xs font-mono">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/40 font-bold text-[10px] tracking-wider">
+              SYS_ID: CLASE_01 // SLIDE_01
+            </span>
+            <span class="text-emerald-500/70 font-semibold text-[11px]">KERNEL: VOICE_HANDSFREE_INTERFACE</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] text-slate-400">
+            <span class="text-cyan-400 flex items-center gap-1"><i data-lucide="mic" class="w-3 h-3"></i> STREAMING AUDIO</span>
+            <span class="text-slate-500">•</span>
+            <span>YOREPARO ACADEMY 2026</span>
+          </div>
+        </div>
+
+        <div class="mt-1 flex items-baseline justify-between">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight font-sans-tech flex items-center gap-2">
+              <span class="text-emerald-400 font-mono text-lg">[01]</span>
+              El Asistente Manos Libres en el Banco de Trabajo
+            </h2>
+            <p class="text-xs text-slate-400 font-mono mt-0.5">
+              Arquitectura de voz en tiempo real: Por qué el teclado es un cuello de botella fatal para el técnico
+            </p>
+          </div>
+          <div class="hidden lg:flex items-center gap-2 text-[10px] text-slate-400 bg-slate-900 px-2 py-1 rounded border border-slate-800">
+            <span class="text-emerald-400 font-bold">LATENCIA:</span> &lt; 250ms
+            <span class="text-slate-600">•</span>
+            <span class="text-cyan-400 font-bold">MODO:</span> FULL DUPLEX
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID PRINCIPAL DE 12 COLUMNAS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 flex-1 items-stretch mb-2">
+        
+        <!-- COLUMNA IZQUIERDA: TERMINAL DE ENTRADA / SALIDA Y MATRIZ (7 COLS) -->
+        <div class="lg:col-span-7 flex flex-col justify-between gap-2.5">
+          
+          <!-- CAJA ESTILO TERMINAL LINUX -->
+          <div class="bg-slate-900/90 border border-emerald-500/30 rounded-md overflow-hidden shadow-inner flex flex-col">
+            <div class="term-header px-3 py-1.5 flex items-center justify-between text-[11px]">
+              <div class="flex items-center gap-1.5">
+                <span class="term-dot bg-rose-500"></span>
+                <span class="term-dot bg-amber-500"></span>
+                <span class="term-dot bg-emerald-500"></span>
+                <span class="ml-2 text-slate-300 font-bold">session_bench_audio.sh — ttyS0</span>
+              </div>
+              <span class="text-[10px] text-emerald-400 font-mono">STATUS: LISTENING</span>
+            </div>
+            
+            <div class="p-3 text-xs font-mono space-y-2 bg-slate-950/80">
+              <div class="text-slate-400">
+                <span class="text-emerald-400 font-bold">tech@workbench:~$</span> ./voice_daemon --engine=gemini-live --profile=appliance_repair
+              </div>
+              <div class="p-2 rounded bg-slate-900 border border-slate-800 text-slate-300 space-y-1">
+                <div class="text-[11px] text-cyan-400 font-bold flex items-center gap-1.5">
+                  <i data-lucide="radio" class="w-3.5 h-3.5"></i> [STDIN_VOZ] TÉCNICO EN BANCO (MANOS EN SOLDADOR):
+                </div>
+                <p class="text-[11.5px] italic text-emerald-200 pl-4 border-l-2 border-emerald-500/40">
+                  "Asistente, no me sueltes. Tengo este chasis Drean con triac explotado. Decime qué componentes periféricos de gate revisar antes de poner el recambio."
+                </p>
+              </div>
+
+              <div class="p-2 rounded bg-emerald-950/20 border border-emerald-500/20 text-slate-300 space-y-1">
+                <div class="text-[11px] text-emerald-400 font-bold flex items-center gap-1.5">
+                  <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> [STDOUT_AUDIO] SÍNTESIS AL AURICULAR MONOAURAL:
+                </div>
+                <p class="text-[11px] text-slate-300 pl-4 border-l-2 border-cyan-500/40">
+                  "Revisá la resistencia SMD de 1 kΩ que va a la compuerta y el diodo SMD de protección contiguo. Si el triac voló por corto de termoactuador, ese diodo suele quedar en fuga abierta."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- COMPARATIVA DE FLUJO DE TRABAJO (MATRIZ SIN PIPES) -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="p-2.5 rounded bg-rose-950/20 border border-rose-500/30">
+              <div class="text-rose-400 font-bold text-[11px] flex items-center gap-1 mb-1">
+                <i data-lucide="x-circle" class="w-3.5 h-3.5"></i> WORKFLOW OBSOLETO (TECLADO / PC)
+              </div>
+              <ul class="text-[11px] text-slate-400 space-y-1">
+                <li class="flex items-start gap-1.5">
+                  <span class="text-rose-500 font-bold">#</span> Manos ocupadas con soldador y pinzas.
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <span class="text-rose-500 font-bold">#</span> Teclado y mouse degradados por flux, estaño y grasa.
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <span class="text-rose-500 font-bold">#</span> Pérdida de 5 a 10 minutos por consulta estática.
+                </li>
+              </ul>
+            </div>
+
+            <div class="p-2.5 rounded bg-emerald-950/20 border border-emerald-500/30">
+              <div class="text-emerald-400 font-bold text-[11px] flex items-center gap-1 mb-1">
+                <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> WORKFLOW HACKER (VOICE SHELL)
+              </div>
+              <ul class="text-[11px] text-slate-300 space-y-1">
+                <li class="flex items-start gap-1.5">
+                  <span class="text-emerald-400 font-bold">&gt;</span> Manos 100% sobre las puntas de prueba del multímetro.
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <span class="text-emerald-400 font-bold">&gt;</span> Celular en soporte articulado magnético elevado.
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <span class="text-emerald-400 font-bold">&gt;</span> Interacción fluida en menos de 15 segundos sin pausas.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- REGLA DE INGENIERÍA INVERSA DE BANCO -->
+          <div class="p-2 rounded bg-slate-900 border border-cyan-500/30 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold text-[10px]">REGLA HACKER</span>
+              <span class="text-slate-300 text-[11px]">
+                No tipees palabras clave como en 2005. Dialogá como con un colega sénior sentado en tu banco.
+              </span>
+            </div>
+            <span class="text-[10px] text-cyan-400 font-mono hidden sm:inline">ZERO_FRICTION</span>
+          </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: PLACEHOLDER FOTOGRÁFICO Y HARDWARE TELEMETRY (5 COLS) -->
+        <div class="lg:col-span-5 flex flex-col justify-between gap-2.5">
+          
+          <!-- RECUADRO TÉCNICO DEL PLACEHOLDER FOTOGRÁFICO -->
+          <div class="bg-slate-900/90 border-2 border-dashed border-emerald-500/40 rounded-md p-3 relative flex flex-col justify-between flex-1">
+            <div class="flex items-center justify-between border-b border-emerald-500/20 pb-1.5 mb-2">
+              <span class="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
+                <i data-lucide="camera" class="w-3 h-3"></i> OPTICAL_CAPTURE_FEED // CAM_01
+              </div>
+              <span class="text-[9px] text-slate-500 font-mono">LENS: 50MM F/1.8 • MACRO</span>
+            </div>
+
+            <!-- VISOR DE CÁMARA ESTILIZADO -->
+            <div class="p-2.5 rounded bg-slate-950 border border-slate-800 space-y-1.5 my-auto">
+              <div class="text-[10px] font-bold text-cyan-400 uppercase tracking-wider flex items-center justify-between">
+                <span>Instrucción Fotográfica de Escena:</span>
+                <span class="text-emerald-400">[ + CRUCETA DE ENFOQUE + ]</span>
+              </div>
+              <p class="text-[11px] text-slate-300 leading-relaxed font-mono">
+                Toma macro de ángulo cerrado del banco de trabajo. En primer plano: Auricular Bluetooth monoaural industrial apoyado sobre tapete antiestático azul junto a punta de cautín T12 humeante a 350°C. Al lado, smartphone Android montado en brazo magnético mostrando en pantalla la onda verde pulsante (waveform) de Gemini Live en plena captura de audio. Puntas de multímetro Fluke doradas tocando una PCB con serigrafía nítida.
+              </p>
+            </div>
+
+            <!-- ESPECIFICACIONES DE SETUP TÉCNICO -->
+            <div class="grid grid-cols-2 gap-1.5 mt-2 pt-2 border-t border-slate-800 text-[10px] font-mono">
+              <div class="bg-slate-950 p-1.5 rounded border border-slate-800">
+                <span class="text-slate-500 block">MICRÓFONO:</span>
+                <span class="text-emerald-300 font-bold">ENC Doble Mic de Cancelación</span>
+              </div>
+              <div class="bg-slate-950 p-1.5 rounded border border-slate-800">
+                <span class="text-slate-500 block">SOPORTE DE CELULAR:</span>
+                <span class="text-cyan-300 font-bold">Magnético Articulado a 40cm</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHEATSHEET DE CONFIGURACIÓN RÁPIDA -->
+          <div class="p-2.5 rounded bg-slate-900/90 border border-emerald-500/30 text-xs">
+            <div class="text-emerald-400 font-bold text-[11px] mb-1 flex items-center justify-between">
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="cpu" class="w-3.5 h-3.5"></i> SETUP RÁPIDO EN 3 PASOS
+              </span>
+              <span class="text-[10px] text-slate-500">T &lt; 180s</span>
+            </div>
+            <div class="grid grid-cols-3 gap-1.5 text-[10.5px]">
+              <div class="p-1.5 bg-slate-950 rounded border border-slate-800">
+                <span class="text-emerald-400 font-bold block">1. APP</span>
+                <span class="text-slate-400">Gemini o ChatGPT activado en segundo plano.</span>
+              </div>
+              <div class="p-1.5 bg-slate-950 rounded border border-slate-800">
+                <span class="text-cyan-400 font-bold block">2. TRIGGER</span>
+                <span class="text-slate-400">Hotword de voz o botón físico de auricular.</span>
+              </div>
+              <div class="p-1.5 bg-slate-950 rounded border border-slate-800">
+                <span class="text-amber-400 font-bold block">3. AUDIO</span>
+                <span class="text-slate-400">Verificación de ganancia con ruido de motor.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER DE SLIDE 1 -->
+      <div class="border-t border-slate-800 pt-1.5 flex items-center justify-between text-[10px] font-mono text-slate-500">
+        <div class="flex items-center gap-2">
+          <span class="text-emerald-400">DIAGNOSTIC_CORE // REVISION 2.6</span>
+          <span>•</span>
+          <span>AUTOR: LEÓN MUNITZ</span>
+        </div>
+        <div class="flex items-center gap-2 text-slate-400">
+          <span>COMUNICACIÓN DIRECTA BANCO-IA</span>
+          <span class="text-emerald-500 font-bold">PÁGINA [ 01 / 04 ]</span>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- SLIDE 2: PROTOCOLO DE TRIAGE EN 3 DATOS -->
+    <!-- ========================================== -->
+    <section class="slide-page bg-slate-950 border border-emerald-500/30 rounded-lg relative overflow-hidden" id="slide-2">
+      
+      <!-- HEADER CHEATSHEET -->
+      <div class="border-b border-emerald-500/20 pb-2 mb-2.5">
+        <div class="flex items-center justify-between text-xs font-mono">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/40 font-bold text-[10px] tracking-wider">
+              SYS_ID: CLASE_01 // SLIDE_02
+            </span>
+            <span class="text-cyan-400 font-semibold text-[11px]">PAYLOAD: TRIAGE_PROTOCOL_V1.0</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] text-slate-400">
+            <span class="text-emerald-400 flex items-center gap-1"><i data-lucide="shield-alert" class="w-3 h-3"></i> ANTI-HALLUCINATION SHIELD</span>
+            <span class="text-slate-500">•</span>
+            <span>YOREPARO ACADEMY 2026</span>
+          </div>
+        </div>
+
+        <div class="mt-1 flex items-baseline justify-between">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight font-sans-tech flex items-center gap-2">
+              <span class="text-cyan-400 font-mono text-lg">[02]</span>
+              El Método de Triage en 3 Datos Obligatorios
+            </h2>
+            <p class="text-xs text-slate-400 font-mono mt-0.5">
+              Estructura estricta del payload de consulta hablada para forzar inferencias certeras y eliminar respuestas vagas
+            </p>
+          </div>
+          <div class="hidden lg:flex items-center gap-2 text-[10px] text-slate-400 bg-slate-900 px-2 py-1 rounded border border-slate-800">
+            <span class="text-amber-400 font-bold">REQUISITO:</span> 3 CAMPOS NO NULOS
+            <span class="text-slate-600">•</span>
+            <span class="text-emerald-400 font-bold">PRECISIÓN:</span> 99.4%
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID PRINCIPAL DE 12 COLUMNAS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 flex-1 items-stretch mb-2">
+        
+        <!-- 3 BLOQUES ESTRUCTURALES DEL TRIAGE (8 COLS) -->
+        <div class="lg:col-span-8 flex flex-col justify-between gap-2">
+          
+          <!-- GRID DE LOS 3 DATOS OBLIGATORIOS -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 flex-1">
+            
+            <!-- DATO 1: IDENTIFICADOR EXACTO -->
+            <div class="bg-slate-900/90 border border-emerald-500/30 rounded p-2.5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between border-b border-emerald-500/20 pb-1.5 mb-1.5">
+                  <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">PARAM_01</span>
+                  <i data-lucide="tag" class="w-3.5 h-3.5 text-emerald-400"></i>
+                </div>
+                <h3 class="text-xs font-bold text-white uppercase tracking-tight mb-1">
+                  Contexto y Chasis Exacto
+                </h3>
+                <p class="text-[11px] text-slate-400 leading-snug">
+                  Marca, modelo comercial íntegro, código de chasis o serigrafía de placa.
+                </p>
+              </div>
+              <div class="mt-2 p-1.5 rounded bg-slate-950 border border-slate-800 text-[10px] font-mono text-emerald-300">
+                <span class="text-slate-500 block">EJEMPLO HABLANTE:</span>
+                "Lavarropas Drean Next 8.14 Eco, placa electrónica azul con micro Renesas."
+              </div>
+            </div>
+
+            <!-- DATO 2: SÍNTOMA Y CÓDIGO -->
+            <div class="bg-slate-900/90 border border-cyan-500/30 rounded p-2.5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between border-b border-cyan-500/20 pb-1.5 mb-1.5">
+                  <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300">PARAM_02</span>
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-cyan-400"></i>
+                </div>
+                <h3 class="text-xs font-bold text-white uppercase tracking-tight mb-1">
+                  Síntoma y Señal Forense
+                </h3>
+                <p class="text-[11px] text-slate-400 leading-snug">
+                  Código alfanumérico en display, destello de LEDs o etapa exacta del ciclo donde aborta.
+                </p>
+              </div>
+              <div class="mt-2 p-1.5 rounded bg-slate-950 border border-slate-800 text-[10px] font-mono text-cyan-300">
+                <span class="text-slate-500 block">EJEMPLO HABLANTE:</span>
+                "Tira error E02 en display al momento exacto de pasar al desagote final."
+              </div>
+            </div>
+
+            <!-- DATO 3: MEDICIONES FÍSICAS PREVIAS -->
+            <div class="bg-slate-900/90 border border-amber-500/30 rounded p-2.5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between border-b border-amber-500/20 pb-1.5 mb-1.5">
+                  <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">PARAM_03</span>
+                  <i data-lucide="gauge" class="w-3.5 h-3.5 text-amber-400"></i>
+                </div>
+                <h3 class="text-xs font-bold text-white uppercase tracking-tight mb-1">
+                  Telemetría con Multímetro
+                </h3>
+                <p class="text-[11px] text-slate-400 leading-snug">
+                  Valores en Ohms de cargas/bobinados y voltajes AC/DC medidos antes de consultar.
+                </p>
+              </div>
+              <div class="mt-2 p-1.5 rounded bg-slate-950 border border-slate-800 text-[10px] font-mono text-amber-300">
+                <span class="text-slate-500 block">EJEMPLO HABLANTE:</span>
+                "Bomba mide 165 Ω en frío, le llegan 220 VAC al borne pero el rotor no gira."
+              </div>
+            </div>
+
+          </div>
+
+          <!-- TERMINAL SCRIPT DEL PROMPT EFECTIVO -->
+          <div class="bg-slate-900/90 border border-cyan-500/30 rounded-md overflow-hidden">
+            <div class="term-header px-3 py-1 flex items-center justify-between text-[11px]">
+              <span class="text-cyan-400 font-bold flex items-center gap-1.5">
+                <i data-lucide="terminal" class="w-3.5 h-3.5"></i> prompt_payload_generator.sh --execute
+              </span>
+              <span class="text-[10px] text-slate-400">FORMATO: DICTADO POR VOZ</span>
+            </div>
+            <div class="p-2.5 bg-slate-950 font-mono text-[11.5px] leading-relaxed text-slate-300">
+              <span class="text-emerald-400 font-bold">dictar_a_ia()</span> {<br>
+              &nbsp;&nbsp;<span class="text-amber-300">"Tengo un [Drean Next 8.14]. Tira [error E02 al momento de desagotar].</span><br>
+              &nbsp;&nbsp;<span class="text-cyan-300">La bomba mide [165 ohms] y le llegan [220V directos]. Descartada la bomba,</span><br>
+              &nbsp;&nbsp;<span class="text-white">¿qué triac de conmutación o qué circuito detector de cruce por cero debo medir en la placa?"</span><br>
+              }
+            </div>
+          </div>
+
+          <!-- ERROR HABITUAL VS RESPUESTA OPTIMIZADA -->
+          <div class="p-2 rounded bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
+            <div class="text-[11px] text-slate-300 flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[10px] font-bold">ANTI-PATRÓN</span>
+              <span>Preguntar: "¿Por qué no desagota el lavarropas?" produce respuestas de 4 páginas inútiles.</span>
+            </div>
+            <span class="text-emerald-400 font-bold text-[10px] font-mono">FILTRO DETERMINÍSTICO</span>
+          </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: PLACEHOLDER FOTOGRÁFICO Y CHECKLIST (4 COLS) -->
+        <div class="lg:col-span-4 flex flex-col justify-between gap-2">
+          
+          <!-- RECUADRO TÉCNICO DEL PLACEHOLDER FOTOGRÁFICO -->
+          <div class="bg-slate-900/90 border-2 border-dashed border-cyan-500/40 rounded-md p-3 relative flex flex-col justify-between flex-1">
+            <div class="flex items-center justify-between border-b border-cyan-500/20 pb-1.5 mb-2">
+              <span class="text-[10px] font-bold text-cyan-400 flex items-center gap-1">
+                <i data-lucide="camera" class="w-3 h-3"></i> OPTICAL_CAPTURE_FEED // CAM_02
+              </div>
+              <span class="text-[9px] text-slate-500 font-mono">TELEMETRY_BENCH</span>
+            </div>
+
+            <div class="p-2.5 rounded bg-slate-950 border border-slate-800 space-y-1 my-auto">
+              <div class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">
+                Instrucción Fotográfica de Escena:
+              </div>
+              <p class="text-[10.5px] text-slate-300 leading-relaxed font-mono">
+                Plano medio superior cenital de medición de campo: Dos puntas de multímetro tocando firmemente los conectores Faston de una electrobomba de desagote colocada sobre el banco. El tester en primer plano muestra "165.4 Ω" en su pantalla digital verde retroiluminada. Al fondo, la etiqueta identificatoria plateada del lavarropas con el código de modelo legible y el smartphone registrando la entrada de voz en tiempo real.
+              </p>
+            </div>
+
+            <div class="mt-2 pt-2 border-t border-slate-800 text-[10px] font-mono flex items-center justify-between">
+              <span class="text-slate-500">PRECISIÓN DE LECTURA:</span>
+              <span class="text-cyan-400 font-bold">TRUE RMS FLUKE 117</span>
+            </div>
+          </div>
+
+          <!-- REGLAS DE ORO EN CAJA COMPACTA -->
+          <div class="p-2.5 rounded bg-slate-900 border border-emerald-500/30 text-xs">
+            <div class="text-emerald-400 font-bold text-[11px] mb-1 flex items-center gap-1">
+              <i data-lucide="check-square" class="w-3.5 h-3.5"></i> CHECKLIST PREVIO AL DICTADO
+            </div>
+            <ul class="text-[10.5px] text-slate-400 space-y-1 font-mono">
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">[v]</span> Modelo verificado en placa metálica trasera.
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">[v]</span> Tensión y resistencia medidas antes de preguntar.
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">[v]</span> Pregunta final acotada a componente específico.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER DE SLIDE 2 -->
+      <div class="border-t border-slate-800 pt-1.5 flex items-center justify-between text-[10px] font-mono text-slate-500">
+        <div class="flex items-center gap-2">
+          <span class="text-cyan-400">DATA_CONTRACT // ZERO_GUESSING</span>
+          <span>•</span>
+          <span>AUTOR: LEÓN MUNITZ</span>
+        </div>
+        <div class="flex items-center gap-2 text-slate-400">
+          <span>ESTRUCTURA DE TRIAGE HABLANTE</span>
+          <span class="text-cyan-400 font-bold">PÁGINA [ 02 / 04 ]</span>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- SLIDE 3: CASO DE ESTUDIO HELADERA NO FROST -->
+    <!-- ========================================== -->
+    <section class="slide-page bg-slate-950 border border-emerald-500/30 rounded-lg relative overflow-hidden" id="slide-3">
+      
+      <!-- HEADER CHEATSHEET -->
+      <div class="border-b border-emerald-500/20 pb-2 mb-2.5">
+        <div class="flex items-center justify-between text-xs font-mono">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/40 font-bold text-[10px] tracking-wider">
+              SYS_ID: CLASE_01 // SLIDE_03
+            </span>
+            <span class="text-amber-400 font-semibold text-[11px]">CASE_LOG: NO_FROST_ICE_BLOCK</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] text-slate-400">
+            <span class="text-emerald-400 flex items-center gap-1"><i data-lucide="dollar-sign" class="w-3 h-3"></i> AHORRO PLACA: $88 USD</span>
+            <span class="text-slate-500">•</span>
+            <span>YOREPARO ACADEMY 2026</span>
+          </div>
+        </div>
+
+        <div class="mt-1 flex items-baseline justify-between">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight font-sans-tech flex items-center gap-2">
+              <span class="text-amber-400 font-mono text-lg">[03]</span>
+              Caso Real: Heladera No Frost Bloqueada de Hielo
+            </h2>
+            <p class="text-xs text-slate-400 font-mono mt-0.5">
+              Diagnóstico diferencial con IA: Sensor NTC descalibrado (2.8k a 0°C) vs cambio innecesario de placa de $90 USD
+            </p>
+          </div>
+          <div class="hidden lg:flex items-center gap-2 text-[10px] text-slate-400 bg-slate-900 px-2 py-1 rounded border border-slate-800">
+            <span class="text-emerald-400 font-bold">FALLA:</span> DESHIELO INACTIVO
+            <span class="text-slate-600">•</span>
+            <span class="text-cyan-400 font-bold">COSTO SENSOR:</span> $2 USD
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID PRINCIPAL DE 12 COLUMNAS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 flex-1 items-stretch mb-2">
+        
+        <!-- COLUMNA IZQUIERDA: DIAGNÓSTICO EN CASCADA Y ANÁLISIS DE RESISTENCIA (7 COLS) -->
+        <div class="lg:col-span-7 flex flex-col justify-between gap-2.5">
+          
+          <!-- CASCADA DE DESCARTE LÓGICO -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded p-2.5 space-y-1.5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-1">
+              <span class="text-[11px] font-bold text-slate-200 flex items-center gap-1.5 font-mono">
+                <i data-lucide="git-merge" class="w-3.5 h-3.5 text-cyan-400"></i> SECUENCIA DE DESCARTE RÁPIDO EN BANCO
+              </span>
+              <span class="text-[10px] text-slate-500 font-mono">TIEMPO: 3 MINUTOS</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 text-xs font-mono">
+              <div class="p-2 rounded bg-slate-950 border border-slate-800">
+                <span class="text-cyan-400 font-bold block text-[10px]">1. RESISTENCIA</span>
+                <span class="text-white text-xs font-bold">280 Ω</span>
+                <p class="text-[9.5px] text-emerald-400 mt-0.5">ESTADO: OK (Calienta)</p>
+              </div>
+
+              <div class="p-2 rounded bg-slate-950 border border-slate-800">
+                <span class="text-cyan-400 font-bold block text-[10px]">2. FUSIBLE / BIMETAL</span>
+                <span class="text-white text-xs font-bold">0.1 Ω / CERRADO</span>
+                <p class="text-[9.5px] text-emerald-400 mt-0.5">ESTADO: OK (Continuidad)</p>
+              </div>
+
+              <div class="p-2 rounded bg-rose-950/30 border border-rose-500/40">
+                <span class="text-rose-400 font-bold block text-[10px]">3. SENSOR NTC 0°C</span>
+                <span class="text-rose-300 text-xs font-bold">2.8 kΩ [ANOMALÍA]</span>
+                <p class="text-[9.5px] text-rose-400 mt-0.5">ESTADO: DESCALIBRADO</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- TERMINAL CON LOG DE INFERENCIA DE LA IA -->
+          <div class="bg-slate-900/90 border border-amber-500/30 rounded-md overflow-hidden flex-1 flex flex-col">
+            <div class="term-header px-3 py-1 flex items-center justify-between text-[11px]">
+              <span class="text-amber-400 font-bold flex items-center gap-1.5">
+                <i data-lucide="cpu" class="w-3.5 h-3.5"></i> ai_diagnostic_inference.py --eval-ntc
+              </span>
+              <span class="text-[10px] text-emerald-400 font-mono">CONFIDENCE: 99.8%</span>
+            </div>
+
+            <div class="p-2.5 bg-slate-950 font-mono text-[11px] space-y-1.5 text-slate-300 flex-1">
+              <div>
+                <span class="text-slate-500">[LOG_IN]:</span> NTC_READING_AT_ICE_BATH = <span class="text-amber-300 font-bold">2.8 kΩ</span>
+              </div>
+              <div>
+                <span class="text-slate-500">[LOOKUP]:</span> TABLA_NOMINAL_NTC_10K = <span class="text-cyan-300 font-bold">10.0 kΩ a 0°C (2.7 kΩ equivale a +32°C)</span>
+              </div>
+              <div class="p-1.5 rounded bg-rose-950/20 border-l-2 border-rose-500 text-rose-200 text-[10.5px]">
+                <span class="font-bold">[VEREDICTO IA]:</span> El sensor informa que el evaporador está a +32°C. El microprocesador interpreta que no hay hielo y NUNCA cierra el relé de descongelamiento. La placa funciona perfecto; el sensor tiene corrimiento de curva.
+              </div>
+              <div class="text-[10.5px] text-emerald-300 flex items-center gap-1">
+                <i data-lucide="check" class="w-3 h-3 text-emerald-400"></i>
+                <span>ACCIÓN: Reemplazar ampolla NTC 10k ($2 USD). NO CAMBIAR PLACA PRINCIPAL.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- IMPACTO ECONÓMICO Y DE REPUTACIÓN -->
+          <div class="p-2 rounded bg-emerald-950/20 border border-emerald-500/40 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">ROI TALLER</span>
+              <span class="text-slate-200 text-[11px]">
+                Costo repuesto: $2 USD vs Placa nueva: $90 USD. Ahorro inmediato y cliente ganado de por vida.
+              </span>
+            </div>
+            <span class="text-emerald-400 font-bold text-[10px] font-mono">FIDELIZACIÓN 100%</span>
+          </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: PLACEHOLDER FOTOGRÁFICO Y CURVA TÉRMICA (5 COLS) -->
+        <div class="lg:col-span-5 flex flex-col justify-between gap-2.5">
+          
+          <!-- RECUADRO TÉCNICO DEL PLACEHOLDER FOTOGRÁFICO -->
+          <div class="bg-slate-900/90 border-2 border-dashed border-amber-500/40 rounded-md p-3 relative flex flex-col justify-between flex-1">
+            <div class="flex items-center justify-between border-b border-amber-500/20 pb-1.5 mb-2">
+              <span class="text-[10px] font-bold text-amber-400 flex items-center gap-1">
+                <i data-lucide="camera" class="w-3 h-3"></i> OPTICAL_CAPTURE_FEED // CAM_03
+              </div>
+              <span class="text-[9px] text-slate-500 font-mono">THERMAL_TEST_SETUP</span>
+            </div>
+
+            <div class="p-2.5 rounded bg-slate-950 border border-slate-800 space-y-1.5 my-auto">
+              <div class="text-[10px] font-bold text-cyan-400 uppercase tracking-wider">
+                Instrucción Fotográfica de Escena:
+              </div>
+              <p class="text-[10.5px] text-slate-300 leading-relaxed font-mono">
+                Fotografía macro en plano detalle de banco de trabajo: Recipiente térmico transparente con agua y cubos de hielo picados a 0°C. Sumergida en el agua, la ampolla engomada de un sensor NTC. Dos pinzas cocodrilo del multímetro sujetan los terminales del sensor. En segundo plano con iluminación rasante, el evaporador de aluminio de heladera completamente bloqueado con escarcha de hielo blanco y una placa electrónica intacta al costado.
+              </p>
+            </div>
+
+            <!-- COMPARATIVA DE VALORES EN TABLA SIN PIPES -->
+            <div class="p-2 rounded bg-slate-950 border border-slate-800 mt-2 text-[10px] font-mono">
+              <div class="text-slate-400 font-bold mb-1 text-[9.5px] uppercase">Curva Patrón NTC vs Sensor Dañado:</div>
+              <div class="space-y-1 text-slate-300">
+                <div class="flex justify-between">
+                  <span>A 25°C Ambiente:</span>
+                  <span class="text-emerald-400 font-bold">10.0 kΩ (Patrón)</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>A 0°C en Hielo:</span>
+                  <span class="text-emerald-400 font-bold">27.0 kΩ - 32.0 kΩ (Patrón)</span>
+                </div>
+                <div class="flex justify-between text-rose-400 font-bold border-t border-slate-800 pt-0.5">
+                  <span>Sensor con Falla:</span>
+                  <span>2.8 kΩ (Simula calor constante)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- REGLA DE ORO DEL DESHIELO -->
+          <div class="p-2.5 rounded bg-slate-900 border border-cyan-500/30 text-xs">
+            <div class="text-cyan-400 font-bold text-[10.5px] flex items-center gap-1 mb-0.5">
+              <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> LEY INMUTABLE DE REFRIGERACIÓN ELECTRÓNICA
+            </div>
+            <p class="text-[10.5px] text-slate-300 font-mono leading-tight">
+              Jamás reemplaces una placa de heladera sin antes haber probado la resistencia directa a 220V y el NTC en agua helada.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER DE SLIDE 3 -->
+      <div class="border-t border-slate-800 pt-1.5 flex items-center justify-between text-[10px] font-mono text-slate-500">
+        <div class="flex items-center gap-2">
+          <span class="text-amber-400">HARDWARE_DIAGNOSTICS // NO_FROST_CASE</span>
+          <span>•</span>
+          <span>AUTOR: LEÓN MUNITZ</span>
+        </div>
+        <div class="flex items-center gap-2 text-slate-400">
+          <span>DESCARTE DE NTC POR INFERENCIA</span>
+          <span class="text-amber-400 font-bold">PÁGINA [ 03 / 04 ]</span>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- SLIDE 4: REGLAS DE ORO Y VERIFICACIÓN CRUZADA -->
+    <!-- ========================================== -->
+    <section class="slide-page bg-slate-950 border border-emerald-500/30 rounded-lg relative overflow-hidden" id="slide-4">
+      
+      <!-- HEADER CHEATSHEET -->
+      <div class="border-b border-emerald-500/20 pb-2 mb-2.5">
+        <div class="flex items-center justify-between text-xs font-mono">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/40 font-bold text-[10px] tracking-wider">
+              SYS_ID: CLASE_01 // SLIDE_04
+            </span>
+            <span class="text-rose-400 font-semibold text-[11px]">SECURITY_RULE: ZERO_TRUST_BENCH</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] text-slate-400">
+            <span class="text-emerald-400 flex items-center gap-1"><i data-lucide="shield-check" class="w-3 h-3"></i> MULTIMETER IS KING</span>
+            <span class="text-slate-500">•</span>
+            <span>YOREPARO ACADEMY 2026</span>
+          </div>
+        </div>
+
+        <div class="mt-1 flex items-baseline justify-between">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight font-sans-tech flex items-center gap-2">
+              <span class="text-rose-400 font-mono text-lg">[04]</span>
+              Reglas de Oro y Verificación Cruzada
+            </h2>
+            <p class="text-xs text-slate-400 font-mono mt-0.5">
+              La IA propone hipótesis pero el multímetro dicta la sentencia física: Detección de alucinaciones y ejercicio de banco
+            </p>
+          </div>
+          <div class="hidden lg:flex items-center gap-2 text-[10px] text-slate-400 bg-slate-900 px-2 py-1 rounded border border-slate-800">
+            <span class="text-rose-400 font-bold">ALERTA:</span> PREVENIR CORTO
+            <span class="text-slate-600">•</span>
+            <span class="text-emerald-400 font-bold">VALIDACIÓN:</span> 100% OBLIGATORIA
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID PRINCIPAL DE 12 COLUMNAS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 flex-1 items-stretch mb-2">
+        
+        <!-- COLUMNA IZQUIERDA: 3 MANDAMIENTOS Y FILTRO DE ALUCINACIONES (7 COLS) -->
+        <div class="lg:col-span-7 flex flex-col justify-between gap-2.5">
+          
+          <!-- 3 MANDAMIENTOS ZERO-TRUST -->
+          <div class="grid grid-cols-1 gap-2">
+            
+            <!-- REGLA 1 -->
+            <div class="p-2.5 rounded bg-slate-900/90 border border-rose-500/30 flex items-start gap-2.5">
+              <div class="p-1.5 rounded bg-rose-500/20 text-rose-400 mt-0.5">
+                <i data-lucide="alert-octagon" class="w-4 h-4"></i>
+              </div>
+              <div class="space-y-0.5">
+                <div class="text-xs font-bold text-white font-mono flex items-center gap-2">
+                  <span>REGLA 1: DETECCIÓN DE ALUCINACIONES DE PINOUT</span>
+                  <span class="text-[9px] px-1 rounded bg-rose-500/20 text-rose-300">CRÍTICO</span>
+                </div>
+                <p class="text-[11px] text-slate-300 leading-snug">
+                  La IA puede confundir el sufijo de un integrado (ej. TNY268PN vs TNY278GN) e inventar voltajes o patillas. Si la IA te sugiere medir 48V en un circuito de 5V, detenete y consultá el datasheet físico del fabricante.
+                </p>
+              </div>
+            </div>
+
+            <!-- REGLA 2 -->
+            <div class="p-2.5 rounded bg-slate-900/90 border border-cyan-500/30 flex items-start gap-2.5">
+              <div class="p-1.5 rounded bg-cyan-500/20 text-cyan-400 mt-0.5">
+                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+              </div>
+              <div class="space-y-0.5">
+                <div class="text-xs font-bold text-white font-mono flex items-center gap-2">
+                  <span>REGLA 2: EL BUCLE CERRADO DE VERIFICACIÓN (CLOSED LOOP)</span>
+                  <span class="text-[9px] px-1 rounded bg-cyan-500/20 text-cyan-300">PROCESO</span>
+                </div>
+                <p class="text-[11px] text-slate-300 leading-snug">
+                  Hipótesis de IA -&gt; Comprobación con multímetro en frío -&gt; Medición de tensión con lámpara serie -&gt; Sustitución de componente. Jamás desoldar basándose únicamente en la sugerencia hablada.
+                </p>
+              </div>
+            </div>
+
+            <!-- REGLA 3 -->
+            <div class="p-2.5 rounded bg-slate-900/90 border border-emerald-500/30 flex items-start gap-2.5">
+              <div class="p-1.5 rounded bg-emerald-500/20 text-emerald-400 mt-0.5">
+                <i data-lucide="wrench" class="w-4 h-4"></i>
+              </div>
+              <div class="space-y-0.5">
+                <div class="text-xs font-bold text-white font-mono flex items-center gap-2">
+                  <span>REGLA 3: EJERCICIO PRÁCTICO OBLIGATORIO DE BANCO</span>
+                  <span class="text-[9px] px-1 rounded bg-emerald-500/20 text-emerald-300">CONSIGNA</span>
+                </div>
+                <p class="text-[11px] text-slate-300 leading-snug">
+                  Elegí hoy mismo un electrodoméstico parado en tu taller. Dictale a la app los 3 datos clave (Modelo + Síntoma + Mediciones). Contrastá la respuesta con tu experiencia y publicá el resultado en la comunidad YoReparo.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- CHECKLIST DE PRE-ENCENDIDO (PRE-FLIGHT) -->
+          <div class="p-2 rounded bg-slate-950 border border-slate-800 text-xs font-mono">
+            <div class="text-emerald-400 font-bold text-[11px] mb-1 flex items-center gap-1.5">
+              <i data-lucide="check-check" class="w-3.5 h-3.5"></i> PRE-POWER ON CHECKLIST (PROTECCIÓN DE BANCO)
+            </div>
+            <div class="grid grid-cols-3 gap-2 text-[10px] text-slate-400">
+              <div class="flex items-center gap-1">
+                <span class="text-emerald-400">[OK]</span> Lámpara serie conectada.
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-emerald-400">[OK]</span> Cortos a masa descartados.
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-emerald-400">[OK]</span> Cargas periféricas medidas.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: PLACEHOLDER FOTOGRÁFICO Y ENTREGABLE (5 COLS) -->
+        <div class="lg:col-span-5 flex flex-col justify-between gap-2.5">
+          
+          <!-- RECUADRO TÉCNICO DEL PLACEHOLDER FOTOGRÁFICO -->
+          <div class="bg-slate-900/90 border-2 border-dashed border-rose-500/40 rounded-md p-3 relative flex flex-col justify-between flex-1">
+            <div class="flex items-center justify-between border-b border-rose-500/20 pb-1.5 mb-2">
+              <span class="text-[10px] font-bold text-rose-400 flex items-center gap-1">
+                <i data-lucide="camera" class="w-3 h-3"></i> OPTICAL_CAPTURE_FEED // CAM_04
+              </div>
+              <span class="text-[9px] text-slate-500 font-mono">CROSS_VERIFY_STATION</span>
+            </div>
+
+            <div class="p-2.5 rounded bg-slate-950 border border-slate-800 space-y-1.5 my-auto">
+              <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">
+                Instrucción Fotográfica de Escena:
+              </div>
+              <p class="text-[10.5px] text-slate-300 leading-relaxed font-mono">
+                Toma panorámica técnica en ángulo cenital de la estación de diagnóstico: En el centro del banco, multímetro True RMS con puntas aplicadas sobre los terminales de un triac en una PCB. A la izquierda, osciloscopio digital portátil mostrando una señal PWM limpia. A la derecha, smartphone en soporte magnético con la app de voz abierta, y un cuaderno técnico abierto con anotaciones a mano en bolígrafo y sello verde de 'VERIFICADO EN BANCO'.
+              </p>
+            </div>
+
+            <div class="p-1.5 bg-slate-950 rounded border border-slate-800 mt-2 text-[10px] font-mono flex items-center justify-between">
+              <span class="text-slate-500">MÁXIMA DEL TALLER:</span>
+              <span class="text-rose-400 font-bold">LA IA ASISTE, EL TÉCNICO DECIDE</span>
+            </div>
+          </div>
+
+          <!-- ENTREGABLE OFICIAL DE CLASE 1 -->
+          <div class="p-2.5 rounded bg-slate-900 border border-emerald-500/30 text-xs font-mono">
+            <div class="text-emerald-400 font-bold text-[11px] mb-1 flex items-center justify-between">
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="file-text" class="w-3.5 h-3.5"></i> MATERIAL ENTREGABLE DE CLASE 1
+              </span>
+              <span class="text-[10px] text-slate-500">PDF DESCARGABLE</span>
+            </div>
+            <p class="text-[10.5px] text-slate-300 leading-tight">
+              Ficha plastificada digital con la plantilla de Triage en 3 datos, tabla de curvas NTC comunes (2.7k, 5k, 10k) y guía de configuración de hotword manos libres para Android y iOS.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER DE SLIDE 4 -->
+      <div class="border-t border-slate-800 pt-1.5 flex items-center justify-between text-[10px] font-mono text-slate-500">
+        <div class="flex items-center gap-2">
+          <span class="text-rose-400">ZERO_TRUST // END_OF_MODULE_01</span>
+          <span>•</span>
+          <span>AUTOR: LEÓN MUNITZ</span>
+        </div>
+        <div class="flex items-center gap-2 text-slate-400">
+          <span>SÍNTESIS DE CLASE 1</span>
+          <span class="text-rose-400 font-bold">PÁGINA [ 04 / 04 ]</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- INICIALIZACIÓN DE ICONOS LUCIDE -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
