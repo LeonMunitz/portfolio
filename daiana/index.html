@@ -42,20 +42,24 @@
       </div>
 
       <!-- Resumen Numérico Rápido -->
-      <div class="flex items-center gap-3 text-xs overflow-x-auto pb-1 sm:pb-0">
-        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2">
+      <div class="flex items-center gap-2 sm:gap-3 text-xs overflow-x-auto pb-1 sm:pb-0">
+        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
           <span class="text-slate-400">Servicios:</span>
           <span id="stat-total" class="font-bold text-white">0</span>
         </div>
-        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2">
+        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
           <span class="text-slate-400">Cobrado:</span>
           <span id="stat-cobrado" class="font-bold text-emerald-400">$0</span>
         </div>
-        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2">
+        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
           <span class="text-slate-400">Pendiente:</span>
           <span id="stat-pendiente" class="font-bold text-amber-400">$0</span>
         </div>
-        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
+          <span class="text-slate-400">A Chicas:</span>
+          <span id="stat-chicas" class="font-bold text-blue-400">$0</span>
+        </div>
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           Sistema En Vivo
         </span>
@@ -70,7 +74,7 @@
     <!-- PANEL DE FILTROS SUPERIOR (NO INVASIVO) -->
     <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-6 shadow-sm">
       
-      <!-- Fila 1: Buscador en Vivo por Dirección y Cliente -->
+      <!-- Fila 1: Buscador en Vivo por Dirección, Cliente, Barrio o ID (Sin distinción de acentos) -->
       <div class="mb-4">
         <div class="relative">
           <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
@@ -78,21 +82,30 @@
             type="text" 
             id="input-busqueda" 
             oninput="aplicarFiltros()" 
-            placeholder="Buscar por dirección, calle, cliente, barrio o código (#ID)..."
+            placeholder="Buscar por dirección, calle, cliente, barrio o código (#ID) (sin importar acentos)..."
             class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
           >
         </div>
       </div>
 
-      <!-- Fila 2: Selectores combinados (Tipo, Fecha, Funcionaria, Zona/Barrio) -->
+      <!-- Fila 2: Selectores combinados (Calendario Pop-up, Funcionaria, Zona/Barrio, Estado Pago) -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4 text-xs">
         
-        <!-- Filtro Fecha -->
+        <!-- Filtro Calendario Pop-up Interactivo -->
         <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Día de Trabajo</label>
-          <select id="filtro-fecha" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
-            <option value="todas">Todos los días (2 semanas)</option>
-          </select>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Período / Calendario</label>
+          <button 
+            type="button" 
+            onclick="abrirModalCalendario()" 
+            id="btn-calendario-trigger" 
+            class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 hover:border-blue-500 flex items-center justify-between text-xs transition-colors shadow-sm text-left"
+          >
+            <span class="flex items-center gap-1.5 truncate">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
+              <span id="label-calendario" class="truncate font-medium">Todas las fechas</span>
+            </span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 shrink-0 ml-1"></i>
+          </button>
         </div>
 
         <!-- Filtro Funcionaria -->
@@ -131,13 +144,15 @@
           </select>
         </div>
 
-        <!-- Filtro Estado de Cobro -->
+        <!-- Filtro Estado de Cobro / Liquidación -->
         <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Estado de Pago</label>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Estado Financiero</label>
           <select id="filtro-cobro" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
             <option value="todos">Todos los estados</option>
-            <option value="Cobrado">Cobrados</option>
+            <option value="Cobrado">Cobrados de Cliente</option>
             <option value="Pendiente">Pendientes de Cobro</option>
+            <option value="LiquidadoChica">Liquidados a Chica</option>
+            <option value="PendienteChica">Pendientes de Liquidar a Chica</option>
             <option value="Liquidación ArreglaTodo">Liquidación ArreglaTodo</option>
           </select>
         </div>
@@ -168,8 +183,9 @@
 
     <!-- RESULTADOS Y CONTADOR DE SERVICIOS -->
     <div class="flex items-center justify-between mb-4 px-1">
-      <div class="text-xs text-slate-400">
-        Mostrando <span id="contador-mostrados" class="font-bold text-white">0</span> servicios coincidentes
+      <div class="text-xs text-slate-400 flex items-center gap-2">
+        <span>Mostrando <span id="contador-mostrados" class="font-bold text-white">0</span> servicios</span>
+        <span id="badge-filtro-activo" class="hidden px-2 py-0.5 rounded-md text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium"></span>
       </div>
       <button onclick="resetearFiltros()" class="text-xs text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1 font-medium">
         <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
@@ -184,16 +200,148 @@
 
   </main>
 
+  <!-- ================= MODAL CALENDARIO POP-UP ================= -->
+  <div id="modal-calendario" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 w-full max-w-lg shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- Encabezado Modal -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-white">Selector de Período y Rango</h2>
+            <p class="text-[11px] text-slate-400">Elegí un botón rápido, un día individual o un rango personalizado</p>
+          </div>
+        </div>
+        <button onclick="cerrarModalCalendario()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Botones Rápidos -->
+      <div class="mb-4">
+        <span class="block text-[11px] font-semibold text-slate-400 mb-2 uppercase tracking-wider">Accesos Rápidos</span>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+          <button onclick="seleccionarRapido('todas')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
+            Todas las fechas
+          </button>
+          <button onclick="seleccionarRapido('hoy')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
+            Hoy (Lun 26/10)
+          </button>
+          <button onclick="seleccionarRapido('manana')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
+            Mañana (Mar 27/10)
+          </button>
+          <button onclick="seleccionarRapido('semana1')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
+            Semana 1 (26 al 31)
+          </button>
+          <button onclick="seleccionarRapido('semana2')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
+            Semana 2 (02 al 07)
+          </button>
+          <button onclick="seleccionarRapido('tresdias')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
+            Próximos 3 días
+          </button>
+        </div>
+      </div>
+
+      <!-- Días Individuales de la Planificación (2 Semanas) -->
+      <div class="mb-4">
+        <span class="block text-[11px] font-semibold text-slate-400 mb-2 uppercase tracking-wider">Días del Cronograma</span>
+        <div id="grid-dias-calendario" class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 text-xs">
+          <!-- Se genera dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Rango Personalizado -->
+      <div class="p-3 bg-slate-950/60 border border-slate-800 rounded-2xl mb-4">
+        <span class="block text-[11px] font-semibold text-slate-400 mb-2 uppercase tracking-wider">Rango Personalizado</span>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1">Fecha Desde</label>
+            <input type="date" id="cal-input-desde" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 focus:outline-none focus:border-blue-500">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1">Fecha Hasta</label>
+            <input type="date" id="cal-input-hasta" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 focus:outline-none focus:border-blue-500">
+          </div>
+        </div>
+        <button onclick="aplicarRangoPersonalizado()" class="w-full mt-2.5 py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5">
+          <i data-lucide="check" class="w-3.5 h-3.5"></i>
+          <span>Aplicar Rango</span>
+        </button>
+      </div>
+
+      <div class="flex justify-end">
+        <button onclick="cerrarModalCalendario()" class="px-4 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors">
+          Listo
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ================= SCRIPTS ================= -->
   <script>
     let todosLosServicios = [];
     let tipoClienteSeleccionado = 'todos';
 
+    // Estado del Calendario
+    let filtroFechaModo = 'todas'; // 'todas', 'dia', 'rango'
+    let filtroFechaDesde = null;
+    let filtroFechaHasta = null;
+
+    // Almacén Local de Estado Financiero Interactivo
+    // Estructura: { [id]: { cobrado: bool, montoCobro: num, pagadoChica: bool, montoChica: num } }
+    let finanzasData = {};
+
+    function cargarFinanzasLocal() {
+      try {
+        const raw = localStorage.getItem('ds_finanzas_v2');
+        finanzasData = raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        finanzasData = {};
+      }
+    }
+
+    function guardarFinanzasLocal() {
+      try {
+        localStorage.setItem('ds_finanzas_v2', JSON.stringify(finanzasData));
+      } catch (e) {}
+    }
+
+    function obtenerFinanzas(s) {
+      if (!finanzasData[s.id]) {
+        const cobradoDefault = s.estado_cobro.toLowerCase().includes('cobrado');
+        const duracion = s.duracion_hs ? s.duracion_hs : 3;
+        const montoChicaDefault = duracion * 350; // Tarifa estándar $350/hora
+        finanzasData[s.id] = {
+          cobrado: cobradoDefault,
+          montoCobro: s.precio_total ? s.precio_total : 0,
+          pagadoChica: false,
+          montoChica: montoChicaDefault
+        };
+      }
+      return finanzasData[s.id];
+    }
+
+    // Función normalizadora para ignorar acentos y diacríticos
+    function normalizar(texto) {
+      if (!texto) return '';
+      return texto
+        .toString()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
+    }
+
     async function iniciar() {
+      cargarFinanzasLocal();
       try {
         const resp = await fetch('servicios.json?v=' + Date.now());
         todosLosServicios = await resp.json();
-        poblarFechasSelect();
+        construirDiasCalendarioModal();
         aplicarFiltros();
       } catch (err) {
         document.getElementById('grilla-servicios').innerHTML = 
@@ -201,17 +349,119 @@
       }
     }
 
-    function poblarFechasSelect() {
-      const select = document.getElementById('filtro-fecha');
-      const fechasUnicas = [...new Set(todosLosServicios.map(s => s.fecha_servicio))].sort();
-      
-      fechasUnicas.forEach(f => {
-        const opt = document.createElement('option');
-        opt.value = f;
+    // Modal Calendario
+    function abrirModalCalendario() {
+      document.getElementById('modal-calendario').classList.remove('hidden');
+    }
+
+    function cerrarModalCalendario() {
+      document.getElementById('modal-calendario').classList.add('hidden');
+    }
+
+    function construirDiasCalendarioModal() {
+      const fechas = [...new Set(todosLosServicios.map(s => s.fecha_servicio))].sort();
+      const cont = document.getElementById('grid-dias-calendario');
+      cont.innerHTML = '';
+
+      if (fechas.length > 0) {
+        document.getElementById('cal-input-desde').value = fechas[0];
+        document.getElementById('cal-input-hasta').value = fechas[fechas.length - 1];
+        document.getElementById('cal-input-desde').min = fechas[0];
+        document.getElementById('cal-input-hasta').max = fechas[fechas.length - 1];
+      }
+
+      const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+
+      fechas.forEach(f => {
         const partes = f.split('-');
-        opt.textContent = `${partes[2]}/${partes[1]}/${partes[0]}`;
-        select.appendChild(opt);
+        const dateObj = new Date(parseInt(partes[0]), parseInt(partes[1]) - 1, parseInt(partes[2]));
+        const diaNombre = diasSemana[dateObj.getDay()];
+        const count = todosLosServicios.filter(s => s.fecha_servicio === f).length;
+
+        const btn = document.createElement('button');
+        btn.id = 'cal-dia-' + f;
+        btn.className = 'p-2 rounded-xl bg-slate-800 hover:bg-blue-600 border border-slate-700/60 text-center transition-all group';
+        btn.onclick = () => {
+          seleccionarDiaIndividual(f, `${diaNombre} ${partes[2]}/${partes[1]}`);
+        };
+
+        btn.innerHTML = `
+          <div class="text-[10px] text-slate-400 group-hover:text-blue-100 font-semibold">${diaNombre}</div>
+          <div class="text-xs font-bold text-white group-hover:text-white">${partes[2]}/${partes[1]}</div>
+          <div class="text-[9px] text-blue-400 group-hover:text-white mt-0.5">${count} srv</div>
+        `;
+        cont.appendChild(btn);
       });
+    }
+
+    function seleccionarRapido(tipo) {
+      if (tipo === 'todas') {
+        filtroFechaModo = 'todas';
+        filtroFechaDesde = null;
+        filtroFechaHasta = null;
+        document.getElementById('label-calendario').textContent = 'Todas las fechas (2 semanas)';
+      } else if (tipo === 'hoy') {
+        filtroFechaModo = 'dia';
+        filtroFechaDesde = '2026-10-26';
+        filtroFechaHasta = '2026-10-26';
+        document.getElementById('label-calendario').textContent = 'Hoy (Lun 26/10)';
+      } else if (tipo === 'manana') {
+        filtroFechaModo = 'dia';
+        filtroFechaDesde = '2026-10-27';
+        filtroFechaHasta = '2026-10-27';
+        document.getElementById('label-calendario').textContent = 'Mañana (Mar 27/10)';
+      } else if (tipo === 'semana1') {
+        filtroFechaModo = 'rango';
+        filtroFechaDesde = '2026-10-26';
+        filtroFechaHasta = '2026-10-31';
+        document.getElementById('label-calendario').textContent = 'Semana 1 (26 al 31 Oct)';
+      } else if (tipo === 'semana2') {
+        filtroFechaModo = 'rango';
+        filtroFechaDesde = '2026-11-02';
+        filtroFechaHasta = '2026-11-07';
+        document.getElementById('label-calendario').textContent = 'Semana 2 (02 al 07 Nov)';
+      } else if (tipo === 'tresdias') {
+        filtroFechaModo = 'rango';
+        filtroFechaDesde = '2026-10-26';
+        filtroFechaHasta = '2026-10-28';
+        document.getElementById('label-calendario').textContent = 'Próx 3 días (26 al 28 Oct)';
+      }
+      cerrarModalCalendario();
+      aplicarFiltros();
+    }
+
+    function seleccionarDiaIndividual(f, etiqueta) {
+      filtroFechaModo = 'dia';
+      filtroFechaDesde = f;
+      filtroFechaHasta = f;
+      document.getElementById('label-calendario').textContent = etiqueta;
+      cerrarModalCalendario();
+      aplicarFiltros();
+    }
+
+    function aplicarRangoPersonalizado() {
+      const desde = document.getElementById('cal-input-desde').value;
+      const hasta = document.getElementById('cal-input-hasta').value;
+
+      if (!desde) {
+        alert('Por favor seleccioná ambas fechas.');
+        return;
+      }
+      if (!hasta) {
+        alert('Por favor seleccioná ambas fechas.');
+        return;
+      }
+
+      filtroFechaModo = 'rango';
+      filtroFechaDesde = desde;
+      filtroFechaHasta = hasta;
+      
+      const pD = desde.split('-');
+      const pH = hasta.split('-');
+      document.getElementById('label-calendario').textContent = `${pD[2]}/${pD[1]} al ${pH[2]}/${pH[1]}`;
+      
+      cerrarModalCalendario();
+      aplicarFiltros();
     }
 
     function setTipoCliente(tipo) {
@@ -229,29 +479,62 @@
 
     function resetearFiltros() {
       document.getElementById('input-busqueda').value = '';
-      document.getElementById('filtro-fecha').value = 'todas';
       document.getElementById('filtro-funcionaria').value = 'todas';
       document.getElementById('filtro-zona').value = 'todas';
       document.getElementById('filtro-cobro').value = 'todos';
+      seleccionarRapido('todas');
       setTipoCliente('todos');
     }
 
+    // Métodos interactivos para Cobro y Pago a Funcionarias
+    function toggleCobro(id, checked) {
+      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '' });
+      fin.cobrado = checked;
+      guardarFinanzasLocal();
+      aplicarFiltros();
+    }
+
+    function actualizarMontoCobro(id, valor) {
+      const num = parseFloat(valor);
+      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '' });
+      fin.montoCobro = isNaN(num) ? 0 : num;
+      guardarFinanzasLocal();
+      actualizarMetricas(filtradosActuales);
+    }
+
+    function togglePagoChica(id, checked) {
+      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '' });
+      fin.pagadoChica = checked;
+      guardarFinanzasLocal();
+      aplicarFiltros();
+    }
+
+    function actualizarMontoChica(id, valor) {
+      const num = parseFloat(valor);
+      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '' });
+      fin.montoChica = isNaN(num) ? 0 : num;
+      guardarFinanzasLocal();
+      actualizarMetricas(filtradosActuales);
+    }
+
+    let filtradosActuales = [];
+
     function aplicarFiltros() {
-      const q = document.getElementById('input-busqueda').value.toLowerCase().trim();
-      const fFecha = document.getElementById('filtro-fecha').value;
+      const q = normalizar(document.getElementById('input-busqueda').value);
       const fChica = document.getElementById('filtro-funcionaria').value;
-      const fZona = document.getElementById('filtro-zona').value;
+      const fZona = normalizar(document.getElementById('filtro-zona').value);
       const fCobro = document.getElementById('filtro-cobro').value;
 
-      const filtrados = todosLosServicios.filter(s => {
+      filtradosActuales = todosLosServicios.filter(s => {
         // Filtro Tipo Cliente
         if (tipoClienteSeleccionado !== 'todos' && s.origen !== tipoClienteSeleccionado) {
           return false;
         }
 
-        // Filtro Fecha
-        if (fFecha !== 'todas' && s.fecha_servicio !== fFecha) {
-          return false;
+        // Filtro Período / Fecha
+        if (filtroFechaModo !== 'todas') {
+          if (filtroFechaDesde && s.fecha_servicio < filtroFechaDesde) return false;
+          if (filtroFechaHasta && s.fecha_servicio > filtroFechaHasta) return false;
         }
 
         // Filtro Funcionaria
@@ -259,30 +542,37 @@
           return false;
         }
 
-        // Filtro Barrio o Zona
+        // Filtro Barrio o Zona (Normalizado sin acentos)
         if (fZona !== 'todas') {
-          const zonaTxt = (s.zona_nombre || '').toLowerCase();
-          if (!zonaTxt.includes(fZona.toLowerCase())) return false;
+          const zonaTxt = normalizar(s.zona_nombre);
+          if (!zonaTxt.includes(fZona)) return false;
         }
 
-        // Filtro Cobro
+        // Obtener estado financiero guardado
+        const fin = obtenerFinanzas(s);
+
+        // Filtro Cobro / Liquidación
         if (fCobro !== 'todos') {
-          if (fCobro === 'Cobrado' && !s.estado_cobro.toLowerCase().includes('cobrado')) return false;
-          if (fCobro === 'Pendiente' && !s.estado_cobro.toLowerCase().includes('pendiente') && !s.estado_cobro.toLowerCase().includes('seña')) return false;
+          if (fCobro === 'Cobrado' && !fin.cobrado) return false;
+          if (fCobro === 'Pendiente' && fin.cobrado) return false;
+          if (fCobro === 'LiquidadoChica' && !fin.pagadoChica) return false;
+          if (fCobro === 'PendienteChica' && fin.pagadoChica) return false;
           if (fCobro === 'Liquidación ArreglaTodo' && s.origen !== 'arreglatodo') return false;
         }
 
-        // Buscador de texto libre (Dirección, Calle, Cliente, ID, Barrio)
+        // Buscador Inteligente Sin Acentos (Dirección, Calle, Cliente, ID, Barrio, Funcionaria)
         if (q.length > 0) {
-          const haystack = `${s.id} ${s.direccion} ${s.cliente_nombre} ${s.zona_nombre} ${s.notas}`.toLowerCase();
-          if (!haystack.includes(q)) return false;
+          const haystack = normalizar(`${s.id} ${s.direccion} ${s.cliente_nombre} ${s.zona_nombre} ${s.notas} ${s.funcionaria_nombre} ${s.origen}`);
+          const terminos = q.split(' ');
+          const coincideTodo = terminos.every(t => haystack.includes(t));
+          if (!coincideTodo) return false;
         }
 
         return true;
       });
 
-      actualizarMetricas(filtrados);
-      renderizarGrilla(filtrados);
+      actualizarMetricas(filtradosActuales);
+      renderizarGrilla(filtradosActuales);
     }
 
     function actualizarMetricas(items) {
@@ -291,19 +581,23 @@
 
       let totalCobrado = 0;
       let totalPendiente = 0;
+      let totalChicas = 0;
 
       items.forEach(s => {
+        const fin = obtenerFinanzas(s);
         if (s.origen !== 'arreglatodo') {
-          if (s.estado_cobro.toLowerCase().includes('cobrado')) {
-            totalCobrado += (s.precio_total || 0);
+          if (fin.cobrado) {
+            totalCobrado += (fin.montoCobro ? fin.montoCobro : 0);
           } else {
-            totalPendiente += (s.precio_total || 0);
+            totalPendiente += (fin.montoCobro ? fin.montoCobro : 0);
           }
         }
+        totalChicas += (fin.montoChica ? fin.montoChica : 0);
       });
 
-      document.getElementById('stat-cobrado').textContent = '$' + totalCobrado.toLocaleString('es-UY');
-      document.getElementById('stat-pendiente').textContent = '$' + totalPendiente.toLocaleString('es-UY');
+      document.getElementById('stat-cobrado').textContent = '$' + Math.round(totalCobrado).toLocaleString('es-UY');
+      document.getElementById('stat-pendiente').textContent = '$' + Math.round(totalPendiente).toLocaleString('es-UY');
+      document.getElementById('stat-chicas').textContent = '$' + Math.round(totalChicas).toLocaleString('es-UY');
     }
 
     function renderizarGrilla(items) {
@@ -318,6 +612,8 @@
       }
 
       contenedor.innerHTML = items.map(s => {
+        const fin = obtenerFinanzas(s);
+
         // Badges según tipo
         let badgeTipo = '';
         if (s.origen === 'empresa') {
@@ -330,32 +626,27 @@
           badgeTipo = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Particular</span>';
         }
 
-        // Estado Cobro
-        let badgeCobro = '';
-        if (s.origen === 'arreglatodo') {
-          badgeCobro = '<span class="text-[10px] text-amber-400 font-semibold">Liquidación Quincenal</span>';
-        } else if (s.estado_cobro.toLowerCase().includes('cobrado')) {
-          badgeCobro = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Cobrado</span>';
-        } else {
-          badgeCobro = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Pendiente</span>';
-        }
-
         // Formato fecha amigable
         const fPartes = s.fecha_servicio.split('-');
         const fechaCorta = `${fPartes[2]}/${fPartes[1]}`;
 
-        // Mensajes WhatsApp
+        // Enlace Automático a Google Maps
+        const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(s.direccion + ', Montevideo, Uruguay')}`;
+
+        // Mensaje WhatsApp a Funcionaria con Enlace Directo a Maps Embebido
         const msgChica = encodeURIComponent(
-          `Hola ${s.funcionaria_nombre}, tu servicio:\n` +
+          `Hola ${s.funcionaria_nombre}, tu servicio coordinado:\n` +
           `📍 Dirección: ${s.direccion} (${s.zona_nombre})\n` +
+          `🗺️ Mapa: ${mapsUrl}\n` +
           `⏰ Horario: ${s.fecha_servicio} a las ${s.hora_servicio} hs (${s.duracion_hs} hs)\n` +
-          `📦 Tareas: ${s.adicionales || 'Limpieza estándar'}\n` +
+          `📦 Tareas: ${s.adicionales ? s.adicionales : 'Limpieza estándar'}\n` +
           `👤 Cliente: ${s.cliente_nombre}`
         );
 
+        // Mensaje WhatsApp Cobro Cliente con Monto Dinámico
         const msgCobro = encodeURIComponent(
           `Hola ${s.cliente_nombre}, te escribimos de Daiana Souza Servicios.\n` +
-          `El saldo del servicio de hoy es de $${s.precio_total} UYU.\n` +
+          `El saldo del servicio coordinado es de $${fin.montoCobro} UYU.\n` +
           `Podés abonar por transferencia BROU / Prex o efectivo.\n` +
           `¡Muchas gracias!`
         );
@@ -376,46 +667,96 @@
                 </div>
               </div>
 
-              <!-- Dirección Destacada (El foco de Daiana) -->
-              <div class="mb-2.5">
+              <!-- Dirección Destacada con Link de Google Maps -->
+              <div class="mb-2">
                 <div class="text-sm font-bold text-white leading-snug flex items-start gap-1.5">
                   <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
                   <span>${s.direccion}</span>
                 </div>
-                <div class="text-xs text-slate-400 mt-1 pl-5">
+                <div class="text-xs text-slate-400 mt-0.5 pl-5 flex items-center justify-between">
                   <span>${s.zona_nombre}</span>
+                  <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-blue-400 hover:text-blue-300 font-medium transition-colors">
+                    <i data-lucide="map" class="w-3 h-3"></i>
+                    <span>Ver mapa</span>
+                  </a>
                 </div>
               </div>
 
-              <!-- Cliente y Detalles -->
-              <div class="pl-5 text-xs space-y-1 mb-3">
+              <!-- Cliente y Horas -->
+              <div class="pl-5 text-xs space-y-0.5 mb-2.5">
                 <div class="text-slate-300 font-medium">${s.cliente_nombre}</div>
                 <div class="text-[11px] text-slate-500">
                   <span>${s.duracion_hs} hs</span>
                   <span class="mx-1">•</span>
-                  <span>${s.adicionales || 'Limpieza estándar'}</span>
+                  <span>${s.adicionales ? s.adicionales : 'Limpieza estándar'}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Pie de Tarjeta y Finanzas -->
+            <!-- Sección Financiera Interactiva y Asignación -->
             <div>
-              <div class="pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs mb-3">
+              <!-- Control de Cobro y Liquidación Editable -->
+              <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800/80 mb-3 space-y-2">
+                
+                <!-- Cobro Cliente -->
+                <div class="flex items-center justify-between gap-2 text-xs">
+                  <label class="flex items-center gap-1.5 cursor-pointer select-none">
+                    <input type="checkbox" 
+                      ${fin.cobrado ? 'checked' : ''} 
+                      onchange="toggleCobro('${s.id}', this.checked)"
+                      class="w-3.5 h-3.5 rounded border-slate-700 bg-slate-900 text-emerald-500 focus:ring-0 cursor-pointer">
+                    <span class="text-[11px] font-semibold ${fin.cobrado ? 'text-emerald-400' : 'text-slate-400'}">
+                      ${fin.cobrado ? 'Cobrado Cliente' : 'Pendiente Cobro'}
+                    </span>
+                  </label>
+                  
+                  <div class="flex items-center gap-1">
+                    <span class="text-[11px] text-slate-500 font-mono">$</span>
+                    <input type="number" 
+                      value="${fin.montoCobro}" 
+                      onchange="actualizarMontoCobro('${s.id}', this.value)"
+                      class="w-20 px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-right font-mono text-xs text-white focus:outline-none focus:border-blue-500"
+                      title="Monto total del servicio">
+                  </div>
+                </div>
+
+                <!-- Pago Funcionaria -->
+                <div class="flex items-center justify-between gap-2 text-xs pt-1.5 border-t border-slate-800/60">
+                  <label class="flex items-center gap-1.5 cursor-pointer select-none">
+                    <input type="checkbox" 
+                      ${fin.pagadoChica ? 'checked' : ''} 
+                      onchange="togglePagoChica('${s.id}', this.checked)"
+                      class="w-3.5 h-3.5 rounded border-slate-700 bg-slate-900 text-blue-500 focus:ring-0 cursor-pointer">
+                    <span class="text-[11px] font-semibold ${fin.pagadoChica ? 'text-blue-400' : 'text-slate-400'}">
+                      ${fin.pagadoChica ? 'Liquidado a Chica' : 'Pendiente a Chica'}
+                    </span>
+                  </label>
+                  
+                  <div class="flex items-center gap-1">
+                    <span class="text-[11px] text-slate-500 font-mono">$</span>
+                    <input type="number" 
+                      value="${fin.montoChica}" 
+                      onchange="actualizarMontoChica('${s.id}', this.value)"
+                      class="w-20 px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-right font-mono text-xs text-white focus:outline-none focus:border-blue-500"
+                      title="Monto a liquidar a la chica">
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Fila de Funcionaria y Botones WhatsApp -->
+              <div class="flex items-center justify-between text-xs mb-2.5 px-0.5">
                 <div class="flex items-center gap-1.5">
                   <div class="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-[10px] font-bold text-blue-400">
                     ${s.funcionaria_nombre.charAt(0)}
                   </div>
                   <span class="font-medium text-slate-200">${s.funcionaria_nombre}</span>
                 </div>
-                
-                <div class="flex items-center gap-2">
-                  ${s.origen !== 'arreglatodo' ? `<span class="font-bold text-white">$${s.precio_total.toLocaleString('es-UY')}</span>` : ''}
-                  ${badgeCobro}
-                </div>
+                ${s.origen === 'arreglatodo' ? '<span class="text-[10px] text-amber-400 font-semibold">Liquidación AT</span>' : ''}
               </div>
 
               <!-- Botones de Acción WhatsApp de 1 Clic -->
-              <div class="grid grid-cols-2 gap-2 pt-1">
+              <div class="grid grid-cols-2 gap-2">
                 <a href="https://wa.me/?text=${msgChica}" target="_blank" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-emerald-600/15 hover:bg-emerald-600/25 text-emerald-300 border border-emerald-500/25 font-semibold text-xs transition-all text-center">
                   <i data-lucide="send" class="w-3.5 h-3.5"></i>
                   <span>A Funcionaria</span>
