@@ -72,7 +72,7 @@
   <main class="max-w-7xl mx-auto w-full px-4 lg:px-8 py-5 flex-grow">
 
     <!-- PANEL DE FILTROS SUPERIOR (NO INVASIVO) -->
-    <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-6 shadow-sm">
+    <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-5 shadow-sm">
       
       <!-- Fila 1: Buscador en Vivo por Dirección, Cliente, Barrio o ID (Sin distinción de acentos) -->
       <div class="mb-4">
@@ -82,18 +82,18 @@
             type="text" 
             id="input-busqueda" 
             oninput="aplicarFiltros()" 
-            placeholder="Buscar por dirección, calle, cliente, barrio o código (#ID) (sin importar acentos)..."
+            placeholder="Buscar por dirección, cliente, barrio, funcionaria o código (ignora acentos)..."
             class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
           >
         </div>
       </div>
 
-      <!-- Fila 2: Selectores combinados (Calendario Pop-up, Funcionaria, Zona/Barrio, Estado Pago) -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4 text-xs">
+      <!-- Fila 2: Selectores Combinados (Calendario, Estado Servicio, Funcionaria, Zona/Barrio, Estado Pago) -->
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mb-4 text-xs">
         
         <!-- Filtro Calendario Pop-up Interactivo -->
         <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Período / Calendario</label>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Período / Fecha</label>
           <button 
             type="button" 
             onclick="abrirModalCalendario()" 
@@ -106,6 +106,20 @@
             </span>
             <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 shrink-0 ml-1"></i>
           </button>
+        </div>
+
+        <!-- Filtro Estado de Servicio (6 Estados) -->
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Estado de Servicio</label>
+          <select id="filtro-estado-servicio" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500 font-medium">
+            <option value="todos">Todos los estados (6)</option>
+            <option value="Coordinado">Coordinado</option>
+            <option value="Asignado">Asignado</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Terminado">Terminado</option>
+            <option value="Abonado">Abonado</option>
+            <option value="Completado">Completado</option>
+          </select>
         </div>
 
         <!-- Filtro Funcionaria -->
@@ -130,7 +144,7 @@
         <div>
           <label class="block text-[11px] font-semibold text-slate-400 mb-1">Barrio o Zona</label>
           <select id="filtro-zona" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
-            <option value="todas">Todos los barrios y zonas</option>
+            <option value="todas">Todos los barrios</option>
             <option value="Pocitos">Pocitos</option>
             <option value="Punta Carretas">Punta Carretas</option>
             <option value="Buceo">Buceo</option>
@@ -144,47 +158,85 @@
           </select>
         </div>
 
-        <!-- Filtro Estado de Cobro / Liquidación -->
+        <!-- Filtro Estado de Pago -->
         <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Estado Financiero</label>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Estado de Pago</label>
           <select id="filtro-cobro" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
-            <option value="todos">Todos los estados</option>
-            <option value="Cobrado">Cobrados de Cliente</option>
-            <option value="Pendiente">Pendientes de Cobro</option>
+            <option value="todos">Todos los pagos</option>
+            <option value="Cobrado">Cobrados Cliente</option>
+            <option value="Pendiente">Pendientes Cobro</option>
             <option value="LiquidadoChica">Liquidados a Chica</option>
-            <option value="PendienteChica">Pendientes de Liquidar a Chica</option>
-            <option value="Liquidación ArreglaTodo">Liquidación ArreglaTodo</option>
+            <option value="PendienteChica">Pendientes a Chica</option>
+            <option value="Liquidación ArreglaTodo">ArreglaTodo</option>
           </select>
         </div>
 
       </div>
 
-      <!-- Fila 3: Botones Rápidos de Categoría de Cliente -->
-      <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-800/80 text-xs">
-        <span class="text-slate-400 font-medium mr-1">Tipo de Cliente:</span>
-        <button onclick="setTipoCliente('todos')" id="pill-todos" class="px-3 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all shadow-sm">
-          Todos
-        </button>
-        <button onclick="setTipoCliente('particular')" id="pill-particular" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
-          Particulares
-        </button>
-        <button onclick="setTipoCliente('empresa')" id="pill-empresa" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
-          Empresas
-        </button>
-        <button onclick="setTipoCliente('consorcio')" id="pill-consorcio" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
-          Consorcios
-        </button>
-        <button onclick="setTipoCliente('arreglatodo')" id="pill-arreglatodo" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
-          ArreglaTodo
-        </button>
+      <!-- Fila 3: Botones Rápidos de Categoría y Toggle de Recurrentes -->
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800/80 text-xs">
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-slate-400 font-medium mr-1">Categoría:</span>
+          <button onclick="setTipoCliente('todos')" id="pill-todos" class="px-3 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all shadow-sm">
+            Todos
+          </button>
+          <button onclick="setTipoCliente('particular')" id="pill-particular" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+            Particulares
+          </button>
+          <button onclick="setTipoCliente('empresa')" id="pill-empresa" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+            Empresas
+          </button>
+          <button onclick="setTipoCliente('consorcio')" id="pill-consorcio" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+            Consorcios
+          </button>
+          <button onclick="setTipoCliente('arreglatodo')" id="pill-arreglatodo" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+            ArreglaTodo
+          </button>
+        </div>
+
+        <!-- Botón Especial: Filtrar Recurrentes Multi-Fecha -->
+        <div>
+          <button onclick="setTipoCliente('recurrentes')" id="pill-recurrentes" class="px-3 py-1.5 rounded-lg font-semibold bg-indigo-950/60 text-indigo-300 border border-indigo-700/50 hover:bg-indigo-900/60 transition-all flex items-center gap-1.5">
+            <i data-lucide="repeat" class="w-3.5 h-3.5 text-indigo-400"></i>
+            <span>Recurrentes Multi-Fecha (1/4, 2/4...)</span>
+          </button>
+        </div>
       </div>
 
+    </section>
+
+    <!-- BARRA RÁPIDA DE ESTADOS OPERATIVOS (CONTADORES VIVOS CLICKEABLES) -->
+    <section class="grid grid-cols-2 sm:grid-cols-6 gap-2 mb-4 text-xs">
+      <button onclick="filtrarPorEstado('Coordinado')" class="p-2 rounded-xl bg-sky-950/30 border border-sky-800/40 hover:border-sky-500/60 transition-all flex items-center justify-between">
+        <span class="text-sky-400 font-semibold">Coordinado</span>
+        <span id="badge-count-Coordinado" class="px-1.5 py-0.5 rounded-md text-[10px] bg-sky-500/20 text-sky-300 font-mono font-bold">0</span>
+      </button>
+      <button onclick="filtrarPorEstado('Asignado')" class="p-2 rounded-xl bg-indigo-950/30 border border-indigo-800/40 hover:border-indigo-500/60 transition-all flex items-center justify-between">
+        <span class="text-indigo-400 font-semibold">Asignado</span>
+        <span id="badge-count-Asignado" class="px-1.5 py-0.5 rounded-md text-[10px] bg-indigo-500/20 text-indigo-300 font-mono font-bold">0</span>
+      </button>
+      <button onclick="filtrarPorEstado('En proceso')" class="p-2 rounded-xl bg-amber-950/30 border border-amber-800/40 hover:border-amber-500/60 transition-all flex items-center justify-between">
+        <span class="text-amber-400 font-semibold">En proceso</span>
+        <span id="badge-count-En proceso" class="px-1.5 py-0.5 rounded-md text-[10px] bg-amber-500/20 text-amber-300 font-mono font-bold">0</span>
+      </button>
+      <button onclick="filtrarPorEstado('Terminado')" class="p-2 rounded-xl bg-teal-950/30 border border-teal-800/40 hover:border-teal-500/60 transition-all flex items-center justify-between">
+        <span class="text-teal-400 font-semibold">Terminado</span>
+        <span id="badge-count-Terminado" class="px-1.5 py-0.5 rounded-md text-[10px] bg-teal-500/20 text-teal-300 font-mono font-bold">0</span>
+      </button>
+      <button onclick="filtrarPorEstado('Abonado')" class="p-2 rounded-xl bg-purple-950/30 border border-purple-800/40 hover:border-purple-500/60 transition-all flex items-center justify-between">
+        <span class="text-purple-400 font-semibold">Abonado</span>
+        <span id="badge-count-Abonado" class="px-1.5 py-0.5 rounded-md text-[10px] bg-purple-500/20 text-purple-300 font-mono font-bold">0</span>
+      </button>
+      <button onclick="filtrarPorEstado('Completado')" class="p-2 rounded-xl bg-emerald-950/30 border border-emerald-800/40 hover:border-emerald-500/60 transition-all flex items-center justify-between">
+        <span class="text-emerald-400 font-semibold">Completado</span>
+        <span id="badge-count-Completado" class="px-1.5 py-0.5 rounded-md text-[10px] bg-emerald-500/20 text-emerald-300 font-mono font-bold">0</span>
+      </button>
     </section>
 
     <!-- RESULTADOS Y CONTADOR DE SERVICIOS -->
     <div class="flex items-center justify-between mb-4 px-1">
       <div class="text-xs text-slate-400 flex items-center gap-2">
-        <span>Mostrando <span id="contador-mostrados" class="font-bold text-white">0</span> servicios</span>
+        <span>Mostrando <span id="contador-mostrados" class="font-bold text-white">0</span> servicios coincidentes</span>
         <span id="badge-filtro-activo" class="hidden px-2 py-0.5 rounded-md text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium"></span>
       </div>
       <button onclick="resetearFiltros()" class="text-xs text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1 font-medium">
@@ -287,17 +339,17 @@
     let tipoClienteSeleccionado = 'todos';
 
     // Estado del Calendario
-    let filtroFechaModo = 'todas'; // 'todas', 'dia', 'rango'
+    let filtroFechaModo = 'todas';
     let filtroFechaDesde = null;
     let filtroFechaHasta = null;
 
-    // Almacén Local de Estado Financiero Interactivo
-    // Estructura: { [id]: { cobrado: bool, montoCobro: num, pagadoChica: bool, montoChica: num } }
+    // Almacén Local de Estado Financiero y Operativo
+    // Estructura: { [id]: { cobrado: bool, montoCobro: num, pagadoChica: bool, montoChica: num, estadoServicio: str } }
     let finanzasData = {};
 
     function cargarFinanzasLocal() {
       try {
-        const raw = localStorage.getItem('ds_finanzas_v2');
+        const raw = localStorage.getItem('ds_finanzas_v3');
         finanzasData = raw ? JSON.parse(raw) : {};
       } catch (e) {
         finanzasData = {};
@@ -306,26 +358,35 @@
 
     function guardarFinanzasLocal() {
       try {
-        localStorage.setItem('ds_finanzas_v2', JSON.stringify(finanzasData));
+        localStorage.setItem('ds_finanzas_v3', JSON.stringify(finanzasData));
       } catch (e) {}
     }
 
     function obtenerFinanzas(s) {
       if (!finanzasData[s.id]) {
-        const cobradoDefault = s.estado_cobro.toLowerCase().includes('cobrado');
         const duracion = s.duracion_hs ? s.duracion_hs : 3;
-        const montoChicaDefault = duracion * 350; // Tarifa estándar $350/hora
+        const montoChicaDefault = duracion * 350;
+        const estadoInicial = s.estado_servicio ? s.estado_servicio : 'Coordinado';
+        
+        let cobradoInicial = false;
+        if (['Abonado', 'Completado'].includes(estadoInicial)) {
+          cobradoInicial = true;
+        } else if (s.estado_cobro && s.estado_cobro.toLowerCase().includes('cobrado')) {
+          cobradoInicial = true;
+        }
+
         finanzasData[s.id] = {
-          cobrado: cobradoDefault,
+          cobrado: cobradoInicial,
           montoCobro: s.precio_total ? s.precio_total : 0,
-          pagadoChica: false,
-          montoChica: montoChicaDefault
+          pagadoChica: (estadoInicial === 'Completado'),
+          montoChica: montoChicaDefault,
+          estadoServicio: estadoInicial
         };
       }
       return finanzasData[s.id];
     }
 
-    // Función normalizadora para ignorar acentos y diacríticos
+    // Normalizador de texto sin acentos
     function normalizar(texto) {
       if (!texto) return '';
       return texto
@@ -346,6 +407,26 @@
       } catch (err) {
         document.getElementById('grilla-servicios').innerHTML = 
           '<div class="col-span-full p-8 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-400 text-center text-xs">Error cargando servicios.json</div>';
+      }
+    }
+
+    // Estilos de badge según los 6 estados
+    function obtenerEstiloEstado(estado) {
+      switch (estado) {
+        case 'Coordinado':
+          return 'bg-sky-500/15 text-sky-400 border-sky-500/30';
+        case 'Asignado':
+          return 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30';
+        case 'En proceso':
+          return 'bg-amber-500/15 text-amber-300 border-amber-500/30';
+        case 'Terminado':
+          return 'bg-teal-500/15 text-teal-300 border-teal-500/30';
+        case 'Abonado':
+          return 'bg-purple-500/15 text-purple-300 border-purple-500/30';
+        case 'Completado':
+          return 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30';
+        default:
+          return 'bg-slate-800 text-slate-300 border-slate-700';
       }
     }
 
@@ -399,7 +480,7 @@
         filtroFechaModo = 'todas';
         filtroFechaDesde = null;
         filtroFechaHasta = null;
-        document.getElementById('label-calendario').textContent = 'Todas las fechas (2 semanas)';
+        document.getElementById('label-calendario').textContent = 'Todas las fechas';
       } else if (tipo === 'hoy') {
         filtroFechaModo = 'dia';
         filtroFechaDesde = '2026-10-26';
@@ -414,17 +495,17 @@
         filtroFechaModo = 'rango';
         filtroFechaDesde = '2026-10-26';
         filtroFechaHasta = '2026-10-31';
-        document.getElementById('label-calendario').textContent = 'Semana 1 (26 al 31 Oct)';
+        document.getElementById('label-calendario').textContent = 'Semana 1 (26 al 31)';
       } else if (tipo === 'semana2') {
         filtroFechaModo = 'rango';
         filtroFechaDesde = '2026-11-02';
         filtroFechaHasta = '2026-11-07';
-        document.getElementById('label-calendario').textContent = 'Semana 2 (02 al 07 Nov)';
+        document.getElementById('label-calendario').textContent = 'Semana 2 (02 al 07)';
       } else if (tipo === 'tresdias') {
         filtroFechaModo = 'rango';
         filtroFechaDesde = '2026-10-26';
         filtroFechaHasta = '2026-10-28';
-        document.getElementById('label-calendario').textContent = 'Próx 3 días (26 al 28 Oct)';
+        document.getElementById('label-calendario').textContent = 'Próx 3 días (26-28)';
       }
       cerrarModalCalendario();
       aplicarFiltros();
@@ -468,17 +549,36 @@
       tipoClienteSeleccionado = tipo;
       ['todos', 'particular', 'empresa', 'consorcio', 'arreglatodo'].forEach(t => {
         const btn = document.getElementById('pill-' + t);
-        if (t === tipo) {
-          btn.className = 'px-3 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all shadow-sm';
-        } else {
-          btn.className = 'px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all';
+        if (btn) {
+          if (t === tipo) {
+            btn.className = 'px-3 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all shadow-sm';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all';
+          }
         }
       });
+
+      const btnRec = document.getElementById('pill-recurrentes');
+      if (btnRec) {
+        if (tipo === 'recurrentes') {
+          btnRec.className = 'px-3 py-1.5 rounded-lg font-semibold bg-indigo-600 text-white transition-all shadow-sm flex items-center gap-1.5';
+        } else {
+          btnRec.className = 'px-3 py-1.5 rounded-lg font-semibold bg-indigo-950/60 text-indigo-300 border border-indigo-700/50 hover:bg-indigo-900/60 transition-all flex items-center gap-1.5';
+        }
+      }
+
+      aplicarFiltros();
+    }
+
+    function filtrarPorEstado(estado) {
+      const select = document.getElementById('filtro-estado-servicio');
+      select.value = estado;
       aplicarFiltros();
     }
 
     function resetearFiltros() {
       document.getElementById('input-busqueda').value = '';
+      document.getElementById('filtro-estado-servicio').value = 'todos';
       document.getElementById('filtro-funcionaria').value = 'todas';
       document.getElementById('filtro-zona').value = 'todas';
       document.getElementById('filtro-cobro').value = 'todos';
@@ -486,24 +586,42 @@
       setTipoCliente('todos');
     }
 
-    // Métodos interactivos para Cobro y Pago a Funcionarias
+    // Modificación de Estado y Finanzas en Tiempo Real
+    function cambiarEstadoServicio(id, nuevoEstado) {
+      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
+      fin.estadoServicio = nuevoEstado;
+
+      if (['Abonado', 'Completado'].includes(nuevoEstado)) {
+        fin.cobrado = true;
+      }
+      if (nuevoEstado === 'Completado') {
+        fin.pagadoChica = true;
+      }
+
+      guardarFinanzasLocal();
+      aplicarFiltros();
+    }
+
     function toggleCobro(id, checked) {
-      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '' });
+      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
       fin.cobrado = checked;
+      if (checked && fin.estadoServicio === 'Coordinado') {
+        fin.estadoServicio = 'Abonado';
+      }
       guardarFinanzasLocal();
       aplicarFiltros();
     }
 
     function actualizarMontoCobro(id, valor) {
       const num = parseFloat(valor);
-      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '' });
+      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
       fin.montoCobro = isNaN(num) ? 0 : num;
       guardarFinanzasLocal();
       actualizarMetricas(filtradosActuales);
     }
 
     function togglePagoChica(id, checked) {
-      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '' });
+      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
       fin.pagadoChica = checked;
       guardarFinanzasLocal();
       aplicarFiltros();
@@ -511,7 +629,7 @@
 
     function actualizarMontoChica(id, valor) {
       const num = parseFloat(valor);
-      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '' });
+      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
       fin.montoChica = isNaN(num) ? 0 : num;
       guardarFinanzasLocal();
       actualizarMetricas(filtradosActuales);
@@ -521,13 +639,24 @@
 
     function aplicarFiltros() {
       const q = normalizar(document.getElementById('input-busqueda').value);
+      const fEstado = document.getElementById('filtro-estado-servicio').value;
       const fChica = document.getElementById('filtro-funcionaria').value;
       const fZona = normalizar(document.getElementById('filtro-zona').value);
       const fCobro = document.getElementById('filtro-cobro').value;
 
       filtradosActuales = todosLosServicios.filter(s => {
-        // Filtro Tipo Cliente
-        if (tipoClienteSeleccionado !== 'todos' && s.origen !== tipoClienteSeleccionado) {
+        // Filtro Tipo Cliente / Recurrente
+        if (tipoClienteSeleccionado === 'recurrentes') {
+          if (!s.es_recurrente) return false;
+        } else if (tipoClienteSeleccionado !== 'todos') {
+          if (s.origen !== tipoClienteSeleccionado) return false;
+        }
+
+        // Obtener estado financiero y operativo guardado
+        const fin = obtenerFinanzas(s);
+
+        // Filtro Estado del Servicio (6 estados)
+        if (fEstado !== 'todos' && fin.estadoServicio !== fEstado) {
           return false;
         }
 
@@ -548,9 +677,6 @@
           if (!zonaTxt.includes(fZona)) return false;
         }
 
-        // Obtener estado financiero guardado
-        const fin = obtenerFinanzas(s);
-
         // Filtro Cobro / Liquidación
         if (fCobro !== 'todos') {
           if (fCobro === 'Cobrado' && !fin.cobrado) return false;
@@ -560,9 +686,9 @@
           if (fCobro === 'Liquidación ArreglaTodo' && s.origen !== 'arreglatodo') return false;
         }
 
-        // Buscador Inteligente Sin Acentos (Dirección, Calle, Cliente, ID, Barrio, Funcionaria)
+        // Buscador Inteligente Sin Acentos (Dirección, Calle, Cliente, ID, Barrio, Funcionaria, Estado)
         if (q.length > 0) {
-          const haystack = normalizar(`${s.id} ${s.direccion} ${s.cliente_nombre} ${s.zona_nombre} ${s.notas} ${s.funcionaria_nombre} ${s.origen}`);
+          const haystack = normalizar(`${s.id} ${s.direccion} ${s.cliente_nombre} ${s.zona_nombre} ${s.notas} ${s.funcionaria_nombre} ${s.origen} ${fin.estadoServicio} ${s.recurrencia_etiqueta}`);
           const terminos = q.split(' ');
           const coincideTodo = terminos.every(t => haystack.includes(t));
           if (!coincideTodo) return false;
@@ -582,6 +708,29 @@
       let totalCobrado = 0;
       let totalPendiente = 0;
       let totalChicas = 0;
+
+      const conteoEstados = {
+        'Coordinado': 0,
+        'Asignado': 0,
+        'En proceso': 0,
+        'Terminado': 0,
+        'Abonado': 0,
+        'Completado': 0
+      };
+
+      // Contar estados sobre los servicios visibles o globales
+      todosLosServicios.forEach(s => {
+        const fin = obtenerFinanzas(s);
+        if (conteoEstados[fin.estadoServicio] !== undefined) {
+          conteoEstados[fin.estadoServicio] += 1;
+        }
+      });
+
+      // Actualizar badges superiores de estados
+      Object.keys(conteoEstados).forEach(est => {
+        const el = document.getElementById('badge-count-' + est);
+        if (el) el.textContent = conteoEstados[est];
+      });
 
       items.forEach(s => {
         const fin = obtenerFinanzas(s);
@@ -626,6 +775,37 @@
           badgeTipo = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Particular</span>';
         }
 
+        // Stepper Visual para Clientes Recurrentes con Fechas Múltiples (1/4, 2/4...)
+        let stepperRecurrenteHtml = '';
+        if (s.es_recurrente && s.recurrencia_total > 1) {
+          const total = s.recurrencia_total;
+          const actual = s.recurrencia_indice;
+          const pasos = [];
+
+          for (let paso = 1; paso <= total; paso++) {
+            if (paso < actual) {
+              pasos.push(`<span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-[9px] font-bold" title="Visita ${paso}/${total} Completada">✓</span>`);
+            } else if (paso === actual) {
+              pasos.push(`<span class="w-4 h-4 rounded-full bg-indigo-500/30 text-indigo-300 border border-indigo-400 flex items-center justify-center text-[9px] font-bold ring-1 ring-indigo-400" title="Visita Actual ${paso}/${total}">${paso}</span>`);
+            } else {
+              pasos.push(`<span class="w-4 h-4 rounded-full bg-slate-800 text-slate-500 border border-slate-700/60 flex items-center justify-center text-[9px] font-bold" title="Visita Futura ${paso}/${total}">${paso}</span>`);
+            }
+          }
+
+          stepperRecurrenteHtml = `
+            <div class="mt-2 mb-1 p-2 rounded-xl bg-indigo-950/30 border border-indigo-900/40 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5">
+                <i data-lucide="repeat" class="w-3.5 h-3.5 text-indigo-400"></i>
+                <span class="text-[11px] font-bold text-indigo-300">Plan Periódico</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <div class="flex items-center gap-1">${pasos.join('')}</div>
+                <span class="text-[11px] font-mono font-bold text-white ml-1">Visita ${actual}/${total}</span>
+              </div>
+            </div>
+          `;
+        }
+
         // Formato fecha amigable
         const fPartes = s.fecha_servicio.split('-');
         const fechaCorta = `${fPartes[2]}/${fPartes[1]}`;
@@ -633,12 +813,14 @@
         // Enlace Automático a Google Maps
         const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(s.direccion + ', Montevideo, Uruguay')}`;
 
-        // Mensaje WhatsApp a Funcionaria con Enlace Directo a Maps Embebido
+        // Mensaje WhatsApp a Funcionaria con Enlace Directo a Maps y Estado
         const msgChica = encodeURIComponent(
-          `Hola ${s.funcionaria_nombre}, tu servicio coordinado:\n` +
+          `Hola ${s.funcionaria_nombre}, tu servicio:\n` +
           `📍 Dirección: ${s.direccion} (${s.zona_nombre})\n` +
-          `🗺️ Mapa: ${mapsUrl}\n` +
+          `🗺️ Ubicación en Maps: ${mapsUrl}\n` +
           `⏰ Horario: ${s.fecha_servicio} a las ${s.hora_servicio} hs (${s.duracion_hs} hs)\n` +
+          `📋 Estado: ${fin.estadoServicio}\n` +
+          (s.es_recurrente ? `🔁 Plan Recurrente: Visita ${s.recurrencia_etiqueta}\n` : '') +
           `📦 Tareas: ${s.adicionales ? s.adicionales : 'Limpieza estándar'}\n` +
           `👤 Cliente: ${s.cliente_nombre}`
         );
@@ -651,20 +833,39 @@
           `¡Muchas gracias!`
         );
 
+        const estiloEstado = obtenerEstiloEstado(fin.estadoServicio);
+
         return `
           <div class="bg-slate-900 border border-slate-800/90 rounded-2xl p-4 flex flex-col justify-between hover:border-slate-700 transition-all shadow-sm">
             
             <!-- Cabecera de la Tarjeta -->
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
-                <div class="flex items-center gap-1.5">
+                <div class="flex items-center gap-1.5 flex-wrap">
                   <span class="font-mono text-xs font-bold text-slate-300">${s.id}</span>
                   ${badgeTipo}
+                  ${s.es_recurrente ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">${s.recurrencia_etiqueta}</span>` : ''}
                 </div>
                 <div class="flex items-center gap-1.5 text-xs text-slate-300 font-semibold">
                   <span class="text-[11px] text-slate-400">${fechaCorta}</span>
                   <span class="text-emerald-400 font-bold">${s.hora_servicio} hs</span>
                 </div>
+              </div>
+
+              <!-- Selector Interactivo de Estado del Servicio (6 Estados) -->
+              <div class="mb-2.5 flex items-center justify-between gap-2">
+                <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Estado Operativo:</span>
+                <select 
+                  onchange="cambiarEstadoServicio('${s.id}', this.value)" 
+                  class="text-[11px] font-bold px-2.5 py-1 rounded-lg border focus:outline-none transition-colors cursor-pointer ${estiloEstado}"
+                >
+                  <option value="Coordinado" class="bg-slate-900 text-sky-400" ${fin.estadoServicio === 'Coordinado' ? 'selected' : ''}>Coordinado</option>
+                  <option value="Asignado" class="bg-slate-900 text-indigo-300" ${fin.estadoServicio === 'Asignado' ? 'selected' : ''}>Asignado</option>
+                  <option value="En proceso" class="bg-slate-900 text-amber-300" ${fin.estadoServicio === 'En proceso' ? 'selected' : ''}>En proceso</option>
+                  <option value="Terminado" class="bg-slate-900 text-teal-300" ${fin.estadoServicio === 'Terminado' ? 'selected' : ''}>Terminado</option>
+                  <option value="Abonado" class="bg-slate-900 text-purple-300" ${fin.estadoServicio === 'Abonado' ? 'selected' : ''}>Abonado</option>
+                  <option value="Completado" class="bg-slate-900 text-emerald-300" ${fin.estadoServicio === 'Completado' ? 'selected' : ''}>Completado</option>
+                </select>
               </div>
 
               <!-- Dirección Destacada con Link de Google Maps -->
@@ -683,14 +884,18 @@
               </div>
 
               <!-- Cliente y Horas -->
-              <div class="pl-5 text-xs space-y-0.5 mb-2.5">
-                <div class="text-slate-300 font-medium">${s.cliente_nombre}</div>
-                <div class="text-[11px] text-slate-500">
+              <div class="pl-5 text-xs space-y-0.5 mb-2">
+                <div class="text-slate-200 font-medium">${s.cliente_nombre}</div>
+                <div class="text-[11px] text-slate-400">
                   <span>${s.duracion_hs} hs</span>
                   <span class="mx-1">•</span>
                   <span>${s.adicionales ? s.adicionales : 'Limpieza estándar'}</span>
                 </div>
               </div>
+
+              <!-- Barra de Progreso de Recurrentes (Multi-Fecha) -->
+              ${stepperRecurrenteHtml}
+
             </div>
 
             <!-- Sección Financiera Interactiva y Asignación -->
