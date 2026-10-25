@@ -6,166 +6,433 @@
   <title>Gestión de Servicios • Daiana Souza</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Estilos sutiles de scroll */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
 </head>
-<body class="min-h-screen pb-16 flex flex-col font-sans">
+<body class="min-h-screen flex flex-col font-sans bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white">
 
-  <!-- Header Fijo -->
-  <header class="sticky top-0 z-30 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 shadow-md">
-    <div class="max-w-md mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">
-          DS
+  <!-- ================= TOPBAR ================= -->
+  <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3 shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      
+      <!-- Marca y Estado -->
+      <div class="flex items-center justify-between sm:justify-start gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white font-black text-sm shadow-sm shadow-emerald-500/20">
+            DS
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-base font-extrabold text-white tracking-tight leading-none">Daiana Souza</h1>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">SaaS Ops</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-0.5">Coordinación Operativa y Logística • Montevideo</p>
+          </div>
         </div>
-        <div>
-          <h1 class="text-sm font-bold text-white leading-tight">Daiana Souza</h1>
-          <p class="text-[11px] text-slate-400">Coordinación Operativa</p>
-        </div>
+
+        <span class="inline-flex sm:hidden items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          En Vivo
+        </span>
       </div>
-      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        En Vivo
-      </span>
+
+      <!-- Resumen Numérico Rápido -->
+      <div class="flex items-center gap-3 text-xs overflow-x-auto pb-1 sm:pb-0">
+        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2">
+          <span class="text-slate-400">Servicios:</span>
+          <span id="stat-total" class="font-bold text-white">0</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2">
+          <span class="text-slate-400">Cobrado:</span>
+          <span id="stat-cobrado" class="font-bold text-emerald-400">$0</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2">
+          <span class="text-slate-400">Pendiente:</span>
+          <span id="stat-pendiente" class="font-bold text-amber-400">$0</span>
+        </div>
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Sistema En Vivo
+        </span>
+      </div>
+
     </div>
   </header>
 
-  <!-- Contenedor Principal Móvil -->
-  <main class="max-w-md mx-auto w-full px-4 pt-4 flex-grow">
+  <!-- ================= MAIN CONTAINER ================= -->
+  <main class="max-w-7xl mx-auto w-full px-4 lg:px-8 py-5 flex-grow">
 
-    <!-- Filtros de Origen -->
-    <div class="flex items-center gap-2 mb-4 p-1 bg-slate-900 rounded-xl border border-slate-800 text-xs">
-      <button onclick="filtrar('todos')" id="btn-todos" class="flex-1 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all">
-        Todos
-      </button>
-      <button onclick="filtrar('particular')" id="btn-particular" class="flex-1 py-1.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all">
-        Particulares
-      </button>
-      <button onclick="filtrar('arreglatodo')" id="btn-arreglatodo" class="flex-1 py-1.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all">
-        ArreglaTodo
+    <!-- PANEL DE FILTROS SUPERIOR (NO INVASIVO) -->
+    <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-6 shadow-sm">
+      
+      <!-- Fila 1: Buscador en Vivo por Dirección y Cliente -->
+      <div class="mb-4">
+        <div class="relative">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="input-busqueda" 
+            oninput="aplicarFiltros()" 
+            placeholder="Buscar por dirección, calle, cliente, barrio o código (#ID)..."
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+          >
+        </div>
+      </div>
+
+      <!-- Fila 2: Selectores combinados (Tipo, Fecha, Funcionaria, Zona/Barrio) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4 text-xs">
+        
+        <!-- Filtro Fecha -->
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Día de Trabajo</label>
+          <select id="filtro-fecha" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
+            <option value="todas">Todos los días (2 semanas)</option>
+          </select>
+        </div>
+
+        <!-- Filtro Funcionaria -->
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Funcionaria</label>
+          <select id="filtro-funcionaria" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
+            <option value="todas">Todas las funcionarias (10)</option>
+            <option value="Daiana Souza">Daiana Souza</option>
+            <option value="Silvia">Silvia</option>
+            <option value="Mariana">Mariana</option>
+            <option value="Romina">Romina</option>
+            <option value="Natalia">Natalia</option>
+            <option value="Valeria">Valeria</option>
+            <option value="Florencia">Florencia</option>
+            <option value="Camila">Camila</option>
+            <option value="Lucía">Lucía</option>
+            <option value="Andrea">Andrea</option>
+          </select>
+        </div>
+
+        <!-- Filtro Barrio / Zona -->
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Barrio o Zona</label>
+          <select id="filtro-zona" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
+            <option value="todas">Todos los barrios y zonas</option>
+            <option value="Pocitos">Pocitos</option>
+            <option value="Punta Carretas">Punta Carretas</option>
+            <option value="Buceo">Buceo</option>
+            <option value="Cordón">Cordón</option>
+            <option value="Centro">Centro</option>
+            <option value="Ciudad Vieja">Ciudad Vieja</option>
+            <option value="La Blanqueada">La Blanqueada</option>
+            <option value="Tres Cruces">Tres Cruces</option>
+            <option value="Prado">Prado</option>
+            <option value="Malvín">Malvín</option>
+          </select>
+        </div>
+
+        <!-- Filtro Estado de Cobro -->
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Estado de Pago</label>
+          <select id="filtro-cobro" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
+            <option value="todos">Todos los estados</option>
+            <option value="Cobrado">Cobrados</option>
+            <option value="Pendiente">Pendientes de Cobro</option>
+            <option value="Liquidación ArreglaTodo">Liquidación ArreglaTodo</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Fila 3: Botones Rápidos de Categoría de Cliente -->
+      <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-800/80 text-xs">
+        <span class="text-slate-400 font-medium mr-1">Tipo de Cliente:</span>
+        <button onclick="setTipoCliente('todos')" id="pill-todos" class="px-3 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all shadow-sm">
+          Todos
+        </button>
+        <button onclick="setTipoCliente('particular')" id="pill-particular" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+          Particulares
+        </button>
+        <button onclick="setTipoCliente('empresa')" id="pill-empresa" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+          Empresas
+        </button>
+        <button onclick="setTipoCliente('consorcio')" id="pill-consorcio" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+          Consorcios
+        </button>
+        <button onclick="setTipoCliente('arreglatodo')" id="pill-arreglatodo" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+          ArreglaTodo
+        </button>
+      </div>
+
+    </section>
+
+    <!-- RESULTADOS Y CONTADOR DE SERVICIOS -->
+    <div class="flex items-center justify-between mb-4 px-1">
+      <div class="text-xs text-slate-400">
+        Mostrando <span id="contador-mostrados" class="font-bold text-white">0</span> servicios coincidentes
+      </div>
+      <button onclick="resetearFiltros()" class="text-xs text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1 font-medium">
+        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+        <span>Limpiar filtros</span>
       </button>
     </div>
 
-    <!-- Lista de Servicios -->
-    <div id="lista-servicios" class="space-y-3.5">
-      <div class="p-6 text-center text-slate-400 text-xs">Cargando agenda...</div>
+    <!-- GRILLA RESPONSIVE DE TARJETAS (1 Col Móvil, 2 Col Tablet, 3 Col Laptop) -->
+    <div id="grilla-servicios" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+      <div class="col-span-full p-12 text-center text-slate-500 text-xs">Cargando base de servicios...</div>
     </div>
 
   </main>
 
+  <!-- ================= SCRIPTS ================= -->
   <script>
-    let servicios = [];
-    let filtroActual = 'todos';
+    let todosLosServicios = [];
+    let tipoClienteSeleccionado = 'todos';
 
-    async function cargarServicios() {
+    async function iniciar() {
       try {
-        const resp = await fetch('servicios.json?t=' + Date.now());
-        servicios = await resp.json();
-        renderizar();
-      } catch (e) {
-        document.getElementById('lista-servicios').innerHTML = 
-          '<div class="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs text-center">Error al conectar con la agenda.</div>';
+        const resp = await fetch('servicios.json?v=' + Date.now());
+        todosLosServicios = await resp.json();
+        poblarFechasSelect();
+        aplicarFiltros();
+      } catch (err) {
+        document.getElementById('grilla-servicios').innerHTML = 
+          '<div class="col-span-full p-8 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-400 text-center text-xs">Error cargando servicios.json</div>';
       }
     }
 
-    function filtrar(tipo) {
-      filtroActual = tipo;
-      ['todos', 'particular', 'arreglatodo'].forEach(t => {
-        const btn = document.getElementById('btn-' + t);
-        if (t === tipo) {
-          btn.className = 'flex-1 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all shadow-sm';
-        } else {
-          btn.className = 'flex-1 py-1.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all';
-        }
+    function poblarFechasSelect() {
+      const select = document.getElementById('filtro-fecha');
+      const fechasUnicas = [...new Set(todosLosServicios.map(s => s.fecha_servicio))].sort();
+      
+      fechasUnicas.forEach(f => {
+        const opt = document.createElement('option');
+        opt.value = f;
+        const partes = f.split('-');
+        opt.textContent = `${partes[2]}/${partes[1]}/${partes[0]}`;
+        select.appendChild(opt);
       });
-      renderizar();
     }
 
-    function renderizar() {
-      const contenedor = document.getElementById('lista-servicios');
-      const filtrados = servicios.filter(s => {
-        if (filtroActual === 'todos') return true;
-        return s.origen === filtroActual;
+    function setTipoCliente(tipo) {
+      tipoClienteSeleccionado = tipo;
+      ['todos', 'particular', 'empresa', 'consorcio', 'arreglatodo'].forEach(t => {
+        const btn = document.getElementById('pill-' + t);
+        if (t === tipo) {
+          btn.className = 'px-3 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all shadow-sm';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all';
+        }
+      });
+      aplicarFiltros();
+    }
+
+    function resetearFiltros() {
+      document.getElementById('input-busqueda').value = '';
+      document.getElementById('filtro-fecha').value = 'todas';
+      document.getElementById('filtro-funcionaria').value = 'todas';
+      document.getElementById('filtro-zona').value = 'todas';
+      document.getElementById('filtro-cobro').value = 'todos';
+      setTipoCliente('todos');
+    }
+
+    function aplicarFiltros() {
+      const q = document.getElementById('input-busqueda').value.toLowerCase().trim();
+      const fFecha = document.getElementById('filtro-fecha').value;
+      const fChica = document.getElementById('filtro-funcionaria').value;
+      const fZona = document.getElementById('filtro-zona').value;
+      const fCobro = document.getElementById('filtro-cobro').value;
+
+      const filtrados = todosLosServicios.filter(s => {
+        // Filtro Tipo Cliente
+        if (tipoClienteSeleccionado !== 'todos' && s.origen !== tipoClienteSeleccionado) {
+          return false;
+        }
+
+        // Filtro Fecha
+        if (fFecha !== 'todas' && s.fecha_servicio !== fFecha) {
+          return false;
+        }
+
+        // Filtro Funcionaria
+        if (fChica !== 'todas' && s.funcionaria_nombre !== fChica) {
+          return false;
+        }
+
+        // Filtro Barrio o Zona
+        if (fZona !== 'todas') {
+          const zonaTxt = (s.zona_nombre || '').toLowerCase();
+          if (!zonaTxt.includes(fZona.toLowerCase())) return false;
+        }
+
+        // Filtro Cobro
+        if (fCobro !== 'todos') {
+          if (fCobro === 'Cobrado' && !s.estado_cobro.toLowerCase().includes('cobrado')) return false;
+          if (fCobro === 'Pendiente' && !s.estado_cobro.toLowerCase().includes('pendiente') && !s.estado_cobro.toLowerCase().includes('seña')) return false;
+          if (fCobro === 'Liquidación ArreglaTodo' && s.origen !== 'arreglatodo') return false;
+        }
+
+        // Buscador de texto libre (Dirección, Calle, Cliente, ID, Barrio)
+        if (q.length > 0) {
+          const haystack = `${s.id} ${s.direccion} ${s.cliente_nombre} ${s.zona_nombre} ${s.notas}`.toLowerCase();
+          if (!haystack.includes(q)) return false;
+        }
+
+        return true;
       });
 
-      if (filtrados.length === 0) {
-        contenedor.innerHTML = '<div class="p-8 text-center text-slate-500 text-xs">No hay servicios en esta sección.</div>';
+      actualizarMetricas(filtrados);
+      renderizarGrilla(filtrados);
+    }
+
+    function actualizarMetricas(items) {
+      document.getElementById('contador-mostrados').textContent = items.length;
+      document.getElementById('stat-total').textContent = items.length;
+
+      let totalCobrado = 0;
+      let totalPendiente = 0;
+
+      items.forEach(s => {
+        if (s.origen !== 'arreglatodo') {
+          if (s.estado_cobro.toLowerCase().includes('cobrado')) {
+            totalCobrado += (s.precio_total || 0);
+          } else {
+            totalPendiente += (s.precio_total || 0);
+          }
+        }
+      });
+
+      document.getElementById('stat-cobrado').textContent = '$' + totalCobrado.toLocaleString('es-UY');
+      document.getElementById('stat-pendiente').textContent = '$' + totalPendiente.toLocaleString('es-UY');
+    }
+
+    function renderizarGrilla(items) {
+      const contenedor = document.getElementById('grilla-servicios');
+
+      if (items.length === 0) {
+        contenedor.innerHTML = 
+          '<div class="col-span-full p-12 bg-slate-900/50 border border-slate-800 rounded-2xl text-center text-slate-500 text-xs">' +
+          'No se encontraron servicios con los filtros seleccionados. Probá limpiar la búsqueda.' +
+          '</div>';
         return;
       }
 
-      contenedor.innerHTML = filtrados.map(s => {
-        const esArreglaTodo = s.origen === 'arreglatodo';
-        const badgeOrigen = esArreglaTodo
-          ? '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">ArreglaTodo #' + (s.id_externo || '') + '</span>'
-          : '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Particular</span>';
+      contenedor.innerHTML = items.map(s => {
+        // Badges según tipo
+        let badgeTipo = '';
+        if (s.origen === 'empresa') {
+          badgeTipo = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">Empresa</span>';
+        } else if (s.origen === 'consorcio') {
+          badgeTipo = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-teal-500/10 text-teal-400 border border-teal-500/20">Consorcio</span>';
+        } else if (s.origen === 'arreglatodo') {
+          badgeTipo = `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">ArreglaTodo #${s.id_externo}</span>`;
+        } else {
+          badgeTipo = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Particular</span>';
+        }
 
+        // Estado Cobro
+        let badgeCobro = '';
+        if (s.origen === 'arreglatodo') {
+          badgeCobro = '<span class="text-[10px] text-amber-400 font-semibold">Liquidación Quincenal</span>';
+        } else if (s.estado_cobro.toLowerCase().includes('cobrado')) {
+          badgeCobro = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Cobrado</span>';
+        } else {
+          badgeCobro = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Pendiente</span>';
+        }
+
+        // Formato fecha amigable
+        const fPartes = s.fecha_servicio.split('-');
+        const fechaCorta = `${fPartes[2]}/${fPartes[1]}`;
+
+        // Mensajes WhatsApp
         const msgChica = encodeURIComponent(
-          "Hola " + (s.funcionaria_nombre || 'compañera') + ", te paso los datos de tu servicio:\n\n" +
-          "📍 Dirección: " + s.direccion + " (" + s.zona_nombre + ")\n" +
-          "⏰ Horario: " + s.fecha_servicio + " a las " + s.hora_servicio + " hs (" + s.duracion_hs + " hs)\n" +
-          "📦 Llevar: " + (s.adicionales || 'Equipo habitual') + "\n" +
-          "👤 Cliente: " + s.cliente_nombre
+          `Hola ${s.funcionaria_nombre}, tu servicio:\n` +
+          `📍 Dirección: ${s.direccion} (${s.zona_nombre})\n` +
+          `⏰ Horario: ${s.fecha_servicio} a las ${s.hora_servicio} hs (${s.duracion_hs} hs)\n` +
+          `📦 Tareas: ${s.adicionales || 'Limpieza estándar'}\n` +
+          `👤 Cliente: ${s.cliente_nombre}`
         );
 
         const msgCobro = encodeURIComponent(
-          "Hola " + s.cliente_nombre + ", te escribimos de parte de Daiana Souza para agradecerte por recibirnos.\n\n" +
-          "El saldo del servicio de hoy es de $" + s.precio_total + " UYU.\n" +
-          "Podés abonarlo por transferencia BROU / Prex o en efectivo.\n\n" +
-          "¡Muchas gracias por la confianza!"
+          `Hola ${s.cliente_nombre}, te escribimos de Daiana Souza Servicios.\n` +
+          `El saldo del servicio de hoy es de $${s.precio_total} UYU.\n` +
+          `Podés abonar por transferencia BROU / Prex o efectivo.\n` +
+          `¡Muchas gracias!`
         );
 
         return `
-          <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-sm hover:border-slate-700 transition-all">
-            <div class="flex items-center justify-between gap-2 mb-2">
-              <div class="flex items-center gap-2">
-                <span class="font-mono text-xs font-bold text-white">${s.id}</span>
-                ${badgeOrigen}
+          <div class="bg-slate-900 border border-slate-800/90 rounded-2xl p-4 flex flex-col justify-between hover:border-slate-700 transition-all shadow-sm">
+            
+            <!-- Cabecera de la Tarjeta -->
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-mono text-xs font-bold text-slate-300">${s.id}</span>
+                  ${badgeTipo}
+                </div>
+                <div class="flex items-center gap-1.5 text-xs text-slate-300 font-semibold">
+                  <span class="text-[11px] text-slate-400">${fechaCorta}</span>
+                  <span class="text-emerald-400 font-bold">${s.hora_servicio} hs</span>
+                </div>
               </div>
-              <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1">
-                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-                ${s.hora_servicio} hs
-              </span>
+
+              <!-- Dirección Destacada (El foco de Daiana) -->
+              <div class="mb-2.5">
+                <div class="text-sm font-bold text-white leading-snug flex items-start gap-1.5">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                  <span>${s.direccion}</span>
+                </div>
+                <div class="text-xs text-slate-400 mt-1 pl-5">
+                  <span>${s.zona_nombre}</span>
+                </div>
+              </div>
+
+              <!-- Cliente y Detalles -->
+              <div class="pl-5 text-xs space-y-1 mb-3">
+                <div class="text-slate-300 font-medium">${s.cliente_nombre}</div>
+                <div class="text-[11px] text-slate-500">
+                  <span>${s.duracion_hs} hs</span>
+                  <span class="mx-1">•</span>
+                  <span>${s.adicionales || 'Limpieza estándar'}</span>
+                </div>
+              </div>
             </div>
 
-            <div class="mb-3">
-              <h2 class="text-sm font-bold text-white mb-0.5">${s.cliente_nombre}</h2>
-              <p class="text-xs text-slate-300 flex items-start gap-1">
-                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-500 shrink-0 mt-0.5"></i>
-                <span>${s.direccion}</span>
-              </p>
-              <div class="mt-1 flex items-center gap-2 text-[11px] text-slate-400">
-                <span class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700/60">${s.zona_nombre}</span>
-                <span>• ${s.duracion_hs} hs</span>
-                ${s.adicionales ? '<span>• ' + s.adicionales + '</span>' : ''}
+            <!-- Pie de Tarjeta y Finanzas -->
+            <div>
+              <div class="pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs mb-3">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-[10px] font-bold text-blue-400">
+                    ${s.funcionaria_nombre.charAt(0)}
+                  </div>
+                  <span class="font-medium text-slate-200">${s.funcionaria_nombre}</span>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  ${s.origen !== 'arreglatodo' ? `<span class="font-bold text-white">$${s.precio_total.toLocaleString('es-UY')}</span>` : ''}
+                  ${badgeCobro}
+                </div>
               </div>
-            </div>
 
-            <div class="pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs mb-3">
-              <div class="flex items-center gap-1 text-slate-400">
-                <i data-lucide="user-check" class="w-3.5 h-3.5 text-blue-400"></i>
-                <span class="font-medium text-slate-200">${s.funcionaria_nombre || 'Por Asignar'}</span>
-              </div>
-              <div>
-                ${esArreglaTodo 
-                  ? '<span class="text-[11px] text-amber-400 font-semibold">Liquidación ArreglaTodo</span>' 
-                  : '<span class="font-bold text-white">$' + s.precio_total + ' UYU</span> <span class="text-[10px] text-slate-400">(' + s.medio_pago + ')</span>'
+              <!-- Botones de Acción WhatsApp de 1 Clic -->
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <a href="https://wa.me/?text=${msgChica}" target="_blank" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-emerald-600/15 hover:bg-emerald-600/25 text-emerald-300 border border-emerald-500/25 font-semibold text-xs transition-all text-center">
+                  <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                  <span>A Funcionaria</span>
+                </a>
+
+                ${s.origen === 'arreglatodo'
+                  ? `<div class="flex items-center justify-center py-1.5 px-2 rounded-xl bg-slate-800/40 text-slate-500 text-[11px] font-medium border border-slate-800/60">
+                      Cobra AT
+                    </div>`
+                  : `<a href="https://wa.me/?text=${msgCobro}" target="_blank" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-blue-600/15 hover:bg-blue-600/25 text-blue-300 border border-blue-500/25 font-semibold text-xs transition-all text-center">
+                      <i data-lucide="receipt" class="w-3.5 h-3.5"></i>
+                      <span>Cobro</span>
+                    </a>`
                 }
               </div>
             </div>
 
-            <!-- Botones de Acción Rápida -->
-            <div class="grid grid-cols-2 gap-2 pt-1">
-              <a href="https://wa.me/?text=${msgChica}" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 font-semibold text-xs transition-all text-center">
-                <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                <span>A Funcionaria</span>
-              </a>
-
-              ${esArreglaTodo 
-                ? '<div class="flex items-center justify-center py-2 px-2.5 rounded-xl bg-slate-800/50 text-slate-500 text-[11px] font-medium border border-slate-800">Cobra ArreglaTodo</div>'
-                : `<a href="https://wa.me/?text=${msgCobro}" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 font-semibold text-xs transition-all text-center">
-                    <i data-lucide="receipt" class="w-3.5 h-3.5"></i>
-                    <span>Cobro Cliente</span>
-                  </a>`
-              }
-            </div>
           </div>
         `;
       }).join('');
@@ -173,7 +440,7 @@
       lucide.createIcons();
     }
 
-    cargarServicios();
+    iniciar();
   </script>
 </body>
 </html>
