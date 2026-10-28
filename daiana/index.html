@@ -789,6 +789,51 @@ Pago: Transferencia BROU</div>
         .trim();
     }
 
+    // ==========================================
+    // SISTEMA DE TELEMETRÍA Y RASTREO EN VIVO
+    // ==========================================
+    const NTFY_TRACK_URL = 'https://ntfy.sh/daiana_souza_ops_telemetria_lm26';
+
+    function obtenerTipoDispositivo() {
+      const ua = navigator.userAgent;
+      if (ua.includes('Android')) return 'Celular Android';
+      if (ua.includes('iPhone')) return 'iPhone';
+      if (ua.includes('iPad')) return 'iPad';
+      if (ua.includes('Windows')) return 'PC Windows';
+      if (ua.includes('Macintosh')) return 'Mac';
+      if (ua.includes('Linux')) return 'PC Linux';
+      return 'Navegador Web';
+    }
+
+    function enviarTelemetria(evento, detalle) {
+      try {
+        const payload = {
+          evento: evento,
+          modo: modoVista === 'admin' ? 'Vista General (Admin)' : ('Funcionaria: ' + modoVista),
+          dispositivo: obtenerTipoDispositivo(),
+          pantalla: window.innerWidth + 'x' + window.innerHeight,
+          detalle: detalle ? detalle : '',
+          fecha: new Date().toLocaleString('es-UY', { timeZone: 'America/Montevideo' })
+        };
+
+        fetch(NTFY_TRACK_URL, {
+          method: 'POST',
+          headers: {
+            'Title': 'Antigravity Telemetria',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        }).catch(function() {});
+      } catch (e) {}
+    }
+
+    function trackMaps(id) {
+      const s = todosLosServicios.find(x => x.id === id);
+      if (s) {
+        enviarTelemetria('CLICK_MAPS', s.id + ' en ' + s.direccion + ' (' + s.funcionaria_nombre + ')');
+      }
+    }
+
     async function iniciar() {
       cargarFinanzasLocal();
       
@@ -806,6 +851,23 @@ Pago: Transferencia BROU</div>
           }
         }
       }
+
+      // Registro de apertura con protección antirrebote de 20 seg
+      try {
+        const ultimaVisita = sessionStorage.getItem('ds_last_visit_track');
+        const ahora = Date.now();
+        let debeEnviarVisita = false;
+        if (!ultimaVisita) {
+          debeEnviarVisita = true;
+        } else if ((ahora - parseInt(ultimaVisita, 10)) > 20000) {
+          debeEnviarVisita = true;
+        }
+
+        if (debeEnviarVisita) {
+          sessionStorage.setItem('ds_last_visit_track', ahora.toString());
+          enviarTelemetria('VISITA_WEB', 'Apertura del panel web');
+        }
+      } catch (e) {}
 
       construirDiasCalendarioModal();
       actualizarModoVistaUI();
@@ -829,6 +891,7 @@ Pago: Transferencia BROU</div>
       modoVista = nuevoModo;
       actualizarModoVistaUI();
       aplicarFiltros();
+      enviarTelemetria('CAMBIO_VISTA', 'Cambió a vista: ' + nuevoModo);
     }
 
     function actualizarModoVistaUI() {
@@ -888,6 +951,8 @@ Pago: Transferencia BROU</div>
       const url = new URL(window.location.href);
       url.searchParams.set('f', targetChica);
       const fullLink = url.toString();
+
+      enviarTelemetria('COPIAR_LINK', 'Generó enlace para ' + targetChica);
 
       navigator.clipboard.writeText(fullLink).then(() => {
         alert('¡Enlace de ' + targetChica + ' copiado al portapapeles! Podés pegárselo por WhatsApp.');
@@ -1120,6 +1185,7 @@ Pago: Transferencia BROU</div>
 
       guardarFinanzasLocal();
       aplicarFiltros();
+      enviarTelemetria('CAMBIO_ESTADO', 'Servicio ' + id + ' -> ' + nuevoEstado);
     }
 
     function toggleCobro(id) {
@@ -1127,6 +1193,7 @@ Pago: Transferencia BROU</div>
       finanzasData[id].cobrado = !finanzasData[id].cobrado;
       guardarFinanzasLocal();
       aplicarFiltros();
+      enviarTelemetria('TOGGLE_COBRO', 'Servicio ' + id + ' cobrado: ' + (finanzasData[id].cobrado ? 'SI' : 'NO'));
     }
 
     function guardarDatosFiscales(id) {
@@ -1141,6 +1208,7 @@ Pago: Transferencia BROU</div>
 
       guardarFinanzasLocal();
       aplicarFiltros();
+      enviarTelemetria('GUARDAR_RUT', 'Servicio ' + id + ' RUT: ' + (finanzasData[id].rutCi ? finanzasData[id].rutCi : 'vacio') + ' (' + finanzasData[id].estadoFactura + ')');
       alert('Datos fiscales guardados.');
     }
 
@@ -1148,6 +1216,7 @@ Pago: Transferencia BROU</div>
       const s = todosLosServicios.find(x => x.id === id);
       if (!s) return;
       const clienteNombre = s.cliente_nombre ? s.cliente_nombre : 'Cliente';
+      enviarTelemetria('SOLICITAR_RUT_WA', 'Pidió RUT a ' + clienteNombre + ' (Servicio ' + id + ')');
       const msg = encodeURIComponent(
         'Hola ' + clienteNombre + ', ¿cómo estás? Te escribimos de Daiana Souza Servicios para la confección de tu factura.\n' +
         '¿Nos podrías facilitar por favor tu RUT o Cédula de Identidad y Razón Social?\n' +
@@ -1161,6 +1230,7 @@ Pago: Transferencia BROU</div>
     function avisarLlegada(id) {
       const s = todosLosServicios.find(x => x.id === id);
       if (!s) return;
+      enviarTelemetria('CLICK_LLEGADA', 'Marcó llegada: ' + s.funcionaria_nombre + ' en ' + s.direccion + ' (' + id + ')');
       const msg = encodeURIComponent('Hola, acabo de llegar al domicilio de ' + s.cliente_nombre + ' en ' + s.direccion);
       window.open('https://wa.me/?text=' + msg, '_blank');
     }
@@ -1168,6 +1238,7 @@ Pago: Transferencia BROU</div>
     function avisarFin(id) {
       const s = todosLosServicios.find(x => x.id === id);
       if (!s) return;
+      enviarTelemetria('CLICK_FIN', 'Marcó fin de servicio ' + id + ' (' + s.cliente_nombre + ')');
       const msg = encodeURIComponent('Hola, servicio finalizado con éxito en lo de ' + s.cliente_nombre);
       window.open('https://wa.me/?text=' + msg, '_blank');
     }
@@ -1369,7 +1440,7 @@ Pago: Transferencia BROU</div>
             '    <div class="mb-3">' +
             '      <div class="text-sm font-bold text-white mb-0.5">' + s.direccion + '</div>' +
             '      <div class="text-xs text-slate-400 mb-2">' + s.zona_nombre + '</div>' +
-            '      <a href="' + mapsUrl + '" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 text-xs font-semibold border border-blue-500/30 transition-colors">' +
+            '      <a href="' + mapsUrl + '" target="_blank" data-id="' + s.id + '" onclick="trackMaps(this.dataset.id)" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 text-xs font-semibold border border-blue-500/30 transition-colors">' +
             '        <i data-lucide="map" class="w-3.5 h-3.5"></i>' +
             '        <span>Abrir en Google Maps</span>' +
             '      </a>' +
@@ -1448,7 +1519,7 @@ Pago: Transferencia BROU</div>
           '      </div>' +
           '      <div class="text-xs text-slate-400 mt-0.5 pl-5 flex items-center justify-between">' +
           '        <span>' + s.zona_nombre + '</span>' +
-          '        <a href="' + mapsUrl + '" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center gap-1 text-[11px]">' +
+          '        <a href="' + mapsUrl + '" target="_blank" rel="noopener" data-id="' + s.id + '" onclick="trackMaps(this.dataset.id)" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center gap-1 text-[11px]">' +
           '          <i data-lucide="map" class="w-3 h-3"></i>' +
           '          <span>Ver mapa</span>' +
           '        </a>' +
