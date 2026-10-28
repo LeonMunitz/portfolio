@@ -7,7 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Estilos sutiles de scroll */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
@@ -18,10 +17,10 @@
 
   <!-- ================= TOPBAR ================= -->
   <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3 shadow-md">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
       
-      <!-- Marca y Estado -->
-      <div class="flex items-center justify-between sm:justify-start gap-3">
+      <!-- Marca y Selector de Modo de Vista -->
+      <div class="flex items-center justify-between md:justify-start gap-3">
         <div class="flex items-center gap-3">
           <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white font-black text-sm shadow-sm shadow-emerald-500/20">
             DS
@@ -35,34 +34,71 @@
           </div>
         </div>
 
-        <span class="inline-flex sm:hidden items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          En Vivo
-        </span>
+        <!-- Selector de Modo de Vista (Admin vs Funcionaria) -->
+        <div class="flex items-center gap-2">
+          <select 
+            id="select-modo-vista" 
+            onchange="cambiarModoVista(this.value)" 
+            class="text-[11px] font-bold px-2.5 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:border-blue-500 cursor-pointer shadow-sm"
+          >
+            <option value="admin">👩‍💼 Modo: Daiana & Carol (Admin)</option>
+            <option value="Silvia">🧹 Vista Funcionaria: Silvia</option>
+            <option value="Mariana">🧹 Vista Funcionaria: Mariana</option>
+            <option value="Romina">🧹 Vista Funcionaria: Romina</option>
+            <option value="Natalia">🧹 Vista Funcionaria: Natalia</option>
+            <option value="Valeria">🧹 Vista Funcionaria: Valeria</option>
+            <option value="Florencia">🧹 Vista Funcionaria: Florencia</option>
+            <option value="Camila">🧹 Vista Funcionaria: Camila</option>
+            <option value="Lucía">🧹 Vista Funcionaria: Lucía</option>
+            <option value="Andrea">🧹 Vista Funcionaria: Andrea</option>
+          </select>
+
+          <!-- Botón Copiar Magic Link para WhatsApp -->
+          <button 
+            type="button" 
+            id="btn-copiar-link-chica" 
+            onclick="copiarMagicLinkActual()" 
+            class="hidden px-2.5 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-[11px] font-bold transition-all flex items-center gap-1.5 shadow-sm"
+            title="Copiar enlace individual para WhatsApp"
+          >
+            <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Copiar Link WhatsApp</span>
+          </button>
+        </div>
       </div>
 
       <!-- Resumen Numérico Rápido -->
-      <div class="flex items-center gap-2 sm:gap-3 text-xs overflow-x-auto pb-1 sm:pb-0">
+      <div id="stats-container" class="flex items-center gap-2 sm:gap-3 text-xs overflow-x-auto pb-1 md:pb-0">
         <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
           <span class="text-slate-400">Servicios:</span>
           <span id="stat-total" class="font-bold text-white">0</span>
         </div>
-        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
+        <div id="box-stat-cobrado" class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
           <span class="text-slate-400">Cobrado:</span>
           <span id="stat-cobrado" class="font-bold text-emerald-400">$0</span>
         </div>
-        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
+        <div id="box-stat-pendiente" class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
           <span class="text-slate-400">Pendiente:</span>
           <span id="stat-pendiente" class="font-bold text-amber-400">$0</span>
         </div>
-        <div class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
+        <div id="box-stat-chicas" class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
           <span class="text-slate-400">A Chicas:</span>
           <span id="stat-chicas" class="font-bold text-blue-400">$0</span>
         </div>
-        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Sistema En Vivo
-        </span>
+        <div id="box-stat-facturas" class="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-2 whitespace-nowrap">
+          <span class="text-slate-400">DGI / Facturas:</span>
+          <span id="stat-facturas" class="font-bold text-sky-400">0</span>
+        </div>
+        <!-- Botón Guía Fácil Daiana -->
+        <button 
+          type="button"
+          onclick="abrirModalInstructivo()" 
+          class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-xs shadow-md shadow-emerald-500/20 flex items-center gap-1.5 transition-all whitespace-nowrap"
+          title="Abrir instructivo fácil paso a paso"
+        >
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+          <span>📖 Guía Fácil</span>
+        </button>
       </div>
 
     </div>
@@ -71,10 +107,60 @@
   <!-- ================= MAIN CONTAINER ================= -->
   <main class="max-w-7xl mx-auto w-full px-4 lg:px-8 py-5 flex-grow">
 
-    <!-- PANEL DE FILTROS SUPERIOR (NO INVASIVO) -->
-    <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-5 shadow-sm">
+    <!-- BANNER DE BIENVENIDA E INSTRUCTIVO RÁPIDO PARA DAIANA -->
+    <section id="banner-instructivo-rapido" class="mb-5 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-teal-950/40 border border-emerald-500/30 shadow-md">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-start sm:items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0 mt-0.5 sm:mt-0">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Instructivo Paso a Paso</span>
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">Súper Simple</span>
+            </div>
+            <h2 class="text-sm sm:text-base font-extrabold text-white mt-0.5">¿Cómo usar este panel y el asistente de WhatsApp?</h2>
+            <p class="text-xs text-slate-300 mt-0.5">Pasá las rutas a las chicas sin mostrar tus precios, controlá cobros y anotá clientes nuevos en 1 toque.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 self-start sm:self-auto flex-shrink-0">
+          <button onclick="abrirModalInstructivo()" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white transition-all shadow-sm flex items-center gap-1.5">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+            <span>Ver Instructivo Completo</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER ESPECÍFICO MODO FUNCIONARIA (SE ACTIVA CON ?f=Nombre) -->
+    <section id="banner-modo-funcionaria" class="hidden mb-5 p-4 rounded-2xl bg-gradient-to-r from-blue-950/70 via-indigo-950/50 to-slate-900 border border-blue-500/30 shadow-md">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+            <i data-lucide="user-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400">Hoja de Ruta Personal</span>
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-500/20 text-emerald-300">Modo Seguro Activo</span>
+            </div>
+            <h2 id="banner-chica-nombre" class="text-base font-extrabold text-white">Silvia</h2>
+            <p class="text-xs text-slate-300 mt-0.5">Se muestran únicamente tus servicios asignados, mapas de llegada y botones de aviso a Carol.</p>
+          </div>
+        </div>
+        <button 
+          onclick="cambiarModoVista('admin')" 
+          class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 transition-colors self-start sm:self-auto"
+        >
+          Volver a Vista Admin
+        </button>
+      </div>
+    </section>
+
+    <!-- PANEL DE FILTROS SUPERIOR (ADMIN) -->
+    <section id="panel-filtros-admin" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-5 shadow-sm">
       
-      <!-- Fila 1: Buscador en Vivo por Dirección, Cliente, Barrio o ID (Sin distinción de acentos) -->
+      <!-- Fila 1: Buscador en Vivo por Dirección, Cliente, Barrio o ID -->
       <div class="mb-4">
         <div class="relative">
           <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
@@ -88,7 +174,7 @@
         </div>
       </div>
 
-      <!-- Fila 2: Selectores Combinados (Calendario, Estado Servicio, Funcionaria, Zona/Barrio, Estado Pago) -->
+      <!-- Fila 2: Selectores Combinados -->
       <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mb-4 text-xs">
         
         <!-- Filtro Calendario Pop-up Interactivo -->
@@ -125,7 +211,7 @@
         <!-- Filtro Funcionaria -->
         <div>
           <label class="block text-[11px] font-semibold text-slate-400 mb-1">Funcionaria</label>
-          <select id="filtro-funcionaria" onchange="aplicarFiltros()" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
+          <select id="filtro-funcionaria" onchange="alCambiarFiltroFuncionaria(this.value)" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-blue-500">
             <option value="todas">Todas las funcionarias (10)</option>
             <option value="Daiana Souza">Daiana Souza</option>
             <option value="Silvia">Silvia</option>
@@ -173,7 +259,7 @@
 
       </div>
 
-      <!-- Fila 3: Botones Rápidos de Categoría y Toggle de Recurrentes -->
+      <!-- Fila 3: Botones Rápidos de Categoría, Recurrentes y Filtros Fiscales DGI -->
       <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800/80 text-xs">
         <div class="flex flex-wrap items-center gap-1.5">
           <span class="text-slate-400 font-medium mr-1">Categoría:</span>
@@ -192,20 +278,33 @@
           <button onclick="setTipoCliente('arreglatodo')" id="pill-arreglatodo" class="px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
             ArreglaTodo
           </button>
-        </div>
-
-        <!-- Botón Especial: Filtrar Recurrentes Multi-Fecha -->
-        <div>
           <button onclick="setTipoCliente('recurrentes')" id="pill-recurrentes" class="px-3 py-1.5 rounded-lg font-semibold bg-indigo-950/60 text-indigo-300 border border-indigo-700/50 hover:bg-indigo-900/60 transition-all flex items-center gap-1.5">
             <i data-lucide="repeat" class="w-3.5 h-3.5 text-indigo-400"></i>
-            <span>Recurrentes Multi-Fecha (1/4, 2/4...)</span>
+            <span>Recurrentes (1/4...)</span>
+          </button>
+        </div>
+
+        <!-- Módulo de Filtro Fiscal DGI (Para Contadora) -->
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-slate-400 font-medium mr-1">Fiscal DGI:</span>
+          <button onclick="setFiltroFiscal('sin_datos')" id="pill-fiscal-sin_datos" class="px-2.5 py-1.5 rounded-lg font-semibold bg-slate-800 text-amber-300 hover:bg-amber-950/50 transition-all flex items-center gap-1 border border-amber-800/40">
+            <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>Sin Datos (<span id="count-fiscal-sin_datos">0</span>)</span>
+          </button>
+          <button onclick="setFiltroFiscal('listo')" id="pill-fiscal-listo" class="px-2.5 py-1.5 rounded-lg font-semibold bg-slate-800 text-sky-300 hover:bg-sky-950/50 transition-all flex items-center gap-1 border border-sky-800/40">
+            <i data-lucide="file-check" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span>Listos p/ Facturar (<span id="count-fiscal-listo">0</span>)</span>
+          </button>
+          <button onclick="setFiltroFiscal('facturado')" id="pill-fiscal-facturado" class="px-2.5 py-1.5 rounded-lg font-semibold bg-slate-800 text-emerald-300 hover:bg-emerald-950/50 transition-all flex items-center gap-1 border border-emerald-800/40">
+            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>Facturados (<span id="count-fiscal-facturado">0</span>)</span>
           </button>
         </div>
       </div>
 
     </section>
 
-    <!-- BARRA RÁPIDA DE ESTADOS OPERATIVOS (CONTADORES VIVOS CLICKEABLES) -->
+    <!-- BARRA RÁPIDA DE ESTADOS OPERATIVOS (CONTADORES CLICKEABLES) -->
     <section class="grid grid-cols-2 sm:grid-cols-6 gap-2 mb-4 text-xs">
       <button onclick="filtrarPorEstado('Coordinado')" class="p-2 rounded-xl bg-sky-950/30 border border-sky-800/40 hover:border-sky-500/60 transition-all flex items-center justify-between">
         <span class="text-sky-400 font-semibold">Coordinado</span>
@@ -245,7 +344,7 @@
       </button>
     </div>
 
-    <!-- GRILLA RESPONSIVE DE TARJETAS (1 Col Móvil, 2 Col Tablet, 3 Col Laptop) -->
+    <!-- GRILLA RESPONSIVE DE TARJETAS -->
     <div id="grilla-servicios" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
       <div class="col-span-full p-12 text-center text-slate-500 text-xs">Cargando base de servicios...</div>
     </div>
@@ -280,16 +379,16 @@
             Todas las fechas
           </button>
           <button onclick="seleccionarRapido('hoy')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
-            Hoy (Lun 26/10)
+            Hoy
           </button>
           <button onclick="seleccionarRapido('manana')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
-            Mañana (Mar 27/10)
+            Mañana
           </button>
           <button onclick="seleccionarRapido('semana1')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
-            Semana 1 (26 al 31)
+            Semana 1
           </button>
           <button onclick="seleccionarRapido('semana2')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
-            Semana 2 (02 al 07)
+            Semana 2
           </button>
           <button onclick="seleccionarRapido('tresdias')" class="px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/60">
             Próximos 3 días
@@ -297,11 +396,10 @@
         </div>
       </div>
 
-      <!-- Días Individuales de la Planificación (2 Semanas) -->
+      <!-- Días Individuales del Cronograma -->
       <div class="mb-4">
         <span class="block text-[11px] font-semibold text-slate-400 mb-2 uppercase tracking-wider">Días del Cronograma</span>
         <div id="grid-dias-calendario" class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 text-xs">
-          <!-- Se genera dinámicamente -->
         </div>
       </div>
 
@@ -333,23 +431,282 @@
     </div>
   </div>
 
+  <!-- ================= MODAL INSTRUCTIVO FÁCIL (PENSADO PARA DAIANA) ================= -->
+  <div id="modal-instructivo" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-slate-900 border border-slate-700/80 rounded-3xl w-full max-w-3xl max-h-[90vh] shadow-2xl relative flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- Encabezado Modal -->
+      <div class="flex items-center justify-between p-4 sm:p-5 border-b border-slate-800 bg-slate-950/60">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-sm shadow-emerald-500/20">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-extrabold text-white">Manual Práctico para Daiana</h2>
+            <p class="text-xs text-slate-400">Guía paso a paso: cómo manejar WhatsApp, las chicas y los cobros sin complicaciones</p>
+          </div>
+        </div>
+        <button onclick="cerrarModalInstructivo()" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Barra de Pestañas / Temas -->
+      <div class="flex items-center gap-1.5 p-2 sm:px-5 bg-slate-950/40 border-b border-slate-800/80 overflow-x-auto no-scrollbar">
+        <button id="btn-tab-inst-whatsapp" onclick="cambiarTabInstructivo('whatsapp')" class="px-3 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs transition-all shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+          <span>1. Tu WhatsApp</span>
+        </button>
+        <button id="btn-tab-inst-chicas" onclick="cambiarTabInstructivo('chicas')" class="px-3 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-medium text-xs transition-all flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="users" class="w-3.5 h-3.5"></i>
+          <span>2. Pasar el día a las chicas</span>
+        </button>
+        <button id="btn-tab-inst-cobros" onclick="cambiarTabInstructivo('cobros')" class="px-3 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-medium text-xs transition-all flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="dollar-sign" class="w-3.5 h-3.5"></i>
+          <span>3. Cobranzas</span>
+        </button>
+        <button id="btn-tab-inst-facturas" onclick="cambiarTabInstructivo('facturas')" class="px-3 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-medium text-xs transition-all flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          <span>4. Facturas y DGI</span>
+        </button>
+        <button id="btn-tab-inst-filtros" onclick="cambiarTabInstructivo('filtros')" class="px-3 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-medium text-xs transition-all flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="filter" class="w-3.5 h-3.5"></i>
+          <span>5. Botones y Filtros</span>
+        </button>
+      </div>
+
+      <!-- Contenido Scrollable de las Pestañas -->
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-4 text-xs text-slate-300 flex-grow">
+        
+        <!-- PESTAÑA 1: WHATSAPP -->
+        <div id="panel-tab-inst-whatsapp" class="space-y-4">
+          <div class="p-4 rounded-2xl bg-emerald-950/30 border border-emerald-500/20">
+            <h3 class="text-sm font-bold text-emerald-300 mb-1 flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
+              <span>Tu Asistente en WhatsApp (Tu secretaria 24/7)</span>
+            </h3>
+            <p class="text-xs text-slate-300">
+              No tenés que aprenderte nada raro. Al número del bot le escribís desde tu WhatsApp como si fuera una secretaria de confianza y te contesta al segundo.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <span class="font-bold text-white block mb-1 text-xs">📅 Para consultar tus tareas:</span>
+              <ul class="space-y-1.5 text-[11px] text-slate-300">
+                <li>• Escribile <code class="text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">hoy</code> y te manda las limpiezas de hoy con mapas de llegada.</li>
+                <li>• Escribile <code class="text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">mañana</code> y te manda la hoja de ruta del día siguiente.</li>
+                <li>• Escribile <code class="text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">particulares</code> para ver tus clientes privados.</li>
+                <li>• Escribile <code class="text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">pendientes</code> y te lista quién te debe plata.</li>
+              </ul>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <span class="font-bold text-white block mb-1 text-xs">👩 Para consultar por las chicas:</span>
+              <ul class="space-y-1.5 text-[11px] text-slate-300">
+                <li>• Escribile <code class="text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">chicas</code> para ver cuántas horas trabajó cada una en la semana.</li>
+                <li>• Escribile <code class="text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">silvia</code> o <code class="text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">romina</code> y te pasa su agenda individual con su enlace privado.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800">
+            <span class="font-bold text-white block mb-2 text-xs">✍️ ¿Cómo anoto un cliente particular que me escribió por WhatsApp?</span>
+            <p class="text-slate-400 mb-2">Simplemente le pegás o reenviás al bot un mensajito con los datos. Por ejemplo:</p>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 font-mono text-[11px] text-emerald-300 whitespace-pre-wrap select-all">Agendar particular:
+Cliente: Mariana Gómez
+Dirección: Benito Blanco 1240, Pocitos
+Fecha: Mañana a las 09:00 (4hs)
+Chica: Silvia
+Total: $2400
+Pago: Transferencia BROU</div>
+            <p class="text-slate-400 mt-2 text-[11px]">¡Y listo! El bot lo guarda en tu agenda, le asigna la zona y te aparece reflejado en esta pantalla en el acto.</p>
+          </div>
+        </div>
+
+        <!-- PESTAÑA 2: PASAR EL DÍA A LAS CHICAS -->
+        <div id="panel-tab-inst-chicas" class="space-y-4 hidden">
+          <div class="p-4 rounded-2xl bg-blue-950/30 border border-blue-500/20">
+            <h3 class="text-sm font-bold text-blue-300 mb-1 flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-blue-400"></i>
+              <span>Cómo pasarle la hoja de ruta a las chicas (Sin mostrar tus precios)</span>
+            </h3>
+            <p class="text-xs text-slate-300">
+              Uno de tus mayores dolores de cabeza es pasarle las direcciones a Silvia, Romina, Lucía, etc., sin que ellas vean cuánto le cobraste al cliente ni tus números del negocio.
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+              <span class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">1</span>
+              <div>
+                <strong class="text-white block text-xs">Elegí la funcionaria</strong>
+                <p class="text-slate-400 mt-0.5">Arriba en el encabezado, en el menú que dice "🧹 Vista Modo", elegí a la chica (ej: Silvia).</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+              <span class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">2</span>
+              <div>
+                <strong class="text-white block text-xs">Tocá el botón verde de Copiar Link</strong>
+                <p class="text-slate-400 mt-0.5">Aparece un botón verde que dice <strong>"Copiar Link WhatsApp"</strong>. Al tocarlo, ya te copia su enlace individual.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+              <span class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">3</span>
+              <div>
+                <strong class="text-white block text-xs">Pegáselo por WhatsApp</strong>
+                <p class="text-slate-400 mt-0.5">Vas al chat de WhatsApp de la chica y se lo pegás. Ella abre ese enlace en su celular.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
+            <strong class="text-emerald-300 block mb-1 text-xs">🔒 ¿Qué ve la chica cuando abre su enlace?</strong>
+            <p class="text-slate-300 text-[11px]">
+              Solamente ve sus propios servicios: el horario, la dirección con un botón para abrir el mapa de Google Maps y las tareas que debe hacer (ej: "Llevar aspiradora").
+              <strong>¡Todos los precios, ganancias, cobranzas y datos de facturación están 100% ocultos!</strong>
+            </p>
+          </div>
+        </div>
+
+        <!-- PESTAÑA 3: COBRANZAS -->
+        <div id="panel-tab-inst-cobros" class="space-y-4 hidden">
+          <div class="p-4 rounded-2xl bg-purple-950/30 border border-purple-500/20">
+            <h3 class="text-sm font-bold text-purple-300 mb-1 flex items-center gap-2">
+              <i data-lucide="dollar-sign" class="w-4 h-4 text-purple-400"></i>
+              <span>Cómo registrar pagos (Efectivo y Transferencias)</span>
+            </h3>
+            <p class="text-xs text-slate-300">
+              Para no volverte loca recordando de memoria quién te pagó y quién te debe plata.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <strong class="text-white block mb-1 text-xs">Opción A: Desde esta pantalla web</strong>
+              <p class="text-slate-400 text-[11px] mb-2">Buscás la tarjeta del servicio y tocás el botón violeta que dice <strong>"Abonado"</strong>.</p>
+              <p class="text-emerald-400 text-[11px]">Al tocarlo se pone en verde al instante y te suma la plata al total cobrado del día.</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <strong class="text-white block mb-1 text-xs">Opción B: Desde WhatsApp</strong>
+              <p class="text-slate-400 text-[11px] mb-2">Le mandás un mensajito corto al bot con el código y el monto:</p>
+              <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 font-mono text-[11px] text-purple-300 mb-2">/pago DS-1122 2400</div>
+              <p class="text-slate-400 text-[11px]">El bot te contesta confirmando y actualiza la pantalla solo.</p>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-[11px] text-slate-300">
+            💡 <strong>Arriba en la pantalla</strong> tenés los contadores en tiempo real:
+            <span class="text-emerald-400 font-bold ml-1">Cobrado</span> (lo que ya tenés seguro en mano o en el banco) y 
+            <span class="text-amber-400 font-bold ml-1">Pendiente</span> (lo que todavía te tienen que pagar).
+          </div>
+        </div>
+
+        <!-- PESTAÑA 4: FACTURAS Y DGI -->
+        <div id="panel-tab-inst-facturas" class="space-y-4 hidden">
+          <div class="p-4 rounded-2xl bg-sky-950/30 border border-sky-500/20">
+            <h3 class="text-sm font-bold text-sky-300 mb-1 flex items-center gap-2">
+              <i data-lucide="receipt" class="w-4 h-4 text-sky-400"></i>
+              <span>Facturas con RUT para Empresas y Consorcios (Para la Contadora)</span>
+            </h3>
+            <p class="text-xs text-slate-300">
+              Clínicas, oficinas y edificios de propiedad horizontal suelen pedirte factura oficial. Acá lo organizás sin estrés.
+            </p>
+          </div>
+
+          <div class="space-y-3 text-[11px]">
+            <div class="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <strong class="text-white block mb-1 text-xs">1. ¿Dónde se anota el RUT?</strong>
+              <p class="text-slate-400">En la tarjeta del cliente vas a ver la sección "Datos Fiscales DGI". Ahí escribís el RUT de 12 dígitos y la Razón Social (el nombre de la empresa).</p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <strong class="text-white block mb-1 text-xs">2. ¿Cómo le paso la lista a la contadora a fin de mes?</strong>
+              <p class="text-slate-400">Arriba en la barra de filtros tocás el botón azul <strong>"Listos p/ Facturar"</strong>. Te filtra únicamente los que necesitan factura para que le pases la lista limpia por WhatsApp sin revolver boletas viejas.</p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <strong class="text-white block mb-1 text-xs">3. O podés cargarlo por WhatsApp:</strong>
+              <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 font-mono text-[11px] text-sky-300 my-1">/factura DS-1001 219999990011 Clinica Buceo SRL</div>
+              <p class="text-slate-400">Y el asistente lo guarda directo para la contadora.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PESTAÑA 5: BOTONES Y FILTROS -->
+        <div id="panel-tab-inst-filtros" class="space-y-4 hidden">
+          <div class="p-4 rounded-2xl bg-amber-950/30 border border-amber-500/20">
+            <h3 class="text-sm font-bold text-amber-300 mb-1 flex items-center gap-2">
+              <i data-lucide="sliders" class="w-4 h-4 text-amber-400"></i>
+              <span>Botones Rápidos (Para no marearte con tantos datos)</span>
+            </h3>
+            <p class="text-xs text-slate-300">
+              Si ves muchas tarjetas juntas y querés enfocarte en una sola cosa, tocá estos botones:
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-white block mb-0.5">🏡 Botón "Particulares"</strong>
+              <p class="text-slate-400">Oculta las empresas y te muestra solo tus clientes privados de casas y apartamentos.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-white block mb-0.5">🏢 Botón "Empresas"</strong>
+              <p class="text-slate-400">Te muestra consultorios, clínicas y oficinas comerciales.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-white block mb-0.5">🏛️ Botón "Consorcios"</strong>
+              <p class="text-slate-400">Te muestra la limpieza de edificios y palieres comunes.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-white block mb-0.5">📱 Botón "ArreglaTodo"</strong>
+              <p class="text-slate-400">Te muestra los servicios asignados a través de la plataforma.</p>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-[11px]">
+            <strong class="text-white block mb-1">🔍 Buscador en vivo:</strong>
+            <p class="text-slate-400 mb-2">Podés escribir en la barra de búsqueda cualquier palabra: una calle (ej: "Benito Blanco"), un barrio (ej: "Pocitos") o el nombre de una chica (ej: "Romina") y te filtra al segundo.</p>
+            <p class="text-blue-400">¿Querés volver a ver todo como al principio? Tocá el botón <strong>"Limpiar filtros"</strong>.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pie del Modal con botón de cerrar -->
+      <div class="p-3.5 sm:p-4 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between">
+        <span class="text-[11px] text-slate-400 flex items-center gap-1.5">
+          <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span>Siempre disponible tocando "📖 Guía Fácil" arriba</span>
+        </span>
+        <button onclick="cerrarModalInstructivo()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 font-bold text-white text-xs transition-all shadow-sm">
+          ¡Entendido, volver al panel!
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ================= SCRIPTS ================= -->
   <script>
     let todosLosServicios = [];
     let tipoClienteSeleccionado = 'todos';
+    let filtroFiscalSeleccionado = 'todos';
 
-    // Estado del Calendario
+    let modoVista = 'admin';
+
     let filtroFechaModo = 'todas';
     let filtroFechaDesde = null;
     let filtroFechaHasta = null;
 
-    // Almacén Local de Estado Financiero y Operativo
-    // Estructura: { [id]: { cobrado: bool, montoCobro: num, pagadoChica: bool, montoChica: num, estadoServicio: str } }
     let finanzasData = {};
 
     function cargarFinanzasLocal() {
       try {
-        const raw = localStorage.getItem('ds_finanzas_v3');
+        const raw = localStorage.getItem('ds_finanzas_v4');
         finanzasData = raw ? JSON.parse(raw) : {};
       } catch (e) {
         finanzasData = {};
@@ -358,7 +715,7 @@
 
     function guardarFinanzasLocal() {
       try {
-        localStorage.setItem('ds_finanzas_v3', JSON.stringify(finanzasData));
+        localStorage.setItem('ds_finanzas_v4', JSON.stringify(finanzasData));
       } catch (e) {}
     }
 
@@ -375,34 +732,65 @@
           cobradoInicial = true;
         }
 
+        const rutCiInicial = s.cliente_rut_ci ? s.cliente_rut_ci : '';
+        const razonSocialInicial = s.cliente_razon_social ? s.cliente_razon_social : '';
+        const numeroFacturaInicial = s.numero_factura ? s.numero_factura : '';
+        
+        let estadoFacturaInicial = s.estado_factura ? s.estado_factura : 'Sin_Datos';
+        if (numeroFacturaInicial && numeroFacturaInicial.length > 2) {
+          estadoFacturaInicial = 'Facturado';
+        } else if (rutCiInicial && rutCiInicial.length > 3) {
+          estadoFacturaInicial = 'Listo_Para_Facturar';
+        }
+
         finanzasData[s.id] = {
           cobrado: cobradoInicial,
           montoCobro: s.precio_total ? s.precio_total : 0,
           pagadoChica: (estadoInicial === 'Completado'),
           montoChica: montoChicaDefault,
-          estadoServicio: estadoInicial
+          estadoServicio: estadoInicial,
+          estadoFactura: estadoFacturaInicial,
+          rutCi: rutCiInicial,
+          razonSocial: razonSocialInicial,
+          numeroFactura: numeroFacturaInicial
         };
       }
       return finanzasData[s.id];
     }
 
-    // Normalizador de texto sin acentos
     function normalizar(texto) {
       if (!texto) return '';
       return texto
         .toString()
         .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[̀-ͯ]/g, '')
         .toLowerCase()
         .trim();
     }
 
     async function iniciar() {
       cargarFinanzasLocal();
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const chicaParam = urlParams.get('f') ? urlParams.get('f') : urlParams.get('funcionaria');
+      if (chicaParam) {
+        modoVista = chicaParam.trim();
+        const sel = document.getElementById('select-modo-vista');
+        if (sel) {
+          for (let i = 0; i < sel.options.length; i++) {
+            if (normalizar(sel.options[i].value) === normalizar(modoVista)) {
+              sel.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      }
+
       try {
         const resp = await fetch('servicios.json?v=' + Date.now());
         todosLosServicios = await resp.json();
         construirDiasCalendarioModal();
+        actualizarModoVistaUI();
         aplicarFiltros();
       } catch (err) {
         document.getElementById('grilla-servicios').innerHTML = 
@@ -410,7 +798,78 @@
       }
     }
 
-    // Estilos de badge según los 6 estados
+    function cambiarModoVista(nuevoModo) {
+      modoVista = nuevoModo;
+      actualizarModoVistaUI();
+      aplicarFiltros();
+    }
+
+    function actualizarModoVistaUI() {
+      const banner = document.getElementById('banner-modo-funcionaria');
+      const nombreEl = document.getElementById('banner-chica-nombre');
+      const btnCopiar = document.getElementById('btn-copiar-link-chica');
+      const panelFiltros = document.getElementById('panel-filtros-admin');
+      const boxCobrado = document.getElementById('box-stat-cobrado');
+      const boxPendiente = document.getElementById('box-stat-pendiente');
+      const boxChicas = document.getElementById('box-stat-chicas');
+      const boxFacturas = document.getElementById('box-stat-facturas');
+
+      if (modoVista === 'admin') {
+        banner.classList.add('hidden');
+        btnCopiar.classList.add('hidden');
+        boxCobrado.classList.remove('hidden');
+        boxPendiente.classList.remove('hidden');
+        boxChicas.classList.remove('hidden');
+        boxFacturas.classList.remove('hidden');
+        panelFiltros.classList.remove('hidden');
+      } else {
+        banner.classList.remove('hidden');
+        nombreEl.textContent = modoVista;
+        btnCopiar.classList.remove('hidden');
+        boxCobrado.classList.add('hidden');
+        boxPendiente.classList.add('hidden');
+        boxChicas.classList.add('hidden');
+        boxFacturas.classList.add('hidden');
+      }
+    }
+
+    function alCambiarFiltroFuncionaria(val) {
+      const btnCopiar = document.getElementById('btn-copiar-link-chica');
+      if (val !== 'todas') {
+        btnCopiar.classList.remove('hidden');
+      } else if (modoVista === 'admin') {
+        btnCopiar.classList.add('hidden');
+      }
+      aplicarFiltros();
+    }
+
+    function copiarMagicLinkActual() {
+      let targetChica = modoVista;
+      if (targetChica === 'admin') {
+        targetChica = document.getElementById('filtro-funcionaria').value;
+      }
+      if (!targetChica) {
+        alert('Seleccioná una funcionaria para generar su enlace individual.');
+        return;
+      }
+      if (targetChica === 'todas') {
+        alert('Seleccioná una funcionaria para generar su enlace individual.');
+        return;
+      }
+
+      const url = new URL(window.location.href);
+      url.searchParams.set('f', targetChica);
+      const fullLink = url.toString();
+
+      navigator.clipboard.writeText(fullLink).then(() => {
+        alert('¡Enlace de ' + targetChica + ' copiado al portapapeles!
+
+Podés pegárselo por WhatsApp para que vea únicamente sus servicios asignados sin contraseñas ni precios.');
+      }).catch(() => {
+        prompt('Copiá este enlace para ' + targetChica + ':', fullLink);
+      });
+    }
+
     function obtenerEstiloEstado(estado) {
       switch (estado) {
         case 'Coordinado':
@@ -430,13 +889,48 @@
       }
     }
 
-    // Modal Calendario
     function abrirModalCalendario() {
       document.getElementById('modal-calendario').classList.remove('hidden');
     }
 
     function cerrarModalCalendario() {
       document.getElementById('modal-calendario').classList.add('hidden');
+    }
+
+    function abrirModalInstructivo(tabDefault) {
+      const modal = document.getElementById('modal-instructivo');
+      if (modal) {
+        modal.classList.remove('hidden');
+        if (tabDefault) {
+          cambiarTabInstructivo(tabDefault);
+        }
+        if (window.lucide) window.lucide.createIcons();
+      }
+    }
+
+    function cerrarModalInstructivo() {
+      const modal = document.getElementById('modal-instructivo');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function cambiarTabInstructivo(tabId) {
+      const tabs = ['whatsapp', 'chicas', 'cobros', 'facturas', 'filtros'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('btn-tab-inst-' + t);
+        const panel = document.getElementById('panel-tab-inst-' + t);
+        if (btn) {
+          if (panel) {
+            if (t === tabId) {
+              btn.className = 'px-3 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs transition-all shadow-sm flex items-center gap-1.5 whitespace-nowrap';
+              panel.classList.remove('hidden');
+            } else {
+              btn.className = 'px-3 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-medium text-xs transition-all flex items-center gap-1.5 whitespace-nowrap';
+              panel.classList.add('hidden');
+            }
+          }
+        }
+      });
+      if (window.lucide) window.lucide.createIcons();
     }
 
     function construirDiasCalendarioModal() {
@@ -451,129 +945,132 @@
         document.getElementById('cal-input-hasta').max = fechas[fechas.length - 1];
       }
 
-      const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-
       fechas.forEach(f => {
         const partes = f.split('-');
-        const dateObj = new Date(parseInt(partes[0]), parseInt(partes[1]) - 1, parseInt(partes[2]));
-        const diaNombre = diasSemana[dateObj.getDay()];
-        const count = todosLosServicios.filter(s => s.fecha_servicio === f).length;
-
+        const diaNum = partes[2];
+        const mesNum = partes[1];
         const btn = document.createElement('button');
-        btn.id = 'cal-dia-' + f;
-        btn.className = 'p-2 rounded-xl bg-slate-800 hover:bg-blue-600 border border-slate-700/60 text-center transition-all group';
-        btn.onclick = () => {
-          seleccionarDiaIndividual(f, `${diaNombre} ${partes[2]}/${partes[1]}`);
-        };
-
-        btn.innerHTML = `
-          <div class="text-[10px] text-slate-400 group-hover:text-blue-100 font-semibold">${diaNombre}</div>
-          <div class="text-xs font-bold text-white group-hover:text-white">${partes[2]}/${partes[1]}</div>
-          <div class="text-[9px] text-blue-400 group-hover:text-white mt-0.5">${count} srv</div>
-        `;
+        btn.type = 'button';
+        btn.onclick = () => seleccionarDiaIndividual(f);
+        btn.className = 'p-2 rounded-xl bg-slate-800/80 hover:bg-blue-600/90 text-slate-200 hover:text-white font-medium transition-all text-center border border-slate-700/50 flex flex-col items-center justify-center';
+        btn.innerHTML = '<span class="text-[10px] text-slate-400">Dia</span><span class="text-xs font-bold">' + diaNum + '/' + mesNum + '</span>';
         cont.appendChild(btn);
       });
     }
 
     function seleccionarRapido(tipo) {
+      filtroFechaModo = tipo;
+      filtroFechaDesde = null;
+      filtroFechaHasta = null;
+
+      const label = document.getElementById('label-calendario');
+      const fechas = [...new Set(todosLosServicios.map(s => s.fecha_servicio))].sort();
+
       if (tipo === 'todas') {
-        filtroFechaModo = 'todas';
-        filtroFechaDesde = null;
-        filtroFechaHasta = null;
-        document.getElementById('label-calendario').textContent = 'Todas las fechas';
+        label.textContent = 'Todas las fechas';
       } else if (tipo === 'hoy') {
-        filtroFechaModo = 'dia';
-        filtroFechaDesde = '2026-10-26';
-        filtroFechaHasta = '2026-10-26';
-        document.getElementById('label-calendario').textContent = 'Hoy (Lun 26/10)';
+        label.textContent = 'Hoy (' + (fechas[0] ? fechas[0] : '26/10') + ')';
       } else if (tipo === 'manana') {
-        filtroFechaModo = 'dia';
-        filtroFechaDesde = '2026-10-27';
-        filtroFechaHasta = '2026-10-27';
-        document.getElementById('label-calendario').textContent = 'Mañana (Mar 27/10)';
+        label.textContent = 'Mañana (' + (fechas[1] ? fechas[1] : '27/10') + ')';
       } else if (tipo === 'semana1') {
-        filtroFechaModo = 'rango';
-        filtroFechaDesde = '2026-10-26';
-        filtroFechaHasta = '2026-10-31';
-        document.getElementById('label-calendario').textContent = 'Semana 1 (26 al 31)';
+        label.textContent = 'Semana 1 (26 al 31)';
       } else if (tipo === 'semana2') {
-        filtroFechaModo = 'rango';
-        filtroFechaDesde = '2026-11-02';
-        filtroFechaHasta = '2026-11-07';
-        document.getElementById('label-calendario').textContent = 'Semana 2 (02 al 07)';
+        label.textContent = 'Semana 2 (02 al 07)';
       } else if (tipo === 'tresdias') {
-        filtroFechaModo = 'rango';
-        filtroFechaDesde = '2026-10-26';
-        filtroFechaHasta = '2026-10-28';
-        document.getElementById('label-calendario').textContent = 'Próx 3 días (26-28)';
+        label.textContent = 'Próximos 3 días';
       }
+
       cerrarModalCalendario();
       aplicarFiltros();
     }
 
-    function seleccionarDiaIndividual(f, etiqueta) {
-      filtroFechaModo = 'dia';
-      filtroFechaDesde = f;
-      filtroFechaHasta = f;
-      document.getElementById('label-calendario').textContent = etiqueta;
+    function seleccionarDiaIndividual(fechaStr) {
+      filtroFechaModo = 'individual';
+      filtroFechaDesde = fechaStr;
+      filtroFechaHasta = fechaStr;
+
+      const p = fechaStr.split('-');
+      document.getElementById('label-calendario').textContent = 'Día ' + p[2] + '/' + p[1];
       cerrarModalCalendario();
       aplicarFiltros();
     }
 
     function aplicarRangoPersonalizado() {
-      const desde = document.getElementById('cal-input-desde').value;
-      const hasta = document.getElementById('cal-input-hasta').value;
+      const d = document.getElementById('cal-input-desde').value;
+      const h = document.getElementById('cal-input-hasta').value;
 
-      if (!desde) {
-        alert('Por favor seleccioná ambas fechas.');
+      if (!d) {
+        alert('Por favor completá ambas fechas.');
         return;
       }
-      if (!hasta) {
-        alert('Por favor seleccioná ambas fechas.');
+      if (!h) {
+        alert('Por favor completá ambas fechas.');
         return;
       }
 
       filtroFechaModo = 'rango';
-      filtroFechaDesde = desde;
-      filtroFechaHasta = hasta;
-      
-      const pD = desde.split('-');
-      const pH = hasta.split('-');
-      document.getElementById('label-calendario').textContent = `${pD[2]}/${pD[1]} al ${pH[2]}/${pH[1]}`;
-      
+      filtroFechaDesde = d;
+      filtroFechaHasta = h;
+
+      const pD = d.split('-');
+      const pH = h.split('-');
+      document.getElementById('label-calendario').textContent = pD[2] + '/' + pD[1] + ' al ' + pH[2] + '/' + pH[1];
+
       cerrarModalCalendario();
       aplicarFiltros();
     }
 
     function setTipoCliente(tipo) {
       tipoClienteSeleccionado = tipo;
-      ['todos', 'particular', 'empresa', 'consorcio', 'arreglatodo'].forEach(t => {
-        const btn = document.getElementById('pill-' + t);
-        if (btn) {
-          if (t === tipo) {
-            btn.className = 'px-3 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all shadow-sm';
+      filtroFiscalSeleccionado = 'todos';
+
+      const pills = ['todos', 'particular', 'empresa', 'consorcio', 'arreglatodo', 'recurrentes'];
+      pills.forEach(p => {
+        const el = document.getElementById('pill-' + p);
+        if (el) {
+          if (p === tipo) {
+            el.className = 'px-3 py-1.5 rounded-lg font-semibold bg-blue-600 text-white transition-all shadow-sm';
           } else {
-            btn.className = 'px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all';
+            el.className = 'px-3 py-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all';
           }
         }
       });
 
-      const btnRec = document.getElementById('pill-recurrentes');
-      if (btnRec) {
-        if (tipo === 'recurrentes') {
-          btnRec.className = 'px-3 py-1.5 rounded-lg font-semibold bg-indigo-600 text-white transition-all shadow-sm flex items-center gap-1.5';
-        } else {
-          btnRec.className = 'px-3 py-1.5 rounded-lg font-semibold bg-indigo-950/60 text-indigo-300 border border-indigo-700/50 hover:bg-indigo-900/60 transition-all flex items-center gap-1.5';
-        }
-      }
-
+      actualizarPillsFiscales();
       aplicarFiltros();
     }
 
-    function filtrarPorEstado(estado) {
-      const select = document.getElementById('filtro-estado-servicio');
-      select.value = estado;
+    function setFiltroFiscal(tipo) {
+      if (filtroFiscalSeleccionado === tipo) {
+        filtroFiscalSeleccionado = 'todos';
+      } else {
+        filtroFiscalSeleccionado = tipo;
+        tipoClienteSeleccionado = 'todos';
+      }
+      actualizarPillsFiscales();
       aplicarFiltros();
+    }
+
+    function actualizarPillsFiscales() {
+      const tipos = ['sin_datos', 'listo', 'facturado'];
+      tipos.forEach(t => {
+        const btn = document.getElementById('pill-fiscal-' + t);
+        if (btn) {
+          if (filtroFiscalSeleccionado === t) {
+            btn.classList.add('ring-2', 'ring-blue-500', 'bg-slate-700');
+          } else {
+            btn.classList.remove('ring-2', 'ring-blue-500', 'bg-slate-700');
+          }
+        }
+      });
+    }
+
+    function filtrarPorEstado(estado) {
+      const sel = document.getElementById('filtro-estado-servicio');
+      if (sel) {
+        sel.value = estado;
+        aplicarFiltros();
+      }
     }
 
     function resetearFiltros() {
@@ -582,102 +1079,174 @@
       document.getElementById('filtro-funcionaria').value = 'todas';
       document.getElementById('filtro-zona').value = 'todas';
       document.getElementById('filtro-cobro').value = 'todos';
+      document.getElementById('btn-copiar-link-chica').classList.add('hidden');
+      
+      filtroFiscalSeleccionado = 'todos';
+      actualizarPillsFiscales();
       seleccionarRapido('todas');
       setTipoCliente('todos');
     }
 
-    // Modificación de Estado y Finanzas en Tiempo Real
     function cambiarEstadoServicio(id, nuevoEstado) {
-      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
-      fin.estadoServicio = nuevoEstado;
+      if (!finanzasData[id]) obtenerFinanzas({ id: id });
+      finanzasData[id].estadoServicio = nuevoEstado;
 
       if (['Abonado', 'Completado'].includes(nuevoEstado)) {
-        fin.cobrado = true;
+        finanzasData[id].cobrado = true;
       }
       if (nuevoEstado === 'Completado') {
-        fin.pagadoChica = true;
+        finanzasData[id].pagadoChica = true;
       }
 
       guardarFinanzasLocal();
       aplicarFiltros();
     }
 
-    function toggleCobro(id, checked) {
-      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
-      fin.cobrado = checked;
-      if (checked && fin.estadoServicio === 'Coordinado') {
-        fin.estadoServicio = 'Abonado';
+    function marcarLlegadaChica(id, clienteNombre, direccion) {
+      cambiarEstadoServicio(id, 'En proceso');
+      const msg = encodeURIComponent('Hola Carol, acabo de llegar al domicilio de ' + clienteNombre + ' (' + direccion + ') y ya estoy comenzando el servicio.');
+      window.open('https://wa.me/?text=' + msg, '_blank');
+    }
+
+    function marcarSalidaChica(id, clienteNombre, direccion) {
+      cambiarEstadoServicio(id, 'Terminado');
+      const msg = encodeURIComponent('Hola Carol, servicio finalizado con éxito en lo de ' + clienteNombre + ' (' + direccion + ').');
+      window.open('https://wa.me/?text=' + msg, '_blank');
+    }
+
+    function toggleCobro(id, valor) {
+      if (!finanzasData[id]) obtenerFinanzas({ id: id });
+      finanzasData[id].cobrado = valor;
+      if (valor && finanzasData[id].estadoServicio === 'Coordinado') {
+        finanzasData[id].estadoServicio = 'Abonado';
       }
       guardarFinanzasLocal();
       aplicarFiltros();
     }
 
-    function actualizarMontoCobro(id, valor) {
-      const num = parseFloat(valor);
-      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
-      fin.montoCobro = isNaN(num) ? 0 : num;
-      guardarFinanzasLocal();
-      actualizarMetricas(filtradosActuales);
-    }
-
-    function togglePagoChica(id, checked) {
-      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
-      fin.pagadoChica = checked;
+    function actualizarMontoCobro(id, nuevoMonto) {
+      if (!finanzasData[id]) obtenerFinanzas({ id: id });
+      finanzasData[id].montoCobro = parseFloat(nuevoMonto) ? parseFloat(nuevoMonto) : 0;
       guardarFinanzasLocal();
       aplicarFiltros();
     }
 
-    function actualizarMontoChica(id, valor) {
-      const num = parseFloat(valor);
-      const fin = obtenerFinanzas({ id: id, precio_total: 0, duracion_hs: 3, estado_cobro: '', estado_servicio: 'Coordinado' });
-      fin.montoChica = isNaN(num) ? 0 : num;
+    function togglePagoChica(id, valor) {
+      if (!finanzasData[id]) obtenerFinanzas({ id: id });
+      finanzasData[id].pagadoChica = valor;
       guardarFinanzasLocal();
-      actualizarMetricas(filtradosActuales);
+      aplicarFiltros();
     }
 
-    let filtradosActuales = [];
+    function actualizarMontoChica(id, nuevoMonto) {
+      if (!finanzasData[id]) obtenerFinanzas({ id: id });
+      finanzasData[id].montoChica = parseFloat(nuevoMonto) ? parseFloat(nuevoMonto) : 0;
+      guardarFinanzasLocal();
+      aplicarFiltros();
+    }
+
+    function guardarDatosFiscales(id) {
+      if (!finanzasData[id]) obtenerFinanzas({ id: id });
+      const rutInput = document.getElementById('input-rut-' + id);
+      const razonInput = document.getElementById('input-razon-' + id);
+      const estadoSelect = document.getElementById('select-fiscal-' + id);
+      const facturaInput = document.getElementById('input-factura-' + id);
+
+      if (rutInput) finanzasData[id].rutCi = rutInput.value.trim();
+      if (razonInput) finanzasData[id].razonSocial = razonInput.value.trim();
+      if (facturaInput) finanzasData[id].numeroFactura = facturaInput.value.trim();
+      if (estadoSelect) finanzasData[id].estadoFactura = estadoSelect.value;
+
+      guardarFinanzasLocal();
+      aplicarFiltros();
+      alert('Datos fiscales guardados para el servicio ' + id);
+    }
+
+    function solicitarRUTWhatsApp(clienteNombre, clienteTel) {
+      const msg = encodeURIComponent(
+        'Hola ' + clienteNombre + ', ¿cómo estás? Te escribimos de Daiana Souza Servicios para la confección de tu factura.
+' +
+        '¿Nos podrías facilitar por favor tu RUT o Cédula de Identidad y Razón Social?
+' +
+        '¡Muchas gracias!'
+      );
+      const telClean = (clienteTel ? clienteTel.replace(/[^0-9]/g, '') : '');
+      const waUrl = telClean.length > 6 ? ('https://wa.me/' + telClean + '?text=' + msg) : ('https://wa.me/?text=' + msg);
+      window.open(waUrl, '_blank');
+    }
 
     function aplicarFiltros() {
       const q = normalizar(document.getElementById('input-busqueda').value);
       const fEstado = document.getElementById('filtro-estado-servicio').value;
-      const fChica = document.getElementById('filtro-funcionaria').value;
+      let fChica = document.getElementById('filtro-funcionaria').value;
       const fZona = normalizar(document.getElementById('filtro-zona').value);
       const fCobro = document.getElementById('filtro-cobro').value;
 
-      filtradosActuales = todosLosServicios.filter(s => {
-        // Filtro Tipo Cliente / Recurrente
-        if (tipoClienteSeleccionado === 'recurrentes') {
-          if (!s.es_recurrente) return false;
-        } else if (tipoClienteSeleccionado !== 'todos') {
-          if (s.origen !== tipoClienteSeleccionado) return false;
-        }
+      if (modoVista !== 'admin') {
+        fChica = modoVista;
+      }
 
-        // Obtener estado financiero y operativo guardado
+      const fechasUnicas = [...new Set(todosLosServicios.map(s => s.fecha_servicio))].sort();
+
+      const filtradosActuales = todosLosServicios.filter(s => {
         const fin = obtenerFinanzas(s);
 
-        // Filtro Estado del Servicio (6 estados)
+        if (modoVista !== 'admin' && s.funcionaria_nombre !== modoVista) {
+          return false;
+        }
+
+        if (tipoClienteSeleccionado !== 'todos') {
+          if (tipoClienteSeleccionado === 'recurrentes') {
+            if (!s.es_recurrente) return false;
+          } else if (s.origen !== tipoClienteSeleccionado) {
+            return false;
+          }
+        }
+
+        if (filtroFiscalSeleccionado !== 'todos') {
+          if (filtroFiscalSeleccionado === 'sin_datos') {
+            if (fin.estadoFactura !== 'Sin_Datos' && fin.rutCi) return false;
+          }
+          if (filtroFiscalSeleccionado === 'listo') {
+            if (fin.estadoFactura !== 'Listo_Para_Facturar') return false;
+            if (!fin.rutCi) return false;
+          }
+          if (filtroFiscalSeleccionado === 'facturado') {
+            if (fin.estadoFactura !== 'Facturado') return false;
+          }
+        }
+
+        if (filtroFechaModo === 'hoy') {
+          if (s.fecha_servicio !== fechasUnicas[0]) return false;
+        } else if (filtroFechaModo === 'manana') {
+          if (s.fecha_servicio !== fechasUnicas[1]) return false;
+        } else if (filtroFechaModo === 'semana1') {
+          const s1 = fechasUnicas.slice(0, 6);
+          if (!s1.includes(s.fecha_servicio)) return false;
+        } else if (filtroFechaModo === 'semana2') {
+          const s2 = fechasUnicas.slice(6, 12);
+          if (!s2.includes(s.fecha_servicio)) return false;
+        } else if (filtroFechaModo === 'tresdias') {
+          const s3 = fechasUnicas.slice(0, 3);
+          if (!s3.includes(s.fecha_servicio)) return false;
+        } else if (['individual', 'rango'].includes(filtroFechaModo)) {
+          if (s.fecha_servicio < filtroFechaDesde) return false;
+          if (s.fecha_servicio > filtroFechaHasta) return false;
+        }
+
         if (fEstado !== 'todos' && fin.estadoServicio !== fEstado) {
           return false;
         }
 
-        // Filtro Período / Fecha
-        if (filtroFechaModo !== 'todas') {
-          if (filtroFechaDesde && s.fecha_servicio < filtroFechaDesde) return false;
-          if (filtroFechaHasta && s.fecha_servicio > filtroFechaHasta) return false;
-        }
-
-        // Filtro Funcionaria
         if (fChica !== 'todas' && s.funcionaria_nombre !== fChica) {
           return false;
         }
 
-        // Filtro Barrio o Zona (Normalizado sin acentos)
         if (fZona !== 'todas') {
           const zonaTxt = normalizar(s.zona_nombre);
           if (!zonaTxt.includes(fZona)) return false;
         }
 
-        // Filtro Cobro / Liquidación
         if (fCobro !== 'todos') {
           if (fCobro === 'Cobrado' && !fin.cobrado) return false;
           if (fCobro === 'Pendiente' && fin.cobrado) return false;
@@ -686,9 +1255,8 @@
           if (fCobro === 'Liquidación ArreglaTodo' && s.origen !== 'arreglatodo') return false;
         }
 
-        // Buscador Inteligente Sin Acentos (Dirección, Calle, Cliente, ID, Barrio, Funcionaria, Estado)
         if (q.length > 0) {
-          const haystack = normalizar(`${s.id} ${s.direccion} ${s.cliente_nombre} ${s.zona_nombre} ${s.notas} ${s.funcionaria_nombre} ${s.origen} ${fin.estadoServicio} ${s.recurrencia_etiqueta}`);
+          const haystack = normalizar(s.id + ' ' + s.direccion + ' ' + s.cliente_nombre + ' ' + s.zona_nombre + ' ' + s.notas + ' ' + s.funcionaria_nombre + ' ' + s.origen + ' ' + fin.estadoServicio + ' ' + (fin.rutCi ? fin.rutCi : '') + ' ' + (fin.razonSocial ? fin.razonSocial : ''));
           const terminos = q.split(' ');
           const coincideTodo = terminos.every(t => haystack.includes(t));
           if (!coincideTodo) return false;
@@ -709,6 +1277,10 @@
       let totalPendiente = 0;
       let totalChicas = 0;
 
+      let countSinDatos = 0;
+      let countListos = 0;
+      let countFacturados = 0;
+
       const conteoEstados = {
         'Coordinado': 0,
         'Asignado': 0,
@@ -718,19 +1290,35 @@
         'Completado': 0
       };
 
-      // Contar estados sobre los servicios visibles o globales
       todosLosServicios.forEach(s => {
         const fin = obtenerFinanzas(s);
         if (conteoEstados[fin.estadoServicio] !== undefined) {
           conteoEstados[fin.estadoServicio] += 1;
         }
+
+        if (fin.estadoFactura === 'Facturado') {
+          countFacturados += 1;
+        } else if (fin.rutCi && fin.rutCi.length > 3) {
+          countListos += 1;
+        } else {
+          countSinDatos += 1;
+        }
       });
 
-      // Actualizar badges superiores de estados
       Object.keys(conteoEstados).forEach(est => {
         const el = document.getElementById('badge-count-' + est);
         if (el) el.textContent = conteoEstados[est];
       });
+
+      const elSin = document.getElementById('count-fiscal-sin_datos');
+      if (elSin) elSin.textContent = countSinDatos;
+      const elLis = document.getElementById('count-fiscal-listo');
+      if (elLis) elLis.textContent = countListos;
+      const elFac = document.getElementById('count-fiscal-facturado');
+      if (elFac) elFac.textContent = countFacturados;
+
+      const elStatFacturas = document.getElementById('stat-facturas');
+      if (elStatFacturas) elStatFacturas.textContent = countListos + ' listos / ' + countSinDatos + ' s/RUT';
 
       items.forEach(s => {
         const fin = obtenerFinanzas(s);
@@ -763,19 +1351,17 @@
       contenedor.innerHTML = items.map(s => {
         const fin = obtenerFinanzas(s);
 
-        // Badges según tipo
         let badgeTipo = '';
         if (s.origen === 'empresa') {
           badgeTipo = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">Empresa</span>';
         } else if (s.origen === 'consorcio') {
           badgeTipo = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-teal-500/10 text-teal-400 border border-teal-500/20">Consorcio</span>';
         } else if (s.origen === 'arreglatodo') {
-          badgeTipo = `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">ArreglaTodo #${s.id_externo}</span>`;
+          badgeTipo = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">ArreglaTodo #' + s.id_externo + '</span>';
         } else {
           badgeTipo = '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Particular</span>';
         }
 
-        // Stepper Visual para Clientes Recurrentes con Fechas Múltiples (1/4, 2/4...)
         let stepperRecurrenteHtml = '';
         if (s.es_recurrente && s.recurrencia_total > 1) {
           const total = s.recurrencia_total;
@@ -784,203 +1370,251 @@
 
           for (let paso = 1; paso <= total; paso++) {
             if (paso < actual) {
-              pasos.push(`<span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-[9px] font-bold" title="Visita ${paso}/${total} Completada">✓</span>`);
+              pasos.push('<span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-[9px] font-bold" title="Visita ' + paso + '/' + total + ' Completada">✓</span>');
             } else if (paso === actual) {
-              pasos.push(`<span class="w-4 h-4 rounded-full bg-indigo-500/30 text-indigo-300 border border-indigo-400 flex items-center justify-center text-[9px] font-bold ring-1 ring-indigo-400" title="Visita Actual ${paso}/${total}">${paso}</span>`);
+              pasos.push('<span class="w-4 h-4 rounded-full bg-indigo-500/30 text-indigo-300 border border-indigo-400 flex items-center justify-center text-[9px] font-bold ring-1 ring-indigo-400" title="Visita Actual ' + paso + '/' + total + '">' + paso + '</span>');
             } else {
-              pasos.push(`<span class="w-4 h-4 rounded-full bg-slate-800 text-slate-500 border border-slate-700/60 flex items-center justify-center text-[9px] font-bold" title="Visita Futura ${paso}/${total}">${paso}</span>`);
+              pasos.push('<span class="w-4 h-4 rounded-full bg-slate-800 text-slate-500 border border-slate-700/60 flex items-center justify-center text-[9px] font-bold" title="Visita Futura ' + paso + '/' + total + '">' + paso + '</span>');
             }
           }
 
-          stepperRecurrenteHtml = `
-            <div class="mt-2 mb-1 p-2 rounded-xl bg-indigo-950/30 border border-indigo-900/40 flex items-center justify-between text-xs">
-              <div class="flex items-center gap-1.5">
-                <i data-lucide="repeat" class="w-3.5 h-3.5 text-indigo-400"></i>
-                <span class="text-[11px] font-bold text-indigo-300">Plan Periódico</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <div class="flex items-center gap-1">${pasos.join('')}</div>
-                <span class="text-[11px] font-mono font-bold text-white ml-1">Visita ${actual}/${total}</span>
-              </div>
-            </div>
-          `;
+          stepperRecurrenteHtml = '' +
+            '<div class="mt-2 mb-1 p-2 rounded-xl bg-indigo-950/30 border border-indigo-900/40 flex items-center justify-between text-xs">' +
+            '  <div class="flex items-center gap-1.5">' +
+            '    <i data-lucide="repeat" class="w-3.5 h-3.5 text-indigo-400"></i>' +
+            '    <span class="text-[11px] font-bold text-indigo-300">Plan Periódico</span>' +
+            '  </div>' +
+            '  <div class="flex items-center gap-1.5">' +
+            '    <div class="flex items-center gap-1">' + pasos.join('') + '</div>' +
+            '    <span class="text-[11px] font-mono font-bold text-white ml-1">Visita ' + actual + '/' + total + '</span>' +
+            '  </div>' +
+            '</div>';
         }
 
-        // Formato fecha amigable
         const fPartes = s.fecha_servicio.split('-');
-        const fechaCorta = `${fPartes[2]}/${fPartes[1]}`;
+        const fechaCorta = fPartes[2] + '/' + fPartes[1];
+        const mapsUrl = 'https://maps.google.com/?q=' + encodeURIComponent(s.direccion + ', Montevideo, Uruguay');
 
-        // Enlace Automático a Google Maps
-        const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(s.direccion + ', Montevideo, Uruguay')}`;
-
-        // Mensaje WhatsApp a Funcionaria con Enlace Directo a Maps y Estado
-        const msgChica = encodeURIComponent(
-          `Hola ${s.funcionaria_nombre}, tu servicio:\n` +
-          `📍 Dirección: ${s.direccion} (${s.zona_nombre})\n` +
-          `🗺️ Ubicación en Maps: ${mapsUrl}\n` +
-          `⏰ Horario: ${s.fecha_servicio} a las ${s.hora_servicio} hs (${s.duracion_hs} hs)\n` +
-          `📋 Estado: ${fin.estadoServicio}\n` +
-          (s.es_recurrente ? `🔁 Plan Recurrente: Visita ${s.recurrencia_etiqueta}\n` : '') +
-          `📦 Tareas: ${s.adicionales ? s.adicionales : 'Limpieza estándar'}\n` +
-          `👤 Cliente: ${s.cliente_nombre}`
-        );
-
-        // Mensaje WhatsApp Cobro Cliente con Monto Dinámico
-        const msgCobro = encodeURIComponent(
-          `Hola ${s.cliente_nombre}, te escribimos de Daiana Souza Servicios.\n` +
-          `El saldo del servicio coordinado es de $${fin.montoCobro} UYU.\n` +
-          `Podés abonar por transferencia BROU / Prex o efectivo.\n` +
-          `¡Muchas gracias!`
-        );
+        let badgeFiscalHtml = '';
+        if (fin.estadoFactura === 'Facturado') {
+          badgeFiscalHtml = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> Factura: ' + (fin.numeroFactura ? fin.numeroFactura : 'Emitida') + '</span>';
+        } else if (fin.rutCi && fin.rutCi.length > 3) {
+          badgeFiscalHtml = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/15 text-sky-300 border border-sky-500/30 flex items-center gap-1"><i data-lucide="file-check" class="w-3 h-3"></i> Listo DGI (RUT: ' + fin.rutCi + ')</span>';
+        } else {
+          badgeFiscalHtml = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1"><i data-lucide="alert-triangle" class="w-3 h-3"></i> Sin Datos Fiscales</span>';
+        }
 
         const estiloEstado = obtenerEstiloEstado(fin.estadoServicio);
 
-        return `
-          <div class="bg-slate-900 border border-slate-800/90 rounded-2xl p-4 flex flex-col justify-between hover:border-slate-700 transition-all shadow-sm">
-            
-            <!-- Cabecera de la Tarjeta -->
-            <div>
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <div class="flex items-center gap-1.5 flex-wrap">
-                  <span class="font-mono text-xs font-bold text-slate-300">${s.id}</span>
-                  ${badgeTipo}
-                  ${s.es_recurrente ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">${s.recurrencia_etiqueta}</span>` : ''}
-                </div>
-                <div class="flex items-center gap-1.5 text-xs text-slate-300 font-semibold">
-                  <span class="text-[11px] text-slate-400">${fechaCorta}</span>
-                  <span class="text-emerald-400 font-bold">${s.hora_servicio} hs</span>
-                </div>
-              </div>
+        if (modoVista !== 'admin') {
+          return '' +
+            '<div class="bg-slate-900 border border-blue-500/30 rounded-2xl p-4 flex flex-col justify-between shadow-md hover:border-blue-400 transition-all">' +
+            '  <div>' +
+            '    <div class="flex items-center justify-between gap-2 mb-2 pb-2 border-b border-slate-800">' +
+            '      <div class="flex items-center gap-1.5">' +
+            '        <span class="text-xs font-mono font-bold text-blue-400">' + s.id + '</span>' +
+            '        <span class="text-xs text-slate-400 font-semibold">' + fechaCorta + '</span>' +
+            '      </div>' +
+            '      <div class="text-sm font-extrabold text-emerald-400">' + s.hora_servicio + ' hs (' + s.duracion_hs + ' hs)</div>' +
+            '    </div>' +
+            '    <div class="mb-3">' +
+            '      <div class="text-base font-bold text-white leading-snug flex items-start gap-1.5">' +
+            '        <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-1"></i>' +
+            '        <span>' + s.direccion + '</span>' +
+            '      </div>' +
+            '      <div class="text-xs text-slate-400 mt-1 pl-5">' + s.zona_nombre + '</div>' +
+            '    </div>' +
+            '    <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800 mb-3 space-y-1 text-xs">' +
+            '      <div class="text-slate-200 font-medium"><span class="text-slate-500">Cliente:</span> ' + s.cliente_nombre + '</div>' +
+            '      <div class="text-slate-300"><span class="text-slate-500">Tareas:</span> ' + (s.adicionales ? s.adicionales : 'Limpieza estándar de mantenimiento') + '</div>' +
+            '      <div class="text-slate-400 text-[11px]"><span class="text-slate-500">Estado actual:</span> <span class="font-bold text-white">' + fin.estadoServicio + '</span></div>' +
+            '    </div>' +
+            '    ' + stepperRecurrenteHtml + '' +
+            '  </div>' +
+            '  <div class="pt-2 space-y-2">' +
+            '    <a href="' + mapsUrl + '" target="_blank" class="w-full py-2 px-3 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 font-bold text-xs flex items-center justify-center gap-1.5 transition-all">' +
+            '      <i data-lucide="map" class="w-4 h-4"></i>' +
+            '      <span>Abrir en Google Maps</span>' +
+            '    </a>' +
+            '    <div class="grid grid-cols-2 gap-2">' +
+            '      <button onclick="marcarLlegadaChica('" + s.id + "', '" + s.cliente_nombre.replace(/'/g, "") + "', '" + s.direccion.replace(/'/g, "") + "')" class="py-2 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1 transition-all shadow-sm">' +
+            '        <i data-lucide="play" class="w-3.5 h-3.5"></i>' +
+            '        <span>Llegué</span>' +
+            '      </button>' +
+            '      <button onclick="marcarSalidaChica('" + s.id + "', '" + s.cliente_nombre.replace(/'/g, "") + "', '" + s.direccion.replace(/'/g, "") + "')" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-teal-600 text-teal-300 hover:text-white border border-teal-500/30 font-bold text-xs flex items-center justify-center gap-1 transition-all">' +
+            '        <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>' +
+            '        <span>Terminé</span>' +
+            '      </button>' +
+            '    </div>' +
+            '  </div>' +
+            '</div>';
+        }
 
-              <!-- Selector Interactivo de Estado del Servicio (6 Estados) -->
-              <div class="mb-2.5 flex items-center justify-between gap-2">
-                <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Estado Operativo:</span>
-                <select 
-                  onchange="cambiarEstadoServicio('${s.id}', this.value)" 
-                  class="text-[11px] font-bold px-2.5 py-1 rounded-lg border focus:outline-none transition-colors cursor-pointer ${estiloEstado}"
-                >
-                  <option value="Coordinado" class="bg-slate-900 text-sky-400" ${fin.estadoServicio === 'Coordinado' ? 'selected' : ''}>Coordinado</option>
-                  <option value="Asignado" class="bg-slate-900 text-indigo-300" ${fin.estadoServicio === 'Asignado' ? 'selected' : ''}>Asignado</option>
-                  <option value="En proceso" class="bg-slate-900 text-amber-300" ${fin.estadoServicio === 'En proceso' ? 'selected' : ''}>En proceso</option>
-                  <option value="Terminado" class="bg-slate-900 text-teal-300" ${fin.estadoServicio === 'Terminado' ? 'selected' : ''}>Terminado</option>
-                  <option value="Abonado" class="bg-slate-900 text-purple-300" ${fin.estadoServicio === 'Abonado' ? 'selected' : ''}>Abonado</option>
-                  <option value="Completado" class="bg-slate-900 text-emerald-300" ${fin.estadoServicio === 'Completado' ? 'selected' : ''}>Completado</option>
-                </select>
-              </div>
+        const msgChica = encodeURIComponent(
+          'Hola ' + s.funcionaria_nombre + ', tu servicio:
+' +
+          '📍 Dirección: ' + s.direccion + ' (' + s.zona_nombre + ')
+' +
+          '🗺️ Ubicación en Maps: ' + mapsUrl + '
+' +
+          '⏰ Horario: ' + s.fecha_servicio + ' a las ' + s.hora_servicio + ' hs (' + s.duracion_hs + ' hs)
+' +
+          '📋 Estado: ' + fin.estadoServicio + '
+' +
+          (s.es_recurrente ? ('🔁 Plan Recurrente: Visita ' + s.recurrencia_etiqueta + '
+') : '') +
+          '📦 Tareas: ' + (s.adicionales ? s.adicionales : 'Limpieza estándar') + '
+' +
+          '👤 Cliente: ' + s.cliente_nombre
+        );
 
-              <!-- Dirección Destacada con Link de Google Maps -->
-              <div class="mb-2">
-                <div class="text-sm font-bold text-white leading-snug flex items-start gap-1.5">
-                  <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                  <span>${s.direccion}</span>
-                </div>
-                <div class="text-xs text-slate-400 mt-0.5 pl-5 flex items-center justify-between">
-                  <span>${s.zona_nombre}</span>
-                  <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-blue-400 hover:text-blue-300 font-medium transition-colors">
-                    <i data-lucide="map" class="w-3 h-3"></i>
-                    <span>Ver mapa</span>
-                  </a>
-                </div>
-              </div>
+        const msgCobro = encodeURIComponent(
+          'Hola ' + s.cliente_nombre + ', te escribimos de Daiana Souza Servicios.
+' +
+          'El saldo del servicio coordinado es de $' + fin.montoCobro + ' UYU.
+' +
+          'Podés abonar por transferencia BROU / Prex o efectivo.
+' +
+          '¡Muchas gracias!'
+        );
 
-              <!-- Cliente y Horas -->
-              <div class="pl-5 text-xs space-y-0.5 mb-2">
-                <div class="text-slate-200 font-medium">${s.cliente_nombre}</div>
-                <div class="text-[11px] text-slate-400">
-                  <span>${s.duracion_hs} hs</span>
-                  <span class="mx-1">•</span>
-                  <span>${s.adicionales ? s.adicionales : 'Limpieza estándar'}</span>
-                </div>
-              </div>
-
-              <!-- Barra de Progreso de Recurrentes (Multi-Fecha) -->
-              ${stepperRecurrenteHtml}
-
-            </div>
-
-            <!-- Sección Financiera Interactiva y Asignación -->
-            <div>
-              <!-- Control de Cobro y Liquidación Editable -->
-              <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800/80 mb-3 space-y-2">
-                
-                <!-- Cobro Cliente -->
-                <div class="flex items-center justify-between gap-2 text-xs">
-                  <label class="flex items-center gap-1.5 cursor-pointer select-none">
-                    <input type="checkbox" 
-                      ${fin.cobrado ? 'checked' : ''} 
-                      onchange="toggleCobro('${s.id}', this.checked)"
-                      class="w-3.5 h-3.5 rounded border-slate-700 bg-slate-900 text-emerald-500 focus:ring-0 cursor-pointer">
-                    <span class="text-[11px] font-semibold ${fin.cobrado ? 'text-emerald-400' : 'text-slate-400'}">
-                      ${fin.cobrado ? 'Cobrado Cliente' : 'Pendiente Cobro'}
-                    </span>
-                  </label>
-                  
-                  <div class="flex items-center gap-1">
-                    <span class="text-[11px] text-slate-500 font-mono">$</span>
-                    <input type="number" 
-                      value="${fin.montoCobro}" 
-                      onchange="actualizarMontoCobro('${s.id}', this.value)"
-                      class="w-20 px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-right font-mono text-xs text-white focus:outline-none focus:border-blue-500"
-                      title="Monto total del servicio">
-                  </div>
-                </div>
-
-                <!-- Pago Funcionaria -->
-                <div class="flex items-center justify-between gap-2 text-xs pt-1.5 border-t border-slate-800/60">
-                  <label class="flex items-center gap-1.5 cursor-pointer select-none">
-                    <input type="checkbox" 
-                      ${fin.pagadoChica ? 'checked' : ''} 
-                      onchange="togglePagoChica('${s.id}', this.checked)"
-                      class="w-3.5 h-3.5 rounded border-slate-700 bg-slate-900 text-blue-500 focus:ring-0 cursor-pointer">
-                    <span class="text-[11px] font-semibold ${fin.pagadoChica ? 'text-blue-400' : 'text-slate-400'}">
-                      ${fin.pagadoChica ? 'Liquidado a Chica' : 'Pendiente a Chica'}
-                    </span>
-                  </label>
-                  
-                  <div class="flex items-center gap-1">
-                    <span class="text-[11px] text-slate-500 font-mono">$</span>
-                    <input type="number" 
-                      value="${fin.montoChica}" 
-                      onchange="actualizarMontoChica('${s.id}', this.value)"
-                      class="w-20 px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-right font-mono text-xs text-white focus:outline-none focus:border-blue-500"
-                      title="Monto a liquidar a la chica">
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- Fila de Funcionaria y Botones WhatsApp -->
-              <div class="flex items-center justify-between text-xs mb-2.5 px-0.5">
-                <div class="flex items-center gap-1.5">
-                  <div class="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-[10px] font-bold text-blue-400">
-                    ${s.funcionaria_nombre.charAt(0)}
-                  </div>
-                  <span class="font-medium text-slate-200">${s.funcionaria_nombre}</span>
-                </div>
-                ${s.origen === 'arreglatodo' ? '<span class="text-[10px] text-amber-400 font-semibold">Liquidación AT</span>' : ''}
-              </div>
-
-              <!-- Botones de Acción WhatsApp de 1 Clic -->
-              <div class="grid grid-cols-2 gap-2">
-                <a href="https://wa.me/?text=${msgChica}" target="_blank" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-emerald-600/15 hover:bg-emerald-600/25 text-emerald-300 border border-emerald-500/25 font-semibold text-xs transition-all text-center">
-                  <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                  <span>A Funcionaria</span>
-                </a>
-
-                ${s.origen === 'arreglatodo'
-                  ? `<div class="flex items-center justify-center py-1.5 px-2 rounded-xl bg-slate-800/40 text-slate-500 text-[11px] font-medium border border-slate-800/60">
-                      Cobra AT
-                    </div>`
-                  : `<a href="https://wa.me/?text=${msgCobro}" target="_blank" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-blue-600/15 hover:bg-blue-600/25 text-blue-300 border border-blue-500/25 font-semibold text-xs transition-all text-center">
-                      <i data-lucide="receipt" class="w-3.5 h-3.5"></i>
-                      <span>Cobro</span>
-                    </a>`
-                }
-              </div>
-            </div>
-
-          </div>
-        `;
+        return '' +
+          '<div class="bg-slate-900 border border-slate-800/90 rounded-2xl p-4 flex flex-col justify-between hover:border-slate-700 transition-all shadow-sm">' +
+          '  <div>' +
+          '    <div class="flex items-center justify-between gap-2 mb-2">' +
+          '      <div class="flex items-center gap-1.5 flex-wrap">' +
+          '        <span class="font-mono text-xs font-bold text-slate-300">' + s.id + '</span>' +
+          '        ' + badgeTipo + '' +
+          '        (s.es_recurrente ? ('<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">' + s.recurrencia_etiqueta + '</span>') : '') +
+          '      </div>' +
+          '      <div class="flex items-center gap-1.5 text-xs text-slate-300 font-semibold">' +
+          '        <span class="text-[11px] text-slate-400">' + fechaCorta + '</span>' +
+          '        <span class="text-emerald-400 font-bold">' + s.hora_servicio + ' hs</span>' +
+          '      </div>' +
+          '    </div>' +
+          '    <div class="mb-2.5 flex items-center justify-between gap-2">' +
+          '      <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Estado Operativo:</span>' +
+          '      <select ' +
+          '        onchange="cambiarEstadoServicio('" + s.id + "', this.value)" ' +
+          '        class="text-[11px] font-bold px-2.5 py-1 rounded-lg border focus:outline-none transition-colors cursor-pointer ' + estiloEstado + '"' +
+          '      >' +
+          '        <option value="Coordinado" class="bg-slate-900 text-sky-400" ' + (fin.estadoServicio === 'Coordinado' ? 'selected' : '') + '>Coordinado</option>' +
+          '        <option value="Asignado" class="bg-slate-900 text-indigo-300" ' + (fin.estadoServicio === 'Asignado' ? 'selected' : '') + '>Asignado</option>' +
+          '        <option value="En proceso" class="bg-slate-900 text-amber-300" ' + (fin.estadoServicio === 'En proceso' ? 'selected' : '') + '>En proceso</option>' +
+          '        <option value="Terminado" class="bg-slate-900 text-teal-300" ' + (fin.estadoServicio === 'Terminado' ? 'selected' : '') + '>Terminado</option>' +
+          '        <option value="Abonado" class="bg-slate-900 text-purple-300" ' + (fin.estadoServicio === 'Abonado' ? 'selected' : '') + '>Abonado</option>' +
+          '        <option value="Completado" class="bg-slate-900 text-emerald-300" ' + (fin.estadoServicio === 'Completado' ? 'selected' : '') + '>Completado</option>' +
+          '      </select>' +
+          '    </div>' +
+          '    <div class="mb-2">' +
+          '      <div class="text-sm font-bold text-white leading-snug flex items-start gap-1.5">' +
+          '        <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>' +
+          '        <span>' + s.direccion + '</span>' +
+          '      </div>' +
+          '      <div class="text-xs text-slate-400 mt-0.5 pl-5 flex items-center justify-between">' +
+          '        <span>' + s.zona_nombre + '</span>' +
+          '        <a href="' + mapsUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-blue-400 hover:text-blue-300 font-medium transition-colors">' +
+          '          <i data-lucide="map" class="w-3 h-3"></i>' +
+          '          <span>Ver mapa</span>' +
+          '        </a>' +
+          '      </div>' +
+          '    </div>' +
+          '    <div class="pl-5 text-xs space-y-0.5 mb-2">' +
+          '      <div class="text-slate-200 font-medium">' + s.cliente_nombre + '</div>' +
+          '      <div class="text-[11px] text-slate-400">' +
+          '        <span>' + s.duracion_hs + ' hs</span>' +
+          '        <span class="mx-1">•</span>' +
+          '        <span>' + (s.adicionales ? s.adicionales : 'Limpieza estándar') + '</span>' +
+          '      </div>' +
+          '    </div>' +
+          '    ' + stepperRecurrenteHtml + '' +
+          '  </div>' +
+          '  <div>' +
+          '    <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800/80 mb-2 space-y-2">' +
+          '      <div class="flex items-center justify-between gap-2 text-xs">' +
+          '        <label class="flex items-center gap-1.5 cursor-pointer select-none">' +
+          '          <input type="checkbox" ' + (fin.cobrado ? 'checked' : '') + ' onchange="toggleCobro('" + s.id + "', this.checked)" class="w-3.5 h-3.5 rounded border-slate-700 bg-slate-900 text-emerald-500 focus:ring-0 cursor-pointer">' +
+          '          <span class="text-[11px] font-semibold ' + (fin.cobrado ? 'text-emerald-400' : 'text-slate-400') + '">' +
+          '            ' + (fin.cobrado ? 'Cobrado Cliente' : 'Pendiente Cobro') + '' +
+          '          </span>' +
+          '        </label>' +
+          '        <div class="flex items-center gap-1">' +
+          '          <span class="text-[11px] text-slate-500 font-mono">$</span>' +
+          '          <input type="number" value="' + fin.montoCobro + '" onchange="actualizarMontoCobro('" + s.id + "', this.value)" class="w-20 px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-right font-mono text-xs text-white focus:outline-none focus:border-blue-500">' +
+          '        </div>' +
+          '      </div>' +
+          '      <div class="flex items-center justify-between gap-2 text-xs pt-1.5 border-t border-slate-800/60">' +
+          '        <label class="flex items-center gap-1.5 cursor-pointer select-none">' +
+          '          <input type="checkbox" ' + (fin.pagadoChica ? 'checked' : '') + ' onchange="togglePagoChica('" + s.id + "', this.checked)" class="w-3.5 h-3.5 rounded border-slate-700 bg-slate-900 text-blue-500 focus:ring-0 cursor-pointer">' +
+          '          <span class="text-[11px] font-semibold ' + (fin.pagadoChica ? 'text-blue-400' : 'text-slate-400') + '">' +
+          '            ' + (fin.pagadoChica ? 'Liquidado a Chica' : 'Pendiente a Chica') + '' +
+          '          </span>' +
+          '        </label>' +
+          '        <div class="flex items-center gap-1">' +
+          '          <span class="text-[11px] text-slate-500 font-mono">$</span>' +
+          '          <input type="number" value="' + fin.montoChica + '" onchange="actualizarMontoChica('" + s.id + "', this.value)" class="w-20 px-2 py-0.5 rounded-lg bg-slate-900 border border-slate-700 text-right font-mono text-xs text-white focus:outline-none focus:border-blue-500">' +
+          '        </div>' +
+          '      </div>' +
+          '    </div>' +
+          '    <!-- Módulo Fiscal DGI Desplegable -->' +
+          '    <details class="bg-slate-950/50 rounded-xl border border-slate-800/80 mb-2 p-2 text-xs group">' +
+          '      <summary class="flex items-center justify-between cursor-pointer list-none select-none">' +
+          '        ' + badgeFiscalHtml + '' +
+          '        <span class="text-[10px] text-slate-400 group-open:rotate-180 transition-transform">▾</span>' +
+          '      </summary>' +
+          '      <div class="mt-2.5 pt-2 border-t border-slate-800/60 space-y-1.5">' +
+          '        <div class="grid grid-cols-2 gap-1.5">' +
+          '          <div>' +
+          '            <label class="text-[9px] text-slate-400 block">RUT o Cédula</label>' +
+          '            <input id="input-rut-' + s.id + '" type="text" value="' + (fin.rutCi ? fin.rutCi : '') + '" placeholder="Ej: 219988770019" class="w-full px-2 py-1 rounded bg-slate-900 border border-slate-700 text-[11px] text-white focus:outline-none focus:border-blue-500">' +
+          '          </div>' +
+          '          <div>' +
+          '            <label class="text-[9px] text-slate-400 block">N° Factura / CFE</label>' +
+          '            <input id="input-factura-' + s.id + '" type="text" value="' + (fin.numeroFactura ? fin.numeroFactura : '') + '" placeholder="Ej: CFE-104" class="w-full px-2 py-1 rounded bg-slate-900 border border-slate-700 text-[11px] text-white focus:outline-none focus:border-blue-500">' +
+          '          </div>' +
+          '        </div>' +
+          '        <div>' +
+          '          <label class="text-[9px] text-slate-400 block">Razón Social</label>' +
+          '          <input id="input-razon-' + s.id + '" type="text" value="' + (fin.razonSocial ? fin.razonSocial : '') + '" placeholder="Nombre de empresa o persona" class="w-full px-2 py-1 rounded bg-slate-900 border border-slate-700 text-[11px] text-white focus:outline-none focus:border-blue-500">' +
+          '        </div>' +
+          '        <div class="flex items-center justify-between gap-1.5 pt-1">' +
+          '          <select id="select-fiscal-' + s.id + '" class="text-[10px] px-2 py-1 rounded bg-slate-900 border border-slate-700 text-slate-200">' +
+          '            <option value="Sin_Datos" ' + (fin.estadoFactura === 'Sin_Datos' ? 'selected' : '') + '>Sin Datos</option>' +
+          '            <option value="Listo_Para_Facturar" ' + (fin.estadoFactura === 'Listo_Para_Facturar' ? 'selected' : '') + '>Listo p/ Facturar</option>' +
+          '            <option value="Facturado" ' + (fin.estadoFactura === 'Facturado' ? 'selected' : '') + '>Facturado</option>' +
+          '          </select>' +
+          '          <div class="flex items-center gap-1">' +
+          '            <button type="button" onclick="solicitarRUTWhatsApp('" + s.cliente_nombre.replace(/'/g, "") + "', '" + (s.cliente_telefono ? s.cliente_telefono : "") + "')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-amber-300 text-[10px] font-semibold border border-amber-500/20" title="Pedir RUT al cliente por WhatsApp">' +
+          '              Pedir RUT' +
+          '            </button>' +
+          '            <button type="button" onclick="guardarDatosFiscales('" + s.id + "')" class="px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-bold">' +
+          '              Guardar' +
+          '            </button>' +
+          '          </div>' +
+          '        </div>' +
+          '      </div>' +
+          '    </details>' +
+          '    <div class="flex items-center justify-between text-xs mb-2.5 px-0.5">' +
+          '      <div class="flex items-center gap-1.5">' +
+          '        <div class="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-[10px] font-bold text-blue-400">' +
+          '          ' + s.funcionaria_nombre.charAt(0) + '' +
+          '        </div>' +
+          '        <span class="font-medium text-slate-200">' + s.funcionaria_nombre + '</span>' +
+          '      </div>' +
+          '      ' + (s.origen === 'arreglatodo' ? '<span class="text-[10px] text-amber-400 font-semibold">Liquidación AT</span>' : '') + '' +
+          '    </div>' +
+          '    <div class="grid grid-cols-2 gap-2">' +
+          '      <a href="https://wa.me/?text=' + msgChica + '" target="_blank" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-emerald-600/15 hover:bg-emerald-600/25 text-emerald-300 border border-emerald-500/25 font-semibold text-xs transition-all text-center">' +
+          '        <i data-lucide="send" class="w-3.5 h-3.5"></i>' +
+          '        <span>A Funcionaria</span>' +
+          '      </a>' +
+          '      ' + (s.origen === 'arreglatodo'
+                      ? '<div class="flex items-center justify-center py-1.5 px-2 rounded-xl bg-slate-800/40 text-slate-500 text-[11px] font-medium border border-slate-800/60">Cobra AT</div>'
+                      : '<a href="https://wa.me/?text=' + msgCobro + '" target="_blank" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-blue-600/15 hover:bg-blue-600/25 text-blue-300 border border-blue-500/25 font-semibold text-xs transition-all text-center"><i data-lucide="receipt" class="w-3.5 h-3.5"></i><span>Cobro</span></a>'
+                    ) + '' +
+          '    </div>' +
+          '  </div>' +
+          '</div>';
       }).join('');
 
       lucide.createIcons();
