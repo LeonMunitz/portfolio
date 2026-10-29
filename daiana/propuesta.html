@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Operativa y Seguridad - Reluciente</title>
+  <style>
+    :root {
+      --bg: #090e1a;
+      --card-bg: #131b2e;
+      --card-border: #1e2c4a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --brand-cyan: #38bdf8;
+      --brand-green: #10b981;
+      --brand-yellow: #f59e0b;
+      --brand-red: #ef4444;
+      --pill-bg: rgba(255, 255, 255, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.65;
+      padding: 24px 16px 50px 16px;
+    }
+
+    .wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header-box {
+      background: linear-gradient(135deg, #131f37 0%, #0d1527 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--brand-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 1.95rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .header-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* BANNER PRINCIPAL */
+    .intro-banner {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 16px;
+      padding: 22px 22px;
+      margin-bottom: 24px;
+    }
+
+    .intro-banner h3 {
+      color: var(--brand-green);
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .intro-banner p {
+      color: #e2e8f0;
+      font-size: 1.02rem;
+      line-height: 1.55;
+    }
+
+    /* CASO PRÁCTICO INTERNO */
+    .usecase-box {
+      background: rgba(56, 189, 248, 0.07);
+      border-left: 4px solid var(--brand-cyan);
+      border-radius: 0 16px 16px 0;
+      padding: 20px 22px;
+      margin-bottom: 28px;
+    }
+
+    .usecase-box h4 {
+      color: var(--brand-cyan);
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .usecase-box p {
+      color: #cbd5e1;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    /* TARJETAS DE OPCIONES */
+    .option-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .option-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .option-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .option-tag {
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .tag-blue { background: rgba(56, 189, 248, 0.2); color: var(--brand-cyan); border: 1px solid var(--brand-cyan); }
+    .tag-green { background: rgba(16, 185, 129, 0.2); color: var(--brand-green); border: 1px solid var(--brand-green); }
+
+    .concept-box {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 4px solid var(--brand-cyan);
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #e2e8f0;
+    }
+
+    .concept-box.green {
+      border-left-color: var(--brand-green);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 18px 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flow-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 12px;
+      background: var(--pill-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.98rem;
+    }
+
+    .flow-num {
+      background: var(--brand-cyan);
+      color: #090e1a;
+      font-weight: 800;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.8rem;
+    }
+
+    .flow-num.green {
+      background: var(--brand-green);
+    }
+
+    .pros-cons-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .pro-box {
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .pro-title {
+      font-weight: 800;
+      color: var(--brand-green);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+    }
+
+    .con-box {
+      background: rgba(245, 158, 11, 0.06);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .con-title {
+      font-weight: 800;
+      color: var(--brand-yellow);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+    }
+
+    ul.clean-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.clean-list li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    ul.clean-list li::before {
+      content: "•";
+      position: absolute;
+      left: 6px;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+
+    .pro-box ul.clean-list li::before { color: var(--brand-green); }
+    .con-box ul.clean-list li::before { color: var(--brand-yellow); }
+
+    /* POR QUÉ DESCARTAMOS LA NOTEBOOK */
+    .discarded-box {
+      background: rgba(239, 68, 68, 0.05);
+      border: 1px dashed rgba(239, 68, 68, 0.35);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+
+    .discarded-title {
+      color: var(--brand-red);
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .discarded-box p {
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px 10px 0 10px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      border-top: 1px solid var(--card-border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <!-- ENCABEZADO -->
+    <div class="header-box">
+      <div class="badge-top">Propuesta Técnica para Reluciente</div>
+      <h1>Dos Opciones Seguras para la Operativa Interna y WhatsApp</h1>
+      <p class="header-desc">
+        Diseñado para garantizar que <strong>los datos sean 100% propiedad de Reluciente</strong>, con disponibilidad para resolver contingencias internas a cualquier hora y acceso móvil en la calle.
+      </p>
+    </div>
+
+    <!-- EL PRINCIPIO FUNDAMENTAL -->
+    <div class="intro-banner">
+      <h3>🛡️ El principio rector: Los datos son exclusivamente de Reluciente</h3>
+      <p>
+        Entendemos y compartimos plenamente la postura de la reunión: <strong>la cartera de clientes, los teléfonos, las direcciones y las tarifas son el patrimonio privado de Reluciente</strong> y no deben guardarse en computadoras personales ajenas. Para cuidar eso y asegurar que la herramienta interna responda ante cualquier urgencia, evaluamos las dos únicas opciones viables y profesionales del mercado.
+      </p>
+    </div>
+
+    <!-- ACLARACIÓN DEL ROL INTERNO DEL BOT -->
+    <div class="usecase-box">
+      <h4>💡 El rol del Asistente en esta etapa: Herramienta Interna del Equipo</h4>
+      <p>
+        <strong>El asistente de WhatsApp no es para que hablen clientes en la noche</strong>; es una herramienta de uso interno exclusivo para Daiana, Carol y la coordinación.<br><br>
+        <strong>Ejemplo real de contingencia:</strong> Si una colaboradora avisa a las 23:00 hs que mañana no puede asistir por una emergencia familiar, Daiana o Carol le pueden preguntar directamente al asistente por WhatsApp: <em>"¿Quién está cerca del servicio de la mañana?"</em>. El sistema busca al instante en la base de datos qué chicas tienen hueco en la misma zona o barrio, permitiendo resolver la cobertura en 2 minutos desde la cama sin tener que prender una computadora ni hacer 10 llamadas a deshora.
+      </p>
+    </div>
+
+    <!-- OPCIÓN 1: NUBE PRIVADA -->
+    <div class="option-card">
+      <div class="option-header">
+        <div class="option-title">Opción 1: Nube Privada a Nombre de Reluciente</div>
+        <span class="option-tag tag-blue">Independencia Total</span>
+      </div>
+
+      <div class="concept-box">
+        <strong>En criollo:</strong> Reluciente contrata su propio servidor privado en la nube (como alquilar una oficina digital propia). Los dueños legales de la cuenta y las contraseñas son ustedes.
+      </div>
+
+      <div class="section-subtitle">⚙️ Cómo funciona el circuito:</div>
+      <div class="flow-list">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <div>Se crea una cuenta en un proveedor de servidores (ej. Hetzner o DigitalOcean) con el <strong>correo oficial y los datos de Reluciente</strong>. La factura viene a nombre de la empresa.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <div>Ustedes tienen la <strong>contraseña maestra</strong>. A León solo le dan un permiso técnico de administrador para instalar el sistema y mantenerlo funcionando.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <div>El asistente interno y la base de datos corren adentro de ese servidor privado las 24 horas.</div>
+        </div>
+      </div>
+
+      <div class="pros-cons-grid">
+        <div class="pro-box">
+          <div class="pro-title">✅ Ventajas para Reluciente:</div>
+          <ul class="clean-list">
+            <li><strong>Propiedad jurídica total:</strong> El servidor es de la empresa. Ningún dato toca la computadora de León.</li>
+            <li><strong>Resolución de urgencias nocturnas:</strong> Pueden consultar al asistente para reasignar servicios a cualquier hora, fines de semana o feriados.</li>
+            <li><strong>Acceso en la calle:</strong> Daiana y las colaboradoras ven itinerarios y direcciones desde el celular en cualquier barrio.</li>
+            <li><strong>Control absoluto:</strong> Si el día de mañana deciden no trabajar más con León, cambian la contraseña del servidor con un clic y León queda afuera, conservando ustedes todo intacto.</li>
+          </ul>
+        </div>
+
+        <div class="con-box">
+          <div class="con-title">⚠️ Lo que hay que tener en cuenta:</div>
+          <ul class="clean-list">
+            <li>Tiene un costo de mantenimiento de servidor de unos <strong>$4 a $5 USD al mes</strong> que se abona directamente al proveedor con la tarjeta de la empresa.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPCIÓN 2: MOTOR CON LEÓN + DATOS EN CLOUDFLARE DE RELUCIENTE -->
+    <div class="option-card">
+      <div class="option-header">
+        <div class="option-title">Opción 2: Motor con León + Los Datos en Poder de Reluciente</div>
+        <span class="option-tag tag-green">Cero Costo Extra</span>
+      </div>
+
+      <div class="concept-box green">
+        <strong>En criollo:</strong> León pone y mantiene la maquinaria pesada (el motor que procesa la lógica), pero <strong>la caja fuerte con los datos de clientes y colaboradoras está en una cuenta gratuita de Reluciente (Cloudflare)</strong>.
+      </div>
+
+      <div class="section-subtitle">⚙️ Cómo funciona el circuito:</div>
+      <div class="flow-list">
+        <div class="flow-step">
+          <div class="flow-num green">1</div>
+          <div>Reluciente se crea una <strong>cuenta gratuita en Cloudflare</strong> (el estándar mundial de seguridad que usan bancos e instituciones). La cuenta es 100% de la empresa.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num green">2</div>
+          <div>La base de datos se aloja en esa cuenta de Cloudflare. León <strong>no almacena copias de sus clientes en su computadora</strong>.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num green">3</div>
+          <div>Ustedes le otorgan al motor del asistente un "pase de acceso" (token). Cada vez que ustedes consultan al asistente interno, el motor lee los datos en la cuenta de Reluciente para responderles.</div>
+        </div>
+      </div>
+
+      <div class="pros-cons-grid">
+        <div class="pro-box">
+          <div class="pro-title">✅ Ventajas para Reluciente:</div>
+          <ul class="clean-list">
+            <li><strong>Costo cero en servidores:</strong> No tienen que pagar los 5 dólares mensuales de infraestructura; se utiliza la capa gratuita de Cloudflare.</li>
+            <li><strong>Llave de corte en su mano:</strong> Si en algún momento no quieren usar más el servicio, desactivan el token desde su panel de Cloudflare y el motor de León queda totalmente ciego sin poder ver ningún dato.</li>
+            <li><strong>Los datos nunca se guardan con León:</strong> La base vive en la cuenta oficial de Reluciente.</li>
+            <li><strong>Disponibilidad para contingencias y celular:</strong> El asistente responde consultas internas de noche y Daiana puede consultar desde el celular en la calle.</li>
+          </ul>
+        </div>
+
+        <div class="con-box">
+          <div class="con-title">⚠️ Lo que hay que tener en cuenta:</div>
+          <ul class="clean-list">
+            <li>Requiere que alguien del equipo cree la cuenta inicial en Cloudflare (se hace en 5 minutos con una videollamada guiada).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- POR QUÉ NO LA NOTEBOOK DE LA OFICINA -->
+    <div class="discarded-box">
+      <div class="discarded-title">
+        <span>❌ Por qué no es viable instalar el sistema en la computadora de la oficina:</span>
+      </div>
+      <p>
+        Evaluar instalar el asistente en la notebook de la oficina traería fallas diarias para la operativa interna:
+      </p>
+      <ul class="clean-list">
+        <li>Apenas bajan la tapa de la notebook o se apaga la máquina al salir de la oficina, <strong>el asistente se apaga y no pueden resolver emergencias nocturnas de chicas que avisan que faltan</strong>.</li>
+        <li>Windows se reinicia solo de madrugada para hacer actualizaciones, dejando el sistema apagado por la mañana.</li>
+        <li>Si Daiana está en la calle y la máquina de la oficina está apagada, <strong>no puede ver itinerarios ni direcciones en el celular</strong>.</li>
+        <li>Si surge una falla técnica fuera del horario de oficina, León no puede conectarse a arreglarlo porque no hay nadie sentado frente a la pantalla para darle acceso.</li>
+      </ul>
+    </div>
+
+    <!-- CONCLUSIÓN -->
+    <footer>
+      <p><strong>Conclusión:</strong> Ambas opciones garantizan que los datos son 100% de Reluciente y resuelven las contingencias de coordinación a cualquier hora. Solo queda definir si prefieren la independencia de un servidor propio (Opción 1) o la practicidad de Cloudflare a costo cero (Opción 2).</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
