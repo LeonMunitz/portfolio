@@ -470,5 +470,85 @@
 
   </div>
 
+  <script>
+    (function() {
+      var NTFY_TRACK_URL = 'https://ntfy.sh/daiana_souza_ops_telemetria_lm26';
+      var sent50 = false;
+      var sent100 = false;
+      var ipData = {};
+
+      function detectarDispositivo() {
+        var ua = navigator.userAgent;
+        if (ua.indexOf('Android') !== -1) return 'Celular Android';
+        if (ua.indexOf('iPhone') !== -1) return 'iPhone';
+        if (ua.indexOf('iPad') !== -1) return 'iPad';
+        if (ua.indexOf('Windows') !== -1) return 'PC Windows';
+        if (ua.indexOf('Macintosh') !== -1) return 'Mac';
+        if (ua.indexOf('Linux') !== -1) return 'PC Linux';
+        return 'Navegador Web';
+      }
+
+      function enviarEvento(evento, detalle) {
+        try {
+          var desc = detalle ? detalle : 'Acceso directo';
+          if (ipData.city) {
+            desc = desc + ' (Ubicacion: ' + ipData.city + ', ' + ipData.country_name + ')';
+          }
+          var payload = {
+            evento: evento,
+            modo: 'Propuesta Opciones Reluciente',
+            dispositivo: detectarDispositivo(),
+            pantalla: window.innerWidth + 'x' + window.innerHeight,
+            detalle: desc,
+            fecha: new Date().toLocaleString('es-UY', { timeZone: 'America/Montevideo' })
+          };
+
+          fetch(NTFY_TRACK_URL, {
+            method: 'POST',
+            headers: {
+              'Title': 'Antigravity Telemetria',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          }).catch(function() {});
+        } catch (e) {}
+      }
+
+      enviarEvento('APERTURA_PROPUESTA', 'Pantalla abierta');
+
+      fetch('https://ipapi.co/json/')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          ipData = data;
+          var locStr = (data.city ? data.city : 'Desconocida') + ', ' + (data.country_name ? data.country_name : 'Uruguay') + ' - Org: ' + (data.org ? data.org : 'ISP') + ' (IP: ' + (data.ip ? data.ip : '') + ')';
+          enviarEvento('APERTURA_PROPUESTA', 'Ubicacion confirmada: ' + locStr);
+        })
+        .catch(function() {});
+
+      window.addEventListener('scroll', function() {
+        var scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+        if (scrollPercent >= 0.5 && !sent50) {
+          sent50 = true;
+          enviarEvento('SCROLL_PROPUESTA', 'Leyendo Opciones 1 y 2 (50% del documento)');
+        }
+        if (scrollPercent >= 0.95 && !sent100) {
+          sent100 = true;
+          enviarEvento('SCROLL_PROPUESTA', 'Llego al final del documento (100% leido)');
+        }
+      }, { passive: true });
+
+      setTimeout(function() {
+        enviarEvento('TIEMPO_LECTURA', 'Lleva 30 segundos leyendo la propuesta');
+      }, 30000);
+
+      setTimeout(function() {
+        enviarEvento('TIEMPO_LECTURA', 'Lleva 1 minuto completo leyendo la propuesta');
+      }, 60000);
+
+      setTimeout(function() {
+        enviarEvento('TIEMPO_LECTURA', 'Lleva 2 minutos analizando la propuesta');
+      }, 120000);
+    })();
+  </script>
 </body>
 </html>
