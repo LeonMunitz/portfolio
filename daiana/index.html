@@ -360,10 +360,16 @@
         <span>Mostrando <span id="contador-mostrados" class="font-bold text-white">0</span> servicios</span>
         <span id="badge-filtro-activo" class="hidden px-2 py-0.5 rounded-md text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium"></span>
       </div>
-      <button onclick="resetearFiltros()" class="text-xs text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1 font-medium">
-        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-        <span>Limpiar filtros</span>
-      </button>
+      <div class="flex items-center gap-2">
+        <button onclick="abrirCalculadoraModal()" class="text-xs bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 font-bold shadow-md shadow-blue-900/30">
+          <i data-lucide="calculator" class="w-3.5 h-3.5 text-blue-200"></i>
+          <span>Calculadora de Cotizaciones</span>
+        </button>
+        <button onclick="resetearFiltros()" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1 font-medium px-2 py-1.5 rounded-lg hover:bg-slate-800">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+          <span>Limpiar filtros</span>
+        </button>
+      </div>
     </div>
 
     <!-- GRILLA RESPONSIVE DE TARJETAS -->
@@ -1803,5 +1809,112 @@ Pago: Transferencia BROU</div>
 
     iniciar();
   </script>
+
+  <!-- MODAL CALCULADORA DAIANA SOUZA -->
+  <div id="modal-calculadora" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <div class="px-5 py-4 border-b border-slate-800 bg-slate-850 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="p-2 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30">
+            <i data-lucide="calculator" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Calculadora Rápida de Cotización</h3>
+            <p class="text-xs text-slate-400">Tarifas oficiales y margen limpio Daiana Souza</p>
+          </div>
+        </div>
+        <button onclick="cerrarCalculadoraModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-4 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1">Duración (Horas):</label>
+            <select id="calc-horas" onchange="recalcularCotizacion()" class="w-full bg-slate-850 border border-slate-700 rounded-lg px-3 py-2 text-white font-medium focus:ring-2 focus:ring-blue-500 outline-none">
+              <option value="3">3 horas (Pequeño / 1 dorm)</option>
+              <option value="4" selected>4 horas (Estándar / 2 dorm)</option>
+              <option value="5">5 horas (Mediano / 3 dorm)</option>
+              <option value="6">6 horas (Grande / 4 dorm)</option>
+              <option value="8">8 horas (Jornada completa)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1">Zona Logística:</label>
+            <select id="calc-zona" onchange="recalcularCotizacion()" class="w-full bg-slate-850 border border-slate-700 rounded-lg px-3 py-2 text-white font-medium focus:ring-2 focus:ring-blue-500 outline-none">
+              <option value="0" selected>Pocitos / Buceo / Cordón / Centro ($0)</option>
+              <option value="150">Oeste / Prado / Sayago (+$150)</option>
+              <option value="200">Carrasco / Costa Este (+$200)</option>
+              <option value="250">Paso de Carrasco (+$250)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 space-y-2">
+          <div class="text-slate-300 font-semibold mb-1">Adicionales e Insumos:</div>
+          <div class="grid grid-cols-2 gap-2 text-slate-300">
+            <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded hover:bg-slate-800/50">
+              <input type="checkbox" id="calc-prod" onchange="recalcularCotizacion()" class="rounded border-slate-700 text-blue-600 focus:ring-blue-500">
+              <span>Insumos / Productos (+$300)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded hover:bg-slate-800/50">
+              <input type="checkbox" id="calc-asp" onchange="recalcularCotizacion()" class="rounded border-slate-700 text-blue-600 focus:ring-blue-500">
+              <span>Aspiradora Industrial (+$350)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded hover:bg-slate-800/50">
+              <input type="checkbox" id="calc-prof" onchange="recalcularCotizacion()" class="rounded border-slate-700 text-blue-600 focus:ring-blue-500">
+              <span>Horno / Heladera (+$400)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded hover:bg-slate-800/50">
+              <input type="checkbox" id="calc-hab" onchange="recalcularCotizacion()" class="rounded border-slate-700 text-emerald-500 focus:ring-emerald-500">
+              <span class="text-emerald-400 font-semibold">Cliente Habitual (-10%)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- RESULTADOS EN VIVO -->
+        <div class="grid grid-cols-3 gap-2.5 pt-1">
+          <div class="bg-blue-950/40 border border-blue-800/50 p-3 rounded-xl text-center">
+            <div class="text-[10px] text-blue-400 uppercase font-bold tracking-wider">Tarifa Cliente</div>
+            <div id="calc-res-total" class="text-lg font-black text-white font-mono mt-0.5">$2,450</div>
+            <div class="text-[10px] text-blue-300/80">a cobrar</div>
+          </div>
+          <div class="bg-indigo-950/40 border border-indigo-800/50 p-3 rounded-xl text-center">
+            <div class="text-[10px] text-indigo-400 uppercase font-bold tracking-wider">Pago Chica</div>
+            <div id="calc-res-chica" class="text-lg font-black text-indigo-200 font-mono mt-0.5">$1,120</div>
+            <div class="text-[10px] text-indigo-300/80">mano de obra ($280/h)</div>
+          </div>
+          <div class="bg-emerald-950/40 border border-emerald-800/50 p-3 rounded-xl text-center">
+            <div class="text-[10px] text-emerald-400 uppercase font-bold tracking-wider">Margen Daiana</div>
+            <div id="calc-res-margen" class="text-lg font-black text-emerald-300 font-mono mt-0.5">$1,330</div>
+            <div class="text-[10px] text-emerald-400/80 font-bold">limpio en mano</div>
+          </div>
+        </div>
+
+        <!-- TEXTO LISTO PARA REENVIAR -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-slate-300 font-semibold">Mensaje listo para reenviar por WhatsApp:</span>
+            <button onclick="copiarTextoCotizacion()" id="btn-copy-calc" class="text-[11px] text-blue-400 hover:text-blue-300 font-bold flex items-center gap-1">
+              <i data-lucide="copy" class="w-3 h-3"></i>
+              <span>Copiar mensaje</span>
+            </button>
+          </div>
+          <textarea id="calc-textarea-msg" readonly rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-300 text-xs font-mono resize-none focus:outline-none"></textarea>
+        </div>
+
+      </div>
+
+      <div class="px-5 py-3 border-t border-slate-800 bg-slate-850 flex justify-end">
+        <button onclick="cerrarCalculadoraModal()" class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-semibold transition-all">
+          Listo
+        </button>
+      </div>
+
+    </div>
+  </div>
+
 </body>
 </html>
