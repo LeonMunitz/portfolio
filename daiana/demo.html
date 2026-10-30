@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demostración de Seguridad, Soberanía y Operatoria de WhatsApp</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background: #090d16;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+    }
+    header {
+      text-align: center;
+      max-width: 980px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      background: #1e293b;
+      padding: 6px;
+      border-radius: 12px;
+      justify-content: center;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .tab-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+    }
+    .tab-btn.active-tab3 {
+      background: #10b981;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Views */
+    .view-container {
+      width: 100%;
+      max-width: 1200px;
+      display: none;
+    }
+    .view-container.active-view {
+      display: block;
+    }
+
+    /* Canvas Section */
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #1e293b;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid #334155;
+    }
+    .btn-killswitch {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-killswitch:hover {
+      background: #b91c1c;
+      transform: scale(1.02);
+    }
+    .btn-killswitch.active {
+      background: #16a34a;
+    }
+    .btn-slowmo {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-slowmo:hover {
+      background: #0369a1;
+    }
+    .backup-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    /* Lifecycle Timeline */
+    .lifecycle-container {
+      margin-top: 16px;
+      background: #111827;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .lifecycle-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .step-box {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 11px;
+      transition: all 0.3s;
+    }
+    .step-box.highlight {
+      border-color: #38bdf8;
+      background: #0c4a6e;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+    .step-time {
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+    .step-name {
+      font-weight: 600;
+      color: #f3f4f6;
+      margin-bottom: 2px;
+    }
+    .step-desc {
+      color: #9ca3af;
+      line-height: 1.3;
+      font-size: 10.5px;
+    }
+
+    /* Console Live Inspection */
+    .console-panel {
+      margin-top: 14px;
+      background: #050811;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11.5px;
+      color: #10b981;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+    .console-line {
+      margin-bottom: 4px;
+      display: flex;
+      gap: 10px;
+    }
+    .console-ts {
+      color: #64748b;
+    }
+    .console-warn {
+      color: #f59e0b;
+    }
+    .console-danger {
+      color: #ef4444;
+    }
+    .console-ok {
+      color: #34d399;
+    }
+
+    /* Cards under Scenario */
+    .info-panel {
+      width: 100%;
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .info-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .info-card h3 {
+      font-size: 15px;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+    .info-card p {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+    .badge-secure {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid #10b981;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    /* TAB 3: WHATSAPP & DASHBOARD SIMULATOR */
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 470px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* Phone Mockup */
+    .phone-container {
+      background: #111b21;
+      border-radius: 24px;
+      border: 2px solid #2a3942;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      height: 740px;
+    }
+    .phone-header {
+      background: #202c33;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #2a3942;
+    }
+    .phone-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 16px;
+    }
+    .phone-contact-info h4 {
+      font-size: 14px;
+      color: #e9edef;
+      font-weight: 600;
+    }
+    .phone-contact-info span {
+      font-size: 11px;
+      color: #00a884;
+    }
+
+    /* Chat Messages Box */
+    .phone-chat {
+      flex: 1;
+      background: #0b141a;
+      padding: 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .msg {
+      max-width: 86%;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.4;
+      position: relative;
+      word-break: break-word;
+    }
+    .msg-in {
+      align-self: flex-start;
+      background: #202c33;
+      color: #e9edef;
+      border-top-left-radius: 2px;
+    }
+    .msg-out {
+      align-self: flex-end;
+      background: #005c4b;
+      color: #e9edef;
+      border-top-right-radius: 2px;
+    }
+    .msg-time {
+      font-size: 9px;
+      color: #8696a0;
+      text-align: right;
+      margin-top: 4px;
+    }
+    .msg-bot-badge {
+      font-size: 9px;
+      font-weight: 700;
+      background: rgba(2, 132, 199, 0.3);
+      color: #38bdf8;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    /* Actions Toolbar at bottom of phone */
+    .phone-actions {
+      background: #202c33;
+      padding: 10px;
+      border-top: 1px solid #2a3942;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .actions-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #8696a0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .btn-group-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .btn-sim {
+      background: #2a3942;
+      color: #d1d7db;
+      border: 1px solid #374248;
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 10.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .btn-sim:hover {
+      background: #00a884;
+      color: white;
+      border-color: #00a884;
+    }
+    .btn-sim-purple:hover {
+      background: #8b5cf6;
+      border-color: #a78bfa;
+    }
+    .btn-sim-orange:hover {
+      background: #f97316;
+      border-color: #fb923c;
+    }
+
+    /* Dashboard Panel on the Right */
+    .dashboard-panel {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 18px;
+      height: 740px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #334155;
+    }
+    .dash-header h2 {
+      font-size: 17px;
+      color: #f8fafc;
+      font-weight: 700;
+    }
+    .cf-live-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid #f97316;
+      color: #fb923c;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .dot-pulse {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #22c55e;
+    }
+
+    /* Dashboard Sub-tabs */
+    .dash-subtabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .subtab-btn {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .subtab-btn.active {
+      background: #0284c7;
+      color: white;
+      border-color: #38bdf8;
+    }
+
+    /* Metrics Summary */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .metric-card {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .metric-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+    .metric-label {
+      font-size: 10.5px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    /* Orders / Records List */
+    .orders-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .records-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 4px;
+    }
+    .record-item {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: all 0.3s;
+    }
+    .record-item.new-entry {
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    }
+    .record-item.alert-entry {
+      border-color: #ef4444;
+      background: #1c1119;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+    }
+    .record-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .record-id {
+      font-weight: 700;
+      font-size: 12.5px;
+      color: #f1f5f9;
+    }
+    .record-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 12px;
+    }
+    .badge-ok {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid #10b981;
+    }
+    .badge-pend {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid #f59e0b;
+    }
+    .badge-danger {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid #ef4444;
+    }
+    .badge-purple {
+      background: rgba(168, 85, 247, 0.2);
+      color: #c084fc;
+      border: 1px solid #a855f7;
+    }
+    .record-details {
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+    .record-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Flujo Operativo, Soberanía y Gestión de WhatsApp</h1>
+    <p class="subtitle">Demostración técnica de seguridad de datos, integración con Cloudflare y automatización operativa inteligente para servicios.</p>
+  </header>
+
+  <div class="tabs">
+    <button id="btn-tab1" class="tab-btn active" onclick="switchMainView(1)">Opción 1: Cloudflare de Ellos (Procesamiento Efímero)</button>
+    <button id="btn-tab2" class="tab-btn" onclick="switchMainView(2)">Opción 2: Servidor Externo Dedicado (100% en otro lado)</button>
+    <button id="btn-tab3" class="tab-btn" onclick="switchMainView(3)">Simulador: Agendamiento, Liquidaciones y Dashboard</button>
+  </div>
+
+  <!-- VIEW 1 & 2: ARCHITECTURE & KILL SWITCH & TIMELINE -->
+  <div id="view-arch" class="view-container active-view">
+    <div class="canvas-container">
+      <canvas id="simCanvas" width="1200" height="520"></canvas>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <button id="killSwitchBtn" class="btn-killswitch" onclick="toggleKillSwitch()">
+        <span>🚨 Probar Kill Switch (Simular Revocación de Acceso)</span>
+      </button>
+      <button class="btn-slowmo" onclick="runSlowMoCycle()">
+        <span>▶ Simular Ciclo de Vida del Dato</span>
+      </button>
+      <div class="backup-indicator">
+        <span>📧 Backup de Salida: daiana@empresa.com (Activo)</span>
+      </div>
+      <div style="font-size: 12px; color: #94a3b8;">
+        Estado del Token: <strong id="tokenStatusText" style="color: #22c55e;">ACTIVO (Conexión Autorizada)</strong>
+      </div>
+    </div>
+
+    <!-- Dynamic Lifecycle Timeline -->
+    <div class="lifecycle-container">
+      <div class="lifecycle-title">
+        <span id="lifecycleHeaderTitle">Ciclo de Vida: Cloudflare Efímero (Total: ~130 ms en RAM)</span>
+        <span id="lifecycleCurrentMs" style="color: #38bdf8;">Estado: En espera de evento</span>
+      </div>
+      <div class="steps-row" id="stepsRowContainer">
+        <!-- Injected via JavaScript based on Scenario 1 or 2 -->
+      </div>
+    </div>
+
+    <!-- Live Console Inspection -->
+    <div class="console-panel" id="consoleOutput">
+      <div class="console-line"><span class="console-ts">[19:40:00.012]</span> [SISTEMA] Motor de gestiones iniciado en modo efímero. Zero-Knowledge activo.</div>
+      <div class="console-line"><span class="console-ts">[19:40:00.015]</span> [CLOUDFLARE] Conexión validada con D1 / KV de la empresa cliente (Tokens seguros).</div>
+      <div class="console-line"><span class="console-ts">[19:40:00.020]</span> [AUTOBACKUP] Listener de Kill Switch configurado: En caso de revocación, genera CSV y envía a daiana@empresa.com.</div>
+    </div>
+
+    <!-- Scenario Cards -->
+    <div class="info-panel" id="infoPanel"></div>
+  </div>
+
+  <!-- VIEW 3: WHATSAPP SIMULATOR & DASHBOARD -->
+  <div id="view-simulator" class="view-container">
+    <div class="sim-grid">
+      
+      <!-- Phone Window -->
+      <div class="phone-container">
+        <div class="phone-header">
+          <div class="phone-avatar">AG</div>
+          <div class="phone-contact-info">
+            <h4>Bot de Gestión Operativa</h4>
+            <span>en línea (Motor León / Cloudflare)</span>
+          </div>
+        </div>
+
+        <div class="phone-chat" id="phoneChat">
+          <div class="msg msg-in">
+            <span class="msg-bot-badge">SISTEMA</span><br>
+            ¡Hola! Soy el asistente automatizado de servicios. Puedes agendar órdenes, consultar pendientes, calcular liquidaciones de personal o conciliar con ArreglaTodo.
+            <div class="msg-time">19:35</div>
+          </div>
+        </div>
+
+        <div class="phone-actions">
+          <span class="actions-label">Comandos de Prueba Operativa (Haz clic para simular):</span>
+          <div class="btn-group-grid">
+            <button class="btn-sim" onclick="simAgendarCompleto()">
+              1. Agendar Completo<br><small style="color: #8696a0;">Cliente con todos los datos</small>
+            </button>
+            <button class="btn-sim" onclick="simAgendarIncompleto()">
+              2. Datos Incompletos<br><small style="color: #f59e0b;">Falta dirección / pago</small>
+            </button>
+            <button class="btn-sim" onclick="simComandoAgenda()">
+              3. Comando: "agenda hoy"<br><small style="color: #8696a0;">Lista de servicios del día</small>
+            </button>
+            <button class="btn-sim" onclick="simReporteHorario()">
+              4. Alerta Horaria (Cron)<br><small style="color: #38bdf8;">Envío de pendientes</small>
+            </button>
+            <button class="btn-sim btn-sim-purple" onclick="simLiquidarPersonal()">
+              5. Liquidar Colaboradora<br><small style="color: #c084fc;">Mano de obra y servicios</small>
+            </button>
+            <button class="btn-sim btn-sim-orange" onclick="simLiquidarArreglaTodo()">
+              6. Liquidar ArreglaTodo<br><small style="color: #fb923c;">Comisiones 15% y balance</small>
+            </button>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 4px;">
+            <button class="btn-sim" style="border-color: #10b981;" onclick="simConciliarArreglaTodoOK()">
+              7A. Comprobante AT: OK<br><small style="color: #34d399;">Total coincide -> Salen de lista</small>
+            </button>
+            <button class="btn-sim" style="border-color: #ef4444;" onclick="simConciliarArreglaTodoError()">
+              7B. Comprobante AT: Error<br><small style="color: #f87171;">Alarma y rebote a ArreglaTodo</small>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Window -->
+      <div class="dashboard-panel">
+        <div class="dash-header">
+          <div>
+            <h2>Dashboard de Operaciones y Liquidaciones</h2>
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">Vista en tiempo real del personal operativo y directivos</div>
+          </div>
+          <div class="cf-live-badge">
+            <div class="dot-pulse"></div>
+            <span>Cloudflare D1 Conectado (de ellos)</span>
+          </div>
+        </div>
+
+        <!-- Metric Badges -->
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-val" id="countAgendados">3</div>
+            <div class="metric-label">Servicios Confirmados Hoy</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="countPendientes" style="color: #fbbf24;">1</div>
+            <div class="metric-label">Pendientes de Datos / Pago</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="metricLiquidado" style="color: #c084fc;">$5.950</div>
+            <div class="metric-label">Liquidación Semanal Personal</div>
+          </div>
+        </div>
+
+        <!-- Subtabs -->
+        <div class="dash-subtabs">
+          <button id="subtab-1" class="subtab-btn active" onclick="switchDashboardTab(1)">Órdenes de Servicios</button>
+          <button id="subtab-2" class="subtab-btn" onclick="switchDashboardTab(2)">Liquidaciones Personal</button>
+          <button id="subtab-3" class="subtab-btn" onclick="switchDashboardTab(3)">Conciliación ArreglaTodo</button>
+        </div>
+
+        <div class="orders-title">
+          <span id="recordsListTitle">Registros en Cloudflare D1</span>
+          <span style="font-size: 11px; color: #64748b;">Sincronización instantánea</span>
+        </div>
+
+        <!-- Dynamic Records Feed -->
+        <div class="records-list" id="recordsList">
+          <!-- Populated by JS -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================
+       VIEW & TAB MANAGEMENT
+       ========================================================== */
+    let currentScenario = 1;
+    let killSwitchActive = false;
+    let currentDashTab = 1;
+    let particles = [];
+    let animFrame;
+
+    function switchMainView(tabNum) {
+      document.getElementById('btn-tab1').className = 'tab-btn' + (tabNum === 1 ? ' active' : '');
+      document.getElementById('btn-tab2').className = 'tab-btn' + (tabNum === 2 ? ' active' : '');
+      document.getElementById('btn-tab3').className = 'tab-btn' + (tabNum === 3 ? ' active active-tab3' : '');
+
+      const viewArch = document.getElementById('view-arch');
+      const viewSim = document.getElementById('view-simulator');
+
+      if (tabNum === 1 || tabNum === 2) {
+        viewArch.className = 'view-container active-view';
+        viewSim.className = 'view-container';
+        currentScenario = tabNum;
+        particles = [];
+        updateInfoPanel();
+        renderLifecycleSteps();
+      } else {
+        viewArch.className = 'view-container';
+        viewSim.className = 'view-container active-view';
+        renderDashboardFeed();
+      }
+    }
+
+    /* ==========================================================
+       LIFECYCLE STEPS DEFINITION (DIFFERENT FOR BOTH ARCHITECTURES)
+       ========================================================== */
+    const lifecycleData = {
+      1: {
+        title: "Ciclo de Vida: Cloudflare Efímero (Total: ~130 ms en RAM)",
+        steps: [
+          { time: "0 ms", name: "Recepción Webhook", desc: "Llega petición HTTPS con token seguro desde WhatsApp o Formulario hacia el motor." },
+          { time: "+40 ms", name: "Procesamiento en RAM", desc: "Se valida y formatea en memoria RAM volátil. 0 bytes escritos en disco duro." },
+          { time: "+85 ms", name: "Escritura Cloudflare", desc: "Se guarda remotamente en la base D1 / KV del cliente bajo sus credenciales." },
+          { time: "+120 ms", name: "Notificación Final", desc: "Sale el mensaje de confirmación o alerta por WhatsApp al cliente / operario." },
+          { time: "+130 ms", name: "Purga Total de RAM", desc: "Garbage Collector destruye la variable. Memoria en cero. Cero copias residuales." }
+        ]
+      },
+      2: {
+        title: "Ciclo de Vida: Servidor Dedicado Privado (Perímetro 100% Cerrado 'En Otro Lado')",
+        steps: [
+          { time: "0 ms", name: "Recepción Interna", desc: "El webhook entra directo a la IP privada y puerto del Servidor contratado por ellos." },
+          { time: "+25 ms", name: "Procesamiento Local", desc: "Corre en la CPU y RAM del servidor de ellos en Hetzner / AWS. Nunca viaja afuera." },
+          { time: "+50 ms", name: "Base de Datos Local", desc: "Se escribe en PostgreSQL / SQLite en el disco duro físico del servidor de ellos." },
+          { time: "+80 ms", name: "Disparo WhatsApp", desc: "Sale la notificación directamente desde la conexión del servidor del cliente." },
+          { time: "Aislado", name: "Cero Acceso León", desc: "León jamás recibe ni ve los datos de clientes; solo actualiza código vía Git Push." }
+        ]
+      }
+    };
+
+    function renderLifecycleSteps() {
+      const data = lifecycleData[currentScenario];
+      document.getElementById('lifecycleHeaderTitle').innerText = data.title;
+      const container = document.getElementById('stepsRowContainer');
+      container.innerHTML = data.steps.map((s, idx) => `
+        <div id="step-${idx}" class="step-box">
+          <div class="step-time">${s.time}</div>
+          <div class="step-name">${s.name}</div>
+          <div class="step-desc">${s.desc}</div>
+        </div>
+      `).join('');
+    }
+
+    /* ==========================================================
+       CANVAS & ARCHITECTURE SCENARIOS
+       ========================================================== */
+    const canvas = document.getElementById('simCanvas');
+    const ctx = canvas.getContext('2d');
+    const infoPanel = document.getElementById('infoPanel');
+
+    const scenarios = {
+      1: {
+        title: "Opción 1: Datos en su Cloudflare (Motor Stateless en RAM)",
+        nodes: [
+          { id: "cf", x: 180, y: 250, w: 210, h: 250, label: "CLOUDFLARE DE ELLOS", sub: "Propiedad exclusiva del cliente\nBase D1 / KV / R2\nTus credenciales y datos\nTokens de acceso revocables", color: "#f97316", border: "#fb923c" },
+          { id: "motor", x: 600, y: 250, w: 210, h: 250, label: "MOTOR DE GESTIONES", sub: "Procesamiento en memoria RAM\nStateless (Sin disco duro)\nEjecuta la tarea en ms\ny se autodestruye de RAM", color: "#0284c7", border: "#38bdf8" },
+          { id: "out", x: 1020, y: 250, w: 210, h: 250, label: "RESPUESTA / DESTINO", sub: "Actualización de pedidos\nNotificación WhatsApp\nCierre de orden\nConfirmación a clientes", color: "#10b981", border: "#34d399" }
+        ],
+        cards: [
+          { title: "Propiedad Total del Cliente", text: "La base de datos, los registros y las claves residen 100% en la cuenta de Cloudflare contratada y controlada por ellos.", badge: "Soberanía de Datos" },
+          { title: "Memoria Efímera (Cero Retención)", text: "El motor de gestión procesa las operaciones en la memoria RAM volátil. No cuenta con disco de guardado ni almacena copias de sus clientes.", badge: "Zero-Knowledge" },
+          { title: "Corte Instantáneo + Backup", text: "Si el cliente revoca el token en Cloudflare, el motor se apaga en 0 ms y se les envía un Excel con sus datos a su email.", badge: "Control Remoto Absoluto" }
+        ]
+      },
+      2: {
+        title: "Opción 2: Servidor Externo Dedicado (Infraestructura Aislada)",
+        nodes: [
+          { id: "ext", x: 380, y: 250, w: 520, h: 320, label: "SERVIDOR PRIVADO DE ELLOS (HETZNER / AWS)", sub: "", color: "#8b5cf6", border: "#a78bfa" },
+          { id: "leoncito", x: 990, y: 250, w: 240, h: 230, label: "MANTENIMIENTO LEÓN", sub: "Solo soporte técnico de código\nSin acceso a la base de datos\nSin copias locales de clientes\nDespliegue llave en mano", color: "#64748b", border: "#94a3b8" }
+        ],
+        cards: [
+          { title: "Infraestructura 'En Otro Lado'", text: "El servidor físico o VPS lo contratan directamente ellos. El hardware, los discos y la red están físicamente fuera del alcance de terceros.", badge: "Infraestructura Aislada" },
+          { title: "Llaves y Factura a su Nombre", text: "La tarjeta de pago, la cuenta del hosting y las llaves SSH de acceso pertenecen exclusivamente al titular de la empresa.", badge: "Propiedad Contractual" },
+          { title: "Aislamiento Perimetral Completo", text: "El motor y la base de datos corren juntos ADENTRO del servidor de ellos. León jamás recibe un solo dato de clientes.", badge: "Perímetro Cerrado" }
+        ]
+      }
+    };
+
+    function updateInfoPanel() {
+      const data = scenarios[currentScenario];
+      infoPanel.innerHTML = data.cards.map(c => `
+        <div class="info-card">
+          <h3>${c.title}</h3>
+          <p>${c.text}</p>
+          <span class="badge-secure">${c.badge}</span>
+        </div>
+      `).join('');
+    }
+
+    class Particle {
+      constructor(fromX, fromY, toX, toY, color) {
+        this.fromX = fromX;
+        this.fromY = fromY;
+        this.toX = toX;
+        this.toY = toY;
+        this.progress = 0;
+        this.speed = 0.007 + Math.random() * 0.004;
+        this.color = color;
+      }
+      update() {
+        this.progress += this.speed;
+        return this.progress < 1;
+      }
+      draw(ctx) {
+        const curX = this.fromX + (this.toX - this.fromX) * this.progress;
+        const curY = this.fromY + (this.toY - this.fromY) * this.progress;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(curX, curY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function drawNode(n) {
+      const left = n.x - n.w / 2;
+      const top = n.y - n.h / 2;
+
+      ctx.save();
+      ctx.fillStyle = '#1e293b';
+      ctx.strokeStyle = killSwitchActive && n.id === "motor" ? "#ef4444" : n.border;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(left, top, n.w, n.h, 14);
+      ctx.fill();
+      ctx.stroke();
+
+      // Header tab
+      ctx.fillStyle = killSwitchActive && n.id === "motor" ? "#991b1b" : n.color;
+      ctx.beginPath();
+      ctx.roundRect(left, top, n.w, 40, [14, 14, 0, 0]);
+      ctx.fill();
+
+      // Title
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 13px sans-serif';
+      ctx.textAlign = 'center';
+      const labelText = killSwitchActive && n.id === "motor" ? "MOTOR BLOQUEADO (0 ACCESO)" : n.label;
+      ctx.fillText(labelText, n.x, top + 25);
+
+      // Subtitle lines
+      if (n.sub) {
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '12px sans-serif';
+        const lines = killSwitchActive && n.id === "motor" ? 
+          ["Token revocado por el cliente", "Conexión rechazada (401)", "0 bytes en memoria", "Motor fuera de servicio"] : 
+          n.sub.split('\n');
+
+        lines.forEach((l, i) => {
+          ctx.fillText(l, n.x, top + 72 + i * 22);
+        });
+      }
+
+      ctx.restore();
+    }
+
+    function drawFlowLine(x1, y1, x2, y2, line1, line2, color, boxWidth) {
+      ctx.save();
+      const strokeCol = killSwitchActive ? '#ef4444' : (color || '#475569');
+      ctx.strokeStyle = strokeCol;
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 6]);
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      const midX = (x1 + x2) / 2;
+      const midY = (y1 + y2) / 2;
+
+      const boxW = boxWidth || 166;
+      const boxH = line2 ? 38 : 26;
+      ctx.fillStyle = '#0b1329';
+      ctx.strokeStyle = strokeCol;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(midX - boxW / 2, midY - boxH / 2, boxW, boxH, 8);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      if (killSwitchActive) {
+        ctx.fillStyle = '#ef4444';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText("ACCESO CORTADO", midX, midY - 7);
+        ctx.fillStyle = '#f87171';
+        ctx.font = '10px sans-serif';
+        ctx.fillText("(Token Revocado)", midX, midY + 8);
+      } else if (line2) {
+        ctx.fillStyle = color || '#ffffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText(line1, midX, midY - 7);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '10px sans-serif';
+        ctx.fillText(line2, midX, midY + 8);
+      } else {
+        ctx.fillStyle = color || '#ffffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText(line1, midX, midY);
+      }
+
+      ctx.restore();
+    }
+
+    let frameCount = 0;
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const scen = scenarios[currentScenario];
+      const nodes = scen.nodes;
+      frameCount++;
+
+      if (currentScenario === 1) {
+        // Arrow 1: CF -> Motor
+        drawFlowLine(285, 215, 495, 215, "1. Petición efímera", "(datos encriptados)", "#38bdf8", 160);
+
+        // Arrow 2: Motor -> CF
+        drawFlowLine(495, 285, 285, 285, "2. Escritura directa", "(guarda en su Cloudflare)", "#f97316", 168);
+
+        // Arrow 3: Motor -> Destino
+        drawFlowLine(705, 250, 915, 250, "3. Notificación final", "(WhatsApp / Cliente)", "#10b981", 160);
+
+        if (!killSwitchActive) {
+          if (frameCount % 45 === 0) particles.push(new Particle(285, 215, 495, 215, "#38bdf8"));
+          if (frameCount % 60 === 0) particles.push(new Particle(495, 285, 285, 285, "#f97316"));
+          if (frameCount % 70 === 0) particles.push(new Particle(705, 250, 915, 250, "#34d399"));
+        }
+
+        // 0 BYTES badge on motor
+        ctx.save();
+        ctx.fillStyle = killSwitchActive ? "rgba(239, 68, 68, 0.3)" : "rgba(239, 68, 68, 0.15)";
+        ctx.strokeStyle = "#ef4444";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(nodes[1].x - 90, nodes[1].y + 80, 180, 26, 6);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "#f87171";
+        ctx.font = "bold 11px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(killSwitchActive ? "0 BYTES Y SIN ACCESO" : "0 BYTES RETENIDOS", nodes[1].x, nodes[1].y + 93);
+        ctx.restore();
+
+      } else {
+        // SCENARIO 2: Dedicated External Server (Show internal components)
+        // Draw External Server Outer Box
+        drawNode(nodes[0]);
+
+        // Draw internal Sub-nodes inside Server
+        // Sub-node 1: Motor Local
+        ctx.save();
+        ctx.fillStyle = '#0f172a';
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(160, 210, 200, 120, 10);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText("MOTOR LOCAL INTERNO", 260, 235);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '11px sans-serif';
+        ctx.fillText("Procesamiento en su CPU", 260, 265);
+        ctx.fillText("Docker aislado", 260, 285);
+        ctx.fillText("Sin conexión externa", 260, 305);
+
+        // Sub-node 2: Database Local
+        ctx.fillStyle = '#0f172a';
+        ctx.strokeStyle = '#a855f7';
+        ctx.beginPath();
+        ctx.roundRect(400, 210, 210, 120, 10);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#c084fc';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.fillText("BASE DE DATOS LOCAL", 505, 235);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '11px sans-serif';
+        ctx.fillText("PostgreSQL / SQLite", 505, 265);
+        ctx.fillText("Disco físico de ellos", 505, 285);
+        ctx.fillText("Cifrado en reposo (LUKS)", 505, 305);
+
+        // Internal flow line inside their server
+        drawFlowLine(360, 270, 400, 270, "Socket Local", "", "#38bdf8", 90);
+
+        // Badge at bottom of their server
+        ctx.fillStyle = "rgba(168, 85, 247, 0.2)";
+        ctx.strokeStyle = "#a855f7";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(200, 360, 360, 26, 6);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "#c084fc";
+        ctx.font = "bold 11px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("TODO EL CICLO OCURRE DENTRO DE SU PERÍMETRO", 380, 377);
+        ctx.restore();
+
+        // Line from Maintenance León to Server (Code only)
+        drawFlowLine(640, 250, 870, 250, "Solo despliegue de código", "(Git Push / Sin acceso a datos)", "#94a3b8", 200);
+
+        if (!killSwitchActive) {
+          // Particles circulating internally inside their server only
+          if (frameCount % 30 === 0) particles.push(new Particle(360, 270, 400, 270, "#38bdf8"));
+          if (frameCount % 45 === 0) particles.push(new Particle(400, 285, 360, 285, "#c084fc"));
+          // Code update flowing from support
+          if (frameCount % 90 === 0) particles.push(new Particle(870, 250, 640, 250, "#94a3b8"));
+        }
+
+        // Draw Maintenance Leon Box
+        drawNode(nodes[1]);
+      }
+
+      // Draw Banner if Kill Switch is active
+      if (killSwitchActive) {
+        ctx.save();
+        ctx.fillStyle = "rgba(220, 38, 38, 0.9)";
+        ctx.beginPath();
+        ctx.roundRect(200, 16, 800, 48, 10);
+        ctx.fill();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 13px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("🚨 KILL SWITCH ACTIVADO: Backup enviado a daiana@empresa.com. Motor desconectado (0 bytes).", 600, 40);
+        ctx.restore();
+      } else if (currentScenario === 1) {
+        nodes.forEach(drawNode);
+      }
+
+      // Update and draw particles
+      particles = particles.filter(p => {
+        p.draw(ctx);
+        return p.update();
+      });
+
+      animFrame = requestAnimationFrame(loop);
+    }
+
+    /* ==========================================================
+       KILL SWITCH INTERACTION
+       ========================================================== */
+    function toggleKillSwitch() {
+      killSwitchActive = !killSwitchActive;
+      const btn = document.getElementById('killSwitchBtn');
+      const tokenStatus = document.getElementById('tokenStatusText');
+
+      if (killSwitchActive) {
+        btn.innerHTML = '<span>✅ Restaurar Conexión (Volver a Autorizar Token)</span>';
+        btn.className = 'btn-killswitch active';
+        tokenStatus.innerHTML = '<span style="color: #ef4444;">REVOCADO POR EL CLIENTE (Corte Instantáneo)</span>';
+        particles = [];
+
+        addConsoleLog("[AUTOBACKUP] Disparado evento de Kill Switch por el cliente.", "warn");
+        addConsoleLog("[AUTOBACKUP] Generando snapshot completo en Excel / CSV de Cloudflare D1...", "ok");
+        addConsoleLog("[CORREO SEGURO] Backup encriptado enviado a daiana@empresa.com vía Cloudflare Email.", "ok");
+        addConsoleLog("[SEGURIDAD] Token de API revocado en Cloudflare. Motor de León pierde 100% de acceso en 0.4 ms.", "danger");
+        addConsoleLog("[MEMORIA] Variables volátiles destruidas. 0 bytes residuales.", "danger");
+      } else {
+        btn.innerHTML = '<span>🚨 Probar Kill Switch (Simular Revocación de Acceso)</span>';
+        btn.className = 'btn-killswitch';
+        tokenStatus.innerHTML = '<span style="color: #22c55e;">ACTIVO (Conexión Autorizada)</span>';
+
+        addConsoleLog("[OK] Nuevo token validado por el cliente. Motor reconectado en memoria efímera.", "ok");
+      }
+    }
+
+    function addConsoleLog(text, type) {
+      const consoleOut = document.getElementById('consoleOutput');
+      const now = new Date();
+      const timeStr = "[" + now.toTimeString().split(' ')[0] + "." + String(now.getMilliseconds()).padStart(3, '0') + "]";
+      const div = document.createElement('div');
+      div.className = 'console-line';
+      let styleClass = "";
+      if (type === "danger") styleClass = "console-danger";
+      if (type === "warn") styleClass = "console-warn";
+      if (type === "ok") styleClass = "console-ok";
+
+      div.innerHTML = `<span class="console-ts">${timeStr}</span> <span class="${styleClass}">${text}</span>`;
+      consoleOut.appendChild(div);
+      consoleOut.scrollTop = consoleOut.scrollHeight;
+    }
+
+    /* ==========================================================
+       SLOW-MO TIMELINE SIMULATION
+       ========================================================== */
+    function runSlowMoCycle() {
+      const data = lifecycleData[currentScenario];
+      const timeLabel = document.getElementById('lifecycleCurrentMs');
+
+      data.steps.forEach((s, idx) => {
+        setTimeout(() => {
+          data.steps.forEach((x, i) => document.getElementById('step-' + i).className = 'step-box');
+          const activeStep = document.getElementById('step-' + idx);
+          if (activeStep) activeStep.className = 'step-box highlight';
+          timeLabel.innerText = "Progreso: " + s.time + " - " + s.name;
+          addConsoleLog("[" + s.name.toUpperCase() + "] " + s.desc, idx === 4 ? "ok" : "");
+
+          if (currentScenario === 1) {
+            if (idx === 0) particles.push(new Particle(285, 215, 495, 215, "#38bdf8"));
+            if (idx === 2) particles.push(new Particle(495, 285, 285, 285, "#f97316"));
+            if (idx === 3) particles.push(new Particle(705, 250, 915, 250, "#34d399"));
+          } else {
+            if (idx === 1) particles.push(new Particle(360, 270, 400, 270, "#38bdf8"));
+            if (idx === 2) particles.push(new Particle(400, 285, 360, 285, "#c084fc"));
+          }
+
+          if (idx === data.steps.length - 1) {
+            setTimeout(() => {
+              data.steps.forEach((x, i) => document.getElementById('step-' + i).className = 'step-box');
+              timeLabel.innerText = "Ciclo finalizado con éxito.";
+            }, 1200);
+          }
+        }, idx * 700);
+      });
+    }
+
+    /* ==========================================================
+       TAB 3: WHATSAPP SIMULATOR & DASHBOARD FEEDS
+       ========================================================== */
+    const phoneChat = document.getElementById('phoneChat');
+    const recordsList = document.getElementById('recordsList');
+
+    function getTimeString() {
+      const d = new Date();
+      return String(d.getHours()).padStart(2, '0') + ":" + String(d.getMinutes()).padStart(2, '0');
+    }
+
+    function appendMessage(sender, text, isBot) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = isBot ? 'msg msg-in' : 'msg msg-out';
+
+      let header = '';
+      if (isBot) {
+        header = '<span class="msg-bot-badge">BOT DE GESTIÓN</span><br>';
+      }
+
+      msgDiv.innerHTML = `${header}${text.replace(/\n/g, '<br>')}<div class="msg-time">${getTimeString()}</div>`;
+      phoneChat.appendChild(msgDiv);
+      phoneChat.scrollTop = phoneChat.scrollHeight;
+    }
+
+    // Dashboard Data Stores
+    const dbOrders = [
+      { id: "#4089", client: "Carlos Benítez", service: "Limpieza Integral", time: "Hoy 16:00 hs", addr: "21 de Setiembre 2840 apto 302", amount: "$2.800 (Pagado)", status: "CONFIRMADO", badgeClass: "badge-ok", note: "Notificado por WhatsApp" },
+      { id: "#4090", client: "Lucía Fernández", service: "Pulido y Encerado", time: "Mañana 10:30 hs", addr: "Rambla Gandhi 450", amount: "$3.400 (Pagado)", status: "CONFIRMADO", badgeClass: "badge-ok", note: "Notificado por WhatsApp" },
+      { id: "#4088", client: "Mariana Rossi", service: "Limpieza de Tapizados", time: "Mañana 14:00 hs", addr: "Luis Alberto de Herrera 1200", amount: "Falta seña", status: "PENDIENTE DE PAGO", badgeClass: "badge-pend", note: "Alerta cada 1 hora activa" }
+    ];
+
+    const dbSettlements = [
+      { id: "#LIQ-041", person: "Laura M. (Colaboradora)", servicesCount: "4 servicios", gross: "$8.500", net: "$5.950 (70% Mano de Obra)", margin: "$2.550 (Empresa)", status: "LISTO PARA PAGO", badgeClass: "badge-purple" },
+      { id: "#LIQ-040", person: "Valeria S. (Colaboradora)", servicesCount: "3 servicios", gross: "$6.200", net: "$4.340 (70% Mano de Obra)", margin: "$1.860 (Empresa)", status: "PAGADO", badgeClass: "badge-ok" }
+    ];
+
+    const dbArreglaTodo = [
+      { id: "#TANDA-884", title: "Tanda ArreglaTodo #884 (4 solicitudes)", orders: "#SOL-101, #SOL-102, #SOL-103, #SOL-104", reported: "$14.200 esperado", real: "Suma sistema: $14.200", status: "PENDIENTE DE COMPROBANTE", badgeClass: "badge-pend", alert: "Esperando comprobante de ArreglaTodo" },
+      { id: "#CANAL-AT", title: "Canal ArreglaTodo (Semana Actual)", orders: "6 servicios derivados", reported: "Facturación: $14.200", real: "Comisión 15%: $2.130", status: "SALDO A FAVOR: $2.070", badgeClass: "badge-ok", alert: "A reclamar a ArreglaTodo" }
+    ];
+
+    function switchDashboardTab(tabId) {
+      currentDashTab = tabId;
+      document.getElementById('subtab-1').className = 'subtab-btn' + (tabId === 1 ? ' active' : '');
+      document.getElementById('subtab-2').className = 'subtab-btn' + (tabId === 2 ? ' active' : '');
+      document.getElementById('subtab-3').className = 'subtab-btn' + (tabId === 3 ? ' active' : '');
+
+      const titleEl = document.getElementById('recordsListTitle');
+      if (tabId === 1) titleEl.innerText = "Órdenes de Servicios en Cloudflare D1";
+      if (tabId === 2) titleEl.innerText = "Liquidaciones Semanales de Personal Operativo";
+      if (tabId === 3) titleEl.innerText = "Conciliaciones y Auditoría ArreglaTodo";
+
+      renderDashboardFeed();
+    }
+
+    function renderDashboardFeed() {
+      recordsList.innerHTML = '';
+      if (currentDashTab === 1) {
+        dbOrders.forEach(o => {
+          const item = document.createElement('div');
+          item.className = 'record-item';
+          item.innerHTML = `
+            <div class="record-header">
+              <span class="record-id">${o.id} - ${o.client}</span>
+              <span class="record-badge ${o.badgeClass}">${o.status}</span>
+            </div>
+            <div class="record-details">
+              <strong>Servicio:</strong> ${o.service} | <strong>Hora:</strong> ${o.time}<br>
+              <strong>Dirección:</strong> ${o.addr} | <strong>Monto:</strong> ${o.amount}
+            </div>
+            <div class="record-footer">
+              <span>Cloudflare D1: Guardado en su base</span>
+              <span>${o.note}</span>
+            </div>
+          `;
+          recordsList.appendChild(item);
+        });
+      } else if (currentDashTab === 2) {
+        dbSettlements.forEach(s => {
+          const item = document.createElement('div');
+          item.className = 'record-item';
+          item.innerHTML = `
+            <div class="record-header">
+              <span class="record-id">${s.id} - ${s.person}</span>
+              <span class="record-badge ${s.badgeClass}">${s.status}</span>
+            </div>
+            <div class="record-details">
+              <strong>Servicios Completados:</strong> ${s.servicesCount} | <strong>Recaudado:</strong> ${s.gross}<br>
+              <strong>Neto Colaboradora:</strong> ${s.net} | <strong>Margen Empresa:</strong> ${s.margin}
+            </div>
+            <div class="record-footer">
+              <span>Transferencia Bancaria / Efectivo</span>
+              <span>Liquidación calculada automáticamente</span>
+            </div>
+          `;
+          recordsList.appendChild(item);
+        });
+      } else {
+        dbArreglaTodo.forEach(a => {
+          const item = document.createElement('div');
+          item.className = a.status.includes('DISCREPANCIA') ? 'record-item alert-entry' : 'record-item';
+          item.innerHTML = `
+            <div class="record-header">
+              <span class="record-id">${a.id} - ${a.title}</span>
+              <span class="record-badge ${a.badgeClass}">${a.status}</span>
+            </div>
+            <div class="record-details">
+              <strong>Alcance:</strong> ${a.orders}<br>
+              <strong>Reportado:</strong> ${a.reported} | <strong>Real Sistema:</strong> ${a.real}
+            </div>
+            <div class="record-footer">
+              <span style="color: #f87171; font-weight: 600;">${a.alert}</span>
+              <span>Auditoría de Comprobante</span>
+            </div>
+          `;
+          recordsList.appendChild(item);
+        });
+      }
+    }
+
+    // 1. Simular Agendamiento Completo
+    function simAgendarCompleto() {
+      switchDashboardTab(1);
+      appendMessage("user", "Agendar: Mateo Silva, Limpieza de alfombras, Mañana 15:00 hs, Benito Blanco 1120 apto 102, $2.200, Pagado", false);
+
+      setTimeout(() => {
+        const reply = "✅ *¡Servicio Agendado con Éxito!*\n\n" +
+                      "• *Orden:* #4091\n" +
+                      "• *Cliente:* Mateo Silva\n" +
+                      "• *Servicio:* Limpieza de alfombras\n" +
+                      "• *Fecha y Hora:* Mañana 15:00 hs\n" +
+                      "• *Dirección:* Benito Blanco 1120 apto 102\n" +
+                      "• *Monto:* $2.200 (Pagado)\n" +
+                      "• *Estado:* Agendado y guardado en Cloudflare D1";
+        appendMessage("bot", reply, true);
+
+        dbOrders.unshift({
+          id: "#4091",
+          client: "Mateo Silva",
+          service: "Limpieza de alfombras",
+          time: "Mañana 15:00 hs",
+          addr: "Benito Blanco 1120 apto 102",
+          amount: "$2.200 (Pagado)",
+          status: "CONFIRMADO",
+          badgeClass: "badge-ok",
+          note: "Confirmación enviada por WhatsApp"
+        });
+        renderDashboardFeed();
+
+        const countAg = document.getElementById('countAgendados');
+        countAg.innerText = parseInt(countAg.innerText) + 1;
+      }, 700);
+    }
+
+    // 2. Simular Datos Incompletos
+    function simAgendarIncompleto() {
+      switchDashboardTab(1);
+      appendMessage("user", "Agendar: Estela Domínguez, Limpieza final de obra, Jueves 09:00 hs", false);
+
+      setTimeout(() => {
+        const reply = "⚠️ *Faltan datos obligatorios para confirmar el servicio:*\n\n" +
+                      "• *Falta:* Dirección exacta del servicio.\n" +
+                      "• *Falta:* Estado de pago o seña.\n\n" +
+                      "¿Deseas pasar la dirección ahora o lo pongo como *Pendiente*?";
+        appendMessage("bot", reply, true);
+
+        setTimeout(() => {
+          appendMessage("user", "Ponelo como pendiente", false);
+
+          setTimeout(() => {
+            const confirmPend = "📌 *Registrado como PENDIENTE (#4092)*\n\n" +
+                                "Cliente: Estela Domínguez\n" +
+                                "Motivo: Falta dirección y seña.\n" +
+                                "ℹ️ Se recordará en el reporte automático de pendientes de cada hora hasta que se complete.";
+            appendMessage("bot", confirmPend, true);
+
+            dbOrders.unshift({
+              id: "#4092",
+              client: "Estela Domínguez",
+              service: "Limpieza final de obra",
+              time: "Jueves 09:00 hs",
+              addr: "Pendiente de ingresar",
+              amount: "Falta comprobante seña",
+              status: "PENDIENTE DE DATOS",
+              badgeClass: "badge-pend",
+              note: "Alerta cada 1 hora activa"
+            });
+            renderDashboardFeed();
+
+            const countPend = document.getElementById('countPendientes');
+            countPend.innerText = parseInt(countPend.innerText) + 1;
+          }, 600);
+        }, 1100);
+      }, 700);
+    }
+
+    // 3. Simular Comando "agenda hoy"
+    function simComandoAgenda() {
+      switchDashboardTab(1);
+      appendMessage("user", "agenda hoy", false);
+
+      setTimeout(() => {
+        const reply = "📋 *Agenda de Servicios de Hoy:*\n\n" +
+                      "1. *16:00 hs* - Carlos Benítez (#4089)\n" +
+                      "   📍 21 de Setiembre 2840 | Limpieza Integral\n" +
+                      "   💵 $2.800 (Pagado)\n\n" +
+                      "2. *17:30 hs* - Mantenimiento Programado (#4077)\n" +
+                      "   📍 Bvr. Artigas 1820 | Sanitización\n\n" +
+                      "Total hoy: 2 servicios programados.\n" +
+                      "Escribe '#ID' para ver más detalles de una orden.";
+        appendMessage("bot", reply, true);
+      }, 600);
+    }
+
+    // 4. Simular Alerta Horaria Automática (Cron)
+    function simReporteHorario() {
+      switchDashboardTab(1);
+      const reply = "⏰ *[REPORTE HORARIO DE PENDIENTES - AUTOMÁTICO]*\n\n" +
+                    "Atención: Existen servicios que requieren atención:\n\n" +
+                    "1. *Orden #4092* (Estela Domínguez)\n" +
+                    "   ⚠️ Falta dirección exacta y comprobante de pago.\n\n" +
+                    "2. *Orden #4088* (Mariana Rossi)\n" +
+                    "   ⚠️ Falta confirmación de seña para mañana 14:00 hs.\n\n" +
+                    "👉 Responde *#4092 + dirección* para completar la orden ahora.";
+      appendMessage("bot", reply, true);
+    }
+
+    // 5. Simular Liquidación por Colaboradora (Chica)
+    function simLiquidarPersonal() {
+      switchDashboardTab(2);
+      appendMessage("user", "liquidar Laura M.", false);
+
+      setTimeout(() => {
+        const reply = "📊 *Liquidación Semanal: Laura M. (Colaboradora)*\n\n" +
+                      "• Servicios completados: *4 órdenes*\n" +
+                      "• Total facturado: *$8.500*\n\n" +
+                      "Desglose:\n" +
+                      "1. #4089 Limpieza: $2.000 (Mano de obra 70%: $1.400)\n" +
+                      "2. #4090 Pulido: $3.200 (Mano de obra 70%: $2.240)\n" +
+                      "3. #4082 Tapizados: $1.800 (Mano de obra 70%: $1.260)\n" +
+                      "4. #4075 Vidrios: $1.500 (Mano de obra 70%: $1.050)\n\n" +
+                      "---------------------------\n" +
+                      "💵 *Total a transferir a Laura M.:* *$5.950*\n" +
+                      "🏢 *Margen operativo empresa (30%):* *$2.550*\n\n" +
+                      "¿Confirmar liquidación y generar comprobante?";
+        appendMessage("bot", reply, true);
+      }, 700);
+    }
+
+    // 6. Simular Liquidación ArreglaTodo
+    function simLiquidarArreglaTodo() {
+      switchDashboardTab(3);
+      appendMessage("user", "liquidar arreglatodo", false);
+
+      setTimeout(() => {
+        const reply = "💼 *Liquidación Canal ArreglaTodo (Semana Actual)*\n\n" +
+                      "• Servicios derivados: *6 órdenes*\n" +
+                      "• Facturación bruta: *$14.200*\n" +
+                      "• Comisión pactada ArreglaTodo (15%): *$2.130*\n\n" +
+                      "Cobranzas:\n" +
+                      "• Recaudado directo por la empresa: $10.000\n" +
+                      "• Recaudado por plataforma ArreglaTodo: $4.200\n\n" +
+                      "---------------------------\n" +
+                      "📈 *Balance Neto:* *Saldo a favor de la empresa $2.070*\n" +
+                      "ℹ️ Monto a reclamar / acreditar en la próxima liquidación de ArreglaTodo.";
+        appendMessage("bot", reply, true);
+      }, 700);
+    }
+
+    // 7A. Simular Conciliación ArreglaTodo: Total OK (Salen de la lista)
+    function simConciliarArreglaTodoOK() {
+      switchDashboardTab(3);
+      const msgUser = "Liquidación ArreglaTodo - Tanda #884:\n" +
+                      "• Solicitud #SOL-101: $3.500\n" +
+                      "• Solicitud #SOL-102: $4.200\n" +
+                      "• Solicitud #SOL-103: $2.800\n" +
+                      "• Solicitud #SOL-104: $3.700\n" +
+                      "-----------------------------\n" +
+                      "TOTAL LIQUIDADO Y TRANSFERIDO: $14.200";
+      appendMessage("user", msgUser, false);
+
+      setTimeout(() => {
+        const reply = "✅ *TOTAL COINCIDE EXACTAMENTE ($14.200)*\n\n" +
+                      "• Solicitudes en tanda: *4 órdenes*\n" +
+                      "• Total liquidado por ArreglaTodo: *$14.200*\n" +
+                      "• Total registrado en Reluciente: *$14.200*\n" +
+                      "• Diferencia: *$0 (Coincidencia exacta)*\n\n" +
+                      "⚙️ *Acción Automática Realizada:*\n" +
+                      "- Las 4 solicitudes (#SOL-101 a #SOL-104) se marcaron como *ABONADAS*.\n" +
+                      "- *Salieron de la lista activa de solicitudes a liquidar de ArreglaTodo.*\n" +
+                      "- Registro en Cloudflare D1: Tanda conciliada y cerrada.";
+        appendMessage("bot", reply, true);
+
+        // Update Dashboard
+        dbArreglaTodo[0] = {
+          id: "#TANDA-884",
+          title: "Tanda ArreglaTodo #884 (4 solicitudes)",
+          orders: "#SOL-101, #SOL-102, #SOL-103, #SOL-104",
+          reported: "$14.200 transferido",
+          real: "Suma sistema: $14.200",
+          status: "ABONADA Y SALDADA (FUERA DE LISTA)",
+          badgeClass: "badge-ok",
+          alert: "Todas las solicitudes marcadas como pagadas"
+        };
+        renderDashboardFeed();
+      }, 750);
+    }
+
+    // 7B. Simular Conciliación ArreglaTodo: Discrepancia (Alarma y Rebote)
+    function simConciliarArreglaTodoError() {
+      switchDashboardTab(3);
+      const msgUser = "Liquidación ArreglaTodo - Tanda #885:\n" +
+                      "• Solicitud #SOL-105: $3.000\n" +
+                      "• Solicitud #SOL-106: $2.500\n" +
+                      "• Solicitud #SOL-107: $4.000\n" +
+                      "• Solicitud #SOL-108: $4.200\n" +
+                      "-----------------------------\n" +
+                      "TOTAL LIQUIDADO Y TRANSFERIDO: $13.700";
+      appendMessage("user", msgUser, false);
+
+      setTimeout(() => {
+        const reply = "🚨 *ALARMA: EL TOTAL NO COINCIDE (-$500)*\n\n" +
+                      "❌ *Discrepancia detectada en Tanda #885:*\n" +
+                      "• Total informado por ArreglaTodo: *$13.700*\n" +
+                      "• Total registrado en Reluciente: *$14.200*\n" +
+                      "• *Diferencia faltante:* *-$500*\n\n" +
+                      "🔍 *Desglose individual (dónde está el error de ellos):*\n" +
+                      "- #SOL-105 ($3.000): Coincide ✅\n" +
+                      "- #SOL-106 (Sistema: $3.000 vs Liquidado: $2.500) ⚠️ *Faltan $500*\n" +
+                      "- #SOL-107 ($4.000): Coincide ✅\n" +
+                      "- #SOL-108 ($4.200): Coincide ✅\n\n" +
+                      "🛑 *Acción Operativa Reluciente:*\n" +
+                      "- *TANDA REBOTADA*. Reluciente solo chequea el total; ArreglaTodo debe revisar y corregir.\n" +
+                      "- *Ninguna solicitud se marca como abonada* (permanecen en la lista activa de cobro).\n\n" +
+                      "💬 *Mensaje listo para reenviar a ArreglaTodo:*\n" +
+                      "\"Hola equipo de ArreglaTodo, rebotamos la liquidación de la Tanda #885. El total liquidado ($13.700) no coincide con el total de nuestras solicitudes registradas ($14.200), presentando una diferencia de -$500 en la solicitud #SOL-106. Solicitamos revisar la tanda de su lado y reenviar la liquidación corregida.\"";
+        appendMessage("bot", reply, true);
+
+        // Update Dashboard
+        dbArreglaTodo.unshift({
+          id: "#TANDA-885",
+          title: "Tanda ArreglaTodo #885 (4 solicitudes)",
+          orders: "Total informado: $13.700 vs Sistema: $14.200",
+          reported: "Diferencia detectada: -$500",
+          real: "Error en solicitud #SOL-106",
+          status: "TANDA REBOTADA (RETENIDA EN LISTA DE COBRO)",
+          badgeClass: "badge-danger",
+          alert: "En espera de que ArreglaTodo revise y reenvíe tanda"
+        });
+        renderDashboardFeed();
+      }, 750);
+    }
+
+    // Initial View
+    switchMainView(1);
+    renderLifecycleSteps();
+    renderDashboardFeed();
+    updateInfoPanel();
+    loop();
+  </script>
+</body>
+</html>

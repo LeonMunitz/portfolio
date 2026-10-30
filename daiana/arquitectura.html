@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arquitectura y Opciones Operativas - Reluciente (Daiana Souza)</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151d30;
+      --card-border: #24324f;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-green: #4ade80;
+      --accent-yellow: #fbbf24;
+      --accent-red: #f87171;
+      --accent-purple: #c084fc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.65;
+      letter-spacing: 0.015em;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 40px;
+      border-bottom: 2px solid var(--card-border);
+      padding-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 2.1rem;
+      color: #ffffff;
+      font-weight: 800;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .badge-header {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: #ffffff;
+    }
+
+    .icon-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+    }
+
+    .icon-blue { background: rgba(56, 189, 248, 0.2); color: var(--accent-blue); }
+    .icon-green { background: rgba(74, 222, 128, 0.2); color: var(--accent-green); }
+    .icon-yellow { background: rgba(251, 191, 36, 0.2); color: var(--accent-yellow); }
+    .icon-red { background: rgba(248, 113, 113, 0.2); color: var(--accent-red); }
+    .icon-purple { background: rgba(192, 132, 252, 0.2); color: var(--accent-purple); }
+
+    p {
+      margin-bottom: 16px;
+      color: #e2e8f0;
+    }
+
+    ul {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      color: #cbd5e1;
+    }
+
+    strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .highlight-box {
+      border-left: 4px solid var(--accent-yellow);
+      background: rgba(251, 191, 36, 0.08);
+      padding: 18px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+    }
+
+    .success-box {
+      border-left: 4px solid var(--accent-green);
+      background: rgba(74, 222, 128, 0.08);
+      padding: 18px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+    }
+
+    .danger-box {
+      border-left: 4px solid var(--accent-red);
+      background: rgba(248, 113, 113, 0.08);
+      padding: 18px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+    }
+
+    .option-card {
+      border-top: 4px solid var(--accent-blue);
+      margin-bottom: 24px;
+    }
+
+    .option-card.recommended {
+      border-top: 4px solid var(--accent-green);
+      background: #17263c;
+    }
+
+    .tag-recommended {
+      background: var(--accent-green);
+      color: #0b0f19;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .pill-item {
+      display: flex;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 14px 18px;
+      border-radius: 12px;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .pill-num {
+      background: var(--accent-blue);
+      color: #0b0f19;
+      font-weight: 800;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+
+    .chat-box {
+      background: #0f172a;
+      border: 1px dashed var(--accent-blue);
+      border-radius: 14px;
+      padding: 22px;
+      color: #93c5fd;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <div class="badge-header">INFORME TÉCNICO Y OPERATIVO</div>
+      <h1>Arquitectura y Opciones para el Sistema de Daiana Souza</h1>
+      <div class="subtitle">Guía de diseño para resolver el miedo de los socios sin perder control ni estabilidad 24/7.</div>
+    </header>
+
+    <!-- BLOQUE 1: EL TELÉFONO REDMI -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon-box icon-blue">📱</span>
+        <span>1. ¿Qué pasa con tu teléfono dedicado (Redmi)?</span>
+      </div>
+      <p><strong>Tu teléfono Redmi fue tu banco de pruebas en tu casa. No tenés que regalárselo a nadie.</strong></p>
+      
+      <div class="pill-list">
+        <div class="pill-item">
+          <div class="pill-num">1</div>
+          <div>
+            <strong>El bot funciona como WhatsApp Web:</strong> El software (Baileys) no necesita una pantalla ni un chip físico en el servidor. Actúa como si abrieras WhatsApp Web en un navegador pero en modo invisible.
+          </div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-num">2</div>
+          <div>
+            <strong>A quién atiende el bot:</strong> Para responder a los clientes de Reluciente, el bot debe vincularse al <strong>número oficial de Reluciente</strong> (el celular de Daiana, de Carol o el teléfono de la empresa).
+          </div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-num">3</div>
+          <div>
+            <strong>Cómo se conecta:</strong> Una única vez, Daiana abre WhatsApp en su teléfono, entra en <em>Dispositivos vinculados</em> y escanea el código QR que le genera el servidor (o pone un código de 8 dígitos). A partir de ese momento, el celular de Daiana sigue en su bolsillo en Montevideo y el bot responde desde el servidor.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOQUE 2: POR QUÉ NO INSTALAR EN LA LAPTOP DE CAROL -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon-box icon-red">⚠️</span>
+        <span>2. La trampa mortal: Instalar el servidor en la PC de la oficina</span>
+      </div>
+      <p>Instalar Node.js, Python, el bot y la base de datos en la computadora de Carol o Daiana parece una solución simple pero es <strong>la peor pesadilla técnica</strong>:</p>
+
+      <div class="danger-box">
+        <ul>
+          <li><strong>Si cierran la notebook, el bot muere:</strong> En cuanto Carol baja la tapa de la laptop para almorzar o irse a la casa, el bot se apaga al instante y ningún cliente de WhatsApp recibe respuesta.</li>
+          <li><strong>Actualizaciones nocturnas de Windows:</strong> Windows se reinicia solo por la noche, mata los programas y a la mañana siguiente nada funciona.</li>
+          <li><strong>Daiana queda ciega en la calle:</strong> Si Daiana está visitando un cliente o una casa en Pocitos y la computadora de la oficina está apagada, Daiana no puede ver ninguna agenda ni dirección desde su celular.</li>
+          <li><strong>Soporte atado de manos:</strong> Cada vez que algo falle, te van a llamar desesperados mientras no están en la oficina, y vos no vas a poder arreglar nada porque nadie puede darte clic en AnyDesk.</li>
+        </ul>
+      </div>
+      <p><strong>Conclusión innegociable:</strong> El motor del bot y la web debe correr en un entorno que esté encendido y conectado las 24 horas.</p>
+    </div>
+
+    <!-- BLOQUE 3: LAS 3 OPCIONES REALES -->
+    <div class="card option-card recommended">
+      <div class="card-title">
+        <span class="icon-box icon-green">🏆</span>
+        <span>OPCIÓN 1 (LA RECOMENDADA): Nube Privada a Nombre de Reluciente</span>
+        <span class="tag-recommended">Mejor Opción</span>
+      </div>
+      <p>Esta es la solución que desarma el 100% del miedo de los socios y te deja a vos con total libertad técnica.</p>
+
+      <div class="success-box">
+        <strong>¿Cómo funciona?</strong>
+        <p style="margin-top: 8px;">Se contrata un servidor virtual privado (VPS) muy liviano (en Hetzner o DigitalOcean) que cuesta <strong>4 a 5 dólares por mes</strong>.</p>
+        <ul>
+          <li><strong>La cuenta está a nombre de Reluciente:</strong> Se registra con el correo oficial de la empresa (ej: admin@reluciente...) y la tarjeta la pagan ellos.</li>
+          <li><strong>Los dueños legales son ellos:</strong> Los socios tienen la contraseña maestra y la titularidad legal de los datos. Eso elimina el miedo de que "León tenga la información en su máquina".</li>
+          <li><strong>Vos tenés llave técnica (SSH):</strong> A vos te dan un acceso de administrador técnico. Entrás las 24 horas por terminal desde tu PC en San Fernando sin pedirle permiso a nadie, sin molestar a Carol y sin depender de AnyDesk.</li>
+        </ul>
+      </div>
+
+      <div class="pill-list">
+        <div class="pill-item">
+          <div class="pill-num">✓</div>
+          <div><strong>Bot online 24/7:</strong> Responde sábados, domingos y de noche sin que ninguna oficina tenga que estar prendida.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-num">✓</div>
+          <div><strong>Acceso en la calle:</strong> Daiana y las colaboradoras abren la web desde el celular en cualquier barrio de Montevideo.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-num">✓</div>
+          <div><strong>Cobrás tus $3.200 semanales limpio:</strong> Vos das soporte, mantenimiento y mejoras sin sufrir cortes de luz en Montevideo ni problemas de hardware ajeno.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card option-card">
+      <div class="card-title">
+        <span class="icon-box icon-yellow">⚡</span>
+        <span>OPCIÓN 2: Motor con León + Base de Datos en Cloudflare de Reluciente</span>
+      </div>
+      <p>Si querés mantener el código 100% cerrado en tu propio servidor:</p>
+
+      <div class="highlight-box">
+        <ul>
+          <li><strong>El motor corre con vos:</strong> Tu servidor procesa los mensajes de WhatsApp y ejecuta la lógica. Nadie te roba el código.</li>
+          <li><strong>Los datos viven con ellos:</strong> Reluciente se crea su cuenta gratuita en <strong>Cloudflare</strong>. La base de datos (Cloudflare D1 o almacenamiento R2) se aloja adentro de la cuenta de ellos.</li>
+          <li><strong>Cómo se comunican:</strong> Tu bot consulta y escribe los datos en la cuenta de Cloudflare de Reluciente mediante una clave segura (API Token) que ellos te dan.</li>
+        </ul>
+      </div>
+      <p><strong>Por qué calma a los socios:</strong> Si el día de mañana quieren cortar, revocan la clave desde su Cloudflare y tu servidor ya no puede ver ni un solo dato de clientes.</p>
+    </div>
+
+    <div class="card option-card">
+      <div class="card-title">
+        <span class="icon-box icon-purple">🖥️</span>
+        <span>OPCIÓN 3: Mini-PC Física en la Oficina con Cloudflare Tunnel</span>
+      </div>
+      <p>Si los socios son muy conservadores y exigen ver una máquina física arriba del escritorio:</p>
+
+      <ul>
+        <li><strong>Prohibido usar la laptop de Carol:</strong> Se les pide poner una Mini-PC fija (tipo Intel NUC o maquinita de escritorio básica) que quede enchufada al router por cable y a la corriente las 24 horas con la suspensión desactivada.</li>
+        <li><strong>Instalamos Cloudflare Tunnel:</strong> Este servicio crea un túnel seguro hacia internet sin abrir puertos en el router.</li>
+        <li><strong>El resultado:</strong> Vos entrás por SSH mediante Cloudflare en cualquier momento sin molestar a nadie, Daiana ve las cosas desde el celular en la calle, y los datos no salen de la oficina.</li>
+        <li><strong>Desventaja:</strong> Si cortan la luz en la oficina o apagan la zapatilla eléctrica, el bot se apaga hasta que alguien vuelva físicamente a prenderla.</li>
+      </ul>
+    </div>
+
+    <!-- BLOQUE 4: QUÉ RESPONDERLE A DAIANA -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon-box icon-blue">💬</span>
+        <span>Mensaje sugerido para responderle a Daiana</span>
+      </div>
+      <p>Podés enviarle exactamente este texto para destrabar el tema con profesionalismo y calma:</p>
+
+      <div class="chat-box">
+        "Hola Daiana! Qué alivio enorme lo de la beba, me alegro muchísimo de que haya sido solo el protector solar en el ojito y que ya esté bien!<br><br>
+        Respecto a lo que hablaron en la reunión, entiendo 100% la postura de tus socios y tienen toda la razón en querer que los datos sean propiedad de Reluciente.<br><br>
+        Para que ellos tengan total tranquilidad y a la vez el sistema no se apague cuando cierran la oficina (y vos puedas ver todo desde el celular en la calle), lo que se hace formalmente es abrir un servidor privado a nombre exclusivo de Reluciente (con el mail de la empresa y la facturación de ustedes, que cuesta unos 4 dólares al mes).<br><br>
+        De esa manera:<br>
+        1. La titularidad legal de los datos y las contraseñas maestras son 100% de ustedes.<br>
+        2. El bot de WhatsApp responde las 24 horas de forma automática aunque la oficina esté cerrada.<br>
+        3. Vos y las chicas pueden ver las agendas y direcciones desde el celular en la calle.<br>
+        4. Yo tengo un acceso técnico para darles soporte y resolver cualquier problema sin tener que interrumpir el trabajo de Carol.<br><br>
+        Coméntaselo a los chicos y cuando me digas lo dejamos en marcha."
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
