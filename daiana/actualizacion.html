@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualización Integral del Motor: Daiana Souza Servicios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #2563eb;
+      --accent-light: #60a5fa;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --indigo: #6366f1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(37, 99, 235, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      line-height: 1.6;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-banner {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .dot-pulse {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 850px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      padding: 1.85rem;
+      margin-bottom: 1.75rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .metric-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-lbl {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .action-box {
+      border-radius: 1rem;
+      padding: 1.35rem;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .action-remove {
+      border-left: 4px solid var(--rose);
+      background: rgba(244, 63, 94, 0.04);
+    }
+
+    .action-add {
+      border-left: 4px solid var(--emerald);
+      background: rgba(16, 185, 129, 0.04);
+    }
+
+    .action-box h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pill-tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 0.4rem;
+      font-weight: 700;
+    }
+
+    .tag-remove { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
+    .tag-add { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+
+    .code-preview {
+      background: #060911;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      white-space: pre-wrap;
+      line-height: 1.5;
+      margin-top: 0.75rem;
+    }
+
+    .ui-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .ui-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.1rem;
+      border-radius: 0.65rem;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+    }
+
+    .ui-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <div class="hero-banner">
+      <div class="status-badge"><span class="dot-pulse"></span> Motor Operativo Actualizado</div>
+      <h1>Desacoplamiento y Simplificación: Daiana Souza</h1>
+      <p class="subtitle">
+        Eliminación del ruido visual contable de plataformas intermedias, integración de calculadora de presupuestos al instante, tarifas fijadas y enlaces directos a Google Maps en cada hoja de ruta.
+      </p>
+    </div>
+
+    <!-- Métricas del Motor -->
+    <div class="grid-3">
+      <div class="metric-card">
+        <div class="metric-val">$450 UYU</div>
+        <div class="metric-lbl">Hora Base Particular</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">-10%</div>
+        <div class="metric-lbl">Descuento Cliente Habitual</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">+$350 / +$300</div>
+        <div class="metric-lbl">Aspiradora / Insumos</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">1 Clic GPS</div>
+        <div class="metric-lbl">Ruta Google Maps</div>
+      </div>
+    </div>
+
+    <!-- Comparativa: Qué se Saca vs Qué se Agrega -->
+    <div class="grid-2">
+      
+      <!-- LO QUE SE SACA -->
+      <div class="action-box action-remove">
+        <h3>
+          <span>Lo que se Saca del Motor (Menos Ruido)</span>
+          <span class="pill-tag tag-remove">Depurado</span>
+        </h3>
+        <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 0.85rem;">
+          Se eliminaron los datos que confundían y no aportaban a la operación directa de Daiana:
+        </p>
+        <div class="ui-showcase">
+          <div class="ui-item">
+            <span>Cálculos de comisiones ArreglaTodo (-15%) en menú</span>
+            <span style="color: #f43f5e; font-weight: 700;">Eliminado</span>
+          </div>
+          <div class="ui-item">
+            <span>Desglose de retenciones externas en la ayuda</span>
+            <span style="color: #f43f5e; font-weight: 700;">Ocultado</span>
+          </div>
+          <div class="ui-item">
+            <span>Rebotes por falta de monto en pedidos de clientes</span>
+            <span style="color: #f43f5e; font-weight: 700;">Flexibilizado</span>
+          </div>
+          <div class="ui-item">
+            <span>Direcciones en texto plano sin enlace de mapa</span>
+            <span style="color: #f43f5e; font-weight: 700;">Reemplazado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LO QUE SE AGREGA -->
+      <div class="action-box action-add">
+        <h3>
+          <span>Lo que se Agrega al Motor (Más Eficiencia)</span>
+          <span class="pill-tag tag-add">Activo</span>
+        </h3>
+        <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 0.85rem;">
+          Nuevas herramientas directas que resuelven en segundos la gestión diaria:
+        </p>
+        <div class="ui-showcase">
+          <div class="ui-item">
+            <span>Calculadora Instantánea con comando <code>/cotizar</code></span>
+            <span class="ui-badge">Automático</span>
+          </div>
+          <div class="ui-item">
+            <span>Links directos a Google Maps para colaboradoras</span>
+            <span class="ui-badge">1 Toque</span>
+          </div>
+          <div class="ui-item">
+            <span>Auto-cálculo de tarifa por horas y zonas logísticas</span>
+            <span class="ui-badge">Inteligente</span>
+          </div>
+          <div class="ui-item">
+            <span>Discriminación nativa: si es ArreglaTodo trae precios AT, sino propios</span>
+            <span class="ui-badge">Segmentado</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- La Nueva Calculadora y Cotizador Rápido -->
+    <div class="card">
+      <div class="card-title">
+        <span>⚡</span> Nueva Calculadora de Presupuestos (WhatsApp)
+      </div>
+      <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 1rem;">
+        Daiana ahora puede consultar en segundos cualquier combinación de servicio (horas, dormitorios, aspiradora, productos o clientes habituales) y el bot le devuelve el desglose de costos, el margen limpio para ella y el mensaje redactado para reenviar:
+      </p>
+
+      <div class="code-preview">Ejemplo de consulta enviada:
+/cotizar 4 hs pocitos productos aspiradora
+
+Respuesta inmediata del Bot:
+💡 *Cotización Directa • Daiana Servicios*
+
+⏱️ *Jornada:* 4 horas (Costa Este (Pocitos/Buceo))
+💰 *Presupuesto Sugerido:* *$2,450 UYU*
+👩 *Pago Colaboradora (4hs x $280):* $1,120 UYU
+📈 *Margen Daiana:* *$1,330 UYU limpios*
+
+📋 *Desglose:*
+• Base (4 hs x $450): $1,800 UYU
+• Insumos y Productos: +$300 UYU
+• Aspiradora Industrial: +$350 UYU
+
+💬 *Mensaje listo para reenviar al cliente:*
+"Hola! Para una jornada de 4 horas con productos incluidos y aspiradora industrial, la tarifa es de $2,450 UYU. ¿Qué día y horario te queda mejor coordinar?"</div>
+    </div>
+
+    <!-- Navegación GPS Integrada -->
+    <div class="card">
+      <div class="card-title">
+        <span>🗺️</span> Hojas de Ruta con Google Maps Directo
+      </div>
+      <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 1rem;">
+        Cada vez que Daiana pide <code>/hoy</code>, <code>/mañana</code> o la agenda de una colaboradora (<code>/silvia</code>, <code>/mariana</code>, <code>/natalia</code>), cada servicio incluye el enlace exacto de navegación:
+      </p>
+
+      <div class="code-preview">👩 *Agenda Asignada para Silvia:*
+
+• 📅 Viernes a las *09:00 hs* (4.0 hs)
+  👤 Verónica Jara
+  📍 Orinoco 1010 (Costa Este (Malvín))
+  🗺️ *Maps:* https://maps.google.com/?q=Orinoco+1010+Montevideo
+  Tareas: Productos incluidos + Aspiradora industrial
+
+• 📅 Viernes a las *14:00 hs* (4.0 hs)
+  👤 Gabriela Méndez
+  📍 Sarmiento 2410, Pocitos
+  🗺️ *Maps:* https://maps.google.com/?q=Sarmiento+2410,+Pocitos+Montevideo
+
+🔗 *Enlace privado para Silvia (sin precios):*
+https://leonmunitz.github.io/portfolio/daiana/?f=Silvia</div>
+    </div>
+
+    <footer>
+      Sistema de Gestión y Operaciones • Daiana Souza & Reluciente
+    </footer>
+
+  </div>
+</body>
+</html>
