@@ -685,8 +685,8 @@
             <button class="btn-sim" onclick="simAgendarCompleto()">
               1. Agendar Completo<br><small style="color: #8696a0;">Cliente con todos los datos</small>
             </button>
-            <button class="btn-sim" onclick="simAgendarIncompleto()">
-              2. Datos Incompletos<br><small style="color: #f59e0b;">Falta dirección / pago</small>
+            <button class="btn-sim" style="border-color: #38bdf8;" onclick="simCotizarRapido()">
+              2. Calculadora / Cotizar<br><small style="color: #38bdf8;">Horas, insumos y margen</small>
             </button>
             <button class="btn-sim" onclick="simComandoAgenda()">
               3. Comando: "agenda hoy"<br><small style="color: #8696a0;">Lista de servicios del día</small>
@@ -697,8 +697,8 @@
             <button class="btn-sim btn-sim-purple" onclick="simLiquidarPersonal()">
               5. Liquidar Colaboradora<br><small style="color: #c084fc;">Mano de obra y servicios</small>
             </button>
-            <button class="btn-sim btn-sim-orange" onclick="simLiquidarArreglaTodo()">
-              6. Liquidar ArreglaTodo<br><small style="color: #fb923c;">Comisiones 15% y balance</small>
+            <button class="btn-sim btn-sim-orange" onclick="simAgendarRapidoFlexible()">
+              6. Agendamiento Flexible<br><small style="color: #fb923c;">"Pablo Besares 5hs" Auto-tarifa</small>
             </button>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 4px;">
@@ -1622,6 +1622,64 @@
         });
         renderDashboardFeed();
       }, 750);
+    }
+
+
+    // Nueva Simulación: Calculadora y Cotizador Rápido de Daiana
+    function simCotizarRapido() {
+      switchDashboardTab(1);
+      const msgUser = "/cotizar 4 hs pocitos productos aspiradora";
+      appendMessage("user", msgUser, false);
+      enviarTelemetria("SIMULADOR_COTIZAR", "Probó calculadora /cotizar 4 hs pocitos productos aspiradora");
+
+      setTimeout(() => {
+        const reply = "💡 *Cotización Directa • Daiana Servicios*\n\n" +
+                      "⏱️ *Jornada:* 4 horas (Costa Este (Pocitos/Buceo))\n" +
+                      "💰 *Presupuesto Sugerido:* *$2,450 UYU*\n" +
+                      "👩 *Pago Colaboradora (4hs x $280):* $1,120 UYU\n" +
+                      "📈 *Margen Daiana:* *$1,330 UYU limpios*\n\n" +
+                      "📋 *Desglose Aplicado:*\n" +
+                      "• Base (4 hs x $450): $1,800 UYU\n" +
+                      "• Insumos y Productos: +$300 UYU\n" +
+                      "• Aspiradora Industrial: +$350 UYU\n\n" +
+                      "💬 *Mensaje listo para reenviar al cliente:*\n" +
+                      "\"Hola! Para una jornada de 4 horas con productos incluidos y aspiradora industrial, la tarifa es de $2,450 UYU. ¿Qué día y horario te queda mejor coordinar?\"";
+        appendMessage("bot", reply, true);
+      }, 600);
+    }
+
+    // Nueva Simulación: Agendamiento Rápido sin rebotar (Onboarding fluido)
+    function simAgendarRapidoFlexible() {
+      switchDashboardTab(1);
+      const msgUser = "Pablo, en Besares 700 5hs de servicio";
+      appendMessage("user", msgUser, false);
+      enviarTelemetria("SIMULADOR_AGENDAR_FLEXIBLE", "Probó agendamiento flexible sin monto manual");
+
+      setTimeout(() => {
+        const reply = "✅ *Servicio Particular Agendado*\n\n" +
+                      "Código: DS-1385\n" +
+                      "👤 Cliente: Pablo\n" +
+                      "📍 Dirección: Besares 700\n" +
+                      "🗺️ *Google Maps:* https://maps.google.com/?q=Besares+700+Montevideo\n" +
+                      "📅 Fecha y Hora: Hoy a las 09:00 hs (5 hs)\n" +
+                      "Funcionaria: Por Asignar\n" +
+                      "💰 Monto sugerido: $2,250 UYU (Efectivo)\n\n" +
+                      "📲 Visible en el Dashboard de Daiana con ruta GPS directa.";
+        appendMessage("bot", reply, true);
+
+        dbOrders.unshift({
+          id: "#DS-1385",
+          client: "Pablo (Particular)",
+          worker: "Por Asignar",
+          address: "Besares 700 (Maps directo)",
+          zone: "Costa Este",
+          time: "Hoy 09:00 (5 hs)",
+          status: "AGENDADO CON GPS",
+          badgeClass: "badge-success",
+          source: "WhatsApp Directo"
+        });
+        renderDashboardFeed();
+      }, 600);
     }
 
     // Initial View
