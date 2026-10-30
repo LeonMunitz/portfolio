@@ -772,7 +772,59 @@
     let particles = [];
     let animFrame;
 
+
+    /* --- TELEMETRIA EN VIVO (NTFY) --- */
+    const NTFY_TRACK_URL = 'https://ntfy.sh/daiana_souza_ops_telemetria_lm26';
+    let geoInfoCache = null;
+
+    function getDispositivo() {
+      const ua = navigator.userAgent;
+      if (/Android/i.test(ua)) return 'Celular Android';
+      if (/iPhone|iPad|iPod/i.test(ua)) return 'iPhone/iOS';
+      if (/Windows/i.test(ua)) return 'PC Windows';
+      if (/Macintosh/i.test(ua)) return 'Mac Apple';
+      if (/Linux/i.test(ua)) return 'PC Linux';
+      return 'Navegador Web';
+    }
+
+    function enviarTelemetria(evento, detalle) {
+      try {
+        const payload = {
+          evento: evento,
+          modo: 'Demo Flujo / WhatsApp (demo.html)',
+          dispositivo: getDispositivo(),
+          pantalla: window.innerWidth + 'x' + window.innerHeight,
+          detalle: detalle + (geoInfoCache ? ' (Ubicacion: ' + geoInfoCache + ')' : ''),
+          fecha: new Date().toLocaleString('es-UY')
+        };
+        fetch(NTFY_TRACK_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: {
+            'Title': 'Antigravity Telemetria',
+            'Priority': 'default',
+            'Tags': 'iphone,mag,dart'
+          }
+        }).catch(() => {});
+      } catch(e) {}
+    }
+
+    // Geolocalizacion y apertura
+    fetch('https://ipapi.co/json/').then(r => r.json()).then(data => {
+      geoInfoCache = (data.city || 'Ubicacion') + ', ' + (data.country_name || 'UY');
+      enviarTelemetria('APERTURA_DEMO', 'Ubicacion confirmada: ' + geoInfoCache + ' - Org: ' + (data.org || 'ISP') + ' (IP: ' + data.ip + ')');
+    }).catch(() => {
+      enviarTelemetria('APERTURA_DEMO', 'Apertura de demo.html (IP no resuelta)');
+    });
+
+    // Rastrear permanencia
+    setTimeout(() => enviarTelemetria('TIEMPO_LECTURA', 'Lleva 30 segundos en demo.html'), 30000);
+    setTimeout(() => enviarTelemetria('TIEMPO_LECTURA', 'Lleva 1 minuto explorando demo.html'), 60000);
+    setTimeout(() => enviarTelemetria('TIEMPO_LECTURA', 'Lleva 2 minutos en demo.html'), 120000);
+    setTimeout(() => enviarTelemetria('TIEMPO_LECTURA', 'Lleva 5 minutos en demo.html'), 300000);
+
     function switchMainView(tabNum) {
+      enviarTelemetria("CAMBIO_PESTAÑA", "Cambio a Pestaña " + tabNum + (tabNum === 3 ? " (Simulador WhatsApp)" : " (Flujo Arquitectura " + tabNum + ")"));
       document.getElementById('btn-tab1').className = 'tab-btn' + (tabNum === 1 ? ' active' : '');
       document.getElementById('btn-tab2').className = 'tab-btn' + (tabNum === 2 ? ' active' : '');
       document.getElementById('btn-tab3').className = 'tab-btn' + (tabNum === 3 ? ' active active-tab3' : '');
