@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArreglaTodo Hospitality B2B - Presentación Integral y Exhaustiva</title>
+<style>
+  :root {
+    --bg-main: #0a0e17;
+    --bg-card: #121924;
+    --bg-card-hover: #172231;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --bronze: #d97706;
+    --bronze-light: #f59e0b;
+    --terminal-green: #10b981;
+    --terminal-bright: #00ff66;
+    --border-card: #202d3e;
+    --accent-blue: #38bdf8;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+  }
+  header {
+    padding: 1.1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-card);
+    background-color: rgba(10, 14, 23, 0.95);
+  }
+  .logo-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .logo-box img {
+    height: 42px;
+    object-fit: contain;
+  }
+  .header-badge {
+    font-family: monospace;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 6px;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--terminal-bright);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .slide-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .slide {
+    display: none;
+    max-width: 1100px;
+    width: 100%;
+    animation: fadeIn 0.25s ease-in-out;
+  }
+  .slide.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .slide-tag {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--bronze-light);
+    background: rgba(217, 119, 6, 0.12);
+    border: 1px solid rgba(217, 119, 6, 0.3);
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.85rem;
+    color: #ffffff;
+  }
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.85rem;
+    color: #ffffff;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.35rem;
+    margin-top: 1rem;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.15rem;
+    margin-top: 1rem;
+  }
+  .card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 8px;
+    padding: 1.35rem;
+    transition: all 0.2s ease;
+  }
+  .card:hover {
+    border-color: rgba(16, 185, 129, 0.4);
+    background-color: var(--bg-card-hover);
+  }
+  .card h3 {
+    font-size: 1.05rem;
+    color: var(--bronze-light);
+    margin-bottom: 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .card ul {
+    list-style: none;
+    margin-top: 0.5rem;
+  }
+  .card ul li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0.45rem;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .card ul li::before {
+    content: "•";
+    color: var(--terminal-bright);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+  .highlight-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--terminal-bright);
+    font-family: monospace;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .callout-box {
+    margin-top: 1.15rem;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    background-color: rgba(217, 119, 6, 0.08);
+    border: 1px solid rgba(217, 119, 6, 0.25);
+    font-size: 0.9rem;
+    color: #fcd34d;
+    line-height: 1.5;
+  }
+  .callout-box strong {
+    color: #ffffff;
+  }
+  .callout-box.blue {
+    background-color: rgba(56, 189, 248, 0.08);
+    border-color: rgba(56, 189, 248, 0.25);
+    color: #bae6fd;
+  }
+  .footer-bar {
+    padding: 0.85rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-card);
+    background-color: rgba(10, 14, 23, 0.95);
+  }
+  .slide-counter {
+    font-family: monospace;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .controls {
+    display: flex;
+    gap: 10px;
+  }
+  button.nav-btn {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    color: var(--text-main);
+    padding: 7px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+  }
+  button.nav-btn:hover {
+    background-color: rgba(16, 185, 129, 0.15);
+    border-color: var(--terminal-green);
+    color: var(--terminal-bright);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-box">
+    <img src="/home/leondon-pc/DatosComprimidos/Imágenes/2026-11-05_22-03.png" alt="LEONDON">
+  </div>
+  <div class="header-badge">Estrategia B2B · Dossier Integral</div>
+</header>
+
+<div class="slide-container">
+
+  <!-- SLIDE 1 -->
+  <div class="slide active" id="slide-0">
+    <div class="slide-tag">[Eje Estratégico · Presentación Ejecutiva]</div>
+    <h1>ARREGLATODO HOSPITALITY B2B</h1>
+    <p class="subtitle">Arquitectura Operativa, Monetización de MRR y Cobertura Integral para Administradores de Alquiler Temporario.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>01. La Oportunidad</h3>
+        <p>Capturar el mercado de alquileres temporarios en Montevideo mediante contratos recurrentes en dólares, migrando del servicio transaccional esporádico a un flujo de caja predecible y de alto margen.</p>
+      </div>
+      <div class="card">
+        <h3>02. La Solución Dual</h3>
+        <p>Abono mensual fijo de mantenimiento técnico preventivo (USD 150) con fondo de materiales, integrado al servicio de turnover y limpieza profesional ($2.500 UYU / ~USD 60) con Daiana Souza.</p>
+      </div>
+      <div class="card">
+        <h3>03. El Ecosistema Comercial</h3>
+        <p>ArreglaTodo extrae valor en 3 niveles: cobro del abono recurrente, margen comercial en la venta mayorista de materiales mediante convenios de afiliados, y ejecución de obras mayores encuadradas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide" id="slide-1">
+    <div class="slide-tag">[Eje Diagnóstico · El Dolor del Mercado]</div>
+    <h2>El Triple Cerco que Asfixia a los Anfitriones</h2>
+    <p class="subtitle">Factores de presión regulatoria, operativa y fiscal que vuelven inviable la gestión casera con trabajadores informales.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Airbnb AirCover & Ventana 72h</h3>
+        <ul>
+          <li>Fallas en servicios esenciales (calefón, aire, cerraduras, sanitaria) reportadas por el huésped en las primeras 72 horas habilitan el reembolso total por parte de la app.</li>
+          <li>Airbnb traslada el costo de reubicación de emergencia directamente a la cuenta del anfitrión.</li>
+          <li>Penalizaciones económicas automáticas de hasta USD 1.000 por cancelación y descenso severo en el algoritmo de búsqueda.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Política Global "Zero Chores"</h3>
+        <ul>
+          <li>Airbnb prohíbe expresamente exigir tareas de limpieza al huésped al salir (lavar vajilla, retirar sábanas, sacar basura).</li>
+          <li>Los apartamentos se entregan en estado de alta demanda operativa a las 11:00 hs, con ingreso obligado a las 15:00 hs.</li>
+          <li>Ventana crítica de 4 horas: si la cuadrilla detecta una rotura a las 12:00 hs, los servicios informales no tienen capacidad de respuesta.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Cruce DGI, MINTUR y Consorcios</h3>
+        <ul>
+          <li>Ley 20.352: Obligatoriedad de inscripción en Registro de Operadores Turísticos y entrega en condiciones de inmediata habitabilidad.</li>
+          <li>Airbnb informa operaciones trimestrales a la DGI: el anfitrión necesita facturas oficiales CFE para deducir costos de IRPF e IRAE.</li>
+          <li>Administraciones de edificios sancionan filtraciones a vecinos y daños comunes causados por roturas imprevistas.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide" id="slide-2">
+    <div class="slide-tag">[Eje Segmentación · Mercado Objetivo]</div>
+    <h2>El Cliente Ideal: Property Managers en Montevideo</h2>
+    <p class="subtitle">Estrategia enfocada exclusivamente en carteras profesionales de escala en zonas neurálgicas.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Perfil del Cliente B2B</h3>
+        <ul>
+          <li>Empresas de Co-Hosting y Administradores Profesionales que gestionan entre 10 y 50 apartamentos en Pocitos, Punta Carretas, Cordón, Centro y Carrasco.</li>
+          <li>Sufren alta fricción operativa atendiendo urgencias fuera de hora y coordinando múltiples oficios dispersos.</li>
+          <li>Priorizan la tranquilidad operativa, la velocidad de intervención y la emisión de facturación formal única a fin de mes.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>La Cláusula Contractual de Fondo de Reserva</h3>
+        <ul>
+          <li>En sus contratos de administración con los dueños de los inmuebles, los Property Managers <strong>ya tienen formalizada contractualmente la Cláusula Sexta</strong> de reparaciones urgentes.</li>
+          <li>Tienen autorizado un fondo de maniobra de USD 150 a USD 300 por unidad para resolver emergencias edilicias sin requerir autorización previa del propietario.</li>
+          <li>El presupuesto ya está asignado; precisan un socio operativo formal que lo ejecute con trazabilidad y respaldo documental.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 -->
+  <div class="slide" id="slide-3">
+    <div class="slide-tag">[Eje Técnico · Auditoría de Ingreso]</div>
+    <h2>Protocolo de Onboarding y Exclusión Contractual</h2>
+    <p class="subtitle">Inspección técnica inicial exhaustiva para registrar el estado real del activo y delimitar responsabilidades.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Relevamiento Técnico Presencial</h3>
+        <ul>
+          <li>Inspección obligatoria previa a la firma del servicio para auditar el funcionamiento de todas las instalaciones sanitarias, eléctricas y de cerrajería.</li>
+          <li>Ficha técnica por apartamento: registro de marca, capacidad y años de uso del termotanque/calefón, acondicionadores de aire, tipo de cisterna y cerraduras inteligentes.</li>
+          <li>Elaboración del plan preventivo a medida y cálculo estimado de recambios proyectados para los siguientes 12 meses.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Cláusula de Exclusión de Riesgos Críticos</h3>
+        <ul>
+          <li>Detección y clasificación de riesgos inmediatos bajo semáforo técnico (ej. calefones con vida útil vencida, instalaciones sin disyuntor).</li>
+          <li>Los componentes clasificados en "Riesgo Rojo" deben ser subsanados por el propietario en un plazo máximo de 15 días.</li>
+          <li>En caso de negativa del dueño, dichos componentes quedan <strong>formalmente excluidos de la cobertura del abono y de las garantías de servicio</strong>, blindando a ArreglaTodo contra fallas preexistentes.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 -->
+  <div class="slide" id="slide-4">
+    <div class="slide-tag">[Eje Financiero · Modelo de Precios]</div>
+    <h2>Estructura de Abonos, Fondos y Facturación</h2>
+    <p class="subtitle">Esquema balanceado de ingresos recurrentes, liquidez operativa para materiales y liquidación transparente.</p>
+    <div class="grid-3">
+      <div class="card">
+        <span class="highlight-number">USD 150</span>
+        <h3>Abono Mantenimiento / Mes</h3>
+        <p>Cuota fija mensual por apartamento. Incluye auditorías preventivas periódicas, cobertura técnica continua y derecho a guardia de emergencia prioritaria.</p>
+      </div>
+      <div class="card">
+        <span class="highlight-number">USD 150</span>
+        <h3>Fondo Inicial de Materiales</h3>
+        <p>Integración por única vez durante el primer mes por unidad. Provee caja operativa para adquirir repuestos inmediatos sin demoras administrativas.</p>
+      </div>
+      <div class="card">
+        <span class="highlight-number">~USD 60</span>
+        <h3>Turnover ($2.500 UYU)</h3>
+        <p>Servicio de limpieza y preparación de blancos ejecutado con Daiana Souza, liquidado a mes vencido según cantidad exacta de rotaciones realizadas.</p>
+      </div>
+    </div>
+    <div class="callout-box">
+      <strong>Bonificación por Escala de Cartera:</strong> Se aplica un descuento comercial del <strong>10% sobre el valor del abono mensual</strong> por cada bloque de 15 apartamentos que el Property Manager integre bajo contrato, incentivando la entrega total de la cartera.
+    </div>
+  </div>
+
+  <!-- SLIDE 6 -->
+  <div class="slide" id="slide-5">
+    <div class="slide-tag">[Eje Comercial · Circuito de Ganancia]</div>
+    <h2>Monetización Integral para ArreglaTodo</h2>
+    <p class="subtitle">El modelo genera rentabilidad en tres niveles complementarios de la cadena de valor.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>1. Margen Recurrente (MRR)</h3>
+        <p>Facturación fija mensual en dólares por concepto de abonos de mantenimiento. Con una cartera inicial de 10 unidades, se asegura una base de USD 1.500 mensuales de ingresos garantizados.</p>
+      </div>
+      <div class="card">
+        <h3>2. Red de Afiliados en Materiales</h3>
+        <p>ArreglaTodo canaliza la compra de insumos a través de su red de convenios con distribuidores mayoristas, capturando un margen de ganancia comercial directo en cada recambio instalado.</p>
+      </div>
+      <div class="card">
+        <h3>3. Estandarización y Obras Mayores</h3>
+        <p>Catálogo de tarifas estandarizadas para mano de obra menor. Trabajos estructurales (recambio de termotanques o reformas) se presupuestan por separado con margen de 35% a 45% y facturación a mes vencido.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 -->
+  <div class="slide" id="slide-6">
+    <div class="slide-tag">[Eje Operativo · Fondo de Materiales]</div>
+    <h2>Gestión del Fondo y Cláusula de Reflote</h2>
+    <p class="subtitle">Mecanismo financiero para asegurar liquidez inmediata en compras sin burocracia.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Fondo Consolidado Discrecional</h3>
+        <ul>
+          <li>Con una cartera de 10 apartamentos, ArreglaTodo dispone de un fondo acumulado de <strong>USD 1.500 en caja</strong> para actuar con inmediatez ante cualquier urgencia técnica.</li>
+          <li>Cada fondo se administra con contabilidad individualizada por cliente y propiedad, registrando cada egreso con comprobante fiscal y fotografía del repuesto.</li>
+          <li>Tipificación clara: materiales de colilla y recambio común (flexibles, llaves, válvulas, térmicas, cerraduras) se debitan del fondo al instante.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Mecanismo de la Cláusula de Reflote</h3>
+        <ul>
+          <li>Se fija un piso de seguridad operativo de <strong>USD 50 por apartamento</strong>.</li>
+          <li>Al momento en que los consumos reduzcan el saldo por debajo de dicho umbral, el sistema emite automáticamente una solicitud de reflote al administrador para restablecer el nivel de USD 150.</li>
+          <li>Garantiza que ninguna propiedad quede desabastecida de respaldo financiero ante roturas imprevistas de fin de semana o nocturnas.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8 -->
+  <div class="slide" id="slide-7">
+    <div class="slide-tag">[Eje Maestranza · Circuito de Campo]</div>
+    <h2>Operativa de Turnover con Daiana Souza</h2>
+    <p class="subtitle">Integración del equipo de limpieza como primera línea de detección y diagnóstico preventivo.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Checklist Técnico Obligatorio a las 11:00 hs</h3>
+        <ul>
+          <li>El personal de Daiana Souza ingresa a la unidad tras el check-out y ejecuta un checklist de 10 puntos de control técnico antes de iniciar el aseo.</li>
+          <li>Verificación inmediata de descargas sanitarias, flujo de agua caliente, encendido de acondicionadores de aire, lámparas y batería de cerraduras.</li>
+          <li>Cualquier falla o indicio de desperfecto se reporta en el acto al canal operativo central para despacho técnico prioritario.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Resolución en la Ventana de 11:00 a 15:00 hs</h3>
+        <ul>
+          <li>El técnico acude a la unidad durante la ejecución de la limpieza con los repuestos específicos tomados del stock estandarizado.</li>
+          <li>La reparación se concluye antes del ingreso del nuevo huésped a las 15:00 hs, erradicando cancelaciones y quejas en la plataforma.</li>
+          <li>Relación colaborativa de mediano plazo con el equipo de Daiana basada en volumen continuo, orden administrativo y previsibilidad de cobros.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9 -->
+  <div class="slide" id="slide-8">
+    <div class="slide-tag">[Eje Servicio · Tiempos de Respuesta]</div>
+    <h2>Estándares de SLA y Trazabilidad Digital</h2>
+    <p class="subtitle">Compromisos de mitigación rápida y respaldo probatorio fehaciente ante incidentes.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>SLA Propuesto de Respuesta Rápida: 90 Minutos</h3>
+        <ul>
+          <li>Parámetro de atención diseñado para contener emergencias críticas dentro de la ventana de turnover o durante la estancia del huésped.</li>
+          <li>Tiempos orientados a desactivar reclamos antes de que escalen al Centro de Resoluciones de Airbnb o habiliten el uso de AirCover.</li>
+          <li>Parámetro calibrable de común acuerdo según zona geográfica y disponibilidad de cuadrillas en guardia activa.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Protocolo Probatorio con Registro Fotográfico</h3>
+        <ul>
+          <li>Registro digital con fecha y hora de cada intervención: fotografía obligatoria del componente averiado y del nuevo repuesto instalado.</li>
+          <li>Informe de entrega que sirve como evidencia irrefutable frente a reclamaciones de huéspedes o requerimientos de administraciones de consorcios.</li>
+          <li>Respaldo integral para que el Property Manager rinda cuentas ante el propietario final con total transparencia.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10 -->
+  <div class="slide" id="slide-9">
+    <div class="slide-tag">[Eje Jurídico · Blindaje Legal y Fiscal]</div>
+    <h2>Marco Contractual, DGI y Responsabilidad Civil</h2>
+    <p class="subtitle">Estructuración formal y delimitación de riesgos corporativos coordinada con Clarisa Andreu.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Deducibilidad Fiscal 100% ante DGI</h3>
+        <ul>
+          <li>Facturación formal emitida por Suryen S.A. mediante e-Factura oficial con RUT a mes vencido.</li>
+          <li>Permite a administradoras y propietarios descontar el total de los gastos de mantenimiento y limpieza en sus liquidaciones de IRPF o IRAE.</li>
+          <li>Ventaja comparativa determinante frente a prestadores individuales no formalizados en plaza.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Delimitación de Responsabilidad Civil</h3>
+        <ul>
+          <li>Elaboración de acuerdo marco de locación de servicios con Daiana Souza coordinado por el área legal/administrativa (Clarisa Andreu).</li>
+          <li>Protocolo riguroso de registro de objetos olvidados: reporte y fotografía inmediata de pertenencias detectadas al ingresar a la unidad.</li>
+          <li>Exoneración expresa de responsabilidad civil por deterioros preexistentes o fuerza mayor no atribuible a la operativa de ArreglaTodo.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11 -->
+  <div class="slide" id="slide-10">
+    <div class="slide-tag">[Eje Operacional · Escalamiento de Equipo]</div>
+    <h2>Plan de Crecimiento y Asignación de Recursos</h2>
+    <p class="subtitle">Evolución de la estructura operativa en función del volumen de apartamentos y la rentabilidad neta.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Etapa 1: Lanzamiento Semilla</h3>
+        <p>Gestión directa y centralizada por el equipo fundador (León, Máximo y Lorenzo). Monitoreo directo de los primeros 10 a 20 apartamentos para estandarizar procesos y calibrar tiempos reales en el terreno.</p>
+      </div>
+      <div class="card">
+        <h3>Etapa 2: Operador Part-Time</h3>
+        <p>Al alcanzar un umbral de 25-30 apartamentos, el flujo recurrente financia la incorporación de un despachador part-time dedicado exclusivamente a la ventana crítica (11:00 a 14:30 hs) para coordinar cuadrillas.</p>
+      </div>
+      <div class="card">
+        <h3>Etapa 3: Estructura Consolidada</h3>
+        <p>Con carteras superiores a 60 unidades, se implementa una cuadrilla móvil exclusiva con baúl de repuestos y vehículo propio para atención permanente de urgencias corporativas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12 -->
+  <div class="slide" id="slide-11">
+    <div class="slide-tag">[Eje Territorial · Roadmap Estratégico]</div>
+    <h2>Despliegue Geográfico Montevideo 2026 — 2027</h2>
+    <p class="subtitle">Foco absoluto en la consolidación metropolitana antes de encarar la expansión estacional.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Fase 1: Validación</h3>
+        <p>Lanzamiento del programa piloto en Montevideo con 2 carteras medianas (15 a 30 unidades) en los corredores Pocitos, Punta Carretas y Cordón.</p>
+      </div>
+      <div class="card">
+        <h3>Fase 2: Expansión Local</h3>
+        <p>Escalamiento progresivo a 50-80 unidades en Montevideo optimizando la rotación del fondo de materiales y los acuerdos de compra mayorista.</p>
+      </div>
+      <div class="card">
+        <h3>Fase 3: Temporada 2027/28</h3>
+        <p>Desembarco programado en Maldonado y Punta del Este tras completar 12 meses de búsqueda, filtro y prueba metódica de personal técnico local.</p>
+      </div>
+    </div>
+    <div class="callout-box blue">
+      <strong>Directiva Estratégica para Maldonado:</strong> No se iniciarán operaciones en Punta del Este durante la temporada inmediata por no disponer de personal técnico de confianza validado. A lo largo de 2027 se llevará adelante un proceso de selección y homologación de cuadrillas locales para asegurar que la expansión estacional cuente con el mismo estándar operativo que Montevideo.
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-bar">
+  <div class="slide-counter" id="counter">Slide 1 de 12</div>
+  <div class="controls">
+    <button class="nav-btn" onclick="prevSlide()">← Anterior</button>
+    <button class="nav-btn" onclick="nextSlide()">Siguiente →</button>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+
+  function showSlide(index) {
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+    });
+    counter.innerText = `Slide ${index + 1} de ${slides.length}`;
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      showSlide(currentSlide);
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      showSlide(currentSlide);
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', ' '].includes(e.key)) {
+      nextSlide();
+    } else if (e.key === 'ArrowLeft') {
+      prevSlide();
+    }
+  });
+</script>
+
+
+<!-- TELEMETRY ENGINE -->
+<script>
+(function() {
+  const ENDPOINT = 'https://webhook.site/c0b603ef-715a-4f15-936b-83a63cd9f317';
+  const sessionId = 'sess_' + Math.random().toString(36).substring(2, 9);
+  const startTime = Date.now();
+
+  function sendTelemetry(eventType, extraData) {
+    extraData = extraData || {};
+    const payload = Object.assign({
+      event: eventType,
+      session: sessionId,
+      timeElapsedSec: Math.round((Date.now() - startTime) / 1000),
+      url: window.location.href,
+      referrer: document.referrer || 'direct',
+      screen: window.screen.width + 'x' + window.screen.height,
+      device: /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+      userAgent: navigator.userAgent,
+      timestamp: new Date().toISOString()
+    }, extraData);
+
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(ENDPOINT, JSON.stringify(payload));
+      } else {
+        fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          mode: 'no-cors'
+        });
+      }
+    } catch(e) {}
+  }
+
+  // 1. Initial Page View
+  sendTelemetry('PAGE_OPEN');
+
+  // 2. Track Slide Changes
+  if (typeof showSlide === 'function') {
+    const _origShowSlide = showSlide;
+    showSlide = function(index) {
+      _origShowSlide(index);
+      const activeSlide = document.querySelectorAll('.slide')[index];
+      const titleElem = activeSlide ? activeSlide.querySelector('h1, h2, h3, .slide-title') : null;
+      const title = titleElem ? titleElem.innerText.trim() : ('Slide ' + (index + 1));
+      sendTelemetry('SLIDE_VIEW', { slideIndex: index + 1, slideTitle: title });
+    };
+  }
+
+  // 3. Heartbeats
+  [15, 30, 60, 120, 180, 300, 600].forEach(function(sec) {
+    setTimeout(function() {
+      sendTelemetry('HEARTBEAT', { secondsActive: sec });
+    }, sec * 1000);
+  });
+
+  // 4. Page Exit
+  window.addEventListener('beforeunload', function() {
+    sendTelemetry('PAGE_LEAVE');
+  });
+})();
+</script>
+
+</body>
+</html>
