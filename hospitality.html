@@ -588,39 +588,66 @@
 <script>
 (function() {
   const ENDPOINT = 'https://webhook.site/c0b603ef-715a-4f15-936b-83a63cd9f317';
+  const NTFY_ENDPOINT = 'https://ntfy.sh/arreglatodo_hospitality_b2b_lm26';
   const sessionId = 'sess_' + Math.random().toString(36).substring(2, 9);
   const startTime = Date.now();
+  let geoInfo = '';
+
+  function isMobileUA(ua) {
+    return ['Mobi', 'Android', 'iPhone'].some(function(k) { return ua.indexOf(k) !== -1; });
+  }
 
   function sendTelemetry(eventType, extraData) {
-    extraData = extraData || {};
+    extraData = extraData ? extraData : {};
     const payload = Object.assign({
       event: eventType,
       session: sessionId,
       timeElapsedSec: Math.round((Date.now() - startTime) / 1000),
       url: window.location.href,
-      referrer: document.referrer || 'direct',
+      referrer: document.referrer ? document.referrer : 'direct',
       screen: window.screen.width + 'x' + window.screen.height,
-      device: /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+      device: isMobileUA(navigator.userAgent) ? 'Mobile' : 'Desktop',
+      geo: geoInfo,
       userAgent: navigator.userAgent,
       timestamp: new Date().toISOString()
     }, extraData);
 
+    const bodyStr = JSON.stringify(payload);
+    try {
+      fetch(NTFY_ENDPOINT, {
+        method: 'POST',
+        body: bodyStr,
+        keepalive: true
+      }).catch(function() {});
+    } catch(e) {}
+
     try {
       if (navigator.sendBeacon) {
-        navigator.sendBeacon(ENDPOINT, JSON.stringify(payload));
+        navigator.sendBeacon(ENDPOINT, bodyStr);
       } else {
         fetch(ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          mode: 'no-cors'
-        });
+          body: bodyStr,
+          mode: 'no-cors',
+          keepalive: true
+        }).catch(function() {});
       }
     } catch(e) {}
   }
 
-  // 1. Initial Page View
+  // 1. Initial Page View + IP Geo Lookup
   sendTelemetry('PAGE_OPEN');
+  try {
+    fetch('https://ipapi.co/json/')
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d && d.ip) {
+          geoInfo = (d.city ? d.city + ', ' : '') + (d.country_name ? d.country_name : '') + ' (' + d.ip + (d.org ? ' - ' + d.org : '') + ')';
+          sendTelemetry('GEO_CONFIRM', { geo: geoInfo });
+        }
+      }).catch(function() {});
+  } catch(e) {}
 
   // 2. Track Slide Changes
   if (typeof showSlide === 'function') {
